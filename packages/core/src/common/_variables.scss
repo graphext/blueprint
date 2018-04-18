@@ -1,9 +1,9 @@
 // Copyright 2015 Palantir Technologies, Inc. All rights reserved.
 // Licensed under the terms of the LICENSE file distributed with this project.
 
+@import "customs";
 @import "colors";
 @import "mixins";
-@import "customs";
 
 // Namespace appended to the beginning of each CSS class: `.#{$ns}-button`.
 $ns: "bp3" !default;
