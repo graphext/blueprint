@@ -26,24 +26,23 @@ $pt-button-height-large: 40px;
 
 $black: #000000;
 
-$dark-gray1: hsl(228, 7%, 8%);
-$dark-gray2: hsl(228, 7%, 13%);
-$dark-gray3: hsl(225, 13%, 18%);
-$dark-gray4: hsl(225, 14%, 22%);
-$dark-gray5: hsl(225, 14%, 27%);
+$dark-gray1: #121315;
+$dark-gray2: #1e1f23;
+$dark-gray3: #272a33;
+$dark-gray4: #30343f;
+$dark-gray5: #3b404e;
 
-$blue1: hsl(202, 100%, 25%);
-$blue2: hsl(202, 100%, 35%);
-$blue3: hsl(202, 100%, 45%);
-$blue4: hsl(202, 100%, 50%);
-$blue5: hsl(202, 85%, 61%);
+$blue1: #00507f;
+$blue2: #0071b2;
+$blue3: #0091e5;
+$blue4: #00a1ff;
+$blue5: #47b2f0;
 
 // ------------------------- Components -------------------------------
 
 // Buttons
 $pt-button-border-radius: $pt-button-height-large / 2;
 
-.pt-button.pt-action-button {
-  padding-left: 32px;
-  padding-right: 32px;
-}
+// DateTime
+$input-font-weight: 300;
+$dark-datepicker-background-color: $dark-gray4;
