@@ -1,0 +1,82 @@
+// Copyright 2018 Graphext
+
+// ------------------------- Components -------------------------------
+
+// Buttons
+.pt-button.pt-action-button {
+  padding-left: 32px;
+  padding-right: 32px;
+  text-transform: uppercase;
+}
+
+// Inputs
+
+//
+// Every input is a round input for us
+//
+.pt-input {
+  border-radius: $pt-input-height;
+  box-sizing: border-box;
+  padding-left: $input-padding-horizontal;
+  padding-right: $input-padding-horizontal;
+
+  &.pt-large {
+    padding: 0 $input-padding-horizontal * 1.5;
+  }
+}
+
+
+// Control groups
+
+.pt-control-group {
+
+  .pt-input {
+    // inherit radius since it's most likely to be zero
+    border-radius: inherit;
+
+    &:focus {
+      border-radius: initial;
+    }
+  }
+  .pt-button,
+  .pt-select select {
+    // inherit radius since it's most likely to be zero
+    border-radius: inherit;
+    //border-radius: $pt-button-border-radius
+  }
+  // round the left corners of the left-most element
+  > :first-child {
+    border-radius: $pt-button-border-radius 0 0 $pt-button-border-radius;
+  }
+
+  // round the right corners of the right-most element
+  > :last-child {
+    margin-right: 0;
+    border-radius: 0 $pt-button-border-radius $pt-button-border-radius 0;
+  }
+
+  // bring back border radius on these buttons
+  .pt-input-group .pt-button {
+    border-radius: $pt-border-radius;
+  }
+
+
+  &.pt-vertical {
+
+    > :first-child {
+      margin-top: 0;
+      border-radius: $pt-border-radius $pt-border-radius 0 0;
+    }
+
+    > :last-child {
+      border-radius: 0 0 $pt-border-radius $pt-border-radius;
+    }
+  }
+}
+
+
+// Tag Input
+
+.pt-input-ghost {
+  font-size: 14px;
+}

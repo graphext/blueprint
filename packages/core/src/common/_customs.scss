@@ -2,7 +2,7 @@
 
 // easily the most important variable, so it comes first
 // (so other variables can use it to define themselves)
-$pt-grid-size: 10px;
+$pt-grid-size: 8px;
 
 // see https://bitsofco.de/the-new-system-font-stack/
 $pt-font-family: "LatoLatin";
@@ -15,6 +15,8 @@ $pt-font-size-small: 12px;
 $pt-line-height: ($pt-grid-size * 2.25) / $pt-font-size + 0.0001 !default;
 
 $pt-border-radius: 4px;
+
+$pt-input-height: 32px;
 
 // Buttons
 $pt-button-height: 32px;
@@ -38,10 +40,20 @@ $blue3: #0091e5;
 $blue4: #00a1ff;
 $blue5: #47b2f0;
 
+
+
 // ------------------------- Components -------------------------------
 
 // Buttons
 $pt-button-border-radius: $pt-button-height-large / 2;
+// $button-border-width: 0;
+
+// Inputs
+$input-padding-horizontal: $pt-grid-size * 2;
+
+//Tags
+$tag-height: 20px;
+$tag-padding: 2px;
 
 // DateTime
 $input-font-weight: 300;
