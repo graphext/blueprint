@@ -3,11 +3,11 @@
 
 @import "../../core/src/common/variables";
 
-.pt-dark .pt-datetimepicker {
+.#{$ns}-dark .#{$ns}-datetimepicker {
     background: $dark-datepicker-background-color;
 }
 
-.pt-popover-wrapper.pt-datepicker {
+.#{$ns}-popover-wrapper.#{$ns}-datepicker {
   background: transparent;
   padding: 0;
 }
