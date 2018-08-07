@@ -1,0 +1,14 @@
+#
+# The first time do:
+# docker-compose run bp sh -c 'yarn && yarn verify'
+#
+version: '3'
+services:
+  bp:
+    image: development
+    command: sh -c 'yarn dev'
+    working_dir: /hostdata
+    volumes:
+      - .:/hostdata:cached
+    ports:
+      - 9000:9000
