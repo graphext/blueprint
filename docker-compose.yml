@@ -9,6 +9,9 @@ services:
     command: sh -c 'yarn dev'
     working_dir: /hostdata
     volumes:
-      - .:/hostdata:cached
+      - docker-sync:/hostdata:nocopy
     ports:
       - 9000:9000
+volumes:
+  docker-sync:
+    external: true
