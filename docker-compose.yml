@@ -1,17 +1,20 @@
 #
-# The first time do:
-# docker-compose run bp sh -c 'yarn && yarn verify'
+# The setup (just first time):
+# docker-compose run bp sh -c 'ln -s /node_modules ./node_modules; yarn && yarn verify'
+#
+# In order to update Markdowns
+# docker-compose run bp sh -c 'ln -s /node_modules ./node_modules; yarn docs-data'
 #
 version: '3'
 services:
   bp:
     image: development
-    command: sh -c 'yarn dev'
+    command: sh -c 'ln -s /node_modules ./node_modules; yarn dev'
     working_dir: /hostdata
     volumes:
-      - docker-sync:/hostdata:nocopy
+      - .:/hostdata
+      - node_modules:/node_modules
     ports:
       - 9000:9000
 volumes:
-  docker-sync:
-    external: true
+  node_modules:
