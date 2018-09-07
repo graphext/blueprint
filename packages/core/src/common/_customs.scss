@@ -46,10 +46,11 @@ $blue5: #47b2f0;
 
 // Buttons
 $pt-button-border-radius: $pt-button-height-large / 2;
-// $button-border-width: 0;
+$button-border-width: 0;
 
 // Inputs
 $input-padding-horizontal: $pt-grid-size * 2;
+$switch-indicator-margin: 1px;
 
 //Tags
 $tag-height: 20px;
