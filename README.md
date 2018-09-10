@@ -7,9 +7,12 @@ Blueprint is a React-based UI toolkit for the web.
 It is optimized for building complex, data-dense web interfaces for _desktop applications_.
 If you rely heavily on mobile interactions and are looking for a mobile-first UI toolkit, this may not be for you.
 
+
 [**Read the introductory blog post ▸**](https://medium.com/@palantir/scaling-product-design-with-blueprint-25492827bb4a)
 
 [**View the full documentation ▸**](http://blueprintjs.com/docs)
+
+[**Try it out on CodeSandbox ▸**](https://codesandbox.io/s/rypm429574)
 
 [**Read our FAQ on the wiki ▸**](https://github.com/palantir/blueprint/wiki/Frequently-Asked-Questions)
 
@@ -96,12 +99,6 @@ Run `yarn dev` from the root directory to watch changes across all packages and 
 
 Alternately, each library has its own dev script to run the docs app and watch changes to just that package (and its dependencies): `yarn dev:core`, `yarn dev:datetime`, etc.
 One exception is `table`: since it has its own dev application, the `dev:table` script runs `table-dev-app` instead of the docs.
-
-### Updating dependencies
-
-1. Edit the `package.json` where you wish to change dependencies.
-1. Run `yarn` at the root to update lockfiles.
-1. Commit the result.
 
 ### Updating documentation
 

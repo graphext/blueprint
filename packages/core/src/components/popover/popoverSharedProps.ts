@@ -21,7 +21,7 @@ export interface IPopoverSharedProps extends IOverlayableProps, IProps {
      * element will close the parent popover.
      *
      * See http://blueprintjs.com/docs/#core/components/popover.closing-on-click
-     * @default true
+     * @default false
      */
     captureDismiss?: boolean;
 
@@ -109,7 +109,7 @@ export interface IPopoverSharedProps extends IOverlayableProps, IProps {
      * user scrolls around.
      * @default "auto"
      */
-    position?: Position | "auto";
+    position?: Position | "auto" | "auto-start" | "auto-end";
 
     /**
      * Space-delimited string of class names applied to the target element.
