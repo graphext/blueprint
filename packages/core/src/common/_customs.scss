@@ -28,11 +28,11 @@ $pt-button-height-large: 40px;
 
 $black: #000000;
 
-$dark-gray1: #121315;
-$dark-gray2: #1e1f23;
-$dark-gray3: #272a33;
-$dark-gray4: #30343f;
-$dark-gray5: #3b404e;
+$dark-gray1: #1F2024;
+$dark-gray2: #272A33;
+$dark-gray3: #2A2E38;
+$dark-gray4: #313541;
+$dark-gray5: #363B47;
 
 $blue1: #00507f;
 $blue2: #0071b2;
@@ -50,6 +50,8 @@ $button-border-width: 0;
 
 // Inputs
 $input-padding-horizontal: $pt-grid-size * 2;
+$dark-input-background-color: $dark-gray4;
+$input-box-shadow: none;
 
 // Controls (switch, radio, checkbox)
 $dark-switch-background-color: $dark-gray2;

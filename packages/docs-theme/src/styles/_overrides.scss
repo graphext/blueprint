@@ -13,3 +13,7 @@ input[type="search"] {
 .#{$ns}-callout p:last-child {
   margin: 0;
 }
+
+.bp3-input {
+  box-shadow: none !important;
+}
