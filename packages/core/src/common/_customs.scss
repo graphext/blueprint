@@ -53,7 +53,6 @@ $input-padding-horizontal: $pt-grid-size * 2;
 
 // Controls (switch, radio, checkbox)
 $dark-switch-background-color: $dark-gray2;
-$switch-indicator-margin: 1px;
 
 //Tags
 $tag-height: 20px;
@@ -62,3 +61,13 @@ $tag-padding: 2px;
 // DateTime
 $input-font-weight: 300;
 $dark-datepicker-background-color: $dark-gray4;
+
+$custom-shadow: 0 0 12px rgba($black, 0.25) !important;
+$button-box-shadow: $custom-shadow;
+$button-box-shadow-active: $custom-shadow;
+$button-box-shadow-overlay: $custom-shadow;
+$button-box-shadow-overlay-active: $custom-shadow;
+$button-intent-box-shadow: $custom-shadow;
+$button-intent-box-shadow-active: $custom-shadow;
+$dark-button-box-shadow: $custom-shadow;
+$dark-button-box-shadow-active: $custom-shadow;
