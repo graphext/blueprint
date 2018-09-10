@@ -1,0 +1,60 @@
+// Copyright 2018 Graphext
+
+// easily the most important variable, so it comes first
+// (so other variables can use it to define themselves)
+$pt-grid-size: 8px;
+
+// see https://bitsofco.de/the-new-system-font-stack/
+$pt-font-family: "LatoLatin";
+
+$pt-font-size: 14px;
+$pt-font-size-large: 16px;
+$pt-font-size-small: 12px;
+
+// a little bit extra to ensure the height comes out to just over 18px (and browser rounds to 18px)
+$pt-line-height: ($pt-grid-size * 2.25) / $pt-font-size + 0.0001 !default;
+
+$pt-border-radius: 4px;
+
+$pt-input-height: 32px;
+
+// Buttons
+$pt-button-height: 32px;
+$pt-button-height-small: 24px;
+$pt-button-height-large: 40px;
+
+
+// ------------------------- Colors -----------------------------------
+
+$black: #000000;
+
+$dark-gray1: #121315;
+$dark-gray2: #1e1f23;
+$dark-gray3: #272a33;
+$dark-gray4: #30343f;
+$dark-gray5: #3b404e;
+
+$blue1: #00507f;
+$blue2: #0071b2;
+$blue3: #0091e5;
+$blue4: #00a1ff;
+$blue5: #47b2f0;
+
+
+
+// ------------------------- Components -------------------------------
+
+// Buttons
+$pt-button-border-radius: $pt-button-height-large / 2;
+// $button-border-width: 0;
+
+// Inputs
+$input-padding-horizontal: $pt-grid-size * 2;
+
+//Tags
+$tag-height: 20px;
+$tag-padding: 2px;
+
+// DateTime
+$input-font-weight: 300;
+$dark-datepicker-background-color: $dark-gray4;

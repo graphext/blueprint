@@ -1,0 +1,13 @@
+// Copyright 2016 Palantir Technologies, Inc. All rights reserved.
+// Licensed under the terms of the LICENSE file distributed with this project.
+
+@import "../../core/src/common/variables";
+
+.#{$ns}-dark .#{$ns}-datetimepicker {
+    background: $dark-datepicker-background-color;
+}
+
+.#{$ns}-popover-wrapper.#{$ns}-datepicker {
+  background: transparent;
+  padding: 0;
+}
