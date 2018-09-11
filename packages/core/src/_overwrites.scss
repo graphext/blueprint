@@ -19,6 +19,7 @@
   box-sizing: border-box;
   padding-left: $input-padding-horizontal;
   padding-right: $input-padding-horizontal;
+  box-shadow: none !important;
 
   &.#{$ns}-large {
     padding: 0 $input-padding-horizontal * 1.5;
