@@ -105,7 +105,7 @@ module.exports = {
             warnings: true,
             errors: true,
         },
-        port: 9000,
+        port: 9100,
     },
 
     module: {

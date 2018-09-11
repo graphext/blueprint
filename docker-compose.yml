@@ -15,6 +15,6 @@ services:
       - .:/hostdata
       - node_modules:/node_modules
     ports:
-      - 9000:9000
+      - 9100:9000
 volumes:
   node_modules:
