@@ -81,3 +81,14 @@
 .#{$ns}-input-ghost {
   font-size: 14px;
 }
+
+.#{$ns}-tag-input .#{$ns}-tag {
+  overflow-wrap: break-word;
+  background: $dark-gray5;
+  border-radius: 24px;
+  padding-left: 8px;
+  box-shadow: $custom-shadow;
+  color: white;
+  font-size: 16px;
+  font-weight: normal;
+}
