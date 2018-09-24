@@ -14,7 +14,7 @@ $pt-font-size-small: 12px;
 // a little bit extra to ensure the height comes out to just over 18px (and browser rounds to 18px)
 $pt-line-height: ($pt-grid-size * 2.25) / $pt-font-size + 0.0001 !default;
 
-$pt-border-radius: 4px;
+$pt-border-radius: 16px;
 
 $pt-input-height: 32px;
 
@@ -47,6 +47,7 @@ $blue5: #47b2f0;
 // Buttons
 $pt-button-border-radius: $pt-button-height-large / 2;
 $button-border-width: 0;
+$menu-item-color-hover: $dark-gray5 !important;
 
 // Inputs
 $input-padding-horizontal: $pt-grid-size * 2;
@@ -73,3 +74,14 @@ $button-intent-box-shadow: $custom-shadow;
 $button-intent-box-shadow-active: $custom-shadow;
 $dark-button-box-shadow: $custom-shadow;
 $dark-button-box-shadow-active: $custom-shadow;
+
+// Tooltip
+$tooltip-padding-vertical: 0;
+$tooltip-padding-horizontal: 0;
+$pt-tooltip-box-shadow: $custom-shadow;
+
+// Menu
+$menu-item-border-radius: $pt-border-radius;
+
+// Popover
+$popover-width: 100%;
