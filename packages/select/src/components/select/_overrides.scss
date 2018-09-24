@@ -1,6 +1,9 @@
-
 .#{$ns}-popover {
   .#{$ns}-popover-content {
     margin-top: 8px;
   }
+}
+
+.#{$ns}-popover.#{$ns}-multi-select-popover .#{$ns}-popover-content {
+  margin-top: 0;
 }
