@@ -47,7 +47,6 @@ $blue5: #47b2f0;
 // Buttons
 $pt-button-border-radius: $pt-button-height-large / 2;
 $button-border-width: 0;
-$menu-item-color-hover: $dark-gray5 !important;
 
 // Inputs
 $input-padding-horizontal: $pt-grid-size * 2;
@@ -82,6 +81,7 @@ $pt-tooltip-box-shadow: $custom-shadow;
 
 // Menu
 $menu-item-border-radius: $pt-border-radius;
+$dark-menu-item-color-hover: $dark-gray5;
 
 // Popover
 $popover-width: 100%;
