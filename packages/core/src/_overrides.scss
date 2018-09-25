@@ -15,7 +15,7 @@
 // Every input is a round input for us
 //
 .#{$ns}-input {
-  border-radius: $pt-input-height;
+  border-radius: $pt-input-height / 2;
   box-sizing: border-box;
   padding-left: $input-padding-horizontal;
   padding-right: $input-padding-horizontal;
@@ -91,4 +91,18 @@
   color: white;
   font-size: 16px;
   font-weight: normal;
+}
+
+// Tag
+.#{$ns}-tag-remove:focus {
+  outline:0;
+}
+
+
+// Popover
+.#{$ns}-popover.#{$ns}-dark, .#{$ns}-dark .#{$ns}-popover {
+  box-shadow: $custom-shadow;
+}
+.#{$ns}-popover-target {
+  width: 100%;
 }
