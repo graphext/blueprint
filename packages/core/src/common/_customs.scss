@@ -28,6 +28,7 @@ $pt-button-height-large: 40px;
 
 $black: #000000;
 
+$dark-gray0: #161616;
 $dark-gray1: #1F2024;
 $dark-gray2: #272A33;
 $dark-gray3: #2A2E38;
@@ -39,6 +40,8 @@ $blue2: #0071b2;
 $blue3: #0091e5;
 $blue4: #00a1ff;
 $blue5: #47b2f0;
+
+$pt-intent-primary: #0091E4;
 
 
 
@@ -78,10 +81,9 @@ $dark-button-box-shadow-active: $custom-shadow;
 $tooltip-padding-vertical: 0;
 $tooltip-padding-horizontal: 0;
 $pt-tooltip-box-shadow: $custom-shadow;
+$dark-tooltip-background-color: $dark-gray0 !important;
+$dark-tooltip-text-color: #FFFFFF !important;
 
 // Menu
 $menu-item-border-radius: $pt-border-radius;
 $dark-menu-item-color-hover: $dark-gray5;
-
-// Popover
-$popover-width: 100%;
