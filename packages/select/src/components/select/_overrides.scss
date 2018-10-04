@@ -1,9 +1,26 @@
-.#{$ns}-popover {
-  .#{$ns}-popover-content {
-    margin-top: 8px;
-  }
-}
+// Popover
 
 .#{$ns}-popover.#{$ns}-multi-select-popover .#{$ns}-popover-content {
   margin-top: 0;
+}
+
+.#{$ns}-popover.#{$ns}-dark,
+.#{$ns}-dark .#{$ns}-popover {
+  box-shadow: $custom-shadow;
+}
+
+.#{$ns}-popover-target {
+  max-width: 100%;
+}
+
+.#{$ns}-popover-wrapper {
+  width: 100%;
+}
+
+.#{$ns}-multi-select-popover .#{$ns}-menu {
+  max-width: 100%;
+}
+
+.#{$ns}-select-popover .#{$ns}-menu {
+  max-width: 100%;
 }
