@@ -9,6 +9,15 @@
   text-transform: uppercase;
 }
 
+.#{$ns}-button:focus {
+  outline: none;
+}
+
+.#{$ns}-button-text {
+  font-size: 12px !important;
+  font-weight: bold !important;
+}
+
 // Inputs
 
 //
@@ -28,7 +37,6 @@
 
 
 // Control groups
-
 .#{$ns}-control-group {
 
   .#{$ns}-input {
@@ -39,12 +47,13 @@
       border-radius: initial;
     }
   }
+
   .#{$ns}-button,
   .#{$ns}-select select {
     // inherit radius since it's most likely to be zero
     border-radius: inherit;
-    //border-radius: $pt-button-border-radius
   }
+
   // round the left corners of the left-most element
   > :first-child {
     border-radius: $pt-button-border-radius 0 0 $pt-button-border-radius;
@@ -93,16 +102,13 @@
   font-weight: normal;
 }
 
+.#{$ns}-tag-input-values {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 // Tag
 .#{$ns}-tag-remove:focus {
-  outline:0;
-}
-
-
-// Popover
-.#{$ns}-popover.#{$ns}-dark, .#{$ns}-dark .#{$ns}-popover {
-  box-shadow: $custom-shadow;
-}
-.#{$ns}-popover-target {
-  width: 100%;
+  outline: 0;
 }
