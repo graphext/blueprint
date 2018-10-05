@@ -12,7 +12,7 @@ $pt-font-size-large: 16px;
 $pt-font-size-small: 12px;
 
 // a little bit extra to ensure the height comes out to just over 18px (and browser rounds to 18px)
-$pt-line-height: ($pt-grid-size * 2.25) / $pt-font-size + 0.0001 !default;
+$pt-line-height: ($pt-grid-size * 2.25) / $pt-font-size + 0.0001;
 
 $pt-border-radius: 16px;
 
@@ -81,8 +81,8 @@ $dark-button-box-shadow-active: $custom-shadow;
 $tooltip-padding-vertical: 0;
 $tooltip-padding-horizontal: 0;
 $pt-tooltip-box-shadow: $custom-shadow;
-$dark-tooltip-background-color: $dark-gray0 !important;
-$dark-tooltip-text-color: #FFFFFF !important;
+$dark-tooltip-background-color: $dark-gray0;
+$dark-tooltip-text-color: #FFFFFF;
 
 // Menu
 $menu-item-border-radius: $pt-border-radius;
