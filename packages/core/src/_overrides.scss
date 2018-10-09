@@ -87,8 +87,11 @@
 
 // Tag Input
 
-.#{$ns}-input-ghost {
-  font-size: 14px;
+.#{$ns}-tag-input {
+  .#{$ns}-input-ghost {
+    width: 100%;
+    font-size: 14px;
+  }
 }
 
 .#{$ns}-tag-input .#{$ns}-tag {
