@@ -17,6 +17,8 @@ $ROOT_NM/.bin/node-sass-chokidar \
   --source-map true \
   $@
 
+# Read the package.json version property
 PACKAGE_VERSION=$(cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[",]//g')
 
+# Add the package version to the header of the css output file
 sed -i '' "3s/^/Version: ${PACKAGE_VERSION}\ /" $OUTPUT*.css
