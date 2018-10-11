@@ -16,3 +16,7 @@ $ROOT_NM/.bin/node-sass-chokidar \
   --output $OUTPUT \
   --source-map true \
   $@
+
+PACKAGE_VERSION=$(cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[",]//g')
+
+sed -i '' "3s/^/Version: ${PACKAGE_VERSION}\ /" $OUTPUT*.css
