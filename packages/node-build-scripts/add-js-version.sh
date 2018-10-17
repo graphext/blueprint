@@ -9,4 +9,4 @@ PACKAGE_VERSION=$(cat package.json | grep version | head -1 | awk -F: '{ print $
 OUTPUT="${OUTPUT:-lib/css/}"
 
 # Add the package version to the header of the css output file
-sed -i '' "6s/^/Version: ${PACKAGE_VERSION}\ /" $OUTPUT*.css
+sed -i '' "6s/^/Version: ${PACKAGE_VERSION}\ /" $OUTPUT*.css || echo "This only works in Mac OS" && exit 1
