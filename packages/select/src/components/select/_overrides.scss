@@ -24,3 +24,24 @@
 .#{$ns}-select-popover .#{$ns}-menu {
   width: 100%;
 }
+
+// MultiSelect
+
+.#{$ns}-tag-input .#{$ns}-tag-input-values {
+  margin-right: 0;
+  overflow-y: auto;
+}
+
+.#{$ns}-input.#{$ns}-multi-select {
+  padding-right: 0;
+}
+
+.#{$ns}-multi-select > i {
+  position: absolute;
+  top: 12px;
+  right: 24px;
+}
+
+.#{$ns}-tag-input .#{$ns}-tag {
+  max-width: calc(100% - 48px);
+}
