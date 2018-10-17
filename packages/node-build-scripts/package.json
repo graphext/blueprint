@@ -6,6 +6,7 @@
     "test": "exit 0"
   },
   "bin": {
+    "add-js-version": "./add-js-version.sh",
     "assert-package-layout": "./assert-package-layout.js",
     "css-dist": "./css-dist.sh",
     "generate-css-variables": "./generate-css-variables.js",
