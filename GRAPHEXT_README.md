@@ -13,7 +13,7 @@ git checkout graphext && git pull upstream develop
 - If the Pull Request is accepted, all commits must be **squashed** into one.
 
 ## Updating Blueprint styles
-The purpose of this repository is to update adapt blueprint UI components' styles to Graphext design, then, it is forbidden to update blueprint javascript. Graphext developers must only update blueprint styles. To do that, the steps to follow must be:
+The purpose of this repository is to adapt blueprint UI components' styles to Graphext design, then, it is forbidden to update blueprint javascript. Graphext developers must only update blueprint styles. To do that, the steps to follow must be:
 - Blueprint uses `!default` flag at the end of some `scss` variable declarations. Therefore, graphext developers must see if they can use `scss` variables in order to get the desired style.
 - If the first approach cannot be done, then the developer must add the `scss` styles to `_overrides.scss` files stayed in `packages/core` and `packages/select`.
 
@@ -32,7 +32,7 @@ cd packages/core
 yarn run generate-graphext-css
 ```
 This command compile all `.scss` files into a single `.css`.
-- Update [blueprint-core.global.css](https://github.com/graphext/graphext/blob/master/app/javascript/rsc/blueprint-core.global.css) file in `graphext/app/javascript/rsc/blueprint-core.global.css` with the new CSS.
+- Update [blueprint-core.global.css](https://github.com/graphext/graphext/blob/master/app/javascript/rsc/blueprint-core.global.css) file in `graphext/app/javascript/rsc/blueprint-core.global.css` with the new CSS located in the lib directory e.g. (`packages/core/lib/css/blueprint.css`).
 
 ## How to add new icons
 
@@ -50,15 +50,15 @@ The icons generator script is [`generate-icons-source.js`](packages/node-build-s
     },
     ...
 ```
-- `iconName` is the most important parameter. and it represents the svg filename and it's the name that must be used in the code to use this icon.
+- `iconName` is the most important parameter. It has to resembles the svg filename, choose a good one because it is also the name that must be used in the code to use this icon.
 - `tags` is just useful to search icons in the documentation.
 - `group` is only used in the documentation too. We must add all icons to **Graphext** group to see all icons added by graphext together.
-- `content` must be an hexadecimal **unique** number of length 4.
+- `content` must be an hexadecimal **unique** number of length 4. This number must be **unique** in the file. (Search before commit) One way of selecting a name is using https://unicode-table.com/ Search for the concept you want to add and copy the number.   
 - Add `svg` resources in the following folders
     - `resources/icons/16px`
     - `resources/icons/20px`
 
-  Note that unless we can add the same `svg` in both folders, it is interesting to respect the 16px and 20 pixels to get better results when we want the the icon to be small.
+  We can add the same `svg` in both folders, but could be nicer to generate one for 16px and another one for 20px.
 - Finally, icons must be compiled:
 ```
 cd packages/icons && yarn compile
