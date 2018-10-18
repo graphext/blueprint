@@ -3,14 +3,15 @@ Before starting developing, please see "One-time setup" section in [Readme](READ
 
 ## How to sync with upstream
 This is a fork of [Palantir's blueprint library](https://github.com/palantir/blueprint) for React UI components, and the main branch of this repository is `graphext`.
-
-- Retrieve latest changes from `upstream develop` into a new branch in `origin`:
+We should always pull commits of a completed released version of blueprint.
+- If the latest commit of `develop` branch is the last of the desired release, we can retrieve the changes from `upstream develop` into a new branch in `origin`:
 ```
 git checkout graphext && git pull upstream develop
 ```
+- Otherwise, the *pull* must be done from the release's specific commit.
 - Push all incoming commits to the branch created in `origin`.
 - Prepare a Pull Request to `origin graphext`.
-- If the Pull Request is accepted, all commits must be **squashed** into one.
+- Note that all commits coming from upstream must be **squashed** into one.
 
 ## Updating Blueprint styles
 The purpose of this repository is to adapt blueprint UI components' styles to Graphext design, then, it is forbidden to update blueprint javascript. Graphext developers must only update blueprint styles. To do that, the steps to follow must be:
@@ -53,7 +54,7 @@ The icons generator script is [`generate-icons-source.js`](packages/node-build-s
 - `iconName` is the most important parameter. It has to resembles the svg filename, choose a good one because it is also the name that must be used in the code to use this icon.
 - `tags` is just useful to search icons in the documentation.
 - `group` is only used in the documentation too. We must add all icons to **Graphext** group to see all icons added by graphext together.
-- `content` must be an hexadecimal **unique** number of length 4. This number must be **unique** in the file. (Search before commit) One way of selecting a name is using https://unicode-table.com/ Search for the concept you want to add and copy the number.   
+- `content` must be an hexadecimal **unique** number of length 4. This number must be **unique** in the file. (Search before commit) One way of selecting a name is using https://unicode-table.com/ Search for the concept you want to add and copy the number.
 - Add `svg` resources in the following folders
     - `resources/icons/16px`
     - `resources/icons/20px`
