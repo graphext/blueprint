@@ -26,8 +26,7 @@
 }
 
 // MultiSelect
-
-.#{$ns}-tag-input .#{$ns}-tag-input-values {
+.#{$ns}-tag-input.#{$ns}-multi-select .#{$ns}-tag-input-values {
   margin-top: 0;
   margin-right: 0;
   height: 100%;
