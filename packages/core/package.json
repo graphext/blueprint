@@ -26,6 +26,7 @@
     "dist:css": "css-dist lib/css/*.css",
     "dist:variables": "generate-css-variables common/_colors.scss common/_color-aliases.scss common/_variables.scss",
     "dist:verify": "assert-package-layout",
+    "generate-graphext-css": "yarn run compile:css && add-js-version",
     "lint": "run-p lint:scss lint:ts",
     "lint:scss": "sass-lint",
     "lint:ts": "ts-lint",
