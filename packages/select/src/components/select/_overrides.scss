@@ -24,3 +24,37 @@
 .#{$ns}-select-popover .#{$ns}-menu {
   width: 100%;
 }
+
+// MultiSelect
+.#{$ns}-tag-input.#{$ns}-multi-select .#{$ns}-tag-input-values {
+  margin-top: 0;
+  margin-right: 0;
+  height: 100%;
+  overflow-y: auto;
+  padding-top: 8px;
+  padding-right: 24px;
+}
+
+.#{$ns}-input.#{$ns}-multi-select {
+  position: relative;
+  height: 100%;
+  padding-right: 0;
+}
+
+.#{$ns}-multi-select > i {
+  position: absolute;
+  top: 12px;
+  right: 24px;
+}
+
+.#{$ns}-tag-input .#{$ns}-tag {
+  max-width: calc(100% - 48px);
+}
+
+.#{$ns}-popover-wrapper .#{$ns}-popover-target {
+  height: 100%;
+}
+
+.#{$ns}-popover-target > div {
+  height: 100%;
+}
