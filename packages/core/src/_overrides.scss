@@ -105,13 +105,12 @@
   font-weight: normal;
 }
 
-.#{$ns}-tag-input-values {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
 // Tag
 .#{$ns}-tag-remove:focus {
   outline: 0;
+}
+
+// Popover
+.#{$ns}-transition-container {
+  margin-top: 4px;
 }
