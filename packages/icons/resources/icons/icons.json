@@ -3162,5 +3162,215 @@
     "tags": "workflow, edge, node, complete, finished, final, last",
     "group": "data",
     "content": "\\e7c4"
+  }, 
+  {
+    "displayName": "Cross",
+    "iconName": "g-cross",
+    "tags": "close, cross, delete",
+    "group": "Graphext",
+    "content": "\\e7c5"
+  },
+  {
+    "displayName": "Search",
+    "iconName": "g-search",
+    "tags": "inspection, exploration, magnifying glass",
+    "group": "Graphext",
+    "content": "\\e7c6"
+  },
+  {
+    "displayName": "Selector",
+    "iconName": "g-selector",
+    "tags": "select, pointer, cursor",
+    "group": "Graphext",
+    "content": "\\e7c7"
+  },
+  {
+    "displayName": "Arrow: Left",
+    "iconName": "g-arrow-left",
+    "tags": "chevron, left, collapse, expand",
+    "group": "Graphext",
+    "content": "\\e7c8"
+  },
+  {
+    "displayName": "Arrow: Right",
+    "iconName": "g-arrow-right",
+    "tags": "chevron, right, collapse, expand",
+    "group": "Graphext",
+    "content": "\\e7c9"
+  },
+  {
+    "displayName": "Arrow: Down",
+    "iconName": "g-arrow-down",
+    "tags": "chevron, down, collapse, expand",
+    "group": "Graphext",
+    "content": "\\e7ca"
+  },
+  {
+    "displayName": "Arrow: Up",
+    "iconName": "g-arrow-up",
+    "tags": "chevron, up, collapse, expand",
+    "group": "Graphext",
+    "content": "\\e7cb"
+  },
+  {
+    "displayName": "Download",
+    "iconName": "g-download",
+    "tags": "export, save",
+    "group": "Graphext",
+    "content": "\\e7cc"
+  },
+  {
+    "displayName": "Info",
+    "iconName": "g-info",
+    "tags": "help, support, documentation",
+    "group": "Graphext",
+    "content": "\\e7cd"
+  },
+  {
+    "displayName": "Settings",
+    "iconName": "g-settings",
+    "tags": "configuration, adjustments, modify, edit",
+    "group": "Graphext",
+    "content": "\\e7ce"
+  },
+  {
+    "displayName": "Menu",
+    "iconName": "g-menu",
+    "tags": "elipsis, dots, dropdown, options",
+    "group": "Graphext",
+    "content": "\\e7cf"
+  },
+  {
+    "displayName": "Hand",
+    "iconName": "g-hand",
+    "tags": "drag, cursor, pointer, select",
+    "group": "Graphext",
+    "content": "\\e7d0"
+  },
+  {
+    "displayName": "Recipes",
+    "iconName": "g-recipes",
+    "tags": "health, status, pipeline, options",
+    "group": "Graphext",
+    "content": "\\e7d1"
+  },
+  {
+    "displayName": "Filters",
+    "iconName": "g-filters",
+    "tags": "reduce, reduced, search ",
+    "group": "Graphext",
+    "content": "\\e7d2"
+  },
+  {
+    "displayName": "Drop",
+    "iconName": "g-drop",
+    "tags": "color, water, change color",
+    "group": "Graphext",
+    "content": "\\e7d3"
+  },
+  {
+    "displayName": "Expand",
+    "iconName": "g-expand",
+    "tags": "maximize, full screen, arrows",
+    "group": "Graphext",
+    "content": "\\e7d4"
+  },
+  {
+    "displayName": "Minimize",
+    "iconName": "g-minimize",
+    "tags": "arrows, small screen",
+    "group": "Graphext",
+    "content": "\\e7d5"
+  },
+  {
+    "displayName": "Size",
+    "iconName": "g-size",
+    "tags": "node, resize, change size",
+    "group": "Graphext",
+    "content": "\\e7d6"
+  },
+  {
+    "displayName": "Edit",
+    "iconName": "g-edit",
+    "tags": "pencil, edit mode, modify",
+    "group": "Graphext",
+    "content": "\\e7d7"
+  },
+  {
+    "displayName": "Delete",
+    "iconName": "g-delete",
+    "tags": "trash, cancel, bin, trash can, rubish",
+    "group": "Graphext",
+    "content": "\\e7d8"
+  },
+  {
+    "displayName": "Insight",
+    "iconName": "g-insight",
+    "tags": "report, clipboard, deliverable",
+    "group": "Graphext",
+    "content": "\\e7d9"
+  },
+  {
+    "displayName": "More",
+    "iconName": "g-more",
+    "tags": "plus, add, plus sign, positive",
+    "group": "Graphext",
+    "content": "\\e7da"
+  },
+  {
+    "displayName": "less",
+    "iconName": "g-less",
+    "tags": "substract, minus sign, negative",
+    "group": "Graphext",
+    "content": "\\e7db"
+  },
+  {
+    "displayName": "Graph",
+    "iconName": "g-graph",
+    "tags": "network, segments, nodes, connections, structure",
+    "group": "Graphext",
+    "content": "\\e7dc"
+  },
+  {
+    "displayName": "pagerank",
+    "iconName": "g-pagerank",
+    "tags": "structure, hierarchy, network, graph, segments",
+    "group": "Graphext",
+    "content": "\\e7dd"
+  },
+  {
+    "displayName": "Check",
+    "iconName": "g-check",
+    "tags": "tick, accept, confirm, valid, correct, ok",
+    "group": "Graphext",
+    "content": "\\e7de"
+  },
+  {
+    "displayName": "Label",
+    "iconName": "g-label",
+    "tags": "tag, identification, id",
+    "group": "Graphext",
+    "content": "\\e7df"
+  },
+  {
+    "displayName": "Pin",
+    "iconName": "g-pin",
+    "tags": "safety pin, attach, detach, clip",
+    "group": "Graphext",
+    "content": "\\e7e0"
+  },
+  {
+    "displayName": "Error",
+    "iconName": "g-error",
+    "tags": "failure, fail, cross",
+    "group": "Graphext",
+    "content": "\\e7e1"
+  },
+  {
+    "displayName": "Bell",
+    "iconName": "g-bell",
+    "tags": "notification, alert",
+    "group": "Graphext",
+    "content": "\\e7e2"
   }
 ]

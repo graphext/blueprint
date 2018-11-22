@@ -37,7 +37,7 @@ This command compile all `.scss` files into a single `.css`.
 
 ## How to add new icons
 
-The icons generator script is [`generate-icons-source.js`](packages/node-build-scripts/generate-icons-source.js). This script uses [`icons.json` ](packages/icons/resources/icons/icons.json) as entry, which is the file we have to modify in order to add a new icon.
+The icons generator script is [`generate-icons-source.js`](packages/node-build-scripts/generate-icons-source.js). This script uses [`packages/icons/resources/icons/icons.json` ](packages/icons/resources/icons/icons.json) as entry, which is the file we have to modify in order to add a new icon.
 - 1. Add a new object at the end of the array:
 
 ```
@@ -60,7 +60,7 @@ The icons generator script is [`generate-icons-source.js`](packages/node-build-s
     - `resources/icons/20px`
 
   We can add the same `svg` in both folders, but could be nicer to generate one for 16px and another one for 20px.
-- Finally, icons must be compiled:
+- Finally, icons must be compiled, open a new terminal and paste:
 ```
-cd packages/icons && yarn compile
+docker-compose run bp yarn --cwd packages/icons compile
 ```
