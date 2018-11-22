@@ -3386,5 +3386,19 @@
     "tags": "expand, see more, next, others",
     "group": "Graphext",
     "content": "\\e7e4"
+  },
+  {
+    "displayName": "Down",
+    "iconName": "g-down",
+    "tags": "arrow, bottom",
+    "group": "Graphext",
+    "content": "\\e7e5"
+  },
+  {
+    "displayName": "Up",
+    "iconName": "g-up",
+    "tags": "arrow, top",
+    "group": "Graphext",
+    "content": "\\e7e6"
   }
 ]
