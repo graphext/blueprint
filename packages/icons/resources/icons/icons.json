@@ -3372,5 +3372,19 @@
     "tags": "notification, alert",
     "group": "Graphext",
     "content": "\\e7e2"
+  },
+  {
+    "displayName": "Color Picker",
+    "iconName": "g-color-picker",
+    "tags": "change color, color",
+    "group": "Graphext",
+    "content": "\\e7e3"
+  },
+  {
+    "displayName": "Show More",
+    "iconName": "g-show-more",
+    "tags": "expand, see more, next, others",
+    "group": "Graphext",
+    "content": "\\e7e4"
   }
 ]
