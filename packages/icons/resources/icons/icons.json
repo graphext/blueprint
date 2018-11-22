@@ -3400,5 +3400,12 @@
     "tags": "arrow, top",
     "group": "Graphext",
     "content": "\\e7e6"
+  },
+  {
+    "displayName": "Logout",
+    "iconName": "g-logout",
+    "tags": "sign out, out, arrow, leave",
+    "group": "Graphext",
+    "content": "\\e7e7"
   }
 ]
