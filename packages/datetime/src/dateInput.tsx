@@ -37,6 +37,13 @@ export interface IDateInputProps extends IDatePickerBaseProps, IDateFormatProps,
     canClearSelection?: boolean;
 
     /**
+     * Text for the reset button in the date picker action bar.
+     * Passed to `DatePicker` component.
+     * @default "Clear"
+     */
+    clearButtonText?: string;
+
+    /**
      * Whether the calendar popover should close when a date is selected.
      * @default true
      */
@@ -108,6 +115,13 @@ export interface IDateInputProps extends IDatePickerBaseProps, IDateFormatProps,
      * in the input field, pass `new Date(undefined)` to the value prop.
      */
     value?: Date | null;
+
+    /**
+     * Text for the today button in the date picker action bar.
+     * Passed to `DatePicker` component.
+     * @default "Today"
+     */
+    todayButtonText?: string;
 }
 
 export interface IDateInputState {
@@ -365,10 +379,7 @@ export class DateInput extends AbstractPureComponent<IDateInputProps, IDateInput
         if (e.which === Keys.ENTER) {
             const nextDate = this.parseDate(this.state.valueString);
             this.handleDateChange(nextDate, true, true);
-        } else if (e.which === Keys.TAB && e.shiftKey) {
-            // close the popover if focus will move to the previous element on
-            // the page. tabbing forward should *not* close the popover, because
-            // focus will be moving into the popover itself.
+        } else if (e.which === Keys.TAB) {
             this.setState({ isOpen: false });
         } else if (e.which === Keys.ESCAPE) {
             this.setState({ isOpen: false });
