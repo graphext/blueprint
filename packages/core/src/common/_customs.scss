@@ -44,6 +44,11 @@ $blue5: #47b2f0;
 $pt-intent-primary: #0091E4;
 $pt-dark-link-color: $pt-intent-primary; // for links
 
+$white1: #ffffff;
+$white2: rgba(255, 255, 255, 0.8);
+$white3: rgba(255, 255, 255, 0.5);
+$white4: rgba(255, 255, 255, 0.3);
+
 
 // ------------------------- Components -------------------------------
 
@@ -80,7 +85,7 @@ $dark-button-box-shadow-active: $custom-shadow;
 // Tooltip
 $pt-tooltip-box-shadow: $custom-shadow;
 $dark-tooltip-background-color: $dark-gray0;
-$dark-tooltip-text-color: #FFFFFF;
+$dark-tooltip-text-color: $white1;
 
 // Menu
 $menu-item-border-radius: $pt-border-radius;
