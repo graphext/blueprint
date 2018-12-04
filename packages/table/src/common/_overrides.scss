@@ -4,3 +4,8 @@ $ns: bp3;
 .#{$ns}-table-container {
   border-radius: 8px;
 }
+
+.vertical-align .#{$ns}-table-cell {
+  display: flex;
+  align-items: center;
+}
