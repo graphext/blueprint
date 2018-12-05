@@ -20,6 +20,5 @@ module.exports = Object.assign({}, baseConfig, {
         library: ["Blueprint", "Table"],
         libraryTarget: "umd",
         path: path.resolve(__dirname, "./dist")
-    },
-    port: process.env.PORT || 9000
+    }
 });
