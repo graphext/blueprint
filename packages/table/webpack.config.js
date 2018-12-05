@@ -21,4 +21,5 @@ module.exports = Object.assign({}, baseConfig, {
         libraryTarget: "umd",
         path: path.resolve(__dirname, "./dist")
     },
+    port: process.env.PORT || 9000
 });
