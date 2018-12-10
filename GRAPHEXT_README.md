@@ -23,6 +23,7 @@ The purpose of this repository is to adapt blueprint UI components' styles to Gr
 The following packages of this monorepo have been already updated by Graphext and they are already published in graphext npm registry:
     - `core`
     - `select`
+    - `icons`
     - `table`
 
 ## How to publish the changes
