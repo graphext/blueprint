@@ -32,4 +32,7 @@ module.exports = Object.assign({}, baseConfig, {
             { from: "src/features.html", to: "." },
         ])
     ]),
+    devServer: {
+        port: process.env.PORT || 9000
+    }
 });

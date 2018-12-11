@@ -20,5 +20,5 @@ module.exports = Object.assign({}, baseConfig, {
         library: ["Blueprint", "Table"],
         libraryTarget: "umd",
         path: path.resolve(__dirname, "./dist")
-    },
+    }
 });
