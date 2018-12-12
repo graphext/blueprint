@@ -245,6 +245,34 @@
     "content": "\\e9e7"
   },
   {
+    "displayName": "Text",
+    "iconName": "g-text",
+    "tags": "letter, word, header",
+    "group": "Graphext",
+    "content": "\\e9e8"
+  },
+  {
+    "displayName": "Title",
+    "iconName": "g-title",
+    "tags": "text, letter, paragraph, content",
+    "group": "Graphext",
+    "content": "\\e9e9"
+  },
+  {
+    "displayName": "Stream",
+    "iconName": "g-stream",
+    "tags": "chart, graph, line",
+    "group": "Graphext",
+    "content": "\\e9f0"
+  },
+  {
+    "displayName": "Filter",
+    "iconName": "g-filter",
+    "tags": "graph, chart, data, column, variable",
+    "group": "Graphext",
+    "content": "\\e9f1"
+  },
+  {
     "displayName": "Blank",
     "iconName": "blank",
     "tags": "empty, placeholder",
