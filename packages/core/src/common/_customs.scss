@@ -49,6 +49,20 @@ $white2: rgba(255, 255, 255, 0.8);
 $white3: rgba(255, 255, 255, 0.5);
 $white4: rgba(255, 255, 255, 0.3);
 
+$pt-intent-text-colors: (
+  "primary": $pt-intent-primary,
+  "success": $green2,
+  "warning": $orange2,
+  "danger" : $red2,
+);
+
+$pt-dark-intent-text-colors: (
+  "primary": $pt-intent-primary,
+  "success": $green5,
+  "warning": $orange5,
+  "danger" : $red5,
+);
+
 
 // ------------------------- Components -------------------------------
 

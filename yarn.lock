@@ -2,6 +2,22 @@
 # yarn lockfile v1
 
 
+"@blueprintjs/core@3.9.0-graphext":
+  version "3.9.0-graphext"
+  resolved "https://npm.graphext.com/@blueprintjs%2fcore/-/core-3.9.0-graphext.tgz#a91f76d5dc51a71d8dbcf95d575c8b650a54e59a"
+  integrity sha512-lcmwVnv1Ds9UZz/qJeAO5fBGeHuHEbisZkEkuQs295zZZyy5v9dDa0HNyWoEPO+zaUMGlrilDm9A9+6UggqFmA==
+  dependencies:
+    "@blueprintjs/icons" "3.3.0-graphext"
+    "@types/dom4" "^2.0.0"
+    classnames "^2.2"
+    dom4 "^2.0.1"
+    normalize.css "^8.0.0"
+    popper.js "^1.14.1"
+    react-popper "^1.0.0"
+    react-transition-group "^2.2.1"
+    resize-observer-polyfill "^1.5.0"
+    tslib "^1.9.0"
+
 "@blueprintjs/core@^3.0.0", "@blueprintjs/core@^3.1.0", "@blueprintjs/core@^3.9.0":
   version "3.9.0"
   resolved "https://registry.yarnpkg.com/@blueprintjs/core/-/core-3.9.0.tgz#60f10908227de8260be920a529bc67efbe9eb686"
@@ -32,6 +48,14 @@
     react-popper "^1.0.0"
     react-transition-group "^2.2.1"
     resize-observer-polyfill "^1.5.0"
+    tslib "^1.9.0"
+
+"@blueprintjs/icons@3.3.0-graphext":
+  version "3.3.0-graphext"
+  resolved "https://npm.graphext.com/@blueprintjs%2ficons/-/icons-3.3.0-graphext.tgz#f863a0074daa8b7b77654472d51fa04baf8bdb0e"
+  integrity sha512-TsKQDI3gHfUThLanfYxCxJmnSBbMpPml+nMhd7rKk8aJVGgok4SvrTi0X/EahLhk51uCQyJ2HtS7IGcLxlAQlA==
+  dependencies:
+    classnames "^2.2"
     tslib "^1.9.0"
 
 "@blueprintjs/icons@^3.0.0", "@blueprintjs/icons@^3.3.0":

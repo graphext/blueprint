@@ -273,6 +273,13 @@
     "content": "\\e9f1"
   },
   {
+    "displayName": "Open",
+    "iconName": "g-open",
+    "tags": "new window, link",
+    "group": "Graphext",
+    "content": "\\e9f2"
+  },
+  {
     "displayName": "Blank",
     "iconName": "blank",
     "tags": "empty, placeholder",
