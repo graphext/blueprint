@@ -1,6 +1,6 @@
 {
   "name": "@blueprintjs/core",
-  "version": "3.9.0-graphext4",
+  "version": "3.9.0-graphext5",
   "description": "Core styles & components",
   "main": "lib/cjs/index.js",
   "module": "lib/esm/index.js",
@@ -39,7 +39,7 @@
     "verify": "npm-run-all compile -p dist test lint"
   },
   "dependencies": {
-    "@blueprintjs/icons": "3.3.0-graphext2",
+    "@blueprintjs/icons": "3.3.0-graphext3",
     "@types/dom4": "^2.0.0",
     "classnames": "^2.2",
     "dom4": "^2.0.1",
