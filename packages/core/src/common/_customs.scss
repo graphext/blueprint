@@ -41,13 +41,31 @@ $blue3: #0091e5;
 $blue4: #00a1ff;
 $blue5: #47b2f0;
 
-$pt-intent-primary: #0091E4;
-$pt-dark-link-color: $pt-intent-primary; // for links
+$green1: #0a6640;
+$green2: #0d8050;
+$green3: #0f9960;
+$green4: #15b371;
+$green5: #3dcc91;
+
+$orange1: #a66321;
+$orange2: #bf7326;
+$orange3: #d9822b;
+$orange4: #f29d49;
+$orange5: #ffb366;
+
+$red1: #a82a2a;
+$red2: #c23030;
+$red3: #db3737;
+$red4: #f55656;
+$red5: #ff7373;
 
 $white1: #ffffff;
 $white2: rgba(255, 255, 255, 0.8);
 $white3: rgba(255, 255, 255, 0.5);
 $white4: rgba(255, 255, 255, 0.3);
+
+$pt-intent-primary: #0091E4;
+$pt-dark-link-color: $pt-intent-primary; // for links
 
 $pt-intent-text-colors: (
   "primary": $pt-intent-primary,
