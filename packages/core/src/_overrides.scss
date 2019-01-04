@@ -120,3 +120,16 @@
 .#{$ns}-transition-container {
   margin-top: 4px;
 }
+
+// CheckBox
+.#{$ns}-control.#{$ns}-checkbox {
+  .#{$ns}-control-indicator {
+    border-radius: 4px;
+    background: $dark-gray5;  // removes gradient
+  }
+  input:checked ~ .#{$ns}-control-indicator{
+    &::before {
+      background-image: svg-icon("16px/g-check.svg", (path: (fill: $white)));
+    }
+  }
+}
