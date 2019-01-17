@@ -36,7 +36,14 @@ And then create the bundles with
 ```
 yarn dist:libs
 ```
-After that you can upgrade the version of the changed packages adding +1 after the `graphext` part of the version. Take into account the dependencies between packages, like the icons --> core dependency.
+After that you can upgrade the version of the changed packages adding +1 after the `graphext` part of the version. Take into account the dependencies between packages, like the icons --> core dependency. The easiest way of updating dependencies is:
+
+1. Edit the file called `graphext-versions.json`, updating all dependencies
+2. Run the script than copies the master versions into the `package.json` of all packages
+
+    ```
+    docker-compose run bp node scripts/syncVersions.js
+    ```
 
 And publish the affected packages like:
 ```
