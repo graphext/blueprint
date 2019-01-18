@@ -62,7 +62,8 @@
     "node": ">=6.1"
   },
   "resolutions": {
-    "node-gyp": "^3.6.3"
+    "node-gyp": "^3.6.3",
+    "tsutils": "2.19.0"
   },
   "repository": {
     "type": "git",
