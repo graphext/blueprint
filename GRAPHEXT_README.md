@@ -22,13 +22,14 @@ The purpose of this repository is to adapt blueprint UI components' styles to Gr
 
 The following packages of this monorepo have been already updated by Graphext and they are already published in graphext npm registry:
     - `core`
+    - `datetime`
     - `select`
     - `icons`
     - `table`
 
 ## How to publish the changes
 
-In the top directory you can complie all the packages
+In the top directory you can compile all the packages
 ```
 yarn compile
 ```
