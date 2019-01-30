@@ -280,6 +280,41 @@
     "content": "\\e9f2"
   },
   {
+    "displayName": "Categorical",
+    "iconName": "g-categorical",
+    "tags": "category, column, variable, data",
+    "group": "Graphext",
+    "content": "\\e9f3"
+  },
+  {
+    "displayName": "Everything",
+    "iconName": "g-everything",
+    "tags": "everything, selection, background",
+    "group": "Graphext",
+    "content": "\\e9f4"
+  },
+  {
+    "displayName": "Grid",
+    "iconName": "g-grid",
+    "tags": "grid, insights, layout",
+    "group": "Graphext",
+    "content": "\\e9f5"
+  },
+  {
+    "displayName": "List Column",
+    "iconName": "g-list-column",
+    "tags": "list, column, insights, layout",
+    "group": "Graphext",
+    "content": "\\e9f6"
+  },
+  {
+    "displayName": "List",
+    "iconName": "g-list",
+    "tags": "list, insights, layout",
+    "group": "Graphext",
+    "content": "\\e9f7"
+  },
+  {
     "displayName": "Blank",
     "iconName": "blank",
     "tags": "empty, placeholder",
