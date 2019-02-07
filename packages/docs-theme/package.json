@@ -28,8 +28,8 @@
     "verify": "npm-run-all compile -p dist lint"
   },
   "dependencies": {
-    "@blueprintjs/core": "3.9.0-graphext8",
-    "@blueprintjs/select": "3.3.0-graphext4",
+    "@blueprintjs/core": "3.9.0-graphext9",
+    "@blueprintjs/select": "3.3.0-graphext5",
     "classnames": "^2.2",
     "documentalist": "^1.4.0",
     "fuzzaldrin-plus": "^0.6.0",

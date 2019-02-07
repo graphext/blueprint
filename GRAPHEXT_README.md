@@ -31,11 +31,11 @@ The following packages of this monorepo have been already updated by Graphext an
 
 In the top directory you can compile all the packages
 ```
-yarn compile
+docker-compose run bp yarn compile
 ```
 And then create the bundles with
 ```
-yarn dist:libs
+docker-compose run bp yarn dist:libs
 ```
 After that you can upgrade the version of the changed packages adding +1 after the `graphext` part of the version. Take into account the dependencies between packages, like the icons --> core dependency. The easiest way of updating dependencies is:
 
@@ -80,3 +80,8 @@ The icons generator script is [`generate-icons-source.js`](packages/node-build-s
 ```
 docker-compose run bp yarn --cwd packages/icons compile
 ```
+- Check the results: the fastest way is running the core and the documentation
+```
+docker-compose run bp yarn dev:core
+```
+

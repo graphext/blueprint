@@ -315,6 +315,13 @@
     "content": "\\e9f7"
   },
   {
+    "displayName": "Metrics",
+    "iconName": "g-metrics",
+    "tags": "metrics, data",
+    "group": "Graphext",
+    "content": "\\e9f8"
+  },
+  {
     "displayName": "Blank",
     "iconName": "blank",
     "tags": "empty, placeholder",
