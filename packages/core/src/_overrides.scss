@@ -18,6 +18,11 @@
   font-weight: bold;
 }
 
+.#{$ns}-dark .#{$ns}-button.#{$ns}-minimal.#{$ns}-intent-primary:hover,
+.#{$ns}-button.#{$ns}-minimal.#{$ns}-intent-primary:hover {
+  background-color: inherit;
+}
+
 // Inputs
 
 //
