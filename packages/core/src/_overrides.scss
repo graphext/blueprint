@@ -126,6 +126,11 @@
   margin-top: 4px;
 }
 
+// Toast
+.#{$ns}-toast {
+  background-color: $dark-gray5;
+}
+
 // CheckBox
 .#{$ns}-control.#{$ns}-checkbox {
   .#{$ns}-control-indicator {
