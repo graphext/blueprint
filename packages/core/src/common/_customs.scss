@@ -87,6 +87,9 @@ $pt-dark-intent-text-colors: (
 // Buttons
 $pt-button-border-radius: $pt-button-height-large / 2;
 $button-border-width: 0;
+$dark-minimal-button-background-color: $dark-gray2;
+$dark-minimal-button-background-color-hover: rgba($dark-gray2, 0.15);
+$dark-minimal-button-background-color-active: rgba($dark-gray2, 0.3);
 
 // Inputs
 $input-padding-horizontal: $pt-grid-size * 2;
