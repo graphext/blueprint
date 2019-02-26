@@ -18,6 +18,11 @@
   font-weight: bold;
 }
 
+.#{$ns}-dark .#{$ns}-button.#{$ns}-minimal.#{$ns}-intent-primary:hover,
+.#{$ns}-button.#{$ns}-minimal.#{$ns}-intent-primary:hover {
+  background-color: inherit;
+}
+
 // Inputs
 
 //
@@ -119,6 +124,17 @@
 // Popover
 .#{$ns}-transition-container {
   margin-top: 4px;
+}
+
+// Toast
+.#{$ns}-toast {
+  &.#{$ns}-dark {
+    background-color: $dark-gray5;
+  }
+}
+
+.#{$ns}-toast.#{$ns}-dark .#{$ns}-button:not([class*="bp3-intent-"]) .#{$ns}-icon {
+  color: $white;
 }
 
 // CheckBox

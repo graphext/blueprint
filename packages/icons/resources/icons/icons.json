@@ -730,9 +730,9 @@
   {
     "displayName": "Cross",
     "iconName": "cross",
-    "tags": "cross mark, fail, delete, no, close, remove",
-    "group": "action",
-    "content": "\\2717"
+    "tags": "close, cross, delete",
+    "group": "Graphext",
+    "content": "\\e9c5"
   },
   {
     "displayName": "Plus",
