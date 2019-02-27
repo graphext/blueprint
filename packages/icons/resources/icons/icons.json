@@ -263,63 +263,140 @@
     "iconName": "g-stream",
     "tags": "chart, graph, line",
     "group": "Graphext",
-    "content": "\\e9f0"
+    "content": "\\e9ea"
   },
   {
     "displayName": "Filter",
     "iconName": "g-filter",
     "tags": "graph, chart, data, column, variable",
     "group": "Graphext",
-    "content": "\\e9f1"
+    "content": "\\e9eb"
   },
   {
     "displayName": "Open",
     "iconName": "g-open",
     "tags": "new window, link",
     "group": "Graphext",
-    "content": "\\e9f2"
+    "content": "\\e9ec"
   },
   {
     "displayName": "Categorical",
     "iconName": "g-categorical",
     "tags": "category, column, variable, data",
     "group": "Graphext",
-    "content": "\\e9f3"
+    "content": "\\e9ed"
   },
   {
     "displayName": "Everything",
     "iconName": "g-everything",
     "tags": "everything, selection, background",
     "group": "Graphext",
-    "content": "\\e9f4"
+    "content": "\\e9ee"
   },
   {
     "displayName": "Grid",
     "iconName": "g-grid",
     "tags": "grid, insights, layout",
     "group": "Graphext",
-    "content": "\\e9f5"
+    "content": "\\e9ef"
   },
   {
     "displayName": "List Column",
     "iconName": "g-list-column",
     "tags": "list, column, insights, layout",
     "group": "Graphext",
-    "content": "\\e9f6"
+    "content": "\\e9f0"
   },
   {
     "displayName": "List",
     "iconName": "g-list",
     "tags": "list, insights, layout",
     "group": "Graphext",
-    "content": "\\e9f7"
+    "content": "\\e9f1"
   },
   {
     "displayName": "Metrics",
     "iconName": "g-metrics",
     "tags": "metrics, data",
     "group": "Graphext",
+    "content": "\\e9f2"
+  },
+  {
+    "displayName": "Visibility",
+    "iconName": "g-visibility",
+    "tags": "see, show, eye, visible",
+    "group": "Graphext",
+    "content": "\\e9f3"
+  },
+  {
+    "displayName": "No Visibility",
+    "iconName": "g-visibility-no",
+    "tags": "hide,not show, eye, not visible",
+    "group": "Graphext",
+    "content": "\\e9f4"
+  },
+  {
+    "displayName": "Url",
+    "iconName": "g-url",
+    "tags": "link, share, web",
+    "group": "Graphext",
+    "content": "\\e9f5"
+  },
+  {
+    "displayName": "Play",
+    "iconName": "g-play",
+    "tags": "music, arrow, triangle",
+    "group": "Graphext",
+    "content": "\\e9f6"
+  },
+  {
+    "displayName": "List Text",
+    "iconName": "g-list-text",
+    "tags": "list, column, bullet, bulletpoints",
+    "group": "Graphext",
+    "content": "\\e9f7"
+  },
+  {
+    "displayName": "Aligned Right Top",
+    "iconName": "g-aligned-right-top",
+    "tags": "aligned, right, top, square, corner, align",
+    "group": "Graphext",
     "content": "\\e9f8"
+  },
+  {
+    "displayName": "Aligned Right Bottom",
+    "iconName": "g-aligned-right-bottom",
+    "tags": "aligned, right, bottom, square, corner, align",
+    "group": "Graphext",
+    "content": "\\e9f9"
+  },
+  {
+    "displayName": "Aligned Left Top",
+    "iconName": "g-aligned-left-top",
+    "tags": "aligned, left, top, square, corner, align",
+    "group": "Graphext",
+    "content": "\\e9fa"
+  },
+  {
+    "displayName": "Aligned Left Bottom",
+    "iconName": "g-aligned-left-bottom",
+    "tags": "aligned, left, bottom, square, corner, align",
+    "group": "Graphext",
+    "content": "\\e9fb"
+  },
+  {
+    "displayName": "Aligned Center Top",
+    "iconName": "g-aligned-center-top",
+    "tags": "aligned, top, center, square, align",
+    "group": "Graphext",
+    "content": "\\e9fc"
+  },
+  {
+    "displayName": "Aligned Center Bottom",
+    "iconName": "g-aligned-center-bottom",
+    "tags": "aligned, bottom, center, square, align",
+    "group": "Graphext",
+    "content": "\\e9fd"
   },
   {
     "displayName": "Blank",
