@@ -48,7 +48,7 @@ After that you can upgrade the version of the changed packages adding +1 after t
 
 And publish the affected packages like:
 ```
-cd packages/core && npm publish
+cd packages/core && npm publish && cd ../../ && cd packages/icons && npm publish && cd ../../ && cd packages/datetime && npm publish && cd ../../ && cd packages/table && npm publish && cd ../../ && cd packages/select && npm publish && cd ../../
 ```
 
 ## How to add new icons
