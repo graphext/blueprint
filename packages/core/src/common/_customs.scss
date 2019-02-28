@@ -87,9 +87,11 @@ $pt-dark-intent-text-colors: (
 // Buttons
 $pt-button-border-radius: $pt-button-height-large / 2;
 $button-border-width: 0;
-$dark-minimal-button-background-color: $dark-gray2;
-$dark-minimal-button-background-color-hover: rgba($dark-gray2, 0.15);
-$dark-minimal-button-background-color-active: rgba($dark-gray2, 0.3);
+
+// The following importants are needed to override the BP minimal button className
+$dark-minimal-button-background-color: $dark-gray5 !important;
+$dark-minimal-button-background-color-hover: rgba($dark-gray5, 0.15) !important;
+$dark-minimal-button-background-color-active: rgba($dark-gray5, 0.3) !important;
 
 // Inputs
 $input-padding-horizontal: $pt-grid-size * 2;

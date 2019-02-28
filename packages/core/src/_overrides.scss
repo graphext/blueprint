@@ -23,6 +23,20 @@
   background-color: inherit;
 }
 
+.#{$ns}-dark .#{$ns}-button.#{$ns}-minimal { 
+  &:disabled,
+  &:disabled:hover,
+  &.#{$ns}-disabled,
+  &.#{$ns}-disabled:hover{
+    background-color: $dark-minimal-button-background-color;
+    opacity: 0.5;
+  }
+}
+
+.#{$ns}-dark .#{$ns}-button, .#{$ns}-dark .#{$ns}-button:not([class*="bp3-intent-"]), .#{$ns}-button:not([class*="bp3-intent-"]) {
+  background-image: none;
+}
+
 // Inputs
 
 //
