@@ -11,3 +11,81 @@
   background: transparent;
   padding: 0;
 }
+// General Date Picker Colors, Paddings and Sizes
+
+.#{$ns}-datepicker{
+  padding: 16px;
+}
+.#{$ns}-dark .#{$ns}-datepicker{
+  background: $dark-gray5;
+}
+.#{$ns}-datepicker .DayPicker{
+  margin: 0 8px;
+  font-size: 12px;
+}
+.#{$ns}-daterangepicker.#{$ns}-daterangepicker-single-month .DayPicker{
+  width: 100%;
+  margin: 0;
+  padding: 0 8px;
+}
+
+.#{$ns}-datepicker.#{$ns}-daterangepicker-single-month .DayPicker-Month{
+  width:100%;
+  margin: 0;
+  
+}
+
+// Date and Range Picker NavBar
+.#{$ns}-daterangepicker .DayPicker:first-of-type .#{$ns}-datepicker-navbar{
+  left:0;
+}
+
+.#{$ns}-datepicker-caption{
+  margin: 0 36px 16px 36px;
+}
+.#{$ns}-datepicker-caption select{
+  padding: 0 24px 0 8px;
+  font-weight: 400;
+}
+.#{$ns}-datepicker-caption > :first-child{
+  min-width: 52px;
+  margin-right: 8px;
+}
+.DayPicker .#{$ns}-html-select.#{$ns}-minimal select{
+  font-size: 12px;
+}
+.#{$ns}-datepicker-year-select {
+  width: 52px;
+}
+.DayPicker .#{$ns}-html-select .#{$ns}-icon-double-caret-vertical{
+  right: 6px !important;
+}
+
+// Date and Range Input Picker
+.#{$ns}-daterangepicker .#{$ns}-daterangepicker-timepickers{
+  margin: 8px 0;
+}
+.#{$ns}-datepicker .#{$ns}-timepicker{
+  margin: 8px ;
+  font-size: 12px
+}
+
+// Icon Colors
+
+.#{$ns}-button.#{$ns}-minimal.DayPicker-NavButton .#{$ns}-icon{
+  color: $pt-intent-primary;
+}
+.#{$ns}-button:disabled.#{$ns}-disabled.#{$ns}-minimal.DayPicker-NavButton .#{$ns}-icon{
+  color: $pt-intent-primary;
+}
+.#{$ns}-dark .#{$ns}-html-select .#{$ns}-icon.#{$ns}-icon-double-caret-vertical{
+  color: $pt-intent-primary;
+}
+
+
+// Numeric Input Control Group
+
+.#{$ns}-numeric-input .#{$ns}-button-group.bp3-vertical > .#{$ns}-button{
+  box-shadow: none !important;
+ 
+}

@@ -6,6 +6,8 @@ Licensed under the terms of the LICENSE file distributed with this project.
 */
 
 // package styles
+@import "~@blueprintjs/core/src/common/variables";
+@import "customs";
 @import "datepicker";
 @import "daterangepicker";
 @import "timepicker";

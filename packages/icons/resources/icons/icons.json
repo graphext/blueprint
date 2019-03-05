@@ -399,6 +399,20 @@
     "content": "\\e9fd"
   },
   {
+    "displayName": "Double caret vertical",
+    "iconName": "g-double-caret-vertical",
+    "tags": "arrows, up, down, more, less, high",
+    "group": "Graphext",
+    "content": "\\e9fe"
+  },
+  {
+    "displayName": "Double caret horizontal",
+    "iconName": "g-double-caret-horizontal",
+    "tags": "arrows, up, down, more, less, high",
+    "group": "Graphext",
+    "content": "\\e9ff"
+  },
+  {
     "displayName": "Blank",
     "iconName": "blank",
     "tags": "empty, placeholder",

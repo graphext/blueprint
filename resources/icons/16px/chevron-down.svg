@@ -1,12 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 18.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 16 16" enable-background="new 0 0 16 16" xml:space="preserve">
-<g id="chevron_down">
-	<g>
-		<path fill-rule="evenodd" clip-rule="evenodd" d="M12,5c-0.28,0-0.53,0.11-0.71,0.29L8,8.59L4.71,5.29C4.53,5.11,4.28,5,4,5
-			C3.45,5,3,5.45,3,6c0,0.28,0.11,0.53,0.29,0.71l4,4C7.47,10.89,7.72,11,8,11s0.53-0.11,0.71-0.29l4-4C12.89,6.53,13,6.28,13,6
-			C13,5.45,12.55,5,12,5z"/>
-	</g>
-</g>
+<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M1.15978 5.13361C1.36213 4.9457 1.6785 4.95742 1.8664 5.15978L8 11.7652L14.1336 5.15978C14.3215 4.95742 14.6379 4.9457 14.8402 5.13361C15.0426 5.32151 15.0543 5.63787 14.8664 5.84023L8.3664 12.8402C8.27179 12.9421 8.13904 13 8 13C7.86097 13 7.72821 12.9421 7.63361 12.8402L1.13361 5.84023C0.945704 5.63787 0.957421 5.32151 1.15978 5.13361Z" fill="#0091E4"/>
 </svg>
