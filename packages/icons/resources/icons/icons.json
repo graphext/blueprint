@@ -413,6 +413,20 @@
     "content": "\\e9ff"
   },
   {
+    "displayName": "Docs",
+    "iconName": "g-docs",
+    "tags": "documentation, paper, guide, manual",
+    "group": "Graphext",
+    "content": "\\ea00"
+  },
+  {
+    "displayName": "Publish",
+    "iconName": "g-publish",
+    "tags": "publicate, publication, share, send, public",
+    "group": "Graphext",
+    "content": "\\ea01"
+  },
+  {
     "displayName": "Blank",
     "iconName": "blank",
     "tags": "empty, placeholder",
