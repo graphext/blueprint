@@ -97,6 +97,10 @@ $dark-minimal-button-background-color-active: rgba($dark-gray5, 0.3) !important;
 $input-padding-horizontal: $pt-grid-size * 2;
 $dark-input-background-color: $dark-gray4;
 $input-box-shadow: none;
+$input-box-shadow-focus: none;
+$pt-dark-input-box-shadow: none;
+$dark-input-shadow-color-focus: transparent;
+
 
 // Controls (switch, radio, checkbox)
 $dark-switch-background-color: $dark-gray2;
