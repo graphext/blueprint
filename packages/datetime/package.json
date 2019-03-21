@@ -1,6 +1,6 @@
 {
   "name": "@blueprintjs/datetime",
-  "version": "3.4.0-graphext810",
+  "version": "3.4.0-graphext10",
   "description": "Components for interacting with dates and times",
   "main": "lib/cjs/index.js",
   "module": "lib/esm/index.js",
