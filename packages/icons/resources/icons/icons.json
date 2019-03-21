@@ -427,6 +427,20 @@
     "content": "\\ea01"
   },
   {
+    "displayName": "Clipboard",
+    "iconName": "g-clipboard",
+    "tags": "list, copy, paste, paper, guide, manual",
+    "group": "Graphext",
+    "content": "\\ea02"
+  },
+  {
+    "displayName": "Full Screen",
+    "iconName": "g-full-screen",
+    "tags": "expand, amplify, width",
+    "group": "Graphext",
+    "content": "\\ea03"
+  },
+  {
     "displayName": "Blank",
     "iconName": "blank",
     "tags": "empty, placeholder",

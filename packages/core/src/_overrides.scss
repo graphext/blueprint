@@ -62,8 +62,9 @@
     // inherit radius since it's most likely to be zero
     border-radius: inherit;
 
+    // inherit radius on focus too to avoid the input to change border radius on focus
     &:focus {
-      border-radius: initial;
+      border-radius: inherit;
     }
   }
 
@@ -103,6 +104,16 @@
   }
 }
 
+// Numeric Input Control Group
+
+.#{$ns}-numeric-input .#{$ns}-button-group.#{$ns}-vertical > .#{$ns}-button{
+  box-shadow: none !important;
+  background-color: $dark-gray4;
+}
+.#{$ns}-numeric-input .#{$ns}-button-group.#{$ns}-vertical > .#{$ns}-button > .#{$ns}-icon{
+  transform: scale(0.8);
+  color: $pt-intent-primary;
+}
 // Editable Text
 .#{$ns}-multiline .#{$ns}-editable-text-content {
   margin: 0;
@@ -128,10 +139,19 @@
   margin: 8px 16px;
 }
 
-
+//Slider
+.#{$ns}-dark .#{$ns}-slider-handle, .#{$ns}-dark .#{$ns}-slider-handle:hover{
+  background-color: $pt-intent-primary;
+}
+.#{$ns}-dark .#{$ns}-slider-handle:active, .#{$ns}-dark .#{$ns}-slider-handle.#{$ns}-active{
+  background-color: $pt-intent-primary;
+}
+.#{$ns}-slider-label{
+  padding: 4px 8px;
+  font-size: 11px;
+}
 
 // Tag Input
-
 .#{$ns}-tag-input {
   .#{$ns}-input-ghost {
     width: 100%;
