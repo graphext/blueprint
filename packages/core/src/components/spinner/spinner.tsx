@@ -1,7 +1,17 @@
 /*
  * Copyright 2015 Palantir Technologies, Inc. All rights reserved.
  *
- * Licensed under the terms of the LICENSE file distributed with this project.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 import classNames from "classnames";
@@ -29,8 +39,13 @@ const MIN_STROKE_WIDTH = 16;
 export interface ISpinnerProps extends IProps, IIntentProps {
     /**
      * Width and height of the spinner in pixels. The size cannot be less than
-     * 10px. Constants are available for common sizes: `Spinner.SIZE_SMALL`,
-     * `Spinner.SIZE_STANDARD`, `Spinner.SIZE_LARGE`.
+     * 10px.
+     *
+     * Constants are available for common sizes:
+     * - `Spinner.SIZE_SMALL = 20px`
+     * - `Spinner.SIZE_STANDARD = 50px`
+     * - `Spinner.SIZE_LARGE = 100px`
+     *
      * @default Spinner.SIZE_STANDARD = 50
      */
     size?: number;
@@ -53,7 +68,7 @@ export interface ISpinnerProps extends IProps, IIntentProps {
 export class Spinner extends AbstractPureComponent<ISpinnerProps, {}> {
     public static displayName = `${DISPLAYNAME_PREFIX}.Spinner`;
 
-    public static readonly SIZE_SMALL = 24;
+    public static readonly SIZE_SMALL = 20;
     public static readonly SIZE_STANDARD = 50;
     public static readonly SIZE_LARGE = 100;
 
@@ -76,7 +91,7 @@ export class Spinner extends AbstractPureComponent<ISpinnerProps, {}> {
         );
 
         // keep spinner track width consistent at all sizes (down to about 10px).
-        const strokeWidth = Math.min(MIN_STROKE_WIDTH, STROKE_WIDTH * Spinner.SIZE_LARGE / size);
+        const strokeWidth = Math.min(MIN_STROKE_WIDTH, (STROKE_WIDTH * Spinner.SIZE_LARGE) / size);
 
         const strokeOffset = PATH_LENGTH - PATH_LENGTH * (value == null ? 0.25 : clamp(value, 0, 1));
 

@@ -1,7 +1,17 @@
 /*
  * Copyright 2015 Palantir Technologies, Inc. All rights reserved.
  *
- * Licensed under the terms of the LICENSE file distributed with this project.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 const ns = "[Blueprint]";
@@ -26,12 +36,11 @@ export const HOTKEYS_WARN_DECORATOR_NO_METHOD = ns + ` @HotkeysTarget-decorated 
 export const HOTKEYS_WARN_DECORATOR_NEEDS_REACT_ELEMENT =
     ns + ` "@HotkeysTarget-decorated components must return a single JSX.Element or an empty render.`;
 
-export const NUMERIC_INPUT_MIN_MAX =
-    ns + ` <NumericInput> requires min to be strictly less than max if both are defined.`;
+export const NUMERIC_INPUT_MIN_MAX = ns + ` <NumericInput> requires min to be no greater than max if both are defined.`;
 export const NUMERIC_INPUT_MINOR_STEP_SIZE_BOUND =
-    ns + ` <NumericInput> requires minorStepSize to be strictly less than stepSize.`;
+    ns + ` <NumericInput> requires minorStepSize to be no greater than stepSize.`;
 export const NUMERIC_INPUT_MAJOR_STEP_SIZE_BOUND =
-    ns + ` <NumericInput> requires majorStepSize to be strictly greater than stepSize.`;
+    ns + ` <NumericInput> requires stepSize to be no greater than majorStepSize.`;
 export const NUMERIC_INPUT_MINOR_STEP_SIZE_NON_POSITIVE =
     ns + ` <NumericInput> requires minorStepSize to be strictly greater than zero.`;
 export const NUMERIC_INPUT_MAJOR_STEP_SIZE_NON_POSITIVE =
@@ -81,3 +90,7 @@ export const TOASTER_WARN_INLINE = ns + ` Toaster.create() ignores inline prop a
 export const DIALOG_WARN_NO_HEADER_ICON = ns + ` <Dialog> iconName is ignored if title is omitted.`;
 export const DIALOG_WARN_NO_HEADER_CLOSE_BUTTON =
     ns + ` <Dialog> isCloseButtonShown prop is ignored if title is omitted.`;
+
+export const DRAWER_VERTICAL_IS_IGNORED = ns + ` <Drawer> vertical is ignored if position is defined`;
+export const DRAWER_ANGLE_POSITIONS_ARE_CASTED =
+    ns + ` <Drawer> all angle positions are casted into pure position (TOP, BOTTOM, LEFT or RIGHT)`;

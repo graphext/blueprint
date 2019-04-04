@@ -1,11 +1,21 @@
 /*
  * Copyright 2016 Palantir Technologies, Inc. All rights reserved.
  *
- * Licensed under the terms of the LICENSE file distributed with this project.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 import { expect } from "chai";
-import { mount, ReactWrapper } from "enzyme";
+import { mount as untypedMount, MountRendererProps, ReactWrapper } from "enzyme";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as sinon from "sinon";
@@ -26,6 +36,12 @@ import { ITableState } from "../src/table";
 import { CellType, expectCellLoading } from "./cellTestUtils";
 import { ElementHarness, ReactHarness } from "./harness";
 import { createStringOfLength, createTableOfSize } from "./mocks/table";
+
+/**
+ * @see https://github.com/DefinitelyTyped/DefinitelyTyped/issues/26979#issuecomment-465304376
+ */
+// tslint:disable-next-line no-unnecessary-callback-wrapper
+const mount = (el: React.ReactElement<ITableProps>, options?: MountRendererProps) => untypedMount<Table>(el, options);
 
 describe("<Table>", function(this) {
     // allow retrying failed tests here to reduce flakes.

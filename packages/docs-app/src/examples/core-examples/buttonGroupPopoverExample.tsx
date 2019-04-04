@@ -1,7 +1,17 @@
 /*
  * Copyright 2017 Palantir Technologies, Inc. All rights reserved.
  *
- * Licensed under the terms of the LICENSE file distributed with this project.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 import { Alignment, Button, ButtonGroup, H5, IconName, Popover, Position, Switch } from "@blueprintjs/core";
@@ -13,6 +23,7 @@ import { FileMenu } from "./common/fileMenu";
 
 export interface IButtonGroupPopoverExampleState {
     alignText: Alignment;
+    fill: boolean;
     large: boolean;
     minimal: boolean;
     vertical: boolean;
@@ -21,11 +32,13 @@ export interface IButtonGroupPopoverExampleState {
 export class ButtonGroupPopoverExample extends React.PureComponent<IExampleProps, IButtonGroupPopoverExampleState> {
     public state: IButtonGroupPopoverExampleState = {
         alignText: Alignment.CENTER,
+        fill: false,
         large: false,
         minimal: false,
         vertical: false,
     };
 
+    private handleFillChange = handleBooleanChange(fill => this.setState({ fill }));
     private handleLargeChange = handleBooleanChange(large => this.setState({ large }));
     private handleMinimalChange = handleBooleanChange(minimal => this.setState({ minimal }));
     private handleVerticalChange = handleBooleanChange(vertical => this.setState({ vertical }));
@@ -34,6 +47,7 @@ export class ButtonGroupPopoverExample extends React.PureComponent<IExampleProps
         const options = (
             <>
                 <H5>Props</H5>
+                <Switch label="Fill" checked={this.state.fill} onChange={this.handleFillChange} />
                 <Switch label="Large" checked={this.state.large} onChange={this.handleLargeChange} />
                 <Switch label="Minimal" checked={this.state.minimal} onChange={this.handleMinimalChange} />
                 <Switch label="Vertical" checked={this.state.vertical} onChange={this.handleVerticalChange} />

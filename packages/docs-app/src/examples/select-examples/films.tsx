@@ -1,7 +1,17 @@
 /*
  * Copyright 2017 Palantir Technologies, Inc. All rights reserved.
  *
- * Licensed under the terms of the LICENSE file distributed with this project.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 import { MenuItem } from "@blueprintjs/core";
@@ -138,8 +148,29 @@ export const renderFilm: ItemRenderer<IFilm> = (film, { handleClick, modifiers, 
     );
 };
 
-export const filterFilm: ItemPredicate<IFilm> = (query, film) => {
-    return `${film.rank}. ${film.title.toLowerCase()} ${film.year}`.indexOf(query.toLowerCase()) >= 0;
+export const renderCreateFilmOption = (
+    query: string,
+    active: boolean,
+    handleClick: React.MouseEventHandler<HTMLElement>,
+) => (
+    <MenuItem
+        icon="add"
+        text={`Create "${query}"`}
+        active={active}
+        onClick={handleClick}
+        shouldDismissPopover={false}
+    />
+);
+
+export const filterFilm: ItemPredicate<IFilm> = (query, film, _index, exactMatch) => {
+    const normalizedTitle = film.title.toLowerCase();
+    const normalizedQuery = query.toLowerCase();
+
+    if (exactMatch) {
+        return normalizedTitle === normalizedQuery;
+    } else {
+        return `${film.rank}. ${normalizedTitle} ${film.year}`.indexOf(normalizedQuery) >= 0;
+    }
 };
 
 function highlightText(text: string, query: string) {
@@ -182,3 +213,59 @@ export const filmSelectProps = {
     itemRenderer: renderFilm,
     items: TOP_100_FILMS,
 };
+
+export function createFilm(title: string): IFilm {
+    return {
+        rank: 100 + Math.floor(Math.random() * 100 + 1),
+        title,
+        year: new Date().getFullYear(),
+    };
+}
+
+export function areFilmsEqual(filmA: IFilm, filmB: IFilm) {
+    // Compare only the titles (ignoring case) just for simplicity.
+    return filmA.title.toLowerCase() === filmB.title.toLowerCase();
+}
+
+export function doesFilmEqualQuery(film: IFilm, query: string) {
+    return film.title.toLowerCase() === query.toLowerCase();
+}
+
+export function arrayContainsFilm(films: IFilm[], filmToFind: IFilm): boolean {
+    return films.some((film: IFilm) => film.title === filmToFind.title);
+}
+
+export function addFilmToArray(films: IFilm[], filmToAdd: IFilm) {
+    return [...films, filmToAdd];
+}
+
+export function deleteFilmFromArray(films: IFilm[], filmToDelete: IFilm) {
+    return films.filter(film => film !== filmToDelete);
+}
+
+export function maybeAddCreatedFilmToArrays(
+    items: IFilm[],
+    createdItems: IFilm[],
+    film: IFilm,
+): { createdItems: IFilm[]; items: IFilm[] } {
+    const isNewlyCreatedItem = !arrayContainsFilm(items, film);
+    return {
+        createdItems: isNewlyCreatedItem ? addFilmToArray(createdItems, film) : createdItems,
+        // Add a created film to `items` so that the film can be deselected.
+        items: isNewlyCreatedItem ? addFilmToArray(items, film) : items,
+    };
+}
+
+export function maybeDeleteCreatedFilmFromArrays(
+    items: IFilm[],
+    createdItems: IFilm[],
+    film: IFilm,
+): { createdItems: IFilm[]; items: IFilm[] } {
+    const wasItemCreatedByUser = arrayContainsFilm(createdItems, film);
+
+    // Delete the item if the user manually created it.
+    return {
+        createdItems: wasItemCreatedByUser ? deleteFilmFromArray(createdItems, film) : createdItems,
+        items: wasItemCreatedByUser ? deleteFilmFromArray(items, film) : items,
+    };
+}

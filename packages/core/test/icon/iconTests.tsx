@@ -1,7 +1,17 @@
 /*
  * Copyright 2016 Palantir Technologies, Inc. All rights reserved.
  *
- * Licensed under the terms of the LICENSE file distributed with this project.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 import { assert } from "chai";
@@ -28,10 +38,17 @@ describe("<Icon>", () => {
     it("renders intent class", () =>
         assert.isTrue(shallow(<Icon icon="add" intent={Intent.DANGER} />).hasClass(Classes.INTENT_DANGER)));
 
-    it("renders icon name", () => assertIcon(<Icon icon="calendar" />, "calendar"));
+    it("renders icon name", () => {
+        assertIcon(<Icon icon="calendar" />, "calendar");
+    });
 
-    it("renders icon without color", () => assertIconColor(<Icon icon="add" />));
-    it("renders icon color", () => assertIconColor(<Icon icon="add" color="red" />, "red"));
+    it("renders icon without color", () => {
+        assertIconColor(<Icon icon="add" />);
+    });
+
+    it("renders icon color", () => {
+        assertIconColor(<Icon icon="add" color="red" />, "red");
+    });
 
     it("unknown icon name renders blank icon", () => {
         assert.lengthOf(shallow(<Icon icon={"unknown" as any} />).find("path"), 0);
@@ -69,7 +86,7 @@ describe("<Icon>", () => {
     function assertIcon(icon: React.ReactElement<IIconProps>, iconName: IconName) {
         const wrapper = shallow(icon);
         assert.strictEqual(wrapper.text(), iconName);
-        assert.isNotEmpty(wrapper.find("path"), "should find path elements");
+        assert.isAbove(wrapper.find("path").length, 0, "should find at least one path element");
     }
 
     /** Asserts that rendered icon has width/height equal to size. */

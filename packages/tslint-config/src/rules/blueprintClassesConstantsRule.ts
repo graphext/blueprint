@@ -1,11 +1,21 @@
 /*
  * Copyright 2018 Palantir Technologies, Inc. All rights reserved.
  *
- * Licensed under the terms of the LICENSE file distributed with this project.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 import * as Lint from "tslint";
-import * as utils from "tsutils";
+import { isExpressionStatement, isJsxAttribute, isPropertyAssignment, isStringLiteral } from "tsutils/typeguard/2.8";
 import * as ts from "typescript";
 import { addImportToFile } from "./utils/addImportToFile";
 
@@ -41,7 +51,7 @@ function walk(ctx: Lint.WalkContext<void>) {
             const prefixMatches = getAllMatches(node.getFullText());
             if (prefixMatches.length > 0) {
                 const ptClassStrings = prefixMatches.map(m => m.match);
-                const replacementText = utils.isStringLiteral(node)
+                const replacementText = isStringLiteral(node)
                     ? // "string literal" likely becomes `${template} string` so we may need to change how it is assigned
                       wrapForParent(getLiteralReplacement(node.getText(), ptClassStrings), node)
                     : getTemplateReplacement(node.getText(), ptClassStrings);
@@ -107,13 +117,13 @@ function wrapForParent(statement: string, node: ts.Node) {
     const { parent } = node;
     if (parent === undefined) {
         return statement;
-    } else if (utils.isJsxAttribute(parent)) {
+    } else if (isJsxAttribute(parent)) {
         return `{${statement}}`;
-    } else if (utils.isExpressionStatement(parent)) {
+    } else if (isExpressionStatement(parent)) {
         return `[${statement}]`;
         // If we're changing the key, it will be child index 0 and we need to wrap it.
         // Else, we're changing a value, and there's no need to wrap
-    } else if (utils.isPropertyAssignment(parent) && parent.getChildAt(0) === node) {
+    } else if (isPropertyAssignment(parent) && parent.getChildAt(0) === node) {
         return `[${statement}]`;
     } else {
         return statement;

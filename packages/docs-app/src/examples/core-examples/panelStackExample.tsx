@@ -1,7 +1,17 @@
 /*
  * Copyright 2018 Palantir Technologies, Inc. All rights reserved.
  *
- * Licensed under the terms of the LICENSE file distributed with this project.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 import * as React from "react";
@@ -30,7 +40,11 @@ export class PanelStackExample extends React.PureComponent<IExampleProps, IPanel
         const stackList = (
             <>
                 <H5>Current stack</H5>
-                <UL>{this.state.currentPanelStack.map((p, i) => <li key={i}>{p.title}</li>)}</UL>
+                <UL>
+                    {this.state.currentPanelStack.map((p, i) => (
+                        <li key={i}>{p.title}</li>
+                    ))}
+                </UL>
             </>
         );
         return (
@@ -46,13 +60,13 @@ export class PanelStackExample extends React.PureComponent<IExampleProps, IPanel
     }
 
     private addToPanelStack = (newPanel: IPanel) => {
-        this.setState({ currentPanelStack: [newPanel, ...this.state.currentPanelStack] });
+        this.setState(state => ({ currentPanelStack: [newPanel, ...state.currentPanelStack] }));
     };
 
     private removeFromPanelStack = (_lastPanel: IPanel) => {
         // In this example, the last panel is always the one closed.
         // Using `this.props.closePanel()` is one way to violate this.
-        this.setState({ currentPanelStack: this.state.currentPanelStack.slice(1) });
+        this.setState(state => ({ currentPanelStack: state.currentPanelStack.slice(1) }));
     };
 }
 

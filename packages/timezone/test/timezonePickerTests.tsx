@@ -1,11 +1,21 @@
 /*
  * Copyright 2017 Palantir Technologies, Inc. All rights reserved.
  *
- * Licensed under the terms of the LICENSE file distributed with this project.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 import { assert } from "chai";
-import { mount, shallow, ShallowWrapper } from "enzyme";
+import { mount, shallow as untypedShallow, ShallowRendererProps, ShallowWrapper } from "enzyme";
 import * as moment from "moment-timezone";
 import * as React from "react";
 import * as sinon from "sinon";
@@ -20,7 +30,7 @@ import {
     Popover,
     Position,
 } from "@blueprintjs/core";
-import { IQueryListProps, ISelectProps, QueryList, Select } from "@blueprintjs/select";
+import { QueryList, Select } from "@blueprintjs/select";
 import {
     getInitialTimezoneItems,
     getLocalTimezoneItem,
@@ -30,6 +40,15 @@ import {
 import { ITimezonePickerProps, ITimezonePickerState, TimezoneDisplayFormat, TimezonePicker } from "../src/index";
 
 type TimezonePickerShallowWrapper = ShallowWrapper<ITimezonePickerProps, ITimezonePickerState>;
+
+/**
+ * @see https://github.com/DefinitelyTyped/DefinitelyTyped/issues/26979#issuecomment-465304376
+ */
+// tslint:disable-next-line no-unnecessary-callback-wrapper
+const shallow = (
+    el: React.ReactElement<ITimezonePickerProps>,
+    options?: ShallowRendererProps,
+): TimezonePickerShallowWrapper => untypedShallow<TimezonePicker>(el, options);
 
 const VALUE = "America/Los_Angeles";
 
@@ -201,14 +220,26 @@ describe("<TimezonePicker>", () => {
         }
     });
 
+    it("renders a custom target via <children>", () => {
+        const timezonePicker = shallow(
+            <TimezonePicker {...DEFAULT_PROPS}>
+                <span className="foo">Hello world</span>
+            </TimezonePicker>,
+        );
+        const button = timezonePicker.find(Button);
+        const span = timezonePicker.find(".foo");
+        assert.lengthOf(button, 0, "expected no button");
+        assert.lengthOf(span, 1, "expected custom target with class '.foo'");
+    });
+
     function findSelect(timezonePicker: TimezonePickerShallowWrapper) {
-        return timezonePicker.find<ISelectProps<ITimezoneItem>>(Select);
+        return timezonePicker.find(Select.ofType<ITimezoneItem>());
     }
 
     function findQueryList(timezonePicker: TimezonePickerShallowWrapper) {
         return findSelect(timezonePicker)
             .shallow()
-            .find<IQueryListProps<ITimezoneItem>>(QueryList);
+            .find(QueryList.ofType<ITimezoneItem>());
     }
 
     function findPopover(timezonePicker: TimezonePickerShallowWrapper) {
