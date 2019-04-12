@@ -1,7 +1,17 @@
 /*
  * Copyright 2016 Palantir Technologies, Inc. All rights reserved.
  *
- * Licensed under the terms of the LICENSE file distributed with this project.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 import { LocaleUtils } from "react-day-picker/types/utils";
@@ -12,7 +22,7 @@ import { ITimePickerProps, TimePrecision } from "./timePicker";
 // also we need an interface for the dictionary without `today` and `outside` injected by r-d-p.
 /**
  * Collection of functions that determine which modifier classes get applied to which days.
- * See the [**react-day-picker** documentation](http://react-day-picker.js.org/Modifiers.html) to learn more.
+ * See the [**react-day-picker** documentation](http://react-day-picker.js.org/api/ModifiersUtils) to learn more.
  */
 export interface IDatePickerModifiers {
     [name: string]: (date: Date) => boolean;
@@ -50,7 +60,7 @@ export interface IDatePickerBaseProps {
     /**
      * Collection of functions that determine which modifier classes get applied to which days.
      * Each function should accept a `Date` and return a boolean.
-     * See the [**react-day-picker** documentation](http://react-day-picker.js.org/Modifiers.html) to learn more.
+     * See the [**react-day-picker** documentation](http://react-day-picker.js.org/api/ModifiersUtils) to learn more.
      */
     modifiers?: IDatePickerModifiers;
 

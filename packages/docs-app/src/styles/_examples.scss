@@ -1,5 +1,5 @@
 // Copyright 2016 Palantir Technologies, Inc. All rights reserved.
-// Licensed under the terms of the LICENSE file distributed with this project.
+// Licensed under the Apache License, Version 2.0.
 
 @import "~@blueprintjs/icons/src/icons";
 @import "~@blueprintjs/core/src/common/react-transition";
@@ -243,9 +243,13 @@
   );
 
   top: 0;
-  left: calc(50% - #{$overlay-example-width / 2});
+  left: calc(50vw - #{$overlay-example-width / 2});
   margin: 10vh 0;
   width: $overlay-example-width;
+}
+
+.docs-overlay-example-tall {
+  height: 200%;
 }
 
 #{example("PopoverExample")} {
@@ -455,6 +459,13 @@
     > * {
       margin: $pt-grid-size / 2;
     }
+  }
+}
+
+#{example("ButtonGroupExample")},
+#{example("ButtonGroupPopoverExample")} {
+  .docs-example > * {
+    margin: 0;
   }
 }
 

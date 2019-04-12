@@ -16,27 +16,28 @@
     "verify": "run-p dist lint"
   },
   "dependencies": {
-    "@blueprintjs/core": "3.9.0-graphext14",
+    "@blueprintjs/core": "3.15.0-graphext1",
     "classnames": "^2.2.5",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   },
   "devDependencies": {
     "@blueprintjs/webpack-build-scripts": "*",
-    "copy-webpack-plugin": "^4.2.0",
+    "copy-webpack-plugin": "^4.6.0",
     "npm-run-all": "^4.1.2",
-    "raw-loader": "^0.5.1",
-    "webpack": "^3.10.0",
-    "webpack-dev-server": "^2.11.1"
+    "raw-loader": "^1.0.0",
+    "webpack": "^4.27.1",
+    "webpack-dev-server": "^3.1.0"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:palantir/blueprint.git"
+    "url": "git@github.com:palantir/blueprint.git",
+    "directory": "packages/landing-app"
   },
   "keywords": [
     "blueprint",
     "landing page"
   ],
   "author": "Palantir Technologies",
-  "license": "SEE LICENSE IN REPO ROOT"
+  "license": "Apache-2.0"
 }

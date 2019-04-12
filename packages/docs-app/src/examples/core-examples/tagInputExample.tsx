@@ -1,13 +1,24 @@
 /*
  * Copyright 2017 Palantir Technologies, Inc. All rights reserved.
  *
- * Licensed under the terms of the LICENSE file distributed with this project.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 import * as React from "react";
 
 import { Button, H5, Intent, ITagProps, Switch, TagInput } from "@blueprintjs/core";
-import { Example, handleBooleanChange, IExampleProps } from "@blueprintjs/docs-theme";
+import { Example, handleBooleanChange, handleStringChange, IExampleProps } from "@blueprintjs/docs-theme";
+import { IntentSelect } from "./common/intentSelect";
 
 const INTENTS = [Intent.NONE, Intent.PRIMARY, Intent.SUCCESS, Intent.DANGER, Intent.WARNING];
 
@@ -27,10 +38,11 @@ export interface ITagInputExampleState {
     addOnPaste: boolean;
     disabled: boolean;
     fill: boolean;
-    intent: boolean;
+    intent: Intent;
     large: boolean;
     leftIcon: boolean;
-    minimal: boolean;
+    tagIntents: boolean;
+    tagMinimal: boolean;
     values: React.ReactNode[];
 }
 
@@ -40,10 +52,11 @@ export class TagInputExample extends React.PureComponent<IExampleProps, ITagInpu
         addOnPaste: true,
         disabled: false,
         fill: false,
-        intent: false,
+        intent: "none",
         large: false,
         leftIcon: true,
-        minimal: false,
+        tagIntents: false,
+        tagMinimal: false,
         values: VALUES,
     };
 
@@ -51,13 +64,14 @@ export class TagInputExample extends React.PureComponent<IExampleProps, ITagInpu
     private handleAddOnPasteChange = handleBooleanChange(addOnPaste => this.setState({ addOnPaste }));
     private handleDisabledChange = handleBooleanChange(disabled => this.setState({ disabled }));
     private handleFillChange = handleBooleanChange(fill => this.setState({ fill }));
-    private handleIntentChange = handleBooleanChange(intent => this.setState({ intent }));
+    private handleIntentChange = handleStringChange((intent: Intent) => this.setState({ intent }));
     private handleLargeChange = handleBooleanChange(large => this.setState({ large }));
     private handleLeftIconChange = handleBooleanChange(leftIcon => this.setState({ leftIcon }));
-    private handleMinimalChange = handleBooleanChange(minimal => this.setState({ minimal }));
+    private handleTagIntentsChange = handleBooleanChange(tagIntents => this.setState({ tagIntents }));
+    private handleTagMinimalChange = handleBooleanChange(tagMinimal => this.setState({ tagMinimal }));
 
     public render() {
-        const { minimal, values, ...props } = this.state;
+        const { tagIntents, tagMinimal, values, ...props } = this.state;
 
         const clearButton = (
             <Button
@@ -72,9 +86,9 @@ export class TagInputExample extends React.PureComponent<IExampleProps, ITagInpu
         // NOTE: avoid this pattern in your app (use this.getTagProps instead); this is only for
         // example purposes!!
         const getTagProps = (_v: string, index: number): ITagProps => ({
-            intent: this.state.intent ? INTENTS[index % INTENTS.length] : Intent.NONE,
+            intent: tagIntents ? INTENTS[index % INTENTS.length] : Intent.NONE,
             large: props.large,
-            minimal,
+            minimal: tagMinimal,
         });
 
         return (
@@ -102,9 +116,18 @@ export class TagInputExample extends React.PureComponent<IExampleProps, ITagInpu
                 <Switch label="Add on blur" checked={this.state.addOnBlur} onChange={this.handleAddOnBlurChange} />
                 <Switch label="Add on paste" checked={this.state.addOnPaste} onChange={this.handleAddOnPasteChange} />
                 <Switch label="Fill container width" checked={this.state.fill} onChange={this.handleFillChange} />
+                <IntentSelect intent={this.state.intent} onChange={this.handleIntentChange} />
                 <H5>Tag props</H5>
-                <Switch label="Use minimal tags" checked={this.state.minimal} onChange={this.handleMinimalChange} />
-                <Switch label="Cycle through intents" checked={this.state.intent} onChange={this.handleIntentChange} />
+                <Switch
+                    label="Use minimal tags"
+                    checked={this.state.tagMinimal}
+                    onChange={this.handleTagMinimalChange}
+                />
+                <Switch
+                    label="Cycle through intents"
+                    checked={this.state.tagIntents}
+                    onChange={this.handleTagIntentsChange}
+                />
             </>
         );
     }

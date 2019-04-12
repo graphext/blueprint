@@ -1,7 +1,17 @@
 /*
  * Copyright 2017 Palantir Technologies, Inc. All rights reserved.
  *
- * Licensed under the terms of the LICENSE file distributed with this project.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 import classNames from "classnames";
@@ -23,6 +33,12 @@ export interface IIconProps extends IIntentProps, IProps {
      * surrounding text.
      */
     color?: string;
+
+    /**
+     * String for the `title` attribute on the rendered element, which will appear
+     * on hover as a native browser tooltip.
+     */
+    htmlTitle?: string;
 
     /**
      * Name of a Blueprint UI icon, or an icon element, to render. This prop is
@@ -73,9 +89,9 @@ export class Icon extends React.PureComponent<IIconProps & React.DOMAttributes<H
     public static readonly SIZE_STANDARD = 16;
     public static readonly SIZE_LARGE = 20;
 
-    public render() {
+    public render(): JSX.Element | null {
         const { icon } = this.props;
-        if (icon == null) {
+        if (icon == null || typeof icon === "boolean") {
             return null;
         } else if (typeof icon !== "string") {
             return icon;
@@ -84,6 +100,7 @@ export class Icon extends React.PureComponent<IIconProps & React.DOMAttributes<H
         const {
             className,
             color,
+            htmlTitle,
             iconSize = Icon.SIZE_STANDARD,
             intent,
             title = icon,
@@ -100,7 +117,7 @@ export class Icon extends React.PureComponent<IIconProps & React.DOMAttributes<H
         const viewBox = `0 0 ${pixelGridSize} ${pixelGridSize}`;
 
         return (
-            <TagName {...htmlprops} className={classes}>
+            <TagName {...htmlprops} className={classes} title={htmlTitle}>
                 <svg fill={color} data-icon={icon} width={iconSize} height={iconSize} viewBox={viewBox}>
                     {title && <desc>{title}</desc>}
                     {paths}

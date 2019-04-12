@@ -1,7 +1,17 @@
 /*
  * Copyright 2015 Palantir Technologies, Inc. All rights reserved.
  *
- * Licensed under the terms of the LICENSE file distributed with this project.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 import * as React from "react";
@@ -9,6 +19,7 @@ import * as React from "react";
 import { CLAMP_MIN_MAX } from "./errors";
 
 export * from "./utils/compareUtils";
+export * from "./utils/safeInvokeMember";
 
 // only accessible within this file, so use `Utils.isNodeEnv(env)` from the outside.
 declare var process: { env: any };
@@ -42,22 +53,33 @@ export function isReactNodeEmpty(node?: React.ReactNode, skipArray = false): boo
 }
 
 /**
- * Converts a React child to an element: non-empty string or number or
+ * Converts a React node to an element: non-empty string or number or
  * `React.Fragment` (React 16.3+) is wrapped in given tag name; empty strings
- * are discarded.
+ * and booleans are discarded.
  */
-export function ensureElement(child: React.ReactChild | undefined, tagName: keyof JSX.IntrinsicElements = "span") {
-    if (child == null) {
+export function ensureElement(child: React.ReactNode | undefined, tagName: keyof JSX.IntrinsicElements = "span") {
+    if (child == null || typeof child === "boolean") {
         return undefined;
     } else if (typeof child === "string") {
         // cull whitespace strings
         return child.trim().length > 0 ? React.createElement(tagName, {}, child) : undefined;
-    } else if (typeof child === "number" || typeof child.type === "symbol") {
-        // React.Fragment has a symbol type
+    } else if (typeof child === "number" || typeof (child as any).type === "symbol" || Array.isArray(child)) {
+        // React.Fragment has a symbol type, ReactNodeArray extends from Array
         return React.createElement(tagName, {}, child);
-    } else {
+    } else if (isReactElement(child)) {
         return child;
+    } else {
+        // child is inferred as {}
+        return undefined;
     }
+}
+
+export function isReactElement<T = any>(child: React.ReactNode): child is React.ReactElement<T> {
+    return (
+        typeof child === "object" &&
+        typeof (child as any).type !== "undefined" &&
+        typeof (child as any).props !== "undefined"
+    );
 }
 
 /**
@@ -184,10 +206,16 @@ export function clamp(val: number, min: number, max: number) {
 
 /** Returns the number of decimal places in the given number. */
 export function countDecimalPlaces(num: number) {
-    if (typeof num !== "number" || Math.floor(num) === num) {
+    if (!isFinite(num)) {
         return 0;
     }
-    return num.toString().split(".")[1].length;
+    let e = 1,
+        p = 0;
+    while (Math.round(num * e) / e !== num) {
+        e *= 10;
+        p++;
+    }
+    return p;
 }
 
 /**

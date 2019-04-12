@@ -1,5 +1,5 @@
 // Copyright 2015 Palantir Technologies, Inc. All rights reserved.
-// Licensed under the terms of the LICENSE file distributed with this project.
+// Licensed under the Apache License, Version 2.0.
 
 @import "~@blueprintjs/core/src/components/popover/common";
 @import "./common";
@@ -135,8 +135,12 @@ $header-margin: ($header-height - $pt-input-height) / 2 !default;
   left: 0;
   height: $pt-button-height;
 
-  > :first-child {
+  > .DayPicker-NavButton--prev {
     margin-right: auto;
+  }
+
+  > .DayPicker-NavButton--next {
+    margin-left: auto;
   }
 }
 

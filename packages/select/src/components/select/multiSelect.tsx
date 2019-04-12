@@ -1,6 +1,16 @@
 /*
  * Copyright 2017 Palantir Technologies, Inc. All rights reserved.
- * Licensed under the terms of the LICENSE file distributed with this project.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 import classNames from "classnames";
@@ -14,6 +24,7 @@ import {
     Popover,
     Position,
     TagInput,
+    TagInputAddMethod,
     Utils,
 } from "@blueprintjs/core";
 import { Classes, IListItemsProps } from "../../common";
@@ -65,13 +76,12 @@ export class MultiSelect<T> extends React.PureComponent<IMultiSelectProps<T>, IM
     };
 
     private TypedQueryList = QueryList.ofType<T>();
-    private input?: HTMLInputElement | null;
-    private queryList?: QueryList<T> | null;
+    private input: HTMLInputElement | null = null;
+    private queryList: QueryList<T> | null = null;
     private refHandlers = {
         input: (ref: HTMLInputElement | null) => {
             this.input = ref;
-            const { tagInputProps = {} } = this.props;
-            Utils.safeInvoke(tagInputProps.inputRef, ref);
+            Utils.safeInvokeMember(this.props.tagInputProps, "inputRef", ref);
         },
         queryList: (ref: QueryList<T> | null) => (this.queryList = ref),
     };
@@ -93,7 +103,13 @@ export class MultiSelect<T> extends React.PureComponent<IMultiSelectProps<T>, IM
 
     private renderQueryList = (listProps: IQueryListRendererProps<T>) => {
         const { tagInputProps = {}, popoverProps = {}, selectedItems = [], placeholder } = this.props;
-        const { handleKeyDown, handleKeyUp } = listProps;
+        const { handlePaste, handleKeyDown, handleKeyUp } = listProps;
+
+        const handleTagInputAdd = (values: any[], method: TagInputAddMethod) => {
+            if (method === "paste") {
+                handlePaste(values);
+            }
+        };
 
         return (
             <Popover
@@ -118,6 +134,7 @@ export class MultiSelect<T> extends React.PureComponent<IMultiSelectProps<T>, IM
                         className={classNames(Classes.MULTISELECT, tagInputProps.className)}
                         inputRef={this.refHandlers.input}
                         inputValue={listProps.query}
+                        onAdd={handleTagInputAdd}
                         onInputChange={listProps.handleQueryChange}
                         values={selectedItems.map(this.props.tagRenderer)}
                     />
@@ -142,9 +159,8 @@ export class MultiSelect<T> extends React.PureComponent<IMultiSelectProps<T>, IM
     };
 
     private handlePopoverInteraction = (nextOpenState: boolean) =>
+        // deferring to rAF to get properly updated document.activeElement
         requestAnimationFrame(() => {
-            // deferring to rAF to get properly updated activeElement
-            const { popoverProps = {} } = this.props;
             if (this.input != null && this.input !== document.activeElement) {
                 // the input is no longer focused so we can close the popover
                 this.setState({ isOpen: false });
@@ -152,16 +168,15 @@ export class MultiSelect<T> extends React.PureComponent<IMultiSelectProps<T>, IM
                 // open the popover when focusing the tag input
                 this.setState({ isOpen: true });
             }
-            Utils.safeInvoke(popoverProps.onInteraction, nextOpenState);
+            Utils.safeInvokeMember(this.props.popoverProps, "onInteraction", nextOpenState);
         });
 
     private handlePopoverOpened = (node: HTMLElement) => {
-        const { popoverProps = {} } = this.props;
         if (this.queryList != null) {
             // scroll active item into view after popover transition completes and all dimensions are stable.
             this.queryList.scrollActiveItemIntoView();
         }
-        Utils.safeInvoke(popoverProps.onOpened, node);
+        Utils.safeInvokeMember(this.props.popoverProps, "onOpened", node);
     };
 
     private getTargetKeyDownHandler = (

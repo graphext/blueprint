@@ -10,7 +10,7 @@
     "test": "exit 0"
   },
   "dependencies": {
-    "@blueprintjs/core": "3.9.0-graphext14",
+    "@blueprintjs/core": "3.15.0-graphext1",
     "@blueprintjs/docs-theme": "^3.0.0",
     "documentalist": "^1.4.0",
     "better-handlebars": "github:wmeldon/better-handlebars",
@@ -23,8 +23,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:palantir/blueprint.git"
+    "url": "git@github.com:palantir/blueprint.git",
+    "directory": "packages/docs-data"
   },
   "author": "Palantir Technologies",
-  "license": "SEE LICENSE IN REPO ROOT"
+  "license": "Apache-2.0"
 }

@@ -1,7 +1,17 @@
 /*
  * Copyright 2015 Palantir Technologies, Inc. All rights reserved.
  *
- * Licensed under the terms of the LICENSE file distributed with this project.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 import { assert } from "chai";
@@ -42,13 +52,19 @@ describe("<DateInput>", () => {
         assert.isTrue(popoverTarget.hasClass(CLASS_2));
     });
 
-    it("supports custom input style", () => {
-        const wrapper = mount(<DateInput {...DATE_FORMAT} inputProps={{ style: { background: "yellow" } }} />);
-        const inputElement = wrapper
-            .find("input")
-            .first()
-            .getDOMNode() as HTMLElement;
+    it("supports custom input props", () => {
+        const wrapper = mount(
+            <DateInput {...DATE_FORMAT} inputProps={{ style: { background: "yellow" }, tabIndex: 4 }} />,
+        );
+        const inputElement = wrapper.find("input").getDOMNode() as HTMLInputElement;
         assert.equal(inputElement.style.background, "yellow");
+        assert.equal(inputElement.tabIndex, 4);
+    });
+
+    it("supports inputProps.inputRef", () => {
+        let input: HTMLInputElement | null = null;
+        mount(<DateInput {...DATE_FORMAT} inputProps={{ inputRef: ref => (input = ref) }} />);
+        assert.instanceOf(input, HTMLInputElement);
     });
 
     it("Popover opens on input focus", () => {
@@ -118,8 +134,7 @@ describe("<DateInput>", () => {
         const defaultValue = new Date(2018, Months.FEBRUARY, 6, 15, 0, 0, 0);
         const { root, changeSelect } = wrap(<DateInput {...DATE_FORMAT} defaultValue={defaultValue} />);
         root.setState({ isOpen: true });
-        root
-            .find("input")
+        root.find("input")
             .simulate("focus")
             .simulate("blur");
         changeSelect(Classes.DATEPICKER_MONTH_SELECT, Months.FEBRUARY);
@@ -130,8 +145,7 @@ describe("<DateInput>", () => {
         const defaultValue = new Date(2018, Months.FEBRUARY, 6, 15, 0, 0, 0);
         const { root, changeSelect } = wrap(<DateInput {...DATE_FORMAT} defaultValue={defaultValue} />);
         root.setState({ isOpen: true });
-        root
-            .find("input")
+        root.find("input")
             .simulate("focus")
             .simulate("blur");
         changeSelect(Classes.DATEPICKER_YEAR_SELECT, 2016);

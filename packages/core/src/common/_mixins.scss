@@ -1,5 +1,5 @@
 // Copyright 2015 Palantir Technologies, Inc. All rights reserved.
-// Licensed under the terms of the LICENSE file distributed with this project.
+// Licensed under the Apache License, Version 2.0.
 
 @import "colors";
 @import "flex";
@@ -24,6 +24,10 @@ $pt-dark-intent-text-colors: (
   "warning": $orange5,
   "danger" : $red5,
 ) !default;
+
+@mixin intent-color($intentName) {
+  color: map-get($pt-intent-colors, $intentName);
+}
 
 @mixin position-all($position, $value) {
   position: $position;

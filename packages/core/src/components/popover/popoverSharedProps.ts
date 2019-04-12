@@ -1,7 +1,17 @@
 /*
  * Copyright 2018 Palantir Technologies, Inc. All rights reserved.
  *
- * Licensed under the terms of the LICENSE file distributed with this project.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 import { Boundary as PopperBoundary, Modifiers as PopperModifiers } from "popper.js";
@@ -97,7 +107,7 @@ export interface IPopoverSharedProps extends IOverlayableProps, IProps {
      * Callback invoked in controlled mode when the popover open state *would*
      * change due to user interaction.
      */
-    onInteraction?: (nextOpenState: boolean) => void;
+    onInteraction?: (nextOpenState: boolean, e?: React.SyntheticEvent<HTMLElement>) => void;
 
     /**
      * Whether the popover should open when its target is focused. If `true`,
@@ -126,6 +136,12 @@ export interface IPopoverSharedProps extends IOverlayableProps, IProps {
      * Space-delimited string of class names applied to the target element.
      */
     targetClassName?: string;
+
+    /**
+     * HTML props to spread to target element. Use `targetTagName` to change
+     * the type of element rendered. Note that `ref` is not supported.
+     */
+    targetProps?: React.HTMLAttributes<HTMLElement>;
 
     /**
      * HTML tag name for the target element. This must be an HTML element to
