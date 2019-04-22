@@ -1,10 +1,26 @@
 /*
  * Copyright 2017 Palantir Technologies, Inc. All rights reserved.
- * Licensed under the terms of the LICENSE file distributed with this project.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 import { expect } from "chai";
-import { mount, ReactWrapper } from "enzyme";
+import {
+    mount as untypedMount,
+    MountRendererProps,
+    ReactWrapper,
+    shallow as untypedShallow,
+    ShallowRendererProps,
+} from "enzyme";
 import * as React from "react";
 import { spy } from "sinon";
 
@@ -14,7 +30,7 @@ import * as Errors from "../../src/common/errors";
 import {
     Button,
     ButtonGroup,
-    Classes,
+    ControlGroup,
     HTMLInputProps,
     Icon,
     InputGroup,
@@ -24,14 +40,24 @@ import {
     Position,
 } from "../../src/index";
 
+/**
+ * @see https://github.com/DefinitelyTyped/DefinitelyTyped/issues/26979#issuecomment-465304376
+ */
+// tslint:disable no-unnecessary-callback-wrapper
+const mount = (el: React.ReactElement<INumericInputProps>, options?: MountRendererProps) =>
+    untypedMount<NumericInput>(el, options);
+const shallow = (el: React.ReactElement<INumericInputProps>, options?: ShallowRendererProps) =>
+    untypedShallow<NumericInput>(el, options);
+// tslint:enable no-unnecessary-callback-wrapper
+
 describe("<NumericInput>", () => {
     describe("Defaults", () => {
         it("renders the buttons on the right by default", () => {
-            const component = mount(<NumericInput />).children();
-            const leftGroup = component.childAt(0);
-            const rightGroup = component.childAt(1);
-            expect(leftGroup.is(InputGroup)).to.be.true;
-            expect(rightGroup.key()).to.equal("button-group");
+            // this ordering is trivial to test with shallow renderer
+            // (no DOM elements getting in the way)
+            const component = untypedShallow(<NumericInput />);
+            const rightGroup = component.children().last();
+            expect(rightGroup.is(ButtonGroup)).to.be.true;
         });
 
         it("has a stepSize of 1 by default", () => {
@@ -71,47 +97,36 @@ describe("<NumericInput>", () => {
 
     describe("Button position", () => {
         it("renders the buttons on the right when buttonPosition == Position.RIGHT", () => {
-            const component = mount(<NumericInput buttonPosition={Position.RIGHT} />);
-            const buttonGroup = component.children().childAt(1);
-            expect(buttonGroup.is(ButtonGroup)).to.be.true;
+            const buttons = shallow(<NumericInput buttonPosition={Position.RIGHT} />)
+                .children()
+                .last();
+            expect(buttons.is(ButtonGroup)).to.be.true;
         });
 
         it("renders the buttons on the left when buttonPosition == Position.LEFT", () => {
-            const component = mount(<NumericInput buttonPosition={Position.LEFT} />);
-            const buttonGroup = component.children().childAt(0);
-            expect(buttonGroup.is(ButtonGroup)).to.be.true;
+            const buttons = shallow(<NumericInput buttonPosition={Position.LEFT} />)
+                .children()
+                .first();
+            expect(buttons.is(ButtonGroup)).to.be.true;
         });
 
         it('does not render the buttons when buttonPosition == "none"', () => {
-            const component = mount(<NumericInput buttonPosition="none" />);
+            const component = shallow(<NumericInput buttonPosition="none" />);
             expect(component.find(ButtonGroup).exists()).to.be.false;
         });
 
         it("does not render the buttons when buttonPosition is null", () => {
-            const component = mount(<NumericInput buttonPosition={null} />);
+            const component = shallow(<NumericInput buttonPosition={null} />);
             expect(component.find(ButtonGroup).exists()).to.be.false;
         });
 
-        it(`renders the children in a ${Classes.CONTROL_GROUP} when buttons are visible`, () => {
+        it(`always renders the children in a ControlGroup`, () => {
             // if the input is put into a control group by itself, it'll have squared border radii
             // on the left, which we don't want.
-            const component = mount(<NumericInput />);
-
-            const index = component.html().indexOf(Classes.CONTROL_GROUP);
-            const isClassPresent = index >= 0;
-
-            expect(isClassPresent).to.be.true;
-        });
-
-        it(`does not render the children in a ${Classes.CONTROL_GROUP} when buttons are hidden`, () => {
-            // if the input is put into a control group by itself, it'll have squared border radii
-            // on the left, which we don't want.
-            const component = mount(<NumericInput buttonPosition={null} />);
-
-            const index = component.html().indexOf(Classes.CONTROL_GROUP);
-            const isClassPresent = index >= 0;
-
-            expect(isClassPresent).to.be.false;
+            const component = shallow(<NumericInput />);
+            expect(component.find(ControlGroup).exists()).to.be.true;
+            component.setProps({ buttonPosition: null });
+            expect(component.find(ControlGroup).exists()).to.be.true;
         });
     });
 
@@ -119,8 +134,7 @@ describe("<NumericInput>", () => {
         it("works like a text input", () => {
             const component = mount(<NumericInput />);
 
-            const inputField = component.find("input");
-            inputField.simulate("change", { target: { value: "11" } });
+            component.find("input").simulate("change", { target: { value: "11" } });
 
             const value = component.state().value;
             const expectedValue = "11";
@@ -130,8 +144,7 @@ describe("<NumericInput>", () => {
         it("allows entry of non-numeric characters", () => {
             const component = mount(<NumericInput />);
 
-            const inputField = component.find("input");
-            inputField.simulate("change", { target: { value: "3 + a" } });
+            component.find("input").simulate("change", { target: { value: "3 + a" } });
 
             const value = component.state().value;
             const expectedValue = "3 + a";
@@ -227,13 +240,11 @@ describe("<NumericInput>", () => {
 
             it("if true, selects all text on focus", () => {
                 const attachTo = document.createElement("div");
-                const component = mount(<NumericInput value={VALUE} selectAllOnFocus={true} />, { attachTo });
-
-                component.find("input").simulate("focus");
-
-                const input = attachTo.querySelector("input") as HTMLInputElement;
-                expect(input.selectionStart).to.equal(0);
-                expect(input.selectionEnd).to.equal(VALUE.length);
+                const input = mount(<NumericInput value={VALUE} selectAllOnFocus={true} />, { attachTo }).find("input");
+                input.simulate("focus");
+                const { selectionStart, selectionEnd } = input.getDOMNode() as HTMLInputElement;
+                expect(selectionStart).to.equal(0);
+                expect(selectionEnd).to.equal(VALUE.length);
             });
         });
 
@@ -435,21 +446,13 @@ describe("<NumericInput>", () => {
 
     describe("Keyboard interactions in input field", () => {
         const simulateIncrement = (component: ReactWrapper<any, {}>, mockEvent?: IMockEvent) => {
-            const mergedMockEvent = mockEvent || {};
-            mergedMockEvent.keyCode = Keys.ARROW_UP;
-            mergedMockEvent.which = Keys.ARROW_UP;
-
             const inputField = component.find(InputGroup).find("input");
-            inputField.simulate("keyDown", mergedMockEvent);
+            inputField.simulate("keydown", addKeyCode(mockEvent, Keys.ARROW_UP));
         };
 
         const simulateDecrement = (component: ReactWrapper<any, {}>, mockEvent?: IMockEvent) => {
-            const mergedMockEvent = mockEvent || {};
-            mergedMockEvent.keyCode = Keys.ARROW_DOWN;
-            mergedMockEvent.which = Keys.ARROW_DOWN;
-
             const inputField = component.find(InputGroup).find("input");
-            inputField.simulate("keyDown", mergedMockEvent);
+            inputField.simulate("keydown", addKeyCode(mockEvent, Keys.ARROW_DOWN));
         };
 
         runInteractionSuite("Press '↑'", "Press '↓'", simulateIncrement, simulateDecrement);
@@ -457,45 +460,28 @@ describe("<NumericInput>", () => {
 
     // Enable these tests once we have a solution for testing Button onKeyUp callbacks (see PR #561)
     describe("Keyboard interactions on buttons (with Space key)", () => {
-        const simulateIncrement = (component: ReactWrapper<any, {}>, mockEvent?: IMockEvent) => {
-            const mergedMockEvent = mockEvent || {};
-            mergedMockEvent.keyCode = Keys.SPACE;
-            mergedMockEvent.which = Keys.SPACE;
-
+        const simulateIncrement = (component: ReactWrapper<any, {}>, mockEvent: IMockEvent = {}) => {
             const incrementButton = component.find(Button).first();
-            incrementButton.simulate("keyUp", mergedMockEvent);
+            incrementButton.simulate("keydown", addKeyCode(mockEvent, Keys.SPACE));
         };
 
-        const simulateDecrement = (component: ReactWrapper<any, {}>, mockEvent?: IMockEvent) => {
-            const mergedMockEvent = mockEvent || {};
-            mergedMockEvent.keyCode = Keys.SPACE;
-            mergedMockEvent.which = Keys.SPACE;
-
+        const simulateDecrement = (component: ReactWrapper<any, {}>, mockEvent: IMockEvent = {}) => {
             const decrementButton = component.find(Button).last();
-            decrementButton.simulate("keyUp", mergedMockEvent);
+            decrementButton.simulate("keydown", addKeyCode(mockEvent, Keys.SPACE));
         };
 
         runInteractionSuite("Press 'SPACE'", "Press 'SPACE'", simulateIncrement, simulateDecrement);
     });
 
-    // Enable these tests once we have a solution for testing Button onKeyUp callbacks (see PR #561)
     describe("Keyboard interactions on buttons (with Enter key)", () => {
         const simulateIncrement = (component: ReactWrapper<any, {}>, mockEvent?: IMockEvent) => {
-            const mergedMockEvent = mockEvent || {};
-            mergedMockEvent.keyCode = Keys.ENTER;
-            mergedMockEvent.which = Keys.ENTER;
-
             const incrementButton = component.find(Button).first();
-            incrementButton.simulate("keyUp", mergedMockEvent);
+            incrementButton.simulate("keydown", addKeyCode(mockEvent, Keys.ENTER));
         };
 
         const simulateDecrement = (component: ReactWrapper<any, {}>, mockEvent?: IMockEvent) => {
-            const mergedMockEvent = mockEvent || {};
-            mergedMockEvent.keyCode = Keys.ENTER;
-            mergedMockEvent.which = Keys.ENTER;
-
             const decrementButton = component.find(Button).last();
-            decrementButton.simulate("keyUp", mergedMockEvent);
+            decrementButton.simulate("keydown", addKeyCode(mockEvent, Keys.ENTER));
         };
 
         runInteractionSuite("Press 'ENTER'", "Press 'ENTER'", simulateIncrement, simulateDecrement);
@@ -714,6 +700,25 @@ describe("<NumericInput>", () => {
             });
         });
 
+        describe("if min === max", () => {
+            it("never changes value", () => {
+                const onValueChangeSpy = spy();
+                const component = mount(<NumericInput min={2} max={2} onValueChange={onValueChangeSpy} />);
+                // repeated interactions, no change in state
+                component
+                    .find(Button)
+                    .first()
+                    .simulate("mousedown")
+                    .simulate("mousedown")
+                    .simulate("mousedown")
+                    .simulate("mousedown")
+                    .simulate("mousedown");
+                expect(component.state().value).to.equal("2");
+                expect(onValueChangeSpy.callCount).to.equal(5);
+                expect(onValueChangeSpy.args[0]).to.deep.equal([2, "2"]);
+            });
+        });
+
         describe("clampValueOnBlur", () => {
             it("does not clamp or invoke onValueChange on blur if clampValueOnBlur=false", () => {
                 // should be false by default
@@ -860,10 +865,9 @@ describe("<NumericInput>", () => {
         });
 
         it("shows a left icon if provided", () => {
-            const leftIcon = mount(<NumericInput leftIcon="variable" />)
-                .find(Icon)
-                .first();
-            expect(leftIcon.text()).to.equal("variable");
+            const component = mount(<NumericInput leftIcon="variable" />);
+            const icon = component.find(InputGroup).find(Icon);
+            expect(icon.prop("icon")).to.equal("variable");
         });
 
         it("shows placeholder text if provided", () => {
@@ -873,6 +877,11 @@ describe("<NumericInput>", () => {
             const placeholderText = inputField.props().placeholder;
 
             expect(placeholderText).to.equal("Enter a number...");
+        });
+
+        it("shows right element if provided", () => {
+            const component = mount(<NumericInput rightElement={<Button />} />);
+            expect(component.find(InputGroup).find(Button)).to.exist;
         });
 
         it("changes max precision of displayed value to that of the smallest step size defined", () => {
@@ -1098,6 +1107,10 @@ describe("<NumericInput>", () => {
             const newValue = component.state().value;
             expect(newValue).to.equal("302");
         });
+    }
+
+    function addKeyCode(mockEvent: IMockEvent = {}, keyCode: number) {
+        return { ...mockEvent, keyCode };
     }
 
     function stringToCharArray(str: string) {

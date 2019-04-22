@@ -1,7 +1,17 @@
 /*
  * Copyright 2016 Palantir Technologies, Inc. All rights reserved.
  *
- * Licensed under the terms of the LICENSE file distributed with this project.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 import classNames from "classnames";
@@ -79,10 +89,12 @@ export class Toast extends AbstractPureComponent<IToastProps, {}> {
     }
 
     public componentDidUpdate(prevProps: IToastProps) {
-        if (prevProps.timeout <= 0 && this.props.timeout > 0) {
-            this.startTimeout();
-        } else if (prevProps.timeout > 0 && this.props.timeout <= 0) {
-            this.clearTimeouts();
+        if (prevProps.timeout !== this.props.timeout) {
+            if (this.props.timeout > 0) {
+                this.startTimeout();
+            } else {
+                this.clearTimeouts();
+            }
         }
     }
 
@@ -107,11 +119,12 @@ export class Toast extends AbstractPureComponent<IToastProps, {}> {
     private handleCloseClick = () => this.triggerDismiss(false);
 
     private triggerDismiss(didTimeoutExpire: boolean) {
-        safeInvoke(this.props.onDismiss, didTimeoutExpire);
         this.clearTimeouts();
+        safeInvoke(this.props.onDismiss, didTimeoutExpire);
     }
 
     private startTimeout = () => {
+        this.clearTimeouts();
         if (this.props.timeout > 0) {
             this.setTimeout(() => this.triggerDismiss(true), this.props.timeout);
         }

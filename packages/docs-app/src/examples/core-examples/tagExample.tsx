@@ -1,7 +1,17 @@
 /*
  * Copyright 2016 Palantir Technologies, Inc. All rights reserved.
  *
- * Licensed under the terms of the LICENSE file distributed with this project.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 import * as React from "react";
@@ -11,6 +21,7 @@ import { Example, handleBooleanChange, handleStringChange, IExampleProps } from 
 import { IntentSelect } from "./common/intentSelect";
 
 export interface ITagExampleState {
+    fill: boolean;
     icon: boolean;
     intent: Intent;
     interactive: boolean;
@@ -24,6 +35,7 @@ export interface ITagExampleState {
 
 export class TagExample extends React.PureComponent<IExampleProps, ITagExampleState> {
     public state: ITagExampleState = {
+        fill: false,
         icon: false,
         intent: Intent.NONE,
         interactive: false,
@@ -35,6 +47,7 @@ export class TagExample extends React.PureComponent<IExampleProps, ITagExampleSt
         tags: INITIAL_TAGS,
     };
 
+    private handleFillChange = handleBooleanChange(fill => this.setState({ fill }));
     private handleIconChange = handleBooleanChange(icon => this.setState({ icon }));
     private handleIntentChange = handleStringChange((intent: Intent) => this.setState({ intent }));
     private handleInteractiveChange = handleBooleanChange(interactive => this.setState({ interactive }));
@@ -68,10 +81,11 @@ export class TagExample extends React.PureComponent<IExampleProps, ITagExampleSt
     }
 
     private renderOptions() {
-        const { icon, intent, interactive, large, minimal, removable, rightIcon, round } = this.state;
+        const { fill, icon, intent, interactive, large, minimal, removable, rightIcon, round } = this.state;
         return (
             <>
                 <H5>Props</H5>
+                <Switch label="Fill" checked={fill} onChange={this.handleFillChange} />
                 <Switch label="Large" checked={large} onChange={this.handleLargeChange} />
                 <Switch label="Minimal" checked={minimal} onChange={this.handleMinimalChange} />
                 <Switch label="Interactive" checked={interactive} onChange={this.handleInteractiveChange} />

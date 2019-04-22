@@ -1,7 +1,17 @@
 /*
  * Copyright 2016 Palantir Technologies, Inc. All rights reserved.
  *
- * Licensed under the terms of the LICENSE file distributed with this project.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 // we need some empty interfaces to show up in docs
@@ -82,6 +92,7 @@ export interface IControlProps extends IProps, HTMLInputProps {
 interface IControlInternalProps extends IControlProps {
     type: "checkbox" | "radio";
     typeClassName: string;
+    indicatorChildren?: React.ReactNode;
 }
 
 /**
@@ -92,6 +103,7 @@ const Control: React.SFC<IControlInternalProps> = ({
     alignIndicator,
     children,
     className,
+    indicatorChildren,
     inline,
     inputRef,
     label,
@@ -117,7 +129,7 @@ const Control: React.SFC<IControlInternalProps> = ({
     return (
         <TagName className={classes} style={style}>
             <input {...htmlProps} ref={inputRef} type={type} />
-            <span className={Classes.CONTROL_INDICATOR} />
+            <span className={Classes.CONTROL_INDICATOR}>{indicatorChildren}</span>
             {label}
             {labelElement}
             {children}
@@ -129,13 +141,47 @@ const Control: React.SFC<IControlInternalProps> = ({
 // Switch
 //
 
-export interface ISwitchProps extends IControlProps {}
+export interface ISwitchProps extends IControlProps {
+    /**
+     * Text to display inside the switch indicator when checked.
+     * If `innerLabel` is provided and this prop is omitted, then `innerLabel`
+     * will be used for both states.
+     * @default innerLabel
+     */
+    innerLabelChecked?: string;
+
+    /**
+     * Text to display inside the switch indicator when unchecked.
+     */
+    innerLabel?: string;
+}
 
 export class Switch extends React.PureComponent<ISwitchProps> {
     public static displayName = `${DISPLAYNAME_PREFIX}.Switch`;
 
     public render() {
-        return <Control {...this.props} type="checkbox" typeClassName={Classes.SWITCH} />;
+        const { innerLabelChecked, innerLabel, ...controlProps } = this.props;
+        const switchLabels =
+            innerLabel || innerLabelChecked
+                ? [
+                      <div key="checked" className={Classes.CONTROL_INDICATOR_CHILD}>
+                          <div className={Classes.SWITCH_INNER_TEXT}>
+                              {innerLabelChecked ? innerLabelChecked : innerLabel}
+                          </div>
+                      </div>,
+                      <div key="unchecked" className={Classes.CONTROL_INDICATOR_CHILD}>
+                          <div className={Classes.SWITCH_INNER_TEXT}>{innerLabel}</div>
+                      </div>,
+                  ]
+                : null;
+        return (
+            <Control
+                {...controlProps}
+                type="checkbox"
+                typeClassName={Classes.SWITCH}
+                indicatorChildren={switchLabels}
+            />
+        );
     }
 }
 
@@ -216,7 +262,7 @@ export class Checkbox extends React.PureComponent<ICheckboxProps, ICheckboxState
     }
 
     private updateIndeterminate() {
-        if (this.state.indeterminate != null) {
+        if (this.input != null) {
             this.input.indeterminate = this.state.indeterminate;
         }
     }

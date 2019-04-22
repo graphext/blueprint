@@ -1,7 +1,17 @@
 /*
  * Copyright 2017 Palantir Technologies, Inc. All rights reserved.
  *
- * Licensed under the terms of the LICENSE file distributed with this project.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 import classNames from "classnames";
@@ -24,7 +34,7 @@ export interface IOmnibarProps<T> extends IListItemsProps<T> {
     /**
      * Props to spread to the query `InputGroup`. Use `query` and
      * `onQueryChange` instead of `inputProps.value` and `inputProps.onChange`
-     * to control this input. Use `inputRef` instead of `ref`.
+     * to control this input.
      */
     inputProps?: IInputGroupProps & HTMLInputProps;
 
@@ -58,7 +68,7 @@ export class Omnibar<T> extends React.PureComponent<IOmnibarProps<T>> {
     }
 
     private TypedQueryList = QueryList.ofType<T>();
-    private queryList?: QueryList<T> | null;
+    private queryList: QueryList<T> | null = null;
     private refHandlers = {
         queryList: (ref: QueryList<T> | null) => (this.queryList = ref),
     };
@@ -71,7 +81,6 @@ export class Omnibar<T> extends React.PureComponent<IOmnibarProps<T>> {
             <this.TypedQueryList
                 {...restProps}
                 initialContent={initialContent}
-                onItemSelect={this.props.onItemSelect}
                 ref={this.refHandlers.queryList}
                 renderer={this.renderQueryList}
             />
@@ -108,8 +117,7 @@ export class Omnibar<T> extends React.PureComponent<IOmnibarProps<T>> {
     };
 
     private handleOverlayClose = (event?: React.SyntheticEvent<HTMLElement>) => {
-        const { overlayProps = {} } = this.props;
-        Utils.safeInvoke(overlayProps.onClose, event);
+        Utils.safeInvokeMember(this.props.overlayProps, "onClose", event);
         Utils.safeInvoke(this.props.onClose, event);
     };
 }

@@ -1,7 +1,17 @@
 /*
  * Copyright 2016 Palantir Technologies, Inc. All rights reserved.
  *
- * Licensed under the terms of the LICENSE file distributed with this project.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 import { assert } from "chai";
@@ -18,13 +28,11 @@ describe("<InputGroup>", () => {
         assert.isTrue(input.childAt(1).hasClass(Classes.INPUT));
     });
 
-    it("supports custom style", () => {
-        const input = mount(<InputGroup leftIcon="star" style={{ background: "yellow" }} />);
-        const inputElement = input
-            .find("input")
-            .first()
-            .getDOMNode() as HTMLElement;
+    it("supports custom props", () => {
+        const input = mount(<InputGroup leftIcon="star" style={{ background: "yellow" }} tabIndex={4} />);
+        const inputElement = input.find("input").getDOMNode() as HTMLElement;
         assert.equal(inputElement.style.background, "yellow");
+        assert.equal(inputElement.tabIndex, 4);
     });
 
     it(`renders right element inside .${Classes.INPUT_ACTION} after input`, () => {
@@ -51,5 +59,12 @@ describe("<InputGroup>", () => {
 
         group.setProps({ type: "password" });
         assert.strictEqual(group.find("input").prop("type"), "password");
+    });
+
+    it("supports inputRef", () => {
+        let input: HTMLInputElement | null = null;
+        // tslint:disable-next-line:jsx-no-lambda
+        mount(<InputGroup inputRef={ref => (input = ref)} />);
+        assert.instanceOf(input, HTMLInputElement);
     });
 });

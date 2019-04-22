@@ -1,7 +1,17 @@
 /*
  * Copyright 2018 Palantir Technologies, Inc. All rights reserved.
  *
- * Licensed under the terms of the LICENSE file distributed with this project.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 import classNames from "classnames";
@@ -11,7 +21,7 @@ import { Boundary } from "../../common/boundary";
 import * as Classes from "../../common/classes";
 import { OVERFLOW_LIST_OBSERVE_PARENTS_CHANGED } from "../../common/errors";
 import { DISPLAYNAME_PREFIX, IProps } from "../../common/props";
-import { safeInvoke } from "../../common/utils";
+import { safeInvoke, shallowCompareKeys } from "../../common/utils";
 import { IResizeEntry, ResizeSensor } from "../resize-sensor/resizeSensor";
 
 /** @internal - do not expose this type */
@@ -100,7 +110,7 @@ export interface IOverflowListState<T> {
     visible: T[];
 }
 
-export class OverflowList<T> extends React.PureComponent<IOverflowListProps<T>, IOverflowListState<T>> {
+export class OverflowList<T> extends React.Component<IOverflowListProps<T>, IOverflowListState<T>> {
     public static displayName = `${DISPLAYNAME_PREFIX}.OverflowList`;
 
     public static defaultProps: Partial<IOverflowListProps<any>> = {
@@ -156,8 +166,19 @@ export class OverflowList<T> extends React.PureComponent<IOverflowListProps<T>, 
         }
     }
 
+    public shouldComponentUpdate(_nextProps: IOverflowListProps<T>, nextState: IOverflowListState<T>) {
+        // We want this component to always re-render, even when props haven't changed, so that
+        // changes in the renderers' behavior can be reflected.
+        // The following statement prevents re-rendering only in the case where the state changes
+        // identity (i.e. setState was called), but the state is still the same when
+        // shallow-compared to the previous state.
+        return !(this.state !== nextState && shallowCompareKeys(this.state, nextState));
+    }
+
     public componentDidUpdate(_prevProps: IOverflowListProps<T>, prevState: IOverflowListState<T>) {
-        this.repartition(false);
+        if (!shallowCompareKeys(prevState, this.state)) {
+            this.repartition(false);
+        }
         const { direction, overflow, lastOverflowCount } = this.state;
         if (
             // if a resize operation has just completed (transition to NONE)

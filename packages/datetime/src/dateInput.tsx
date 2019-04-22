@@ -1,7 +1,17 @@
 /*
  * Copyright 2016 Palantir Technologies, Inc. All rights reserved.
  *
- * Licensed under the terms of the LICENSE file distributed with this project.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 import classNames from "classnames";
@@ -51,7 +61,7 @@ export interface IDateInputProps extends IDatePickerBaseProps, IDateFormatProps,
 
     /**
      * Props to pass to ReactDayPicker. See API documentation
-     * [here](http://react-day-picker.js.org/docs/api-daypicker.html).
+     * [here](http://react-day-picker.js.org/api/DayPicker).
      *
      * The following props are managed by the component and cannot be configured:
      * `canChangeMonth`, `captionElement`, `fromMonth` (use `minDate`), `month` (use
@@ -152,17 +162,9 @@ export class DateInput extends AbstractPureComponent<IDateInputProps, IDateInput
         valueString: null,
     };
 
-    private inputEl: HTMLInputElement = null;
-    private popoverContentEl: HTMLElement = null;
-    private lastElementInPopover: HTMLElement = null;
-    private refHandlers = {
-        input: (el: HTMLInputElement) => {
-            this.inputEl = el;
-        },
-        popoverContent: (el: HTMLElement) => {
-            this.popoverContentEl = el;
-        },
-    };
+    private inputEl: HTMLInputElement | null = null;
+    private popoverContentEl: HTMLElement | null = null;
+    private lastElementInPopover: HTMLElement | null = null;
 
     public componentWillUnmount() {
         super.componentWillUnmount();
@@ -185,7 +187,7 @@ export class DateInput extends AbstractPureComponent<IDateInputProps, IDateInput
         };
 
         const wrappedPopoverContent = (
-            <div ref={this.refHandlers.popoverContent}>
+            <div ref={ref => (this.popoverContentEl = ref)}>
                 <DatePicker
                     {...this.props}
                     dayPickerProps={dayPickerProps}
@@ -196,10 +198,8 @@ export class DateInput extends AbstractPureComponent<IDateInputProps, IDateInput
         );
 
         // assign default empty object here to prevent mutation
-        const { popoverProps = {} } = this.props;
-        const inputProps = this.getInputPropsWithDefaults();
+        const { inputProps = {}, popoverProps = {} } = this.props;
         const isErrorState = value != null && (!isDateValid(value) || !this.isDateInRange(value));
-
         return (
             <Popover
                 isOpen={this.state.isOpen && !this.props.disabled}
@@ -216,14 +216,15 @@ export class DateInput extends AbstractPureComponent<IDateInputProps, IDateInput
                     intent={isErrorState ? Intent.DANGER : Intent.NONE}
                     placeholder={this.props.placeholder}
                     rightElement={this.props.rightElement}
+                    type="text"
                     {...inputProps}
                     disabled={this.props.disabled}
+                    inputRef={this.inputRef}
                     onBlur={this.handleInputBlur}
                     onChange={this.handleInputChange}
                     onClick={this.handleInputClick}
                     onFocus={this.handleInputFocus}
                     onKeyDown={this.handleInputKeyDown}
-                    type="text"
                     value={dateString}
                 />
             </Popover>
@@ -237,23 +238,11 @@ export class DateInput extends AbstractPureComponent<IDateInputProps, IDateInput
         }
     }
 
-    private getInputPropsWithDefaults() {
+    private inputRef = (ref: HTMLInputElement | null) => {
+        this.inputEl = ref;
         const { inputProps = {} } = this.props;
-        if (Utils.isFunction(inputProps.inputRef)) {
-            return {
-                ...inputProps,
-                inputRef: (el: HTMLInputElement) => {
-                    this.refHandlers.input(el);
-                    inputProps.inputRef(el);
-                },
-            };
-        } else {
-            return {
-                ...inputProps,
-                inputRef: this.refHandlers.input,
-            };
-        }
-    }
+        Utils.safeInvoke(inputProps.inputRef, ref);
+    };
 
     private isDateInRange(value: Date) {
         return isDayInRange(value, [this.props.minDate, this.props.maxDate]);

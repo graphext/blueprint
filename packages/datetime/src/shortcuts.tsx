@@ -1,17 +1,42 @@
 /*
  * Copyright 2018 Palantir Technologies, Inc. All rights reserved.
  *
- * Licensed under the terms of the LICENSE file distributed with this project.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 import { Classes, Menu, MenuItem } from "@blueprintjs/core";
-import React from "react";
+import * as React from "react";
 import { DATERANGEPICKER_SHORTCUTS } from "./common/classes";
 import { clone, DateRange, isDayRangeInRange } from "./common/dateUtils";
 
 export interface IDateRangeShortcut {
+    /** Shortcut label that appears in the list. */
     label: string;
+
+    /**
+     * Date range represented by this shortcut. Note that time components of a
+     * shortcut are ignored by default; set `includeTime: true` to respect them.
+     */
     dateRange: DateRange;
+
+    /**
+     * Set this prop to `true` to allow this shortcut to change the selected
+     * times as well as the dates. By default, time components of a shortcut are
+     * ignored; clicking a shortcut takes the date components of the `dateRange`
+     * and combines them with the currently selected time.
+     * @default false
+     */
+    includeTime?: boolean;
 }
 
 export interface IShortcutsProps {
@@ -19,7 +44,7 @@ export interface IShortcutsProps {
     minDate: Date;
     maxDate: Date;
     shortcuts: IDateRangeShortcut[] | true;
-    onShortcutClick: (shortcut: DateRange) => void;
+    onShortcutClick: (shortcut: IDateRangeShortcut) => void;
 }
 
 export class Shortcuts extends React.PureComponent<IShortcutsProps> {
@@ -34,7 +59,7 @@ export class Shortcuts extends React.PureComponent<IShortcutsProps> {
                 className={Classes.POPOVER_DISMISS_OVERRIDE}
                 disabled={!this.isShortcutInRange(s.dateRange)}
                 key={i}
-                onClick={this.getShorcutClickHandler(s.dateRange)}
+                onClick={this.getShorcutClickHandler(s)}
                 text={s.label}
             />
         ));
@@ -42,8 +67,8 @@ export class Shortcuts extends React.PureComponent<IShortcutsProps> {
         return <Menu className={DATERANGEPICKER_SHORTCUTS}>{shortcutElements}</Menu>;
     }
 
-    private getShorcutClickHandler(nextValue: DateRange) {
-        return () => this.props.onShortcutClick(nextValue);
+    private getShorcutClickHandler(shortcut: IDateRangeShortcut) {
+        return () => this.props.onShortcutClick(shortcut);
     }
 
     private isShortcutInRange(shortcutDateRange: DateRange) {

@@ -16,8 +16,8 @@
     "verify": "npm-run-all -p dist lint"
   },
   "dependencies": {
-    "@blueprintjs/core": "3.9.0-graphext15",
-    "@blueprintjs/table": "3.3.0-graphext14",
+    "@blueprintjs/core": "3.15.0-graphext1",
+    "@blueprintjs/table": "3.5.0-graphext1",
     "classnames": "^2.2.5",
     "dom4": "^2.0.1",
     "normalize.css": "^8.0.0",
@@ -28,13 +28,14 @@
     "@blueprintjs/webpack-build-scripts": "*",
     "npm-run-all": "^4.1.2",
     "stylelint": "~8.4.0",
-    "webpack": "^3.10.0",
-    "webpack-dev-server": "^2.11.1"
+    "webpack": "^4.27.1",
+    "webpack-dev-server": "^3.1.0"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:palantir/blueprint.git"
+    "url": "git@github.com:palantir/blueprint.git",
+    "directory": "packages/table-dev-app"
   },
   "author": "Palantir Technologies",
-  "license": "SEE LICENSE IN REPO ROOT"
+  "license": "Apache-2.0"
 }

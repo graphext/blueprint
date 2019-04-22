@@ -1,7 +1,17 @@
 /*
  * Copyright 2015 Palantir Technologies, Inc. All rights reserved.
  *
- * Licensed under the terms of the LICENSE file distributed with this project.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 import classNames from "classnames";
@@ -47,6 +57,11 @@ export interface IMenuItemProps extends IActionProps, ILinkProps {
     label?: string;
 
     /**
+     * A space-delimited list of class names to pass along to the right-aligned label wrapper element.
+     */
+    labelClassName?: string;
+
+    /**
      * Right-aligned label content, useful for displaying hotkeys.
      */
     labelElement?: React.ReactNode;
@@ -76,6 +91,11 @@ export interface IMenuItemProps extends IActionProps, ILinkProps {
      * @default "a"
      */
     tagName?: keyof JSX.IntrinsicElements;
+
+    /**
+     * A space-delimited list of class names to pass along to the text wrapper element.
+     */
+    textClassName?: string;
 }
 
 export class MenuItem extends React.PureComponent<IMenuItemProps & React.AnchorHTMLAttributes<HTMLAnchorElement>> {
@@ -101,6 +121,7 @@ export class MenuItem extends React.PureComponent<IMenuItemProps & React.AnchorH
             popoverProps,
             shouldDismissPopover,
             text,
+            textClassName,
             tagName: TagName = "a",
             ...htmlProps
         } = this.props;
@@ -123,7 +144,7 @@ export class MenuItem extends React.PureComponent<IMenuItemProps & React.AnchorH
         const target = (
             <TagName {...htmlProps} {...(disabled ? DISABLED_PROPS : {})} className={anchorClasses}>
                 <Icon icon={icon} />
-                <Text className={Classes.FILL} ellipsize={!multiline}>
+                <Text className={classNames(Classes.FILL, textClassName)} ellipsize={!multiline}>
                     {text}
                 </Text>
                 {this.maybeRenderLabel(labelElement)}
@@ -136,12 +157,12 @@ export class MenuItem extends React.PureComponent<IMenuItemProps & React.AnchorH
     }
 
     private maybeRenderLabel(labelElement?: React.ReactNode) {
-        const { label } = this.props;
+        const { label, labelClassName } = this.props;
         if (label == null && labelElement == null) {
             return null;
         }
         return (
-            <span className={Classes.MENU_ITEM_LABEL}>
+            <span className={classNames(Classes.MENU_ITEM_LABEL, labelClassName)}>
                 {label}
                 {labelElement}
             </span>

@@ -1,7 +1,17 @@
 /*
  * Copyright 2016 Palantir Technologies, Inc. All rights reserved.
  *
- * Licensed under the terms of the LICENSE file distributed with this project.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 import classNames from "classnames";
@@ -34,8 +44,10 @@ const POPPER_MODIFIERS: PopperModifiers = {
 };
 const TRANSITION_DURATION = 100;
 
+type IContextMenuProps = IOverlayLifecycleProps;
+
 /* istanbul ignore next */
-class ContextMenu extends AbstractPureComponent<IOverlayLifecycleProps, IContextMenuState> {
+class ContextMenu extends AbstractPureComponent<IContextMenuProps, IContextMenuState> {
     public state: IContextMenuState = {
         isDarkTheme: false,
         isOpen: false,
@@ -126,7 +138,10 @@ export function show(menu: JSX.Element, offset: IOffset, onClose?: () => void, i
         contextMenuElement = document.createElement("div");
         contextMenuElement.classList.add(Classes.CONTEXT_MENU);
         document.body.appendChild(contextMenuElement);
-        contextMenu = ReactDOM.render(<ContextMenu onClosed={remove} />, contextMenuElement) as ContextMenu;
+        contextMenu = ReactDOM.render<IContextMenuProps>(
+            <ContextMenu onClosed={remove} />,
+            contextMenuElement,
+        ) as ContextMenu;
     }
 
     contextMenu.show(menu, offset, onClose, isDarkTheme);

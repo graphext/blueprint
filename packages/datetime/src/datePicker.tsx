@@ -1,7 +1,17 @@
 /*
  * Copyright 2015 Palantir Technologies, Inc. All rights reserved.
  *
- * Licensed under the terms of the LICENSE file distributed with this project.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 import { AbstractPureComponent, Button, DISPLAYNAME_PREFIX, Divider, IProps, Utils } from "@blueprintjs/core";
@@ -26,7 +36,7 @@ export interface IDatePickerProps extends IDatePickerBaseProps, IProps {
 
     /**
      * Props to pass to ReactDayPicker. See API documentation
-     * [here](http://react-day-picker.js.org/docs/api-daypicker.html).
+     * [here](http://react-day-picker.js.org/api/DayPicker).
      *
      * The following props are managed by the component and cannot be configured:
      * `canChangeMonth`, `captionElement`, `fromMonth` (use `minDate`), `month` (use
@@ -188,7 +198,9 @@ export class DatePicker extends AbstractPureComponent<IDatePickerProps, IDatePic
     private disabledDays = (day: Date) => !DateUtils.isDayInRange(day, [this.props.minDate, this.props.maxDate]);
 
     private getDisabledDaysModifier = () => {
-        const { dayPickerProps: { disabledDays } } = this.props;
+        const {
+            dayPickerProps: { disabledDays },
+        } = this.props;
 
         return Array.isArray(disabledDays) ? [this.disabledDays, ...disabledDays] : [this.disabledDays, disabledDays];
     };
@@ -246,7 +258,7 @@ export class DatePicker extends AbstractPureComponent<IDatePickerProps, IDatePic
                 selectedDay: day.getDate(),
             });
         }
-        if (this.state.value == null || this.state.value.getMonth() !== day.getMonth()) {
+        if (this.state.value != null && this.state.value.getMonth() !== day.getMonth()) {
             this.ignoreNextMonthChange = true;
         }
 

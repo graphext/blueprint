@@ -1,7 +1,17 @@
 /*
  * Copyright 2017 Palantir Technologies, Inc. All rights reserved.
  *
- * Licensed under the terms of the LICENSE file distributed with this project.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 import { Classes, Intent, IProps, Tag } from "@blueprintjs/core";
@@ -55,7 +65,10 @@ export class InterfaceTable extends React.PureComponent<IInterfaceTableProps> {
 
     private renderPropRow = (entry: ITsProperty | ITsMethod) => {
         const { renderBlock, renderType } = this.context;
-        const { flags: { isDeprecated, isExternal, isOptional }, name } = entry;
+        const {
+            flags: { isDeprecated, isExternal, isOptional },
+            name,
+        } = entry;
         const { documentation } = isTsProperty(entry) ? entry : entry.signatures[0];
 
         // ignore props marked with `@internal` tag (this tag is in contents instead of in flags)
@@ -121,7 +134,10 @@ export class InterfaceTable extends React.PureComponent<IInterfaceTableProps> {
 
     private renderTags(entry: ITsProperty | ITsMethod) {
         const { renderType } = this.context;
-        const { flags: { isDeprecated, isOptional }, inheritedFrom } = entry;
+        const {
+            flags: { isDeprecated, isOptional },
+            inheritedFrom,
+        } = entry;
         return (
             <>
                 {!isOptional && <Tag children="Required" intent={Intent.SUCCESS} minimal={true} />}
