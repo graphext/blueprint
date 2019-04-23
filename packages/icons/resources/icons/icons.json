@@ -483,6 +483,13 @@
     "content": "\\ea09"
   },
   {
+    "displayName": "Sort",
+    "iconName": "g-sort",
+    "tags": "arrow, order, filter, arrange ",
+    "group": "Graphext",
+    "content": "\\ea10"
+  },
+  {
     "displayName": "Blank",
     "iconName": "blank",
     "tags": "empty, placeholder",
