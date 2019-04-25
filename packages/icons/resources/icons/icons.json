@@ -441,6 +441,55 @@
     "content": "\\ea03"
   },
   {
+    "displayName": "Annotation",
+    "iconName": "g-annotation",
+    "tags": "pin, geo, mark, bookmark",
+    "group": "Graphext",
+    "content": "\\ea04"
+  },
+  {
+    "displayName": "Rename",
+    "iconName": "g-rename",
+    "tags": "edit, pencil, change",
+    "group": "Graphext",
+    "content": "\\ea05"
+  },
+  {
+    "displayName": "Join",
+    "iconName": "g-join",
+    "tags": "boolean, combine",
+    "group": "Graphext",
+    "content": "\\ea06"
+  },
+  {
+    "displayName": "Magic Wand",
+    "iconName": "g-magic-wand",
+    "tags": "automatic",
+    "group": "Graphext",
+    "content": "\\ea07"
+  },
+  {
+    "displayName": "Subtract",
+    "iconName": "g-subtract",
+    "tags": "less, take out, boolean",
+    "group": "Graphext",
+    "content": "\\ea08"
+  },
+  {
+    "displayName": "Undo",
+    "iconName": "g-undo",
+    "tags": "back, arrow, ",
+    "group": "Graphext",
+    "content": "\\ea09"
+  },
+  {
+    "displayName": "Sort",
+    "iconName": "g-sort",
+    "tags": "arrow, order, filter, arrange ",
+    "group": "Graphext",
+    "content": "\\ea10"
+  },
+  {
     "displayName": "Blank",
     "iconName": "blank",
     "tags": "empty, placeholder",
