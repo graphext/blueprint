@@ -6,3 +6,19 @@
 .#{$ns}-table-header .#{$ns}-table-row-name {
   padding-top: 8px;
 }
+
+.#{$ns}-table-th-menu-container {
+  opacity: 1;
+}
+
+.#{$ns}-dark .#{$ns}-table-th-menu .#{$ns}-icon {
+  box-shadow: none;
+}
+
+.#{$ns}-dark .#{$ns}-table-selection-enabled .#{$ns}-table-th-menu .#{$ns}-icon {
+  background-color: transparent;
+}
+
+.#{$ns}-dark .#{$ns}-table-th-menu:hover .#{$ns}-icon {
+  box-shadow: none;
+}
