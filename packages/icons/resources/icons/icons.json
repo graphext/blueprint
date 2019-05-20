@@ -483,6 +483,48 @@
     "content": "\\ea09"
   },
   {
+    "displayName": "Charts bars",
+    "iconName": "g-charts-bars",
+    "tags": "charts, filters, bars",
+    "group": "Graphext",
+    "content": "\\ea0A"
+  },
+  {
+    "displayName": "Charts lines",
+    "iconName": "g-charts-lines",
+    "tags": "charts, filters, bars",
+    "group": "Graphext",
+    "content": "\\ea0B"
+  },
+  {
+    "displayName": "Charts perios",
+    "iconName": "g-charts-period",
+    "tags": "charts, filters, bars",
+    "group": "Graphext",
+    "content": "\\ea0C"
+  },
+  {
+    "displayName": "Charts relative evolution",
+    "iconName": "g-charts-relative-evolution",
+    "tags": "charts, filters, bars",
+    "group": "Graphext",
+    "content": "\\ea0D"
+  },
+  {
+    "displayName": "Sort ascending",
+    "iconName": "g-sort-ascending",
+    "tags": "sorting, ordering, filters",
+    "group": "Graphext",
+    "content": "\\ea0E"
+  },
+  {
+    "displayName": "Sort descending",
+    "iconName": "g-sort-descending",
+    "tags": "sorting, ordering, filters",
+    "group": "Graphext",
+    "content": "\\ea0F"
+  },
+  {
     "displayName": "Sort",
     "iconName": "g-sort",
     "tags": "arrow, order, filter, arrange ",
