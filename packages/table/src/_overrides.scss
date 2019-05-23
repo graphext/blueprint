@@ -2,7 +2,9 @@
 .#{$ns}-table-cell {
   padding-top: 8px;
 }
-
+.#{$ns}-dark  .#{$ns}-table-cell{
+  box-shadow: inset 0 -1px 0 #2a2e38;
+}
 .#{$ns}-table-header .#{$ns}-table-row-name {
   padding-top: 8px;
 }
@@ -17,4 +19,20 @@
 
 .#{$ns}-dark .#{$ns}-table-th-menu:hover .#{$ns}-icon {
   box-shadow: none;
+}
+ .#{$ns}-dark .#{$ns}-table-row-headers {
+  background: transparent;
+}
+.#{$ns}-dark  .#{$ns}-table-row-headers .#{$ns}-table-header {
+  box-shadow: inset 0 -1px 0 #2a2e38;
+}
+.#{$ns}-dark .#{$ns}-table-reorder-handle-target{
+  color:$white4;
+}
+.#{$ns}-table-top-container{
+  padding: 8px 0;
+}
+
+.#{$ns}-dark .#{$ns}-table-top-container{
+  background-color: $dark-gray3;
 }

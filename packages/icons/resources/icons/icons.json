@@ -532,6 +532,13 @@
     "content": "\\ea10"
   },
   {
+    "displayName": "Help",
+    "iconName": "g-help",
+    "tags": "question, mark, doubt, info, support ",
+    "group": "Graphext",
+    "content": "\\ea11"
+  },
+  {
     "displayName": "Blank",
     "iconName": "blank",
     "tags": "empty, placeholder",
