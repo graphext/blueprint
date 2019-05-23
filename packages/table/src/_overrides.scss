@@ -26,13 +26,9 @@
 .#{$ns}-dark  .#{$ns}-table-row-headers .#{$ns}-table-header {
   box-shadow: inset 0 -1px 0 #2a2e38;
 }
-.#{$ns}-dark .#{$ns}-table-reorder-handle-target{
-  color:$white4;
+.#{$ns}-dark .#{$ns}-table-reorder-handle-target {
+  color: $white4;
 }
-.#{$ns}-table-top-container{
-  padding: 8px 0 4px 0;
-}
-
-.#{$ns}-dark .#{$ns}-table-top-container{
+.#{$ns}-dark .#{$ns}-table-header.#{$ns}-table-header-active:before, .#{$ns}-dark .#{$ns}-table-selection-enabled .#{$ns}-table-header:hover:before {
   background-color: $dark-gray3;
 }
