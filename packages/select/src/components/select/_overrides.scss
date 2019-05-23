@@ -44,3 +44,25 @@ $custom-shadow: 0 0 12px rgba(#000000, 0.25) !important;
 .#{$ns}-popover-target > div {
   height: 100%;
 }
+
+.#{$ns}-popover-wrapper {
+  width: 100%;
+}
+
+.fill .#{$ns}-popover-target {
+  width: 100%;
+}
+
+.fill button.#{$ns}-button {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.fill .bp3-popover-content {
+  width: 100%;
+}
+
+.fill ul.bp3-menu {
+  max-width: 100%;
+}
