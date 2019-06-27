@@ -134,5 +134,7 @@ $menu-item-border-radius: $pt-border-radius;
 $dark-menu-item-color-hover: $dark-gray5;
 $dark-menu-item-color-active: $dark-gray5 !important; // Important is needed here because the classname "bp3-intent-primary" applied to active menu items.
 
+$pt-dark-icon-color: $white3;
+$pt-dark-icon-color-hover: $white3;
 // Dialog
 $dialog-border-radius: 16px;

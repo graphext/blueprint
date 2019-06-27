@@ -539,6 +539,83 @@
     "content": "\\ea11"
   },
   {
+    "displayName": "Blocks",
+    "iconName": "g-blocks",
+    "tags": "graphic, box, step, steps, recipe ",
+    "group": "Graphext",
+    "content": "\\ea12"
+  },
+  {
+    "displayName": "Code",
+    "iconName": "g-code",
+    "tags": "code, text, editor, recipe, coding, html ",
+    "group": "Graphext",
+    "content": "\\ea13"
+  },
+  {
+    "displayName": "Column",
+    "iconName": "g-column",
+    "tags": "direction, vertical, data, boxes ",
+    "group": "Graphext",
+    "content": "\\ea14"
+  },
+  {
+    "displayName": "Desktop",
+    "iconName": "g-desktop",
+    "tags": "screen, computer, desktop, resolution, monitor ",
+    "group": "Graphext",
+    "content": "\\ea15"
+  },
+  {
+    "displayName": "Drag",
+    "iconName": "g-drag",
+    "tags": "dots, four, point, dragging ",
+    "group": "Graphext",
+    "content": "\\ea16"
+  },
+  {
+    "displayName": "Flash",
+    "iconName": "g-flash",
+    "tags": "thunderbolt, gleam, light",
+    "group": "Graphext",
+    "content": "\\ea17"
+  },
+  {
+    "displayName": "Home",
+    "iconName": "g-home",
+    "tags": "house, building, destination, safe ",
+    "group": "Graphext",
+    "content": "\\ea18"
+  },
+  {
+    "displayName": "Recent",
+    "iconName": "g-recent",
+    "tags": "clock, recent, time, back, recover ",
+    "group": "Graphext",
+    "content": "\\ea19"
+  },
+  {
+    "displayName": "Redo",
+    "iconName": "g-redo",
+    "tags": "forward, arrow, circle, next ",
+    "group": "Graphext",
+    "content": "\\ea1a"
+  },
+  {
+    "displayName": "Team",
+    "iconName": "g-team",
+    "tags": "team, members, people, users, staff, account ",
+    "group": "Graphext",
+    "content": "\\ea1b"
+  },
+  {
+    "displayName": "Update",
+    "iconName": "g-update",
+    "tags": "refresh, update, reload, load, charge ",
+    "group": "Graphext",
+    "content": "\\ea1c"
+  },
+  {
     "displayName": "Blank",
     "iconName": "blank",
     "tags": "empty, placeholder",

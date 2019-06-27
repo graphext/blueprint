@@ -209,3 +209,16 @@
     }
   }
 }
+
+// Radio
+.#{$ns}-control.#{$ns}-radio {
+  input:checked ~ .#{$ns}-control-indicator::before {
+    background-image: radial-gradient($pt-intent-primary, $pt-intent-primary 28%, transparent 32%);
+  }
+  input:checked ~ .#{$ns}-control-indicator{
+    background-color: $dark-gray5;
+  }
+}
+.#{$ns}-dark .#{$ns}-control.#{$ns}-radio:hover input:checked~.#{$ns}-control-indicator{
+  background-color: $dark-gray5;
+}
