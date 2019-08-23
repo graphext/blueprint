@@ -8,9 +8,14 @@ steps:
 - name: build
   image: node:dubnium
   commands:
+  - echo -n $NPMRC | base64 -d > /root/.npmrc
   - yarn
   - yarn compile
   - yarn dist:libs
+  - rm /root/.npmrc
+  environment:
+    NPMRC:
+     from_secret: NPMRC
 - name: publish
   image: node:dubnium
   commands:
@@ -27,6 +32,6 @@ steps:
 
 ---
 kind: signature
-hmac: 16beac09b6451fc0c396a67571929ac81b072010b4d616cbfdacf5fc39d1b3fd
+hmac: 132192b16865b7129546fd1959bd8707c32e833caef825c3681d4e91d26f4e37
 
 ...
