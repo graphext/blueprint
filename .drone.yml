@@ -1,0 +1,32 @@
+---
+kind: pipeline
+name: blueprint
+trigger:
+  branch:
+  - deploy
+steps:
+- name: build
+  image: node:dubnium
+  commands:
+  - yarn
+  - yarn compile
+  - yarn dist:libs
+- name: publish
+  image: node:dubnium
+  commands:
+  - echo -n $NPMRC | base64 -d > /root/.npmrc
+  - npm publish packages/core
+  - npm publish packages/icons
+  - npm publish packages/datetime
+  - npm publish packages/table
+  - npm publish packages/select
+  - rm /root/.npmrc
+  environment:
+    NPMRC:
+     from_secret: NPMRC
+
+---
+kind: signature
+hmac: 16beac09b6451fc0c396a67571929ac81b072010b4d616cbfdacf5fc39d1b3fd
+
+...

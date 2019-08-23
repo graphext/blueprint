@@ -23,7 +23,7 @@
   background-color: inherit;
 }
 
-.#{$ns}-dark .#{$ns}-button.#{$ns}-minimal { 
+.#{$ns}-dark .#{$ns}-button.#{$ns}-minimal {
   &:disabled,
   &:disabled:hover,
   &.#{$ns}-disabled,
@@ -149,6 +149,9 @@
 .#{$ns}-slider-label{
   padding: 4px 8px;
   font-size: 11px;
+}
+.#{$ns}-slider.#{$ns}-axis-hidden .#{$ns}-slider-axis{
+  display: none;
 }
 
 // Tag Input
