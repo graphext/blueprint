@@ -266,8 +266,8 @@
     "content": "\\e9ea"
   },
   {
-    "displayName": "Filter",
-    "iconName": "g-filter",
+    "displayName": "Numerical",
+    "iconName": "g-numerical",
     "tags": "graph, chart, data, column, variable",
     "group": "Graphext",
     "content": "\\e9eb"
@@ -614,6 +614,83 @@
     "tags": "refresh, update, reload, load, charge ",
     "group": "Graphext",
     "content": "\\ea1c"
+  },
+  {
+    "displayName": "Advanced Selection",
+    "iconName": "g-advanced-selection",
+    "tags": "selection, arrow, select, cursor ",
+    "group": "Graphext",
+    "content": "\\ea1d"
+  },
+  {
+    "displayName": "Duplicate",
+    "iconName": "g-duplicate",
+    "tags": "copy, paste, double, clipboard, square",
+    "group": "Graphext",
+    "content": "\\ea1e"
+  },  
+  {
+    "displayName": "Exclusion",
+    "iconName": "g-exclusion",
+    "tags": "operator, subtract, boolean, square, operation",
+    "group": "Graphext",
+    "content": "\\ea1f"
+  },  
+  {
+    "displayName": "Filter",
+    "iconName": "g-filter",
+    "tags": "filter, funnel, conditions, lines, sort",
+    "group": "Graphext",
+    "content": "\\ea20"
+  },  
+  {
+    "displayName": "Intersection",
+    "iconName": "g-intersection",
+    "tags": "operator, operation, boolean, square, middle, inside",
+    "group": "Graphext",
+    "content": "\\ea21"
+  },  
+  {
+    "displayName": "Linear",
+    "iconName": "g-linear",
+    "tags": "line, plot, axis, function, growth, chart, data",
+    "group": "Graphext",
+    "content": "\\ea22"
+  },  
+  {
+    "displayName": "Logarithmic",
+    "iconName": "g-logarithmic",
+    "tags": "exponential, plot, axis, function, growth, chart, data, logarithm",
+    "group": "Graphext",
+    "content": "\\ea23"
+  },  
+  {
+    "displayName": "Not in Recipe",
+    "iconName": "g-recipes-not",
+    "tags": "health, status, pipeline, unsync, broken, book",
+    "group": "Graphext",
+    "content": "\\ea24"
+  },
+  {
+    "displayName": "Save",
+    "iconName": "g-save",
+    "tags": "floppy disc, register, record, casette, ok",
+    "group": "Graphext",
+    "content": "\\ea25"
+  },
+  {
+    "displayName": "Table",
+    "iconName": "g-table",
+    "tags": "cells, column, row, data, content",
+    "group": "Graphext",
+    "content": "\\ea26"
+  },
+  {
+    "displayName": "Zoom In",
+    "iconName": "g-zoomin",
+    "tags": "magnifying glass, more, augment",
+    "group": "Graphext",
+    "content": "\\ea27"
   },
   {
     "displayName": "Blank",
