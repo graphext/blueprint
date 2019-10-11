@@ -1,6 +1,6 @@
 {
   "name": "@blueprintjs/select",
-  "version": "3.8.0-graphext12",
+  "version": "3.8.0-graphext13",
   "description": "Components related to selecting items from a list",
   "main": "lib/cjs/index.js",
   "module": "lib/esm/index.js",
@@ -36,7 +36,7 @@
     "verify": "npm-run-all compile -p dist test lint"
   },
   "dependencies": {
-    "@blueprintjs/core": "3.15.0-graphext12",
+    "@blueprintjs/core": "3.15.0-graphext13",
     "classnames": "^2.2",
     "tslib": "^1.9.0"
   },
