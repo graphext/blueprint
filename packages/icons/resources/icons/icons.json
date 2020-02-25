@@ -628,42 +628,42 @@
     "tags": "copy, paste, double, clipboard, square",
     "group": "Graphext",
     "content": "\\ea1e"
-  },  
+  },
   {
     "displayName": "Exclusion",
     "iconName": "g-exclusion",
     "tags": "operator, subtract, boolean, square, operation",
     "group": "Graphext",
     "content": "\\ea1f"
-  },  
+  },
   {
     "displayName": "Filter",
     "iconName": "g-filter",
     "tags": "filter, funnel, conditions, lines, sort",
     "group": "Graphext",
     "content": "\\ea20"
-  },  
+  },
   {
     "displayName": "Intersection",
     "iconName": "g-intersection",
     "tags": "operator, operation, boolean, square, middle, inside",
     "group": "Graphext",
     "content": "\\ea21"
-  },  
+  },
   {
     "displayName": "Linear",
     "iconName": "g-linear",
     "tags": "line, plot, axis, function, growth, chart, data",
     "group": "Graphext",
     "content": "\\ea22"
-  },  
+  },
   {
     "displayName": "Logarithmic",
     "iconName": "g-logarithmic",
     "tags": "exponential, plot, axis, function, growth, chart, data, logarithm",
     "group": "Graphext",
     "content": "\\ea23"
-  },  
+  },
   {
     "displayName": "Not in Recipe",
     "iconName": "g-recipes-not",
@@ -691,6 +691,55 @@
     "tags": "magnifying glass, more, augment",
     "group": "Graphext",
     "content": "\\ea27"
+  },
+  {
+    "displayName": "Inline",
+    "iconName": "g-inline",
+    "tags": "inline",
+    "group": "Graphext",
+    "content": "\\ea28"
+  },
+  {
+    "displayName": "Keyboard",
+    "iconName": "g-keyboard",
+    "tags": "keyboard, hotkeys, keys",
+    "group": "Graphext",
+    "content": "\\ea29"
+  },
+  {
+    "displayName": "Modal",
+    "iconName": "g-modal",
+    "tags": "modal, overlay",
+    "group": "Graphext",
+    "content": "\\ea2A"
+  },
+  {
+    "displayName": "Recommended",
+    "iconName": "g-recommended",
+    "tags": "recommended",
+    "group": "Graphext",
+    "content": "\\ea2B"
+  },
+  {
+    "displayName": "Side",
+    "iconName": "g-side",
+    "tags": "side",
+    "group": "Graphext",
+    "content": "\\ea2C"
+  },
+  {
+    "displayName": "Talk",
+    "iconName": "g-talk",
+    "tags": "talk, speak",
+    "group": "Graphext",
+    "content": "\\ea2D"
+  },
+  {
+    "displayName": "User",
+    "iconName": "g-user",
+    "tags": "user",
+    "group": "Graphext",
+    "content": "\\ea2E"
   },
   {
     "displayName": "Blank",
