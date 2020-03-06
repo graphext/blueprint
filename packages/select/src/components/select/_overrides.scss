@@ -27,6 +27,10 @@ $custom-shadow: 0 0 12px rgba(#000000, 0.25) !important;
   padding-right: 0;
 }
 
+.#{$ns}-dark .#{$ns}-input.#{$ns}-multi-select {
+  background-color: $dark-gray0;
+}
+
 .#{$ns}-multi-select > i {
   position: absolute;
   top: 12px;
