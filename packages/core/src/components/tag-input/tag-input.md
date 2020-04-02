@@ -9,8 +9,10 @@ on the container will focus the text input for seamless interaction.
 
 <div class="@ns-callout @ns-intent-success @ns-icon-info-sign">
     <h4 class="@ns-heading">Looking for a dropdown menu?</h4>
-    [`MultiSelect` in the **@blueprintjs/select** package](#select/multi-select)
-    composes this component with a dropdopwn menu of suggestions.
+
+[`MultiSelect` in the **@blueprintjs/select** package](#select/multi-select)
+composes this component with a dropdown menu of suggestions.
+
 </div>
 
 @## Props
@@ -23,7 +25,8 @@ new items. A `separator` prop is supported to allow multiple items to be added
 at once; the default splits on commas and newlines.
 
 **Tags can be removed** by clicking their <span class="@ns-icon-standard @ns-icon-cross"></span>
-buttons, or by pressing <kbd>backspace</kbd> repeatedly.
+buttons, or by pressing either <kbd>backspace</kbd> or <kbd>delete</kbd> repeatedly.
+Pressing <kbd>delete</kbd> mimics the behavior of deleting in a text editor, where trying to delete at the end of the line will do nothing.
 Arrow keys can also be used to focus on a particular tag before removing it. The
 cursor must be at the beginning of the text input for these interactions.
 
@@ -44,16 +47,20 @@ be applied to the input via `inputProps`.
 
 <div class="@ns-callout @ns-intent-primary @ns-icon-info-sign">
     <h4 class="@ns-heading">Handling long words</h4>
-    Set an explicit `width` on the container element to cause long tags to wrap onto multiple lines.
-    Either supply a specific pixel value, or use `<TagInput className={Classes.FILL}>`
-    to fill its container's width (try this in the example above).
+
+Set an explicit `width` on the container element to cause long tags to wrap onto multiple lines.
+Either supply a specific pixel value, or use `<TagInput className={Classes.FILL}>`
+to fill its container's width (try this in the example above).
+
 </div>
 
 <div class="@ns-callout @ns-intent-primary @ns-icon-info-sign">
     <h4 class="@ns-heading">Disabling a tag input</h4>
-    <p>Disabling this component requires setting the `disabled` prop to `true`
-    and separately disabling the component's `rightElement` as appropriate
-    (because `TagInput` accepts any `JSX.Element` as its `rightElement`).</p>
+
+Disabling this component requires setting the `disabled` prop to `true`
+and separately disabling the component's `rightElement` as appropriate
+(because `TagInput` accepts any `JSX.Element` as its `rightElement`).
+
 </div>
 
 @interface ITagInputProps

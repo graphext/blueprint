@@ -49,6 +49,10 @@ export const NUMERIC_INPUT_STEP_SIZE_NON_POSITIVE =
     ns + ` <NumericInput> requires stepSize to be strictly greater than zero.`;
 export const NUMERIC_INPUT_STEP_SIZE_NULL = ns + ` <NumericInput> requires stepSize to be defined.`;
 
+export const PANEL_STACK_INITIAL_PANEL_STACK_MUTEX =
+    ns + ` <PanelStack> requires exactly one of initialPanel and stack prop`;
+export const PANEL_STACK_REQUIRES_PANEL = ns + ` <PanelStack> requires at least one panel in the stack`;
+
 export const OVERFLOW_LIST_OBSERVE_PARENTS_CHANGED =
     ns + ` <OverflowList> does not support changing observeParents after mounting.`;
 
@@ -94,3 +98,6 @@ export const DIALOG_WARN_NO_HEADER_CLOSE_BUTTON =
 export const DRAWER_VERTICAL_IS_IGNORED = ns + ` <Drawer> vertical is ignored if position is defined`;
 export const DRAWER_ANGLE_POSITIONS_ARE_CASTED =
     ns + ` <Drawer> all angle positions are casted into pure position (TOP, BOTTOM, LEFT or RIGHT)`;
+
+export const TOASTER_MAX_TOASTS_INVALID =
+    ns + ` <Toaster> maxToasts is set to an invalid number, must be greater than 0`;

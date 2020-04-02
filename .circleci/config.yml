@@ -1,123 +1,141 @@
 version: 2
 
-# this block contains anchors to reusable blocks of config.
-references:
-  setup_env: &setup_env
-    docker:
-      - image: circleci/node:8.10.0
-  save_cache: &save_cache
-    key: v9-dependency-cache-{{ checksum "yarn.lock" }}
+aliases:
+  - &docker-node-lts
+    - image: circleci/node:lts
+
+  - &docker-node-browsers
+    - image: circleci/node:lts-browsers
+      environment:
+          CHROME_BIN: "/usr/bin/google-chrome"
+
+  - &restore-node-modules-cache
+    name: Restore node_modules cache
+    key: v2-yarn-deps-{{ checksum "yarn.lock" }}
+
+  - &restore-yarn-cache
+    name: Restore yarnpkg cache
+    key: v2-yarn-cache
+
+  - &save-node-modules-cache
+    name: Save node_modules cache
     paths:
       - node_modules
-      # explicitly list each package node_modules
-      - packages/core/node_modules
-      - packages/datetime/node_modules
-      - packages/docs-app/node_modules
-      - packages/docs-data/node_modules
-      - packages/docs-theme/node_modules
-      - packages/icons/node_modules
-      - packages/karma-build-scripts/node_modules
-      - packages/labs/node_modules
-      - packages/landing-app/node_modules
-      - packages/node-build-scripts/node_modules
-      - packages/select/node_modules
-      - packages/table/node_modules
-      - packages/table-dev-app/node_modules
-      - packages/test-commons/node_modules
-      - packages/test-react15/node_modules
-      - packages/timezone/node_modules
-      - packages/tslint-config/node_modules
-      - packages/webpack-build-scripts/node_modules
-  restore_cache: &restore_cache
-    keys:
-      - v9-dependency-cache-{{ checksum "yarn.lock" }}
-      - v9-dependency-cache-
-  persist_to_workspace: &persist_to_workspace
-    root: '.'
+    key: v2-yarn-deps-{{ checksum "yarn.lock" }}
+
+  - &save-yarn-cache
+    name: Save yarnpkg cache
     paths:
-      # directories to persist to workspace
-      - packages/*/dist
-      - packages/*/lib
-      - packages/*/src/generated
+      - ~/.cache/yarn
+    key: v2-yarn-cache
+
+references:
   reports_path: &reports_path
     path: ./reports
 
 jobs:
-  install-dependencies:
-    <<: *setup_env
+  checkout-code:
+    docker: *docker-node-lts
     steps:
       - checkout
-      - attach_workspace:
-          at: '.'
-      - restore_cache: *restore_cache
-      - run: yarn --frozen-lockfile
-      - run: npm rebuild node-sass
-      - save_cache: *save_cache
+      - restore_cache: *restore-yarn-cache
+      - restore_cache: *restore-node-modules-cache
+      - run: yarn install --non-interactive --cache-folder ~/.cache/yarn
+      - run:
+          name: Check if yarn.lock changed during install
+          command: git diff --exit-code
+      - save_cache: *save-node-modules-cache
+      - save_cache: *save-yarn-cache
       - persist_to_workspace:
           root: '.'
-          paths:
-            - yarn.lock
+          paths: [packages/*/node_modules]
+
+  clean-lockfile:
+    docker: *docker-node-lts
+    steps:
+      - checkout
+      - restore_cache: *restore-node-modules-cache
+      - run: ./scripts/verifyCleanLockfile.sh
 
   compile:
-    <<: *setup_env
+    docker: *docker-node-lts
+    resource_class: large
     steps:
       - checkout
-      - attach_workspace:
-          at: '.'
-      - restore_cache: *restore_cache
+      - restore_cache: *restore-node-modules-cache
+      - attach_workspace: { at: '.' }
       - run: yarn compile
-      - persist_to_workspace: *persist_to_workspace
+      - persist_to_workspace:
+          root: '.'
+          paths: [packages/*/lib, packages/*/src/generated]
 
   lint:
-    <<: *setup_env
+    docker: *docker-node-lts
     environment:
       JUNIT_REPORT_PATH: reports
     steps:
       - checkout
-      - attach_workspace:
-          at: '.'
-      - restore_cache: *restore_cache
-      - run: mkdir -p ./reports/tslint ./reports/stylelint
-      - run: yarn compile --scope "@blueprintjs/tslint-config"
+      - restore_cache: *restore-node-modules-cache
+      - attach_workspace: { at: '.' }
+      - run: mkdir -p ./reports/eslint ./reports/stylelint
+      # we need to compile the lint rules for blueprint
+      - run: yarn compile --scope "@blueprintjs/{eslint-plugin-blueprint,tslint-config}"
       - run: yarn lint
-      - store_test_results: *reports_path
-      - store_artifacts: *reports_path
+      - store_test_results: { path: ./reports }
+      - store_artifacts: { path: ./reports }
 
   dist:
-    <<: *setup_env
+    docker: *docker-node-lts
+    resource_class: large
     steps:
       - checkout
-      - attach_workspace:
-          at: '.'
-      - restore_cache: *restore_cache
-      - run: yarn dist:libs
-      - run: yarn dist:apps
-      - persist_to_workspace: *persist_to_workspace
+      - restore_cache: *restore-node-modules-cache
+      - attach_workspace: { at: '.' }
+      - run: yarn dist
+      - persist_to_workspace:
+          root: '.'
+          paths: [packages/*/lib, packages/*/dist]
 
-  test-react-16: &test-react
-    docker:
-      - image: circleci/node:8.10.0-browsers
-        environment:
-            CHROME_BIN: "/usr/bin/google-chrome"
+  test-jest:
+    docker: *docker-node-lts
     environment:
       JUNIT_REPORT_PATH: reports
-    parallelism: 3
+      # JEST_JUNIT_OUTPUT_DIR: "reports/junit/js-test-results.xml"
     steps:
       - checkout
-      - attach_workspace:
-          at: '.'
-      - restore_cache: *restore_cache
+      - restore_cache: *restore-node-modules-cache
+      - attach_workspace: { at: '.' }
+      - run: mkdir ./reports
+      - run: yarn lerna run test:jest-ci
+      - store_test_results: { path: ./reports }
+      - store_artifacts: { path: ./reports }
+
+  test-react-16: &test-react
+    docker: *docker-node-browsers
+    environment:
+      JUNIT_REPORT_PATH: reports
+    parallelism: 6
+    steps:
+      - checkout
+      - restore_cache: *restore-node-modules-cache
+      - attach_workspace: { at: '.' }
       - run: mkdir ./reports
       - run:
+          # split karma tests into containers because they can take up a lot of memory
+          # running them in one container caused Karma to time out frequently
+          # see https://github.com/palantir/blueprint/issues/3616
           command: |
               case $CIRCLE_NODE_INDEX in \
-              0) yarn lerna run --parallel test:pre ;; \
-              1) yarn lerna run --parallel test:iso ;; \
-              2) yarn lerna run --parallel test:karma ;; \
+              0) yarn lerna run --parallel test:typeCheck ;; \
+              1) yarn lerna run --scope "@blueprintjs/core" test:karma ;; \
+              2) yarn lerna run --scope "@blueprintjs/datetime" test:karma ;; \
+              3) yarn lerna run --scope "@blueprintjs/select" test:karma ;; \
+              4) yarn lerna run --scope "@blueprintjs/table" test:karma ;; \
+              5) yarn lerna run --scope "@blueprintjs/timezone" test:karma ;; \
               esac
           when: always
-      - store_test_results: *reports_path
-      - store_artifacts: *reports_path
+      - store_test_results: { path: ./reports }
+      - store_artifacts: { path: ./reports }
 
   test-react-15:
     # copy test-react-16 and override environment
@@ -126,52 +144,74 @@ jobs:
       JUNIT_REPORT_PATH: reports
       REACT: 15 # use React 15 for this job
 
-  deploy-preview:
-    docker:
-      - image: circleci/node:8.10.0
+  test-iso-react-16: &test-iso
+    docker: *docker-node-lts
+    environment:
+      JUNIT_REPORT_PATH: reports
     steps:
       - checkout
-      - attach_workspace:
-          at: '.'
-      - restore_cache: *restore_cache
-      - store_artifacts:
-          path: packages/docs-app/dist
-      - store_artifacts:
-          path: packages/landing-app/dist
-      - store_artifacts:
-          path: packages/table-dev-app/dist
+      - restore_cache: *restore-node-modules-cache
+      - attach_workspace: { at: '.' }
+      - run: mkdir ./reports
+      - run: yarn lerna run --parallel test:iso
+      - store_test_results: { path: ./reports }
+      - store_artifacts: { path: ./reports }
+
+  test-iso-react-15:
+    # copy test-iso-react-16 and override environment
+    <<: *test-iso
+    environment:
+      JUNIT_REPORT_PATH: reports
+      REACT: 15 # use React 15 for this job
+
+  deploy-preview:
+    docker: *docker-node-lts
+    steps:
+      - checkout
+      - restore_cache: *restore-node-modules-cache
+      - attach_workspace: { at: '.' }
+      - store_artifacts: { path: packages/docs-app/dist }
+      - store_artifacts: { path: packages/landing-app/dist }
+      - store_artifacts: { path: packages/table-dev-app/dist }
       - run:
           name: Submit Github comment with links to built artifacts
           command: node ./scripts/preview.js
 
   deploy-npm:
-    <<: *setup_env
+    docker: *docker-node-lts
     steps:
       - checkout
-      - attach_workspace:
-          at: '.'
-      - restore_cache: *restore_cache
+      - restore_cache: *restore-node-modules-cache
+      - attach_workspace: { at: '.' }
       - run: ./scripts/publish-npm-semver-tagged
 
 workflows:
   version: 2
   compile_lint_test_dist_deploy:
     jobs:
-      - install-dependencies
+      - checkout-code
+      - clean-lockfile:
+          requires: [checkout-code]
       - compile:
-          requires: [install-dependencies]
+          requires: [checkout-code]
       - lint:
-          requires: [install-dependencies]
+          requires: [checkout-code]
       - dist:
+          requires: [compile]
+      - test-jest:
           requires: [compile]
       - test-react-15:
           requires: [compile]
       - test-react-16:
           requires: [compile]
+      - test-iso-react-15:
+          requires: [compile]
+      - test-iso-react-16:
+          requires: [compile]
       - deploy-preview:
           requires: [dist]
       - deploy-npm:
-          requires: [dist, lint, test-react-15, test-react-16]
+          requires: [dist, lint, test-react-15, test-react-16, test-iso-react-15, test-iso-react-16]
           filters:
             branches:
               only:

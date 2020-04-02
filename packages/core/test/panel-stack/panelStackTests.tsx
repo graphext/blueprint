@@ -84,6 +84,28 @@ describe("<PanelStack>", () => {
         assert.equal(oldPanelHeader.at(1).text(), "Test Title");
     });
 
+    it("renders a panel stack without header and allows opening and closing", () => {
+        panelStackWrapper = renderPanelStack({ initialPanel, showPanelHeader: false });
+        assert.exists(panelStackWrapper);
+
+        const newPanelButton = panelStackWrapper.find("#new-panel-button");
+        assert.exists(newPanelButton);
+        newPanelButton.simulate("click");
+
+        const newPanelHeader = panelStackWrapper.findClass(Classes.HEADING);
+        assert.lengthOf(newPanelHeader, 0);
+
+        const backButton = panelStackWrapper.findClass(Classes.PANEL_STACK_HEADER_BACK);
+        assert.lengthOf(backButton, 0);
+
+        const closePanel = panelStackWrapper.find("#close-panel-button");
+        assert.exists(closePanel);
+        closePanel.last().simulate("click");
+
+        const oldPanelHeader = panelStackWrapper.findClass(Classes.HEADING);
+        assert.lengthOf(oldPanelHeader, 0);
+    });
+
     it("does not call the callback handler onClose when there is only a single panel on the stack", () => {
         const onClose = spy();
         panelStackWrapper = renderPanelStack({ initialPanel, onClose });
@@ -152,6 +174,91 @@ describe("<PanelStack>", () => {
             .hostNodes()
             .at(1);
         assert.equal(backButtonWithTitle.text(), "chevron-left");
+    });
+
+    it("can render a panel stack in controlled mode", () => {
+        const stack = [initialPanel];
+        panelStackWrapper = renderPanelStack({ stack });
+        assert.exists(panelStackWrapper);
+
+        const newPanelButton = panelStackWrapper.find("#new-panel-button");
+        assert.exists(newPanelButton);
+        newPanelButton.simulate("click");
+
+        // Expect the same panel as before since onOpen is not handled
+        const newPanelHeader = panelStackWrapper.findClass(Classes.HEADING);
+        assert.exists(newPanelHeader);
+        assert.equal(newPanelHeader.at(0).text(), "Test Title");
+    });
+
+    it("can open a panel in controlled mode", () => {
+        let stack = [initialPanel];
+        panelStackWrapper = renderPanelStack({ onOpen: panel => (stack = [...stack, panel]), stack });
+        assert.exists(panelStackWrapper);
+
+        const newPanelButton = panelStackWrapper.find("#new-panel-button");
+        assert.exists(newPanelButton);
+        newPanelButton.simulate("click");
+        panelStackWrapper.setProps({ stack });
+        panelStackWrapper.update();
+
+        const newPanelHeader = panelStackWrapper.findClass(Classes.HEADING);
+        assert.exists(newPanelHeader);
+        assert.equal(newPanelHeader.at(0).text(), "New Panel 1");
+    });
+
+    it("can render a panel stack with multiple initial panels and close one", () => {
+        let stack: Array<IPanel<any>> = [initialPanel, { component: TestPanel, title: "New Panel 1" }];
+        panelStackWrapper = renderPanelStack({
+            onClose: () => {
+                const newStack = stack.slice();
+                newStack.pop();
+                stack = newStack;
+            },
+            stack,
+        });
+        assert.exists(panelStackWrapper);
+
+        const panelHeader = panelStackWrapper.findClass(Classes.HEADING);
+        assert.exists(panelHeader);
+        assert.equal(panelHeader.at(0).text(), "New Panel 1");
+
+        const backButton = panelStackWrapper.findClass(Classes.PANEL_STACK_HEADER_BACK);
+        assert.exists(backButton);
+        backButton.simulate("click");
+        panelStackWrapper.setProps({ stack });
+        panelStackWrapper.update();
+
+        const firstPanelHeader = panelStackWrapper.findClass(Classes.HEADING);
+        assert.exists(firstPanelHeader);
+        assert.equal(firstPanelHeader.at(0).text(), "Test Title");
+    });
+
+    it("renders only one panel by default", () => {
+        const stack = [
+            { component: TestPanel, title: "Panel A" },
+            { component: TestPanel, title: "Panel B" },
+        ];
+        panelStackWrapper = renderPanelStack({ stack });
+
+        const panelHeaders = panelStackWrapper.findClass(Classes.HEADING);
+        assert.exists(panelHeaders);
+        assert.equal(panelHeaders.length, 1);
+        assert.equal(panelHeaders.at(0).text(), stack[1].title);
+    });
+
+    it("renders all panels with renderActivePanelOnly disabled", () => {
+        const stack = [
+            { component: TestPanel, title: "Panel A" },
+            { component: TestPanel, title: "Panel B" },
+        ];
+        panelStackWrapper = renderPanelStack({ renderActivePanelOnly: false, stack });
+
+        const panelHeaders = panelStackWrapper.findClass(Classes.HEADING);
+        assert.exists(panelHeaders);
+        assert.equal(panelHeaders.length, 2);
+        assert.equal(panelHeaders.at(0).text(), stack[0].title);
+        assert.equal(panelHeaders.at(1).text(), stack[1].title);
     });
 
     interface IPanelStackWrapper extends ReactWrapper<IPanelStackProps, any> {
