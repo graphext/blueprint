@@ -48,6 +48,7 @@
   @include position-all(absolute, 0);
   display: flex;
   flex-direction: column;
+  z-index: 1;
 
   // border between panels, visible during transition
   margin-right: -1px;
@@ -58,6 +59,10 @@
 
   .#{$ns}-dark & {
     background-color: $dark-gray4;
+  }
+
+  &:nth-last-child(n + 4) {
+    display: none;
   }
 }
 

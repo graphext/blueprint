@@ -15,8 +15,8 @@
  */
 
 import { IProps } from "@blueprintjs/core";
+import { ITsTypeAlias } from "@documentalist/client";
 import classNames from "classnames";
-import { ITsTypeAlias } from "documentalist/dist/client";
 import * as React from "react";
 import { DocumentationContextTypes, IDocumentationContext } from "../../common/context";
 import { ApiHeader } from "./apiHeader";
@@ -35,7 +35,7 @@ export class TypeAliasTable extends React.PureComponent<ITypeAliasTableProps> {
         const { data } = this.props;
         const { renderBlock, renderType } = this.context;
         const aliases = data.type.split(" | ").map((type, i) => (
-            <div>
+            <div key={i}>
                 {i === 0 ? "=" : "|"} {renderType(type)}
             </div>
         ));

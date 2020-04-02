@@ -380,16 +380,20 @@ describe("<Popover>", () => {
             renderPopover()
                 .assertIsOpen(false)
                 .setProps({ isOpen: true })
+                .update()
                 .assertIsOpen();
         });
 
-        it("state does not update on user interaction", () => {
+        it("state does not update on user (click) interaction", () => {
             renderPopover({ isOpen: true })
                 .simulateTarget("click")
                 .assertIsOpen()
                 .setProps({ isOpen: false })
                 .simulateTarget("click")
                 .assertIsOpen(false);
+        });
+
+        it("state does not update on user (key) interaction", () => {
             renderPopover({ canEscapeKeyClose: true, isOpen: true })
                 .sendEscapeKey()
                 .assertIsOpen();
@@ -427,6 +431,7 @@ describe("<Popover>", () => {
                 renderPopover({ disabled: true, isOpen: true, onInteraction: onInteractionSpy })
                     .assertOnInteractionCalled(false)
                     .setProps({ disabled: false })
+                    .update()
                     .assertIsOpen()
                     .assertOnInteractionCalled();
             });
@@ -485,6 +490,11 @@ describe("<Popover>", () => {
                 assert.isTrue(onInteraction.calledOnce);
                 assert.isTrue(onInteraction.calledWith(false));
             });
+        });
+
+        it("does not apply active class to target when open", () => {
+            wrapper = renderPopover({ interactionKind: PopoverInteractionKind.CLICK, isOpen: true });
+            wrapper.assertFindClass(Classes.ACTIVE, false);
         });
     });
 
@@ -582,6 +592,7 @@ describe("<Popover>", () => {
                 .simulateTarget("click")
                 .assertIsOpen()
                 .setProps({ disabled: true })
+                .update()
                 .assertIsOpen(false);
         });
 
@@ -590,6 +601,12 @@ describe("<Popover>", () => {
             renderPopover({ onInteraction: () => false });
             assert.strictEqual(warnSpy.firstCall.args[0], Errors.POPOVER_WARN_UNCONTROLLED_ONINTERACTION);
             warnSpy.restore();
+        });
+
+        it("does apply active class to target when open", () => {
+            wrapper = renderPopover({ interactionKind: PopoverInteractionKind.CLICK });
+            wrapper.simulateTarget("click");
+            wrapper.assertFindClass(Classes.ACTIVE, true);
         });
     });
 
@@ -719,8 +736,38 @@ describe("<Popover>", () => {
         }
     });
 
+    describe("clicking on target", () => {
+        /**
+         * @see https://github.com/palantir/blueprint/issues/3010
+         */
+        it("does not close a HOVER interaction popover", done => {
+            const onCloseSpy = sinon.spy();
+            const setOpenStateSpy = sinon.spy(Popover.prototype as any, "setOpenState");
+
+            wrapper = renderPopover({
+                interactionKind: PopoverInteractionKind.HOVER,
+                onClose: onCloseSpy,
+                usePortal: true,
+            })
+                .simulateTarget("mouseenter")
+                .assertIsOpen();
+
+            wrapper.then(() => {
+                setOpenStateSpy.resetHistory();
+                // need to trigger a real event because the click handler will be on the document
+                dispatchMouseEvent(wrapper.targetElement);
+
+                assert(onCloseSpy.notCalled, "onClose prop callback should not be called");
+                assert(setOpenStateSpy.notCalled, "setOpenState private method should not be called");
+
+                setOpenStateSpy.restore();
+            }, done);
+        });
+    });
+
     interface IPopoverWrapper extends ReactWrapper<IPopoverProps, IPopoverState> {
         popoverElement: HTMLElement;
+        targetElement: HTMLElement;
         assertFindClass(className: string, expected?: boolean, msg?: string): this;
         assertIsOpen(isOpen?: boolean): this;
         assertOnInteractionCalled(called?: boolean): this;
@@ -738,7 +785,9 @@ describe("<Popover>", () => {
             </Popover>,
             { attachTo: testsContainerElement },
         ) as IPopoverWrapper;
+
         wrapper.popoverElement = (wrapper.instance() as Popover).popoverElement;
+        wrapper.targetElement = (wrapper.instance() as Popover).targetElement;
         wrapper.assertFindClass = (className: string, expected = true, msg = className) => {
             (expected ? assert.isTrue : assert.isFalse)(wrapper.findClass(className).exists(), msg);
             return wrapper;

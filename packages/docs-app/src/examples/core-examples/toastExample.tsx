@@ -26,6 +26,7 @@ import {
     IToasterProps,
     IToastProps,
     Label,
+    NumericInput,
     Position,
     ProgressBar,
     Switch,
@@ -111,6 +112,7 @@ export class ToastExample extends React.PureComponent<IExampleProps<IBlueprintEx
     private refHandlers = {
         toaster: (ref: Toaster) => (this.toaster = ref),
     };
+    private progressToastInterval?: number;
 
     private handlePositionChange = handleStringChange((position: ToasterPosition) => this.setState({ position }));
     private toggleAutoFocus = handleBooleanChange(autoFocus => this.setState({ autoFocus }));
@@ -127,13 +129,23 @@ export class ToastExample extends React.PureComponent<IExampleProps<IBlueprintEx
     }
 
     protected renderOptions() {
-        const { autoFocus, canEscapeKeyClear, position } = this.state;
+        const { autoFocus, canEscapeKeyClear, position, maxToasts } = this.state;
         return (
             <>
                 <H5>Props</H5>
                 <Label>
                     Position
                     <HTMLSelect value={position} onChange={this.handlePositionChange} options={POSITIONS} />
+                </Label>
+                <Label>
+                    Maximum active toasts
+                    <NumericInput
+                        allowNumericCharactersOnly={true}
+                        placeholder="No maximum!"
+                        min={1}
+                        value={maxToasts}
+                        onValueChange={this.handleValueChange}
+                    />
                 </Label>
                 <Switch label="Auto focus" checked={autoFocus} onChange={this.toggleAutoFocus} />
                 <Switch label="Can escape key clear" checked={canEscapeKeyClear} onChange={this.toggleEscapeKey} />
@@ -157,6 +169,12 @@ export class ToastExample extends React.PureComponent<IExampleProps<IBlueprintEx
                     value={amount / 100}
                 />
             ),
+            onDismiss: (didTimeoutExpire: boolean) => {
+                if (!didTimeoutExpire) {
+                    // user dismissed toast with click
+                    window.clearInterval(this.progressToastInterval);
+                }
+            },
             timeout: amount < 100 ? 0 : 2000,
         };
     }
@@ -170,13 +188,21 @@ export class ToastExample extends React.PureComponent<IExampleProps<IBlueprintEx
     private handleProgressToast = () => {
         let progress = 0;
         const key = this.toaster.show(this.renderProgress(0));
-        const interval = setInterval(() => {
+        this.progressToastInterval = window.setInterval(() => {
             if (this.toaster == null || progress > 100) {
-                clearInterval(interval);
+                window.clearInterval(this.progressToastInterval);
             } else {
                 progress += 10 + Math.random() * 20;
                 this.toaster.show(this.renderProgress(progress), key);
             }
         }, 1000);
+    };
+
+    private handleValueChange = (value: number) => {
+        if (value) {
+            this.setState({ maxToasts: Math.max(1, value) });
+        } else {
+            this.setState({ maxToasts: undefined });
+        }
     };
 }

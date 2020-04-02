@@ -15,8 +15,8 @@
  */
 
 import * as React from "react";
-
-import { Classes } from "../../common";
+import { polyfill } from "react-lifecycles-compat";
+import { AbstractPureComponent2, Classes } from "../../common";
 import { Button } from "../button/buttons";
 import { Text } from "../text/text";
 import { IPanel } from "./panelProps";
@@ -39,23 +39,36 @@ export interface IPanelViewProps {
 
     /** The previous panel in the stack, for rendering the "back" button. */
     previousPanel?: IPanel;
+
+    /** Whether to show the header with the "back" button. */
+    showHeader: boolean;
 }
 
-export class PanelView extends React.PureComponent<IPanelViewProps> {
+@polyfill
+export class PanelView extends AbstractPureComponent2<IPanelViewProps> {
     public render() {
         const { panel, onOpen } = this.props;
         // two <span> tags in header ensure title is centered as long as
         // possible, due to `flex: 1` magic.
         return (
             <div className={Classes.PANEL_STACK_VIEW}>
-                <div className={Classes.PANEL_STACK_HEADER}>
-                    <span>{this.maybeRenderBack()}</span>
-                    <Text className={Classes.HEADING} ellipsize={true}>
-                        {panel.title}
-                    </Text>
-                    <span />
-                </div>
+                {this.maybeRenderHeader()}
                 <panel.component openPanel={onOpen} closePanel={this.handleClose} {...panel.props} />
+            </div>
+        );
+    }
+
+    private maybeRenderHeader() {
+        if (!this.props.showHeader) {
+            return null;
+        }
+        return (
+            <div className={Classes.PANEL_STACK_HEADER}>
+                <span>{this.maybeRenderBack()}</span>
+                <Text className={Classes.HEADING} ellipsize={true}>
+                    {this.props.panel.title}
+                </Text>
+                <span />
             </div>
         );
     }

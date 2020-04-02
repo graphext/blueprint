@@ -49,6 +49,15 @@ describe("<QueryList>", () => {
         testProps.renderer.resetHistory();
     });
 
+    describe("items", () => {
+        it("handles controlled changes to the whole items list", () => {
+            const wrapper = shallow(<FilmQueryList {...testProps} />);
+            const newItems = TOP_100_FILMS.slice(0, 1);
+            wrapper.setProps({ items: newItems });
+            assert.deepEqual(wrapper.state("filteredItems"), newItems);
+        });
+    });
+
     describe("itemListRenderer", () => {
         const itemListRenderer: ItemListRenderer<IFilm> = props => (
             <ul className="foo">{props.items.map(props.renderItem)}</ul>
@@ -134,6 +143,20 @@ describe("<QueryList>", () => {
             filmQueryList.setProps({
                 items: [TOP_100_FILMS[1]],
                 query: "123",
+            });
+            assert.deepEqual(filmQueryList.state().activeItem, TOP_100_FILMS[1]);
+        });
+
+        it("ensure activeItem changes on when no longer in new items", () => {
+            const props: IQueryListProps<IFilm> = {
+                ...testProps,
+                items: [TOP_100_FILMS[0]],
+                query: "abc",
+            };
+            const filmQueryList: FilmQueryListWrapper = mount(<FilmQueryList {...props} />);
+            assert.deepEqual(filmQueryList.state().activeItem, TOP_100_FILMS[0]);
+            filmQueryList.setProps({
+                items: [TOP_100_FILMS[1]],
             });
             assert.deepEqual(filmQueryList.state().activeItem, TOP_100_FILMS[1]);
         });
