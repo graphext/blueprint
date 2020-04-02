@@ -251,16 +251,6 @@ export class Popover extends AbstractPureComponent2<IPopoverProps, IPopoverState
      */
     public reposition = () => Utils.safeInvoke(this.popperScheduleUpdate);
 
-    /**
-     * Instance method to instruct the `Popover` to recompute its position.
-     *
-     * This method should only be used if you are updating the target in a way
-     * that does not cause it to re-render, such as changing its _position_
-     * without changing its _size_ (since `Popover` already repositions when it
-     * detects a resize).
-     */
-    public reposition = () => Utils.safeInvoke(this.popperScheduleUpdate);
-
     protected validateProps(props: IPopoverProps & { children?: React.ReactNode }) {
         if (props.isOpen == null && props.onInteraction != null) {
             console.warn(Errors.POPOVER_WARN_UNCONTROLLED_ONINTERACTION);

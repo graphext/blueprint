@@ -359,15 +359,6 @@ export class QueryList<T> extends AbstractComponent2<IQueryListProps<T>, IQueryL
         return Utils.safeInvoke(this.props.createNewItemRenderer, query, isActive, handleClick);
     };
 
-    private renderCreateItemMenuItem = (query: string) => {
-        const { activeItem } = this.state;
-        const handleClick: React.MouseEventHandler<HTMLElement> = evt => {
-            this.handleItemCreate(query, evt);
-        };
-        const isActive = isCreateNewItem(activeItem);
-        return Utils.safeInvoke(this.props.createNewItemRenderer, query, isActive, handleClick);
-    };
-
     private getActiveElement() {
         const { activeItem } = this.state;
         if (this.itemsParentRef != null) {
