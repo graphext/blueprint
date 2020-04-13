@@ -8,7 +8,7 @@
 version: '3'
 services:
   bp:
-    image: development
+    image: development_old
     command: sh -c 'yarn dev'
     working_dir: /hostdata
     volumes:
