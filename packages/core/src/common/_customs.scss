@@ -34,7 +34,6 @@ $dark-gray2: #272B33;
 $dark-gray3: #2A2E38;
 $dark-gray4: #313641;
 $dark-gray5: #363B47;
-$dark-gray6: rgba(22, 22, 22, 0.3);
 
 $blue1: #00507f;
 $blue2: #0071b2;
@@ -96,7 +95,7 @@ $dark-minimal-button-background-color-active: rgba($dark-gray5, 0.3) !important;
 
 // Inputs
 $input-padding-horizontal: $pt-grid-size * 2;
-$dark-input-background-color: $dark-gray4;
+$dark-input-background-color: rgba($dark-gray0, 0.3) !default;
 $input-box-shadow: none;
 $input-box-shadow-focus: none;
 $pt-dark-input-box-shadow: none;
