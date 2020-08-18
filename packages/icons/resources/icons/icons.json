@@ -742,6 +742,20 @@
     "content": "\\ea2E"
   },
   {
+    "displayName": "Target",
+    "iconName": "g-target",
+    "tags": "target",
+    "group": "Graphext",
+    "content": "\\1F78B"
+  },
+  {
+    "displayName": "Similarity",
+    "iconName": "g-similarity",
+    "tags": "similarity",
+    "group": "Graphext",
+    "content": "\\2248"
+  },
+  {
     "displayName": "Blank",
     "iconName": "blank",
     "tags": "empty, placeholder",
