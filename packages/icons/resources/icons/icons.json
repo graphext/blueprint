@@ -756,6 +756,27 @@
     "content": "\\2248"
   },
   {
+    "displayName": "Number",
+    "iconName": "g-type-number",
+    "tags": "type, quantitative, number",
+    "group": "Graphext",
+    "content": "\\0023"
+  },
+  {
+    "displayName": "Category",
+    "iconName": "g-type-category",
+    "tags": "type, categorical, category",
+    "group": "Graphext",
+    "content": "\\001D"
+  },
+  {
+    "displayName": "Date",
+    "iconName": "g-type-date",
+    "tags": "type, date",
+    "group": "Graphext",
+    "content": "\\1F4C5"
+  },
+  {
     "displayName": "Blank",
     "iconName": "blank",
     "tags": "empty, placeholder",
