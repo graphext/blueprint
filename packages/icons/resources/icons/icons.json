@@ -777,6 +777,13 @@
     "content": "\\1F4C5"
   },
   {
+    "displayName": "Warning",
+    "iconName": "g-warning",
+    "tags": "warning, status",
+    "group": "Graphext",
+    "content": "\\26A0"
+  },
+  {
     "displayName": "Blank",
     "iconName": "blank",
     "tags": "empty, placeholder",
