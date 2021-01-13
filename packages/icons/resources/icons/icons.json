@@ -70,6 +70,13 @@
     "content": "\\e9ce"
   },
   {
+    "displayName": "Share",
+    "iconName": "g-share",
+    "tags": "share",
+    "group": "Graphext",
+    "content": "\\e9ce"
+  },,
+  {
     "displayName": "Menu",
     "iconName": "g-menu",
     "tags": "elipsis, dots, dropdown, options",
