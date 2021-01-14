@@ -1,6 +1,6 @@
 {
   "name": "@blueprintjs/table",
-  "version": "3.8.3-graphext09",
+  "version": "3.8.3-graphext10",
   "description": "Scalable interactive table component",
   "main": "lib/cjs/index.js",
   "module": "lib/esm/index.js",
@@ -35,7 +35,7 @@
     "verify": "npm-run-all compile -p dist test lint"
   },
   "dependencies": {
-    "@blueprintjs/core": "3.24.0-graphext09",
+    "@blueprintjs/core": "3.24.0-graphext10",
     "classnames": "^2.2",
     "prop-types": "^15.6.0",
     "react-lifecycles-compat": "^3.0.4",
