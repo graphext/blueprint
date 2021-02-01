@@ -758,21 +758,21 @@
   {
     "displayName": "Number",
     "iconName": "g-type-number",
-    "tags": "type, quantitative, number",
+    "tags": "types, type, quantitative, number",
     "group": "Graphext",
     "content": "\\0023"
   },
   {
     "displayName": "Category",
     "iconName": "g-type-category",
-    "tags": "type, categorical, category",
+    "tags": "types, type, categorical, category",
     "group": "Graphext",
     "content": "\\001D"
   },
   {
     "displayName": "Date",
     "iconName": "g-type-date",
-    "tags": "type, date",
+    "tags": "types, type, date",
     "group": "Graphext",
     "content": "\\1F4C5"
   },
@@ -796,6 +796,90 @@
     "tags": "filtering, less, substract, minus sign, negative",
     "group": "Graphext",
     "content": "\\26A2"
+  },
+  {
+    "displayName": "Multi Percentage",
+    "iconName": "g-type-multi-percentage",
+    "tags": "types, type, list, percentage",
+    "group": "Graphext",
+    "content": "\\26A3"
+  },
+  {
+    "displayName": "Multi Text",
+    "iconName": "g-type-multi-text",
+    "tags": "types, type, list, text",
+    "group": "Graphext",
+    "content": "\\26A4"
+  },
+  {
+    "displayName": "Multi Boolean",
+    "iconName": "g-type-multi-boolean",
+    "tags": "types, type, list, boolean",
+    "group": "Graphext",
+    "content": "\\26A5"
+  },
+  {
+    "displayName": "Multi Category",
+    "iconName": "g-type-multi-category",
+    "tags": "types, type, list, category",
+    "group": "Graphext",
+    "content": "\\26A6"
+  },
+  {
+    "displayName": "Multi Currenxy",
+    "iconName": "g-type-multi-currency",
+    "tags": "types, type, list, currency",
+    "group": "Graphext",
+    "content": "\\26A7"
+  },
+  {
+    "displayName": "Multi Date",
+    "iconName": "g-type-multi-date",
+    "tags": "types, type, list, date",
+    "group": "Graphext",
+    "content": "\\26A8"
+  },
+  {
+    "displayName": "Multi Number",
+    "iconName": "g-type-multi-number",
+    "tags": "types, type, list, number",
+    "group": "Graphext",
+    "content": "\\26A9"
+  },
+  {
+    "displayName": "Currency",
+    "iconName": "g-type-currency",
+    "tags": "types, type, currency",
+    "group": "Graphext",
+    "content": "\\26B1"
+  },
+  {
+    "displayName": "Boolean",
+    "iconName": "g-type-boolean",
+    "tags": "types, type, boolean",
+    "group": "Graphext",
+    "content": "\\26B2"
+  },
+  {
+    "displayName": "Percentage",
+    "iconName": "g-type-percentage",
+    "tags": "types, type, percentage",
+    "group": "Graphext",
+    "content": "\\26B3"
+  },
+  {
+    "displayName": "Multi URL",
+    "iconName": "g-type-multi-url",
+    "tags": "types, type, list, url",
+    "group": "Graphext",
+    "content": "\\26B4"
+  },
+  {
+    "displayName": "Open same tab",
+    "iconName": "g-open-same-tab",
+    "tags": "open, link",
+    "group": "Graphext",
+    "content": "\\26B5"
   },
   {
     "displayName": "Blank",
