@@ -16,13 +16,13 @@
     "verify": "run-p dist lint"
   },
   "dependencies": {
-    "@blueprintjs/core": "3.24.0-graphext11",
-    "@blueprintjs/datetime": "3.15.2-graphext11",
+    "@blueprintjs/core": "3.24.0-graphext12",
+    "@blueprintjs/datetime": "3.15.2-graphext12",
     "@blueprintjs/docs-data": "^3.16.0",
     "@blueprintjs/docs-theme": "^3.4.0",
-    "@blueprintjs/icons": "3.14.0-graphext11",
-    "@blueprintjs/select": "3.12.0-graphext11",
-    "@blueprintjs/table": "3.8.3-graphext11",
+    "@blueprintjs/icons": "3.14.0-graphext12",
+    "@blueprintjs/select": "3.12.0-graphext12",
+    "@blueprintjs/table": "3.8.3-graphext12",
     "@blueprintjs/test-commons": "^0.10.1",
     "@blueprintjs/timezone": "^3.6.0",
     "@types/downloadjs": "^1.4.1",
