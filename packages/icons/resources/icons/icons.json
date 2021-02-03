@@ -882,6 +882,13 @@
     "content": "\\26B5"
   },
   {
+    "displayName": "Gender",
+    "iconName": "g-type-gender",
+    "tags": "gender, male, female, sex",
+    "group": "Graphext",
+    "content": "\\26A4"
+  },
+  {
     "displayName": "Blank",
     "iconName": "blank",
     "tags": "empty, placeholder",
