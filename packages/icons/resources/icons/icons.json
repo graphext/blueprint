@@ -886,7 +886,42 @@
     "iconName": "g-type-gender",
     "tags": "gender, male, female, sex",
     "group": "Graphext",
-    "content": "\\26A4"
+    "content": "\\26B6"
+  },
+  {
+    "displayName": "Checkbox empty",
+    "iconName": "g-checkbox-empty",
+    "tags": "tags, checkbox",
+    "group": "Graphext",
+    "content": "\\26B7"
+  },
+  {
+    "displayName": "Checkbox square",
+    "iconName": "g-checkbox-square",
+    "tags": "tags, checkbox",
+    "group": "Graphext",
+    "content": "\\26B8"
+  },
+  {
+    "displayName": "Generic tag",
+    "iconName": "g-generic-tag",
+    "tags": "tags, generic",
+    "group": "Graphext",
+    "content": "\\26B9"
+  },
+  {
+    "displayName": "Internal tag",
+    "iconName": "g-internal",
+    "tags": "tags, internal",
+    "group": "Graphext",
+    "content": "\\26C0"
+  },
+  {
+    "displayName": "Other variables",
+    "iconName": "g-othervariables",
+    "tags": "tags, other",
+    "group": "Graphext",
+    "content": "\\26C1"
   },
   {
     "displayName": "Blank",
