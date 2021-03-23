@@ -924,6 +924,20 @@
     "content": "\\26C1"
   },
   {
+    "displayName": "All",
+    "iconName": "g-all",
+    "tags": "tags, all",
+    "group": "Graphext",
+    "content": "\\26C2"
+  },
+  {
+    "displayName": "Important tag",
+    "iconName": "g-important",
+    "tags": "tags, important",
+    "group": "Graphext",
+    "content": "\\26C3"
+  },
+  {
     "displayName": "Blank",
     "iconName": "blank",
     "tags": "empty, placeholder",
