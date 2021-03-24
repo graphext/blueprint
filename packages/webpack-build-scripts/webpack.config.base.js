@@ -26,7 +26,7 @@ const { getPackageName } = require("./utils");
 
 // globals
 const IS_PRODUCTION = process.env.NODE_ENV === "production";
-const DEV_PORT = process.env.PORT || 9000;
+const DEV_PORT = process.env.PORT || 9999;
 const PACKAGE_NAME = getPackageName();
 
 /**
