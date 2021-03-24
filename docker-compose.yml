@@ -8,11 +8,11 @@
 version: '3'
 services:
   bp:
-    image: development
+    image: node:12
     command: sh -c 'yarn dev'
     working_dir: /hostdata
     volumes:
       - .:/hostdata
-      - ~/.npmrc:/root/.npmrc
+      - ${DEVELOPMENT_DIR}/config/npmrc:/root/.npmrc
     ports:
-      - "9000:9000"
+      - "9999:9999"
