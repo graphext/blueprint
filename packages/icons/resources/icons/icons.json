@@ -938,6 +938,13 @@
     "content": "\\26C3"
   },
   {
+    "displayName": "None tag",
+    "iconName": "g-none",
+    "tags": "tags, none",
+    "group": "Graphext",
+    "content": "\\26C4"
+  },
+  {
     "displayName": "Blank",
     "iconName": "blank",
     "tags": "empty, placeholder",
