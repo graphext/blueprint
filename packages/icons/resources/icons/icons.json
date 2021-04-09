@@ -945,6 +945,27 @@
     "content": "\\26C4"
   },
   {
+    "displayName": "Keep bottom",
+    "iconName": "g-keep-bottom",
+    "tags": "tags, keep, keep-bottom",
+    "group": "Graphext",
+    "content": "\\26C5"
+  },
+  {
+    "displayName": "Keep top",
+    "iconName": "g-keep-top",
+    "tags": "tags, keep, keep-top",
+    "group": "Graphext",
+    "content": "\\26C6"
+  },
+  {
+    "displayName": "Sampling",
+    "iconName": "g-sampling",
+    "tags": "tags, sampling",
+    "group": "Graphext",
+    "content": "\\26C7"
+  },
+  {
     "displayName": "Blank",
     "iconName": "blank",
     "tags": "empty, placeholder",
