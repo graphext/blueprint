@@ -966,6 +966,20 @@
     "content": "\\26C7"
   },
   {
+    "displayName": "Filter crossed",
+    "iconName": "g-filter-crossed",
+    "tags": "tags, filter",
+    "group": "Graphext",
+    "content": "\\26C8"
+  },
+  {
+    "displayName": "Filter dot",
+    "iconName": "g-filter-dot",
+    "tags": "tags, filter, active",
+    "group": "Graphext",
+    "content": "\\26C9"
+  },
+  {
     "displayName": "Blank",
     "iconName": "blank",
     "tags": "empty, placeholder",
