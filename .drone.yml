@@ -29,6 +29,15 @@ steps:
   environment:
     NPMRC:
      from_secret: NPMRC
+- name: docs
+  image: node:dubnium
+  depends_on:
+  - build
+  commands:
+  - yarn dist:apps
+  - yarn site:clean
+  - yarn copy:docs-app
+  - yarn deploy
 
 ---
 kind: signature
