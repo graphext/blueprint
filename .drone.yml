@@ -40,6 +40,7 @@ steps:
   - yarn site:clean
   - yarn copy:docs-app
   - mkdir /root/.ssh && echo "$DEPLOY_KEY" > /root/.ssh/id_rsa && chmod 0600 /root/.ssh/id_rsa
+  - ssh-keyscan github.com >> /root/.ssh/known_hosts
   - git config user.email "drone@graphext.com"
   - git config user.name "drone"
   - yarn deploy
@@ -48,6 +49,6 @@ steps:
      from_secret: deploy-key
 ---
 kind: signature
-hmac: 4e90b5da82358d7077896000d14c07849ee0ce6dd2c5a70913fa7a2167c38b26
+hmac: cd23e7b9b22ea48f498606868ebdd7a745f58cef82a67ae620b3d62f245bb666
 
 ...
