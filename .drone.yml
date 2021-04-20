@@ -39,12 +39,15 @@ steps:
   - yarn dist:apps
   - yarn site:clean
   - yarn copy:docs-app
+  - mkdir /root/.ssh && echo "$DEPLOY_KEY" > /root/.ssh/id_rsa && chmod 0600 /root/.ssh/id_rsa
   - git config user.email "drone@graphext.com"
   - git config user.name "drone"
   - yarn deploy
-
+  environment:
+    DEPLOY_KEY:
+     from_secret: deploy-key
 ---
 kind: signature
-hmac: ff3fbc3be0f5f51ee99dace9e6f9a88a93713b60554e880b6da9ad55074b1533
+hmac: 4e90b5da82358d7077896000d14c07849ee0ce6dd2c5a70913fa7a2167c38b26
 
 ...
