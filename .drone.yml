@@ -39,10 +39,12 @@ steps:
   - yarn dist:apps
   - yarn site:clean
   - yarn copy:docs-app
+  - git config user.email "drone@graphext.com"
+  - git config user.name "drone"
   - yarn deploy
 
 ---
 kind: signature
-hmac: 59ae398bf7b8b4fd598e809336c433334f3680da377a83debacbc9a3d5d201a3
+hmac: ff3fbc3be0f5f51ee99dace9e6f9a88a93713b60554e880b6da9ad55074b1533
 
 ...
