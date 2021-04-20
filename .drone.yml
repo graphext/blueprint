@@ -18,6 +18,8 @@ steps:
      from_secret: NPMRC
 - name: publish
   image: node:dubnium
+  depends_on:
+  - build
   commands:
   - echo -n $NPMRC | base64 -d > /root/.npmrc
   - npm publish packages/core
@@ -41,6 +43,6 @@ steps:
 
 ---
 kind: signature
-hmac: 274084619cbf1b68799a19a772df79de8e74c263ecb693e7d88167a184aff07e
+hmac: 59ae398bf7b8b4fd598e809336c433334f3680da377a83debacbc9a3d5d201a3
 
 ...
