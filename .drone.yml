@@ -43,13 +43,13 @@ steps:
   - ssh-keyscan github.com >> /root/.ssh/known_hosts
   - git config user.email "drone@graphext.com"
   - git config user.name "drone"
-  - sleep 1000
+  - git remote set-url origin git@github.com:graphext/blueprint.git
   - yarn deploy
   environment:
     DEPLOY_KEY:
      from_secret: deploy-key
 ---
 kind: signature
-hmac: c3a4d882e1c7f79969534046f7daa773f200cb796ccb27e5219d1d23e417959c
+hmac: 0b39adef8a2cab5fc503cfa82cd12ca4cd9c49b3e46b13a2fe788d1cfd488e9a
 
 ...
