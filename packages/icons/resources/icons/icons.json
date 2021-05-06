@@ -175,13 +175,6 @@
     "content": "\\e9dc"
   },
   {
-    "displayName": "pagerank",
-    "iconName": "g-pagerank",
-    "tags": "structure, hierarchy, network, graph, segments",
-    "group": "Graphext",
-    "content": "\\e9dd"
-  },
-  {
     "displayName": "Check",
     "iconName": "g-check",
     "tags": "tick, accept, confirm, valid, correct, ok",
@@ -789,13 +782,6 @@
     "tags": "share, exporting",
     "group": "Graphext",
     "content": "\\26A1"
-  },
-  {
-    "displayName": "Threshold",
-    "iconName": "g-threshold",
-    "tags": "filtering, less, substract, minus sign, negative",
-    "group": "Graphext",
-    "content": "\\26A2"
   },
   {
     "displayName": "Multi Percentage",
