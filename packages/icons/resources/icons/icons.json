@@ -966,6 +966,20 @@
     "content": "\\26C9"
   },
   {
+    "displayName": "Move to",
+    "iconName": "g-move-to",
+    "tags": "tags, move",
+    "group": "Graphext",
+    "content": "\\26D0"
+  },
+  {
+    "displayName": "Copy in",
+    "iconName": "g-copy-in",
+    "tags": "tags, copy",
+    "group": "Graphext",
+    "content": "\\26D1"
+  },
+  {
     "displayName": "Blank",
     "iconName": "blank",
     "tags": "empty, placeholder",
