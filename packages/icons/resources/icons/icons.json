@@ -980,6 +980,20 @@
     "content": "\\26D1"
   },
   {
+    "displayName": "Compare",
+    "iconName": "g-compare",
+    "tags": "tags, compare",
+    "group": "Graphext",
+    "content": "\\26D2"
+  },
+  {
+    "displayName": "Correlations",
+    "iconName": "g-correlations",
+    "tags": "tags, correlations",
+    "group": "Graphext",
+    "content": "\\26D3"
+  },
+  {
     "displayName": "Blank",
     "iconName": "blank",
     "tags": "empty, placeholder",
