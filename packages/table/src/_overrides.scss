@@ -32,3 +32,17 @@
 .#{$ns}-dark .#{$ns}-table-header.#{$ns}-table-header-active:before, .#{$ns}-dark .#{$ns}-table-selection-enabled .#{$ns}-table-header:hover:before {
   background-color: $dark-gray3;
 }
+
+.#{$ns}-dark  .#{$ns}-table-column-headers .#{$ns}-table-header,
+.#{$ns}-dark  .#{$ns}-table-menu,
+.#{$ns}-dark  .#{$ns}-table-row-headers,
+.#{$ns}-dark  .#{$ns}-table-cell {
+	border-right: 1px solid #313641; // --Dark4
+}
+
+.#{$ns}-dark .#{$ns}-table-cell-ledger-even {
+	background-color: #272A33; // --Dark2
+}
+.#{$ns}-dark .#{$ns}-table-cell-ledger-odd {
+	background-color: #2A2E38; // --Dark3
+}
