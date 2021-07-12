@@ -175,13 +175,6 @@
     "content": "\\e9dc"
   },
   {
-    "displayName": "pagerank",
-    "iconName": "g-pagerank",
-    "tags": "structure, hierarchy, network, graph, segments",
-    "group": "Graphext",
-    "content": "\\e9dd"
-  },
-  {
     "displayName": "Check",
     "iconName": "g-check",
     "tags": "tick, accept, confirm, valid, correct, ok",
@@ -791,13 +784,6 @@
     "content": "\\26A1"
   },
   {
-    "displayName": "Threshold",
-    "iconName": "g-threshold",
-    "tags": "filtering, less, substract, minus sign, negative",
-    "group": "Graphext",
-    "content": "\\26A2"
-  },
-  {
     "displayName": "Multi Percentage",
     "iconName": "g-type-multi-percentage",
     "tags": "types, type, list, percentage",
@@ -978,6 +964,34 @@
     "tags": "tags, filter, active",
     "group": "Graphext",
     "content": "\\26C9"
+  },
+  {
+    "displayName": "Move to",
+    "iconName": "g-move-to",
+    "tags": "tags, move",
+    "group": "Graphext",
+    "content": "\\26D0"
+  },
+  {
+    "displayName": "Copy in",
+    "iconName": "g-copy-in",
+    "tags": "tags, copy",
+    "group": "Graphext",
+    "content": "\\26D1"
+  },
+  {
+    "displayName": "Compare",
+    "iconName": "g-compare",
+    "tags": "tags, compare",
+    "group": "Graphext",
+    "content": "\\26D2"
+  },
+  {
+    "displayName": "Correlations",
+    "iconName": "g-correlations",
+    "tags": "tags, correlations",
+    "group": "Graphext",
+    "content": "\\26D3"
   },
   {
     "displayName": "Blank",
