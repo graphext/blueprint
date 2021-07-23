@@ -77,6 +77,13 @@
     "content": "\\e9ce"
   },
   {
+    "displayName": "Manage",
+    "iconName": "g-manage",
+    "tags": "lines, dots, manage",
+    "group": "Graphext",
+    "content": "\\e9cf"
+  },
+  {
     "displayName": "Menu",
     "iconName": "g-menu",
     "tags": "elipsis, dots, dropdown, options",
@@ -313,6 +320,27 @@
     "tags": "metrics, data",
     "group": "Graphext",
     "content": "\\e9f2"
+  },
+  {
+    "displayName": "Variables",
+    "iconName": "g-variables",
+    "tags": "grid, small, squares",
+    "group": "Graphext",
+    "content": "\\e9f3"
+  },
+  {
+    "displayName": "Variables Medium",
+    "iconName": "g-variables-medium",
+    "tags": "grid, medium, squares",
+    "group": "Graphext",
+    "content": "\\e9f3"
+  },
+  {
+    "displayName": "Variables Large",
+    "iconName": "g-variables-large",
+    "tags": "grid, large, rectangles",
+    "group": "Graphext",
+    "content": "\\e9f3"
   },
   {
     "displayName": "Visibility",
