@@ -330,14 +330,14 @@
   },
   {
     "displayName": "Variables Medium",
-    "iconName": "g-variables-medium",
+    "iconName": "g-variable-medium",
     "tags": "grid, medium, squares",
     "group": "Graphext",
     "content": "\\e9f3"
   },
   {
     "displayName": "Variables Large",
-    "iconName": "g-variables-large",
+    "iconName": "g-variable-large",
     "tags": "grid, large, rectangles",
     "group": "Graphext",
     "content": "\\e9f3"
