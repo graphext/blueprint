@@ -46,3 +46,22 @@
 .#{$ns}-dark .#{$ns}-table-cell-ledger-odd {
 	background-color: #2A2E38; // --Dark3
 }
+
+// Use column title as reorder handle area
+// and hide drag-handle icon
+.#{$ns}-table-reorder-handle-target {
+	width: 100%;
+}
+.#{$ns}-table-reorder-handle {
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+  cursor: grab;
+  z-index: 1000;
+}
+.#{$ns}-icon-drag-handle-vertical {
+	display: none;
+}
