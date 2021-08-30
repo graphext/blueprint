@@ -343,6 +343,13 @@
     "content": "\\e9f3"
   },
   {
+    "displayName": "Camera",
+    "iconName": "g-camera",
+    "tags": "camera, picture, image",
+    "group": "Graphext",
+    "content": "\\e9f3"
+  },
+  {
     "displayName": "Visibility",
     "iconName": "g-visibility",
     "tags": "see, show, eye, visible",
