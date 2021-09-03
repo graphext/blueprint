@@ -203,6 +203,13 @@
     "content": "\\e9e0"
   },
   {
+    "displayName": "Unpin",
+    "iconName": "g-unpin",
+    "tags": "safety unpin, detach",
+    "group": "Graphext",
+    "content": "\\e9e0"
+  },
+  {
     "displayName": "Error",
     "iconName": "g-error",
     "tags": "failure, fail, cross",
