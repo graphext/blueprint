@@ -43,7 +43,12 @@
 .#{$ns}-dark .#{$ns}-table-cell-ledger-even {
 	background-color: #272A33; // --Dark2
 }
-.#{$ns}-dark .#{$ns}-table-cell-ledger-odd {
+.#{$ns}-dark .#{$ns}-table-cell-ledger-odd,
+.#{$ns}-dark .#{$ns}-table-header[class$="1"],
+.#{$ns}-dark .#{$ns}-table-header[class$="3"],
+.#{$ns}-dark .#{$ns}-table-header[class$="5"],
+.#{$ns}-dark .#{$ns}-table-header[class$="7"],
+.#{$ns}-dark .#{$ns}-table-header[class$="9"] {
 	background-color: #2A2E38; // --Dark3
 }
 
