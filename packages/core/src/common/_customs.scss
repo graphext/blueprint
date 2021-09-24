@@ -88,11 +88,6 @@ $pt-dark-intent-text-colors: (
 $pt-button-border-radius: $pt-button-height-large / 2;
 $button-border-width: 0;
 
-// The following importants are needed to override the BP minimal button className
-$dark-minimal-button-background-color: none; // $dark-gray5!important;
-$dark-minimal-button-background-color-hover: rgba($dark-gray5, 0.15);
-$dark-minimal-button-background-color-active: rgba($dark-gray5, 0.3);
-
 // Inputs
 $input-padding-horizontal: $pt-grid-size * 2;
 $dark-input-background-color: rgba($dark-gray0, 0.3) !default;
@@ -138,3 +133,6 @@ $pt-dark-icon-color: $white3;
 $pt-dark-icon-color-hover: $white3;
 // Dialog
 $dialog-border-radius: 16px;
+
+// Divider
+$pt-dark-divider-black: $dark-gray5;
