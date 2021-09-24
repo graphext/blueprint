@@ -32,7 +32,7 @@
 .#{$ns}-datepicker.#{$ns}-daterangepicker-single-month .DayPicker-Month{
   width:100%;
   margin: 0;
-  
+
 }
 
 // Date and Range Picker NavBar
@@ -53,12 +53,27 @@
 }
 .DayPicker .#{$ns}-html-select.#{$ns}-minimal select{
   font-size: 12px;
+  box-shadow: $custom-shadow;
+  background-color: $dark-button-background-color;
+  &:hover {
+    background: $dark-button-background-color;
+    box-shadow: $custom-shadow;
+  }
 }
 .#{$ns}-datepicker-year-select {
   width: 52px;
 }
 .DayPicker .#{$ns}-html-select .#{$ns}-icon-double-caret-vertical{
   right: 6px !important;
+}
+.#{$ns}-dark .#{$ns}-button.#{$ns}-minimal.DayPicker-NavButton,
+.#{$ns}-dark .#{$ns}-datepicker-footer .#{$ns}-button.#{$ns}-minimal {
+  box-shadow: $custom-shadow;
+  background-color: $dark-button-background-color;
+  &:hover {
+    background: $dark-button-background-color;
+    box-shadow: $custom-shadow;
+  }
 }
 
 // Date and Range Input Picker

@@ -89,9 +89,9 @@ $pt-button-border-radius: $pt-button-height-large / 2;
 $button-border-width: 0;
 
 // The following importants are needed to override the BP minimal button className
-$dark-minimal-button-background-color: $dark-gray5 !important;
-$dark-minimal-button-background-color-hover: rgba($dark-gray5, 0.15) !important;
-$dark-minimal-button-background-color-active: rgba($dark-gray5, 0.3) !important;
+$dark-minimal-button-background-color: none; // $dark-gray5!important;
+$dark-minimal-button-background-color-hover: rgba($dark-gray5, 0.15);
+$dark-minimal-button-background-color-active: rgba($dark-gray5, 0.3);
 
 // Inputs
 $input-padding-horizontal: $pt-grid-size * 2;
@@ -114,7 +114,7 @@ $tag-padding: 2px;
 $input-font-weight: 300;
 $dark-datepicker-background-color: $dark-gray4;
 
-$custom-shadow: 0 0 12px rgba($black, 0.25) !important;
+$custom-shadow: 0 0 12px rgba($black, 0.25);
 $button-box-shadow: $custom-shadow;
 $button-box-shadow-active: $custom-shadow;
 $button-box-shadow-overlay: $custom-shadow;
