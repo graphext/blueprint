@@ -245,6 +245,20 @@
     "content": "\\e9e6"
   },
   {
+    "displayName": "Left",
+    "iconName": "g-left",
+    "tags": "arrow, left",
+    "group": "Graphext",
+    "content": "\\e9e6"
+  },
+  {
+    "displayName": "Right",
+    "iconName": "g-right",
+    "tags": "arrow, left",
+    "group": "Graphext",
+    "content": "\\e9e6"
+  },
+  {
     "displayName": "Logout",
     "iconName": "g-logout",
     "tags": "sign out, out, arrow, leave",
