@@ -1036,6 +1036,13 @@
     "content": "\\26D3"
   },
   {
+    "displayName": "Data",
+    "iconName": "g-data-mode",
+    "tags": "data, mode",
+    "group": "Graphext",
+    "content": "\\26D4"
+  },
+  {
     "displayName": "Blank",
     "iconName": "blank",
     "tags": "empty, placeholder",
