@@ -29,8 +29,14 @@
 .#{$ns}-dark .#{$ns}-table-reorder-handle-target {
   color: $white4;
 }
-.#{$ns}-dark .#{$ns}-table-header.#{$ns}-table-header-active:before, .#{$ns}-dark .#{$ns}-table-selection-enabled .#{$ns}-table-header:hover:before {
-  background-color: $dark-gray3;
+.#{$ns}-dark .#{$ns}-table-header.#{$ns}-table-header-active:before,
+.#{$ns}-dark .#{$ns}-table-selection-enabled .#{$ns}-table-header:hover:before {
+  background-color: transparent;
+}
+.#{$ns}-table-header.#{$ns}-table-header-selected:before,
+.#{$ns}-table-header.#{$ns}-table-header-selected:hover:before {
+	pointer-events: none;
+	z-index: 1;
 }
 
 .#{$ns}-dark  .#{$ns}-table-column-headers .#{$ns}-table-header,
