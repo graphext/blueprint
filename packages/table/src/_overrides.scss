@@ -24,7 +24,7 @@
   background: transparent;
 }
 .#{$ns}-dark  .#{$ns}-table-row-headers .#{$ns}-table-header {
-  box-shadow: inset 0 -1px 0 #2a2e38;
+  box-shadow: none;
 }
 .#{$ns}-dark .#{$ns}-table-reorder-handle-target {
   color: $white4;
@@ -40,8 +40,8 @@
 }
 
 .#{$ns}-dark  .#{$ns}-table-column-headers .#{$ns}-table-header,
+.#{$ns}-dark  .#{$ns}-table-row-headers .#{$ns}-table-header,
 .#{$ns}-dark  .#{$ns}-table-menu,
-.#{$ns}-dark  .#{$ns}-table-row-headers,
 .#{$ns}-dark  .#{$ns}-table-cell {
 	border-right: 1px solid #313641; // --Dark4
 }
