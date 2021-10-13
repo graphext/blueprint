@@ -37,6 +37,10 @@
   background-image: none;
 }
 
+.#{$ns}-dark .#{$ns}-button:not([class*="bp3-intent-"]) .#{$ns}-icon {
+ color: $white;
+}
+
 // Inputs
 
 //
@@ -189,10 +193,6 @@
   &.#{$ns}-dark {
     background-color: $dark-gray5;
   }
-}
-
-.#{$ns}-toast.#{$ns}-dark .#{$ns}-button:not([class*="bp3-intent-"]) .#{$ns}-icon {
-  color: $white;
 }
 
 // CheckBox
