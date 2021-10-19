@@ -259,6 +259,13 @@
     "content": "\\e9e6"
   },
   {
+    "displayName": "Data Exploration",
+    "iconName": "g-data-exploration",
+    "tags": "lens, data",
+    "group": "Graphext",
+    "content": "\\e9e6"
+  },
+  {
     "displayName": "Logout",
     "iconName": "g-logout",
     "tags": "sign out, out, arrow, leave",
