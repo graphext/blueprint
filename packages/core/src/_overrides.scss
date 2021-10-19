@@ -41,6 +41,10 @@
  color: $white;
 }
 
+.#{$ns}-button-group .#{$ns}-button {
+  min-width: 48px;
+}
+
 // Inputs
 
 //
