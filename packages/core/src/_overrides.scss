@@ -45,6 +45,15 @@
   min-width: 48px;
 }
 
+.#{$ns}-button-group .#{$ns}-button:not(:last-child),
+.#{$ns}-button-group .#{$ns}-popover-wrapper:not(:last-child) .#{$ns}-button {
+  border-right: 1px solid #2A2E38; // --Dark3
+}
+
+.#{$ns}-dark .#{$ns}-button-group .#{$ns}-button:not([class*="bp3-intent-"]) {
+  box-shadow: none;
+}
+
 // Inputs
 
 //
