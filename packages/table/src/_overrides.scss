@@ -39,6 +39,10 @@
 	z-index: 1;
 }
 
+.#{$ns}-dark .#{$ns}-table-header .#{$ns}-table-header-content {
+	border-bottom: 1px solid #313641; // --Dark4
+}
+
 .#{$ns}-dark  .#{$ns}-table-column-headers .#{$ns}-table-header,
 .#{$ns}-dark  .#{$ns}-table-row-headers .#{$ns}-table-header,
 .#{$ns}-dark  .#{$ns}-table-menu,
@@ -56,6 +60,11 @@
 .#{$ns}-dark .#{$ns}-table-header[class$="7"],
 .#{$ns}-dark .#{$ns}-table-header[class$="9"] {
 	background-color: #2A2E38; // --Dark3
+}
+
+// Avoid first column (for row index) to overlap second column selection
+.#{$ns}-table-menu {
+  z-index: 11;
 }
 
 // Use column title as reorder handle area
