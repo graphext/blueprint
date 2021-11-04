@@ -39,7 +39,7 @@
 	z-index: 1;
 }
 
-.#{$ns}-dark .#{$ns}-table-header .#{$ns}-table-header-content {
+.#{$ns}-dark  .#{$ns}-table-column-headers .#{$ns}-table-header {
 	border-bottom: 1px solid #313641; // --Dark4
 }
 
