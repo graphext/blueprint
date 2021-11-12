@@ -16,8 +16,8 @@
     "verify": "npm-run-all -p dist lint"
   },
   "dependencies": {
-    "@blueprintjs/core": "3.24.0-graphext48",
-    "@blueprintjs/table": "3.8.3-graphext48",
+    "@blueprintjs/core": "3.24.0-graphext49",
+    "@blueprintjs/table": "3.8.3-graphext49",
     "classnames": "^2.2.6",
     "dom4": "^2.1.5",
     "normalize.css": "^8.0.1",
