@@ -3,7 +3,7 @@
 .#{$ns}-table-striped {
   .#{$ns}-dark & {
     .#{$ns}-table-cell-ledger-odd {
-      background-color: $dark-table-background-color
+      background-color: $dark-table-background-color;
     }
   }
 }
