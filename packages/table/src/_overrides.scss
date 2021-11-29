@@ -21,3 +21,17 @@
     }
   }
 }
+
+// Hide handle icon & divider in interaction bar
+// & fill all the column width
+.#{$ns}-table-interaction-bar {
+
+  .#{$ns}-table-reorder-handle-target {
+    width: 100%;
+  }
+
+  .#{$ns}-table-reorder-handle,
+  & + .#{$ns}-table-horizontal-cell-divider {
+    display: none;
+  }
+}
