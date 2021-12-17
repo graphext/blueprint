@@ -266,6 +266,13 @@
     "content": "\\e9e6"
   },
   {
+    "displayName": "Reset",
+    "iconName": "g-reset",
+    "tags": "reset",
+    "group": "Graphext",
+    "content": "\\e9e6"
+  },
+  {
     "displayName": "Logout",
     "iconName": "g-logout",
     "tags": "sign out, out, arrow, leave",
