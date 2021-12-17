@@ -3,6 +3,7 @@
 
 @import "../../common/variables";
 @import "../../common/mixins";
+@import "customs";
 
 /*
 Tabs
@@ -197,3 +198,5 @@ $tab-indicator-width: 3px !default;
 .#{$ns}-flex-expander {
   flex: 1 1;
 }
+
+@import "overrides";
