@@ -152,8 +152,10 @@
   left: 0;
 }
 
-.#{$ns}-editable-text-input:not(textarea), .#{$ns}-editable-text-content:not(textarea) {
-  margin: 8px 16px;
+.#{$ns}-editable-text:not([class*="#{$ns}-table-editable-name"]) {
+  .#{$ns}-editable-text-input:not(textarea), .#{$ns}-editable-text-content:not(textarea) {
+    margin: 8px 16px;
+  }
 }
 
 //Slider
