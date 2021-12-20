@@ -5,6 +5,7 @@
 // multiple @imports of shared/forms from different files causes placeholder @extends to
 // output CSS multiple times which breaks textbox padding.
 @import "./common";
+@import "customs";
 
 @import "./control-group";
 @import "./controls";
