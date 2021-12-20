@@ -1,0 +1,111 @@
+// Control group
+.#{$ns}-control-group {
+
+  .#{$ns}-input {
+    // inherit radius since it's most likely to be zero
+    border-radius: inherit;
+
+    // inherit radius on focus too to avoid the input to change border radius on focus
+    &:focus {
+      border-radius: inherit;
+    }
+  }
+
+  .#{$ns}-button,
+  .#{$ns}-select select {
+    // inherit radius since it's most likely to be zero
+    border-radius: inherit;
+  }
+
+  // round the left corners of the left-most element
+  > :first-child {
+    border-radius: $pt-button-border-radius 0 0 $pt-button-border-radius;
+  }
+
+  // round the right corners of the right-most element
+  > :last-child {
+    margin-right: 0;
+    border-radius: 0 $pt-button-border-radius $pt-button-border-radius 0;
+  }
+
+  // bring back border radius on these buttons
+  .#{$ns}-input-group .#{$ns}-button {
+    border-radius: $pt-border-radius;
+  }
+
+
+  &.#{$ns}-vertical {
+
+    > :first-child {
+      margin-top: 0;
+      border-radius: $pt-border-radius $pt-border-radius 0 0;
+    }
+
+    > :last-child {
+      border-radius: 0 0 $pt-border-radius $pt-border-radius;
+    }
+  }
+}
+
+
+// CheckBox
+.#{$ns}-control {
+  &.#{$ns}-checkbox {
+    .#{$ns}-control-indicator {
+      border-radius: 4px;
+      background: $dark-gray5;  // removes gradient
+    }
+    input:checked ~ .#{$ns}-control-indicator{
+      &::before {
+        background-image: svg-icon("16px/g-check.svg", (path: (fill: $white)));
+      }
+    }
+  }
+}
+
+
+// Radio
+.#{$ns}-control {
+  &.#{$ns}-radio {
+    input:checked ~ .#{$ns}-control-indicator::before {
+      background-image: radial-gradient($pt-intent-primary, $pt-intent-primary 28%, transparent 32%);
+    }
+    input:checked ~ .#{$ns}-control-indicator{
+      background-color: $dark-gray5;
+    }
+  }
+}
+.#{$ns}-dark .#{$ns}-control {
+  &.#{$ns}-radio:hover input:checked~.#{$ns}-control-indicator{
+    background-color: $dark-gray5;
+  }
+}
+
+
+// Inputs
+// (every input is a round input for us)
+.#{$ns}-input {
+  border-radius: $pt-input-height / 2;
+  box-sizing: border-box;
+  padding-left: $input-padding-horizontal;
+  padding-right: $input-padding-horizontal;
+  box-shadow: none !important;
+
+  &.#{$ns}-large {
+    padding: 0 $input-padding-horizontal * 1.5;
+  }
+}
+
+
+// Numeric Input Control Group
+.#{$ns}-numeric-input {
+  .#{$ns}-button-group.#{$ns}-vertical > .#{$ns}-button {
+    box-shadow: none !important;
+    background-color: $dark-gray4;
+
+    & > .#{$ns}-icon{
+      transform: scale(0.8);
+      color: $pt-intent-primary;
+    }
+  }
+}
