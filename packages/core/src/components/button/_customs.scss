@@ -1,8 +1,9 @@
+@import "../../common/customs";
+
 $pt-button-border-radius: $pt-button-height-large / 2;
 
 $button-border-width: 0;
 
-$custom-shadow: 0 0 12px rgba($black, 0.25);
 $button-box-shadow: $custom-shadow;
 $button-box-shadow-active: $custom-shadow;
 $button-box-shadow-overlay: $custom-shadow;
