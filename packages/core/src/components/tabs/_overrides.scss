@@ -1,5 +1,31 @@
+.#{$ns}-tab > * {
+  color: inherit;
+}
+
 .#{$ns}-dark {
   .#{$ns}-tab {
     color: $blue3;
+  }
+}
+
+.#{$ns}-tab-indicator-wrapper {
+  z-index: 1;
+
+  .#{$ns}-tab-indicator {
+    bottom: -$tab-indicator-width;
+  }
+}
+
+// Allow tabs to fill available width
+.#{$ns}-tabs-fill {
+  .#{$ns}-tab {
+    flex: 1;
+    margin: 0;
+    text-align: center;
+    border-bottom: 2px solid transparent;
+
+    &:not([aria-selected="true"]) {
+      border-bottom-color: var(--Dark1);
+    }
   }
 }
