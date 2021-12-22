@@ -4,6 +4,7 @@
 @import "../../common/variables";
 @import "../popover/common";
 @import "./common";
+@import "customs";
 
 .#{$ns}-tooltip {
   @include popover-sizing(
@@ -59,3 +60,5 @@
   border-bottom: dotted 1px;
   cursor: help;
 }
+
+@import "overrides";

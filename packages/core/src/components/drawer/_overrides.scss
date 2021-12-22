@@ -17,11 +17,28 @@
 }
 
 .#{$ns}-drawer-header {
-  padding: $pt-grid-size * 3 / 2 0;
+  padding: 2 * $pt-grid-size 0;
+  box-shadow: none;
+
+  .#{$ns}-heading {
+    font-size: 24px;
+    font-weight: normal;
+    line-height: 32px;
+    text-transform: none;
+  }
+
+  .#{$ns}-dark & {
+    box-shadow: none;
+  }
 }
 
 .#{$ns}-drawer-footer {
-  padding: $pt-grid-size * 2 0 $pt-grid-size * 4 0;
+  padding: $pt-grid-size * 2 0;
+  box-shadow: none;
+
+  .#{$ns}-dark & {
+    box-shadow: none;
+  }
 }
 
 .#{$ns}-drawer-body {
