@@ -4,7 +4,6 @@
 @import "../../common/variables";
 @import "../popover/common";
 @import "./common";
-@import "customs";
 
 .#{$ns}-tooltip {
   @include popover-sizing(

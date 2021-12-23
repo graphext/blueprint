@@ -1,6 +1,8 @@
 // Copyright 2016 Palantir Technologies, Inc. All rights reserved.
 // Licensed under the Apache License, Version 2.0.
 
+@import "customs";
+
 $half-grid-size: $pt-grid-size / 2 !default;
 
 $menu-item-border-radius: $pt-border-radius - 1 !default;
