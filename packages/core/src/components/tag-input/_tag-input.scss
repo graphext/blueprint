@@ -4,6 +4,7 @@
 @import "../../common/variables";
 @import "../forms/common";
 @import "../tag/common";
+@import "customs";
 
 $tag-input-padding: ($pt-input-height - $tag-height) / 2 !default;
 
