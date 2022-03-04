@@ -1,0 +1,15 @@
+// Common
+$input-padding-horizontal: $pt-grid-size * 2;
+$input-font-weight: 300;
+
+$dark-input-background-color: rgba($dark-gray0, 0.3);
+$dark-input-shadow-color-focus: transparent;
+
+$input-box-shadow: none;
+$input-box-shadow-focus: none;
+$pt-dark-input-box-shadow: none;
+
+
+// Controls
+$dark-switch-background-color: $dark-gray2;
+$dark-control-background-color-hover: $dark-gray4;

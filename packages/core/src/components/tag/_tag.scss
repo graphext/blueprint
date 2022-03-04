@@ -73,3 +73,5 @@ Styleguide tag
 .#{$ns}-tag-remove {
   @include pt-tag-remove();
 }
+
+@import "overrides";

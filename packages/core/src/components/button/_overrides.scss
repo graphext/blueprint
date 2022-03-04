@@ -1,0 +1,50 @@
+.#{$ns}-button.#{$ns}-action-button {
+  padding-left: 32px;
+  padding-right: 32px;
+  text-transform: uppercase;
+}
+
+.#{$ns}-button:focus {
+  outline: none;
+}
+
+.#{$ns}-button-text {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.#{$ns}-dark .#{$ns}-button.#{$ns}-minimal.#{$ns}-intent-primary:hover,
+.#{$ns}-button.#{$ns}-minimal.#{$ns}-intent-primary:hover {
+  background-color: inherit;
+}
+
+.#{$ns}-dark .#{$ns}-button.#{$ns}-minimal {
+  &:disabled,
+  &:disabled:hover,
+  &.#{$ns}-disabled,
+  &.#{$ns}-disabled:hover{
+    background-color: $dark-minimal-button-background-color;
+    opacity: 0.5;
+  }
+}
+
+.#{$ns}-dark .#{$ns}-button, .#{$ns}-dark .#{$ns}-button:not([class*="bp3-intent-"]), .#{$ns}-button:not([class*="bp3-intent-"]) {
+  background-image: none;
+}
+
+.#{$ns}-dark .#{$ns}-button:not([class*="bp3-intent-"]) .#{$ns}-icon {
+ color: $white;
+}
+
+.#{$ns}-button-group .#{$ns}-button {
+  min-width: 48px;
+}
+
+.#{$ns}-button-group .#{$ns}-button:not(:last-child),
+.#{$ns}-button-group .#{$ns}-popover-wrapper:not(:last-child) .#{$ns}-button {
+  border-right: 1px solid #2A2E38; // --Dark3
+}
+
+.#{$ns}-dark .#{$ns}-button-group .#{$ns}-button:not([class*="bp3-intent-"]) {
+  box-shadow: none;
+}

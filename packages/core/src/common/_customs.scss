@@ -1,0 +1,96 @@
+// Copyright 2018 Graphext
+
+// easily the most important variable, so it comes first
+// (so other variables can use it to define themselves)
+$pt-grid-size: 8px;
+
+// see https://bitsofco.de/the-new-system-font-stack/
+$pt-font-family: "LatoLatin";
+
+$pt-font-size: 14px;
+$pt-font-size-large: 16px;
+$pt-font-size-small: 12px;
+
+// a little bit extra to ensure the height comes out to just over 18px (and browser rounds to 18px)
+$pt-line-height: ($pt-grid-size * 2.25) / $pt-font-size + 0.0001;
+
+$pt-border-radius: 16px;
+
+$pt-input-height: 32px;
+
+// Buttons
+$pt-button-height: 32px;
+$pt-button-height-small: 24px;
+$pt-button-height-large: 40px;
+
+
+// ------------------------- Colors -----------------------------------
+
+$black: #000000;
+
+$dark-gray0: #161616;
+$dark-gray1: #1F2024;
+$dark-gray2: #272B33;
+$dark-gray3: #2A2E38;
+$dark-gray4: #313641;
+$dark-gray5: #363B47;
+
+$blue1: #00507f;
+$blue2: #0071b2;
+$blue3: #0091e5;
+$blue4: #00a1ff;
+$blue5: #47b2f0;
+
+$green1: #0a6640;
+$green2: #0d8050;
+$green3: #0f9960;
+$green4: #15b371;
+$green5: #3dcc91;
+
+$orange1: #a66321;
+$orange2: #bf7326;
+$orange3: #d9822b;
+$orange4: #f29d49;
+$orange5: #ffb366;
+
+$red1: #a82a2a;
+$red2: #c23030;
+$red3: #db3737;
+$red4: #f55656;
+$red5: #ff7373;
+
+$white1: #ffffff;
+$white2: rgba(255, 255, 255, 0.8);
+$white3: rgba(255, 255, 255, 0.5);
+$white4: rgba(255, 255, 255, 0.3);
+
+$pt-intent-primary: #0091E4;
+$pt-dark-link-color: $pt-intent-primary; // for links
+
+$pt-intent-text-colors: (
+  "primary": $pt-intent-primary,
+  "success": $green2,
+  "warning": $orange2,
+  "danger" : $red2,
+);
+
+$pt-dark-intent-text-colors: (
+  "primary": $pt-intent-primary,
+  "success": $green5,
+  "warning": $orange5,
+  "danger" : $red5,
+);
+
+
+// ------------------------- Color aliases -------------------------------
+
+$pt-dark-icon-color: $white3;
+$pt-dark-icon-color-hover: $white3;
+
+$pt-dark-divider-black: $white3;
+
+
+// ------------------------- Components -------------------------------
+
+// Custom shadow for buttons, selects, tag-inputs, tooltips & datetime
+$custom-shadow: 0 0 12px rgba($black, 0.25);

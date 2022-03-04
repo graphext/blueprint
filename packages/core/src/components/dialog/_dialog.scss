@@ -5,6 +5,7 @@
 @import "../../common/mixins";
 @import "../../common/react-transition";
 @import "../../common/variables";
+@import "customs";
 
 /*
 Dialog
@@ -145,3 +146,5 @@ $dialog-padding: $pt-grid-size * 2 !default;
     margin-left: $pt-grid-size;
   }
 }
+
+@import "overrides";

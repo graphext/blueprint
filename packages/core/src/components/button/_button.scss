@@ -23,6 +23,7 @@ Markup:
 .#{$ns}-large - Larger size
 .#{$ns}-small - Smaller size
 .#{$ns}-fill - Fill parent container
+.#{$ns}-action-button - Action button
 
 Styleguide button
 */
@@ -206,3 +207,5 @@ a.#{$ns}-button {
     }
   }
 }
+
+@import "overrides";

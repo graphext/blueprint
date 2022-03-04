@@ -1,0 +1,37 @@
+.#{$ns}-table-container {
+  border-radius: 8px;
+}
+
+// Avoid first column (for row index) to overlap second column selection
+.#{$ns}-table-menu {
+  z-index: 11;
+}
+
+// Add stripped background to row index cells
+.#{$ns}-table-striped {
+  .#{$ns}-dark & {
+    .#{$ns}-table-row-headers {
+      .#{$ns}-table-header[class$="0"],
+      .#{$ns}-table-header[class$="2"],
+      .#{$ns}-table-header[class$="4"],
+      .#{$ns}-table-header[class$="6"],
+      .#{$ns}-table-header[class$="8"] {
+        background-color: $dark-cell-background-color;
+      }
+    }
+  }
+}
+
+// Hide handle icon & divider in interaction bar
+// & fill all the column width
+.#{$ns}-table-interaction-bar {
+
+  .#{$ns}-table-reorder-handle-target {
+    width: 100%;
+  }
+
+  .#{$ns}-table-reorder-handle,
+  & + .#{$ns}-table-horizontal-cell-divider {
+    display: none;
+  }
+}

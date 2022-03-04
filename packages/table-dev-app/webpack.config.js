@@ -39,4 +39,7 @@ module.exports = Object.assign({}, baseConfig, {
             ],
         }),
     ]),
+    devServer: {
+        port: process.env.PORT || 9999
+    }
 });

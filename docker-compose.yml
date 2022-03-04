@@ -1,0 +1,18 @@
+#
+# The setup (just first time):
+# docker-compose run bp sh -c 'yarn && yarn compile'
+#
+# In order to update Markdowns
+# docker-compose run bp sh -c 'yarn docs-data'
+#
+version: '3'
+services:
+  bp:
+    image: node:12
+    command: sh -c 'yarn dev'
+    working_dir: /hostdata
+    volumes:
+      - .:/hostdata
+      - ${DEVELOPMENT_DIR}/config/npmrc:/root/.npmrc
+    ports:
+      - "9999:9999"
