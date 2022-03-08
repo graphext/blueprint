@@ -13,6 +13,21 @@ git checkout updateUpstream && git pull upstream develop
 - Prepare a Pull Request to `origin graphext`.
 - Note that all commits coming from upstream must be **squashed** into one.
 
+## If Blueprint package version change
+If Blueprint package version change (for example from 3.53.0 to 4.0.0) is **needed to remove "-graphext[OldVersion]"** from all the package.json . This is made in order to get the first install and compile of the packages:
+```
+docker-compose run bp sh -c 'yarn && yarn compile'
+```
+Once it's done, we can create de dist files with:
+```
+docker-compose run bp sh -c 'yarn dist:libs'
+```
+Then **change the packages names to "-graphext[NewVersion]" again** with the new version (better using the JS script explained in **How to publish the changes** steps 1 and 2) and publish the packages to our private NPM with:
+```
+docker-compose run bpsh -c 'cd packages/core && npm publish && cd ../../ && cd packages/icons && npm publish && cd ../../ && cd packages/datetime && npm publish && cd ../../ && cd packages/table && npm publish && cd ../../ && cd packages/select && npm publish'
+```
+Otherwise, we will be assembling the package by downloading an older version of blueprint and it will not be compatible with our environment.
+
 ## Updating Blueprint styles
 The purpose of this repository is to adapt blueprint UI components' styles to Graphext design, then, it is forbidden to update blueprint javascript. Graphext developers must only update blueprint styles. To do that, the steps to follow must be:
 - Blueprint uses `!default` flag at the end of some `scss` variable declarations. Therefore, graphext developers must see if they can use `scss` variables in order to get the desired style.
