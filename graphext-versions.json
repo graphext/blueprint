@@ -1,7 +1,7 @@
 {
-  "@blueprintjs/core": "3.53.0-graphext01",
-  "@blueprintjs/datetime": "3.23.20-graphext01",
-  "@blueprintjs/icons": "3.32.0-graphext01",
-  "@blueprintjs/select": "3.18.12-graphext01",
-  "@blueprintjs/table": "3.9.14-graphext01"
+  "@blueprintjs/core": "3.53.0-graphext02",
+  "@blueprintjs/datetime": "3.23.20-graphext02",
+  "@blueprintjs/icons": "3.32.0-graphext02",
+  "@blueprintjs/select": "3.18.12-graphext02",
+  "@blueprintjs/table": "3.9.14-graphext02"
 }
