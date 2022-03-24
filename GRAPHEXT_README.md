@@ -100,3 +100,34 @@ docker-compose run bp yarn --cwd packages/icons compile
 docker-compose run bp yarn dev:core
 ```
 
+## A bit of history about this repository...
+### How we included the changes from palantir blueprint
+A long time ago, we did a fork from the blueprint repository. We kept adding functionality in the `graphext` branch,
+and when we wanted to deploy it, we merge it into `deploy` branch.
+But time goes, and we realized it would be nice if we can have all the changes that the blueprint team had added,
+and we were missing since the fork. As you may be thinking...yes, that merge was a bit scary.
+
+We tried to merge the branch from palantir in our graphext branch, but a lot of changes arise, a lot of them because of format changes...
+so we thought the best solution was to say goodbye to our beloved `graphext` branch and its history and just add our changes into their branch.
+This meant that we were going to lose all our commit history (bye-bye to git blame!), so we copied `graphext` into `graphextOld`.
+So if you want to see the rationality behind a change, you may need to check it [there](https://github.com/graphext/blueprint/tree/graphextOld).
+
+Just to be clear:
+- we copied `graphext` branch into `graphextOld`
+- we removed `graphext`
+- we created `graphext` again from `palantir:develop`
+- we [merged](https://github.com/graphext/blueprint/tree/e64b857881ab2c310600c567635f3b753e6f03e6) `graphextOld` into our new `graphext` branch
+
+We were facing a similar situation with the `deploy` branch, and the process was as follows:
+- we copied `deploy` branch into `deployOld`
+- we removed `graphext`
+- we created `deploy` again from `graphext`
+
+Oh, wait! And what happened with the changes in the `deploy` branch? Were they lost?
+Yes, but it doesn't matter because `deploy` should reflect `graphext` history branch. It is just a new beginning.
+The [first version](https://npm.graphext.com/-/web/detail/@blueprintjs/core/v/3.53.0-graphext01]) that included those changes was `3.53.0-graphex01`.
+
+This is how we included the changes from palantir in our repository.
+At this point, we were able to work as we used to do (PR in `graphext` and then if you want to deploy your changes, merge it into `deploy`).
+
+
