@@ -1,0 +1,18 @@
+// Selected region change
+.#{$ns}-table-region {
+  border: none;
+}
+
+.#{$ns}-table-selection-region {
+  background-color: rgba($g-grey4, 0.1);
+  border-top: none;
+  border-left: 1px solid $g-grey4;
+
+  .#{$ns}-table-column-headers & {
+    border-left: 1px solid $g-grey4;
+  }
+  
+  .#{$ns}-table-row-headers & {
+    border-left: 1px solid $g-grey4;
+  }
+}
