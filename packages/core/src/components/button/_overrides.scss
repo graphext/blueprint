@@ -42,9 +42,27 @@
 
 .#{$ns}-button-group .#{$ns}-button:not(:last-child),
 .#{$ns}-button-group .#{$ns}-popover-wrapper:not(:last-child) .#{$ns}-button {
-  border-right: 1px solid #2A2E38; // --Dark3
+  border-right: 1px solid $g-dark-base3;
 }
 
 .#{$ns}-dark .#{$ns}-button-group .#{$ns}-button:not([class*="bp3-intent-"]) {
   box-shadow: none;
+}
+
+// Fix - Button icons without intent not 100% white
+$pt-gp-dark-icon-color: $g-white;
+
+.#{$ns}-button {
+  .#{$ns}-dark & {
+    &:not([class*="#{$ns}-intent-"]) {
+      &[class*="#{$ns}-icon-"]::before {
+        color: $pt-gp-dark-icon-color;
+      }
+      #{$icon-classes} {
+        &:not([class*="#{$ns}-intent-"]) {
+          color: $pt-gp-dark-icon-color;
+        }
+      }
+    }
+  }
 }
