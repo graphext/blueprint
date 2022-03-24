@@ -6,7 +6,7 @@ trigger:
   - deploy
 steps:
 - name: build
-  image: node:dubnium
+  image: node:erbium
   commands:
   - echo -n $NPMRC | base64 -d > /root/.npmrc
   - yarn
@@ -17,7 +17,7 @@ steps:
     NPMRC:
      from_secret: NPMRC
 - name: publish
-  image: node:dubnium
+  image: node:erbium
   depends_on:
   - build
   commands:
@@ -32,7 +32,7 @@ steps:
     NPMRC:
      from_secret: NPMRC
 - name: docs
-  image: node:dubnium
+  image: node:erbium
   depends_on:
   - build
   commands:
@@ -50,6 +50,6 @@ steps:
      from_secret: deploy-key
 ---
 kind: signature
-hmac: 0b39adef8a2cab5fc503cfa82cd12ca4cd9c49b3e46b13a2fe788d1cfd488e9a
+hmac: 2535d8c55841cbec2b7d5393289b61f1881c188478236bc9722cdcfc675f3bfb
 
 ...
