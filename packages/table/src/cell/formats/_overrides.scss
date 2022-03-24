@@ -1,0 +1,41 @@
+// CUSTOM CLASS for using truncated popover like a tooltip with hover over the cell
+.#{$ns}-gp-truncated-hover-popover {
+  .#{$ns}-table-truncated-value {
+    right: 8px; // Equal to padding of cell
+    top: 4px; // Centering values with icon
+  }
+
+  .#{$ns}-table-truncated-cell &{
+    .#{$ns}-table-truncated-popover-target{
+      visibility: hidden; // To hide popover icon if not hoover
+    }
+  }
+
+  .#{$ns}-table-truncated-cell:hover &{
+    .#{$ns}-table-truncated-popover-target{
+      visibility: visible; // To show icon when cell is hover
+    }
+
+    .#{$ns}-table-truncated-value {
+      right: 28px; // Equal to sum of icon and padding width
+    }
+  }
+}
+
+.#{$ns}-table-truncated-popover {
+  font-family: "LatoLatin";
+  font-size: 12px; // Body3 Typography
+}
+
+// Centering text for truncated values and icon
+.#{$ns}-table-truncated-value {
+  top: 4px;
+}
+
+.#{$ns}-table-truncated-format-text {
+  top: 4px;
+}
+
+.#{$ns}-table-truncated-popover-target {
+  padding: 4px $pt-grid-size / 2; // Adding top and bottom padding for centering the icon
+}
