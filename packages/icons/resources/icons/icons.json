@@ -28,11 +28,25 @@
     "content": "\\e9c8"
   },
   {
+      "displayName": "Arrow: Left Small",
+      "iconName": "g-arrow-left-small",
+      "tags": "chevron, left, collapse, expand, small",
+      "group": "Graphext",
+      "content": "\\e9c8"
+  },
+  {
     "displayName": "Arrow: Right",
     "iconName": "g-arrow-right",
     "tags": "chevron, right, collapse, expand",
     "group": "Graphext",
     "content": "\\e9c9"
+  },
+  {
+       "displayName": "Arrow: Right Small",
+       "iconName": "g-arrow-right-small",
+       "tags": "chevron, right, collapse, expand, small",
+       "group": "Graphext",
+       "content": "\\e9c9"
   },
   {
     "displayName": "Arrow: Down",
@@ -76,6 +90,13 @@
     "group": "Graphext",
     "content": "\\e9ce"
   },
+   {
+       "displayName": "Show",
+       "iconName": "g-show",
+       "tags": "show, reveal, expand",
+       "group": "Graphext",
+       "content": "\\e9ce"
+   },
   {
     "displayName": "Manage",
     "iconName": "g-manage",
@@ -600,6 +621,13 @@
     "tags": "question, mark, doubt, info, support ",
     "group": "Graphext",
     "content": "\\ea11"
+  },
+  {
+      "displayName": "Hide",
+      "iconName": "g-hide",
+      "tags": "hide, collapse, cover",
+      "group": "Graphext",
+      "content": "\\ea11"
   },
   {
     "displayName": "Blocks",
