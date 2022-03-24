@@ -1,0 +1,55 @@
+---
+kind: pipeline
+name: blueprint
+trigger:
+  branch:
+  - deploy
+steps:
+- name: build
+  image: node:dubnium
+  commands:
+  - echo -n $NPMRC | base64 -d > /root/.npmrc
+  - yarn
+  - yarn compile
+  - yarn dist:libs
+  - rm /root/.npmrc
+  environment:
+    NPMRC:
+     from_secret: NPMRC
+- name: publish
+  image: node:dubnium
+  depends_on:
+  - build
+  commands:
+  - echo -n $NPMRC | base64 -d > /root/.npmrc
+  - npm publish packages/core
+  - npm publish packages/icons
+  - npm publish packages/datetime
+  - npm publish packages/table
+  - npm publish packages/select
+  - rm /root/.npmrc
+  environment:
+    NPMRC:
+     from_secret: NPMRC
+- name: docs
+  image: node:dubnium
+  depends_on:
+  - build
+  commands:
+  - yarn dist:apps
+  - yarn site:clean
+  - yarn copy:docs-app
+  - mkdir /root/.ssh && echo "$DEPLOY_KEY" > /root/.ssh/id_rsa && chmod 0600 /root/.ssh/id_rsa
+  - ssh-keyscan github.com >> /root/.ssh/known_hosts
+  - git config user.email "drone@graphext.com"
+  - git config user.name "drone"
+  - git remote set-url origin git@github.com:graphext/blueprint.git
+  - yarn deploy
+  environment:
+    DEPLOY_KEY:
+     from_secret: deploy-key
+---
+kind: signature
+hmac: 0b39adef8a2cab5fc503cfa82cd12ca4cd9c49b3e46b13a2fe788d1cfd488e9a
+
+...
