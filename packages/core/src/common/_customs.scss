@@ -94,3 +94,58 @@ $pt-dark-divider-black: $white3;
 
 // Custom shadow for buttons, selects, tag-inputs, tooltips & datetime
 $custom-shadow: 0 0 12px rgba($black, 0.25);
+
+// Custom shadow for popover (New Design System)
+$pt-dark-border-shadow-opacity: 0.1;
+
+// ------------------------- New Design System Colors -------------------------------
+
+// Functions to get tint effect
+@function tint($color, $percentage) {
+  @return mix(white, $color, $percentage);
+}
+
+// Functions to get shade effect
+@function shade($color, $percentage) {
+  @return mix(black, $color, $percentage);
+}
+
+$g-dark-primary1: #0091E4;
+$g-dark-primary2: tint($g-dark-primary1, 20%); //20% tint
+$g-dark-primary3: shade($g-dark-primary1, 20%); //20% shade
+$g-dark-primary4: shade($g-dark-primary1, 30%); //30% shade
+$g-dark-primary5: shade($g-dark-primary1, 40%); //40% shade
+
+$g-white: hsl(0, 0%, 100%);
+$g-black: hsl(0, 0%, 10%);
+
+$g-primary1: shade($g-dark-primary1, 20%);
+$g-primary2: shade($g-dark-primary2, 20%);
+$g-primary3: shade($g-dark-primary3, 20%);
+$g-primary4: shade($g-dark-primary4, 30%);
+$g-primary5: shade($g-dark-primary5, 20%);
+
+$g-dark-grey1: hsl(220, 4%, 84%); 
+$g-dark-grey2: hsl(220, 4%, 84%);
+$g-dark-grey3: hsl(223, 3%, 59%);
+$g-dark-grey4: hsl(222, 5%, 44%);
+
+$g-grey1: $g-dark-grey4;
+$g-grey2: $g-dark-grey3;
+$g-grey3: $g-dark-grey2;
+$g-grey4: $g-dark-grey1;
+
+$g-dark-base0: hsl(0, 0%, 9%);
+$g-dark-base1: hsl(228, 7%, 13%);
+$g-dark-base2: hsl(220, 13%, 18%);
+$g-dark-base3: hsl(225, 14%, 19%);
+$g-dark-base4: hsl(221, 14%, 22%);
+$g-dark-base5: hsl(225, 13%, 25%);
+
+// To Be Defined in the New Design System https://www.figma.com/file/1rUpciJJRVQZiNqEzggaAN/NEW---Design-System?node-id=0%3A1 :
+// $g-base0: hsl(0, 0%, 9%);
+// $g-base1: hsl(225, 55%, 96%);
+// $g-base2: hsl(228, 38%, 97%);
+// $g-base3: hsl(228, 38%, 97%);
+// $g-base4: hsl(0, 0%, 98%);
+// $g-base5: hsl(225, 13%, 25%);
