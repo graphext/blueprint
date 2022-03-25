@@ -22,20 +22,26 @@
   }
 }
 
+// Custom Body3 font for truncated-popover
 .#{$ns}-table-truncated-popover {
   font-family: "LatoLatin";
-  font-size: 12px; // Body3 Typography
+  font-size: 12px;
 }
 
-// Centering text for truncated values and icon
+// Centering text for truncated values and format text
 .#{$ns}-table-truncated-value {
   top: 4px;
 }
-
 .#{$ns}-table-truncated-format-text {
   top: 4px;
 }
 
+// Adding top and bottom padding for centering the icon
 .#{$ns}-table-truncated-popover-target {
-  padding: 4px $pt-grid-size / 2; // Adding top and bottom padding for centering the icon
+  padding: 4px $pt-grid-size / 2; 
+}
+
+// Using break-spaces instead of pre in truncated popover https://graphext.atlassian.net/browse/GRAPH-7139
+.#{$ns}-table-popover-whitespace-pre {
+  white-space: break-spaces;
 }
