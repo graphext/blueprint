@@ -41,7 +41,9 @@ export class ColumnLoadingExample extends React.PureComponent<IExampleProps, ICo
     public render() {
         return (
             <Example options={this.renderOptions()} showOptionsBelowExample={true} {...this.props}>
-                <Table2 numRows={bigSpaceRocks.length}>{this.renderColumns()}</Table2>
+                <Table2 defaultRowHeight={32} numRows={bigSpaceRocks.length}>
+                    {this.renderColumns()}
+                </Table2>
             </Example>
         );
     }

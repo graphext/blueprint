@@ -54,7 +54,7 @@ export class TableLoadingExample extends React.PureComponent<IExampleProps, ITab
         ));
         return (
             <Example options={this.renderOptions()} showOptionsBelowExample={true} {...this.props}>
-                <Table2 numRows={bigSpaceRocks.length} loadingOptions={this.getLoadingOptions()}>
+                <Table2 defaultRowHeight={32} numRows={bigSpaceRocks.length} loadingOptions={this.getLoadingOptions()}>
                     {columns}
                 </Table2>
             </Example>

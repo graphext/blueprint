@@ -82,6 +82,7 @@ export class CellLoadingExample extends React.PureComponent<IExampleProps, ICell
                     numRows={bigSpaceRocks.length}
                     rowHeaderCellRenderer={this.renderRowHeaderCell}
                     enableColumnInteractionBar={true}
+                    defaultRowHeight={32}
                 >
                     {this.renderColumns()}
                 </Table2>

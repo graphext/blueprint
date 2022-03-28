@@ -82,6 +82,7 @@ export class TableReorderableExample extends React.PureComponent<IExampleProps, 
                     onColumnsReordered={this.handleColumnsReordered}
                     onRowsReordered={this.handleRowsReordered}
                     enableColumnInteractionBar={enableColumnInteractionBar}
+                    defaultRowHeight={32}
                 >
                     {this.state.columns}
                 </Table2>
