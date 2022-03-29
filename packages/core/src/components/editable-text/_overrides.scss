@@ -37,7 +37,7 @@
 
     &::before {
       border-radius: 8px;
-      @include position-editable-text(-8px, -8px); // Should be the saame as margin
+      @include position-editable-text(-8px, -8px); // Should be the same as margin
     }
   }
 }
