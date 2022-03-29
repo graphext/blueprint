@@ -52,9 +52,7 @@ export class TableEditableExample extends React.PureComponent<IExampleProps, ITa
         });
         return (
             <Example options={false} showOptionsBelowExample={true} {...this.props}>
-                <Table2 defaultRowHeight={32} numRows={7}>
-                    {columns}
-                </Table2>
+                <Table2 numRows={7}>{columns}</Table2>
             </Example>
         );
     }

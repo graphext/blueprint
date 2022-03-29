@@ -210,7 +210,6 @@ export class TableSortableExample extends React.PureComponent<IExampleProps> {
         return (
             <Example options={false} showOptionsBelowExample={true} {...this.props}>
                 <Table2
-                    defaultRowHeight={32}
                     bodyContextMenuRenderer={this.renderBodyContextMenu}
                     numRows={numRows}
                     selectionModes={SelectionModes.COLUMNS_AND_CELLS}

@@ -93,7 +93,7 @@ export class TableFormatsExample extends React.PureComponent<IExampleProps> {
     public render() {
         return (
             <Example options={false} showOptionsBelowExample={true} {...this.props}>
-                <Table2 defaultRowHeight={32} enableRowResizing={true} numRows={this.data.length}>
+                <Table2 enableRowResizing={true} numRows={this.data.length}>
                     <Column name="Timezone" cellRenderer={this.renderTimezone} />
                     <Column name="UTC Offset" cellRenderer={this.renderOffset} />
                     <Column name="Local Time" cellRenderer={this.renderLocalTime} />

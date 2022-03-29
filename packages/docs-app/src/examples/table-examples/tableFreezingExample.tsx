@@ -33,12 +33,7 @@ export class TableFreezingExample extends React.PureComponent<IExampleProps, ITa
     public render() {
         return (
             <Example options={false} showOptionsBelowExample={true} {...this.props}>
-                <Table2
-                    defaultRowHeight={32}
-                    numRows={NUM_ROWS}
-                    numFrozenRows={NUM_FROZEN_ROWS}
-                    numFrozenColumns={NUM_FROZEN_COLUMNS}
-                >
+                <Table2 numRows={NUM_ROWS} numFrozenRows={NUM_FROZEN_ROWS} numFrozenColumns={NUM_FROZEN_COLUMNS}>
                     {this.renderColumns()}
                 </Table2>
             </Example>
