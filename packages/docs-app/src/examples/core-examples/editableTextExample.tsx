@@ -34,7 +34,7 @@ export interface IEditableTextExampleState {
 
 export class EditableTextExample extends React.PureComponent<IExampleProps, IEditableTextExampleState> {
     public state: IEditableTextExampleState = {
-        alwaysRenderInput: false,
+        alwaysRenderInput: true,
         confirmOnEnterKey: false,
         report: "",
         selectAllOnFocus: false,
@@ -56,25 +56,10 @@ export class EditableTextExample extends React.PureComponent<IExampleProps, IEdi
                         alwaysRenderInput={this.state.alwaysRenderInput}
                         intent={this.state.intent}
                         maxLength={this.state.maxLength}
-                        placeholder="Big editable H1"
+                        placeholder="Edit title..."
                         selectAllOnFocus={this.state.selectAllOnFocus}
                     />
                 </H1>
-                <EditableText
-                    alwaysRenderInput={this.state.alwaysRenderInput}
-                    intent={this.state.intent}
-                    maxLength={this.state.maxLength}
-                    placeholder="Edit title..."
-                    selectAllOnFocus={this.state.selectAllOnFocus}
-                />
-                <EditableText
-                    alwaysRenderInput={false}
-                    intent={this.state.intent}
-                    maxLength={this.state.maxLength}
-                    placeholder="Disabled..."
-                    selectAllOnFocus={this.state.selectAllOnFocus}
-                    disabled={true}
-                />
                 <EditableText
                     alwaysRenderInput={this.state.alwaysRenderInput}
                     intent={this.state.intent}
@@ -87,18 +72,6 @@ export class EditableTextExample extends React.PureComponent<IExampleProps, IEdi
                     confirmOnEnterKey={this.state.confirmOnEnterKey}
                     value={this.state.report}
                     onChange={this.handleReportChange}
-                />
-                <EditableText
-                    className="bp3-gp-rounded-small"
-                    alwaysRenderInput={this.state.alwaysRenderInput}
-                    intent={this.state.intent}
-                    maxLength={this.state.maxLength}
-                    maxLines={3}
-                    minLines={3}
-                    multiline={true}
-                    placeholder="Edit report but with 'bp3-gp-rounded-small' class... (controlled, multiline)"
-                    selectAllOnFocus={this.state.selectAllOnFocus}
-                    confirmOnEnterKey={this.state.confirmOnEnterKey}
                 />
             </Example>
         );
