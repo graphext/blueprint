@@ -142,3 +142,8 @@
     $dark-cell-border-color
   );
 }
+
+// Centering cells for 32px height in DATA
+.#{$ns}-table-cell {
+  padding: 4px 8px
+}

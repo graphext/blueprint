@@ -1,25 +1,43 @@
-.#{$ns}-multiline .#{$ns}-editable-text-content {
-  margin: 0;
-}
 .#{$ns}-dark .#{$ns}-editable-text.#{$ns}-editable-text-editing::before, .#{$ns}-editable-text.#{$ns}-editable-text-editing::before{
   box-shadow: none;
 }
+
 .#{$ns}-dark .#{$ns}-editable-text:hover::before{
   box-shadow: none;
   background: $dark-gray5;
 }
 
-.#{$ns}-editable-text-editing:not([class*="#{$ns}-multiline"])::before , .#{$ns}-editable-text:not([class*="#{$ns}-multiline"])::before {
-  width: 100%;
-  height: 100%;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+// Removing hover background when it's disabled
+.#{$ns}-dark .#{$ns}-editable-text.#{$ns}-disabled:hover::before{
+  background: none;
 }
 
-.#{$ns}-editable-text:not([class*="#{$ns}-table-editable-name"]) {
-  .#{$ns}-editable-text-input:not(textarea), .#{$ns}-editable-text-content:not(textarea) {
-    margin: 8px 16px;
+// Custom function for position in editable-text
+@mixin position-editable-text($height, $width) {
+  bottom: $height;
+  left: $width;
+  position: absolute;
+  right: $width;
+  top: $height;
+}
+
+.#{$ns}-editable-text {
+  display: block;
+  margin: 8px 12px; // Margin to fix absolute position over other components
+
+  &::before {
+    // Imitating @include position-all() with custom design system values
+    // Also, it breaks the position relation with the pt-border-radius
+    @include position-editable-text(-8px, -12px); // Should be the same as margin
+  }
+
+  // CUSTOM CLASS Small rounded for table description editable text
+  &.#{$ns}-gp-rounded-small {
+    margin: 8px 8px; // Forcing smaller margin
+
+    &::before {
+      border-radius: 8px;
+      @include position-editable-text(-8px, -8px); // Should be the same as margin
+    }
   }
 }

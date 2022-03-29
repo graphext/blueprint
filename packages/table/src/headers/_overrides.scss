@@ -1,0 +1,52 @@
+// Changing padding from column name text
+.#{$ns}-table-column-name-text {
+  padding: 0px 8px; // Forced cell header padding
+}
+
+// Removing strange objects on table when hover
+@function menu-background($color) {
+  @return none;
+}
+
+// // Weird background-image when selected
+.#{$ns}-table-header {
+  .#{$ns}-table-selection-enabled &:hover,
+  &.#{$ns}-table-header-active {
+    &::before {
+      .#{$ns}-dark & {
+        background-color: none;
+      }
+    }
+  }
+
+  &.#{$ns}-table-header-selected::before {
+    background-image: none;
+    background-color: rgba($g-grey4, 0.1);
+  }
+}
+
+// Same background-color when hover table header
+.#{$ns}-table-header.#{$ns}-table-header-selected {
+  .#{$ns}-table-selection-enabled &:hover{
+    &::before {
+      .#{$ns}-dark & {
+        background-color: rgba($g-grey4, 0.1);
+      }
+    }
+  }
+}
+
+// Removing strange artefacts when selected
+.#{$ns}-table-th-menu-container-background {
+  .#{$ns}-table-selection-enabled .#{$ns}-table-header.#{$ns}-table-header-selected:hover & {
+    .#{$ns}-dark & {
+      background-image: none;
+    }
+  }
+}
+
+
+// Centering row-index with cell and icons
+.#{$ns}-table-row-name {
+  padding: 4px $pt-grid-size / 2; // Added 4px to center row-index with cells
+}
