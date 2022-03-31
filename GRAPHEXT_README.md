@@ -41,6 +41,7 @@ The following packages of this monorepo have been already updated by Graphext an
     - `select`
     - `icons`
     - `table`
+    - `popover2` 
 
 ## How to publish the changes
 
@@ -63,7 +64,7 @@ After that you can upgrade the version of the changed packages adding +1 after t
 
 And publish the affected packages like:
 ```
-cd packages/core && npm publish && cd ../../ && cd packages/icons && npm publish && cd ../../ && cd packages/datetime && npm publish && cd ../../ && cd packages/table && npm publish && cd ../../ && cd packages/select && npm publish && cd ../../
+cd packages/core && npm publish && cd ../../ && cd packages/icons && npm publish && cd ../../ && cd packages/datetime && npm publish && cd ../../ && cd packages/table && npm publish && cd ../../ && cd packages/select && npm publish && cd ../../ && cd packages/popover2 && npm publish && cd ../../
 ```
 
 ## How to add new icons
@@ -130,4 +131,7 @@ The [first version](https://npm.graphext.com/-/web/detail/@blueprintjs/core/v/3.
 This is how we included the changes from palantir in our repository.
 At this point, we were able to work as we used to do (PR in `graphext` and then if you want to deploy your changes, merge it into `deploy`).
 
-
+### About popover2 situation
+`@blueprint/popover2` package is going to replace `@blueprint/core` popover in `Blueprintjs V5`. 
+The use of this package is recommended to be prepared and also because it is more efficient than the previous one.
+We must take into account that the 'custom' version of this package for graphext exists since `graphext04`, so if we try to use a previous version it will return an error because it does not exist in our private repository.
