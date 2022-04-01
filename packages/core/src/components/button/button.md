@@ -65,3 +65,7 @@ Use the `@ns-button` class to access button styles. You should implement buttons
 * Note that `<a>` tags do not respond to the `:disabled` attribute; use `.@ns-disabled` instead.
 
 @css button
+
+@## Graphext buttons
+
+@reactExample ButtonsGExample

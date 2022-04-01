@@ -64,24 +64,6 @@ $white2: rgba(255, 255, 255, 0.8);
 $white3: rgba(255, 255, 255, 0.5);
 $white4: rgba(255, 255, 255, 0.3);
 
-$pt-intent-primary: #0091E4;
-$pt-dark-link-color: $pt-intent-primary; // for links
-
-$pt-intent-text-colors: (
-  "primary": $pt-intent-primary,
-  "success": $green2,
-  "warning": $orange2,
-  "danger" : $red2,
-);
-
-$pt-dark-intent-text-colors: (
-  "primary": $pt-intent-primary,
-  "success": $green5,
-  "warning": $orange5,
-  "danger" : $red5,
-);
-
-
 // ------------------------- Color aliases -------------------------------
 
 $pt-dark-icon-color: $white3;
@@ -125,7 +107,7 @@ $g-primary3: shade($g-dark-primary3, 20%);
 $g-primary4: shade($g-dark-primary4, 30%);
 $g-primary5: shade($g-dark-primary5, 20%);
 
-$g-dark-grey1: hsl(220, 4%, 84%); 
+$g-dark-grey1: hsl(220, 4%, 84%);
 $g-dark-grey2: hsl(220, 4%, 84%);
 $g-dark-grey3: hsl(223, 3%, 59%);
 $g-dark-grey4: hsl(222, 5%, 44%);
@@ -149,3 +131,20 @@ $g-dark-base5: hsl(225, 13%, 25%);
 // $g-base3: hsl(228, 38%, 97%);
 // $g-base4: hsl(0, 0%, 98%);
 // $g-base5: hsl(225, 13%, 25%);
+
+$pt-intent-primary: $g-dark-primary1;
+$pt-dark-link-color: $pt-intent-primary; // for links
+
+$pt-intent-text-colors: (
+  "primary": $pt-intent-primary,
+  "success": $green2,
+  "warning": $orange2,
+  "danger" : $red2,
+);
+
+$pt-dark-intent-text-colors: (
+  "primary": $pt-intent-primary,
+  "success": $green5,
+  "warning": $orange5,
+  "danger" : $red5,
+);

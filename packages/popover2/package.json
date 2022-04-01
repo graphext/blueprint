@@ -35,7 +35,7 @@
     "verify": "npm-run-all compile -p dist test lint"
   },
   "dependencies": {
-    "@blueprintjs/core": "3.53.0-graphext04",
+    "@blueprintjs/core": "3.53.0-graphext05-beta",
     "@popperjs/core": "^2.5.4",
     "classnames": "^2.2",
     "dom4": "^2.1.5",

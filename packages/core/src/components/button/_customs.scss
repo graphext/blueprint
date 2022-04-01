@@ -1,6 +1,7 @@
 @import "../../common/customs";
 
 $pt-button-border-radius: $pt-button-height-large / 2;
+$pt-border-radius: $pt-button-border-radius; // Custom border radius just used once in _common.scss
 
 $button-border-width: 0;
 
@@ -13,7 +14,34 @@ $button-intent-box-shadow-active: $custom-shadow;
 $dark-button-box-shadow: $custom-shadow;
 $dark-button-box-shadow-active: $custom-shadow;
 
-$dark-minimal-button-background-color-hover: rgba($dark-gray5, 0.15);
-$dark-minimal-button-background-color-active: rgba($dark-gray5, 0.3);
+$button-padding: $pt-grid-size ($pt-grid-size * 1.5) !default;
+$button-padding-large: $pt-grid-size ($pt-grid-size * 3) !default;
 
-$pt-border-radius: $pt-button-border-radius; // Custom border radius just used once in _common.scss
+// "intent": (default, hover, active colors)
+$button-intents: (
+  "primary": ($pt-intent-primary, $g-dark-primary2, $g-dark-primary1),
+  "success": ($pt-intent-success, $green2, $green1),
+  "warning": ($pt-intent-warning, $orange2, $orange1),
+  "danger": ($pt-intent-danger, $red2, $red1)
+) !default;
+
+$dark-button-color-disabled: $g-dark-primary5 !default;
+
+/* LARGE */
+
+$pt-font-size-large: $pt-font-size;
+$pt-button-height-large: $pt-grid-size * 4;
+
+/* SECONDARY */
+$dark-button-background-color: $dark-gray4;
+$dark-button-background-color-hover: $dark-gray5;
+$dark-button-gradient: none;
+$pt-dark-button-text-color: $g-dark-primary2;
+
+/* GHOST */
+$dark-minimal-button-background-color-hover: transparent;
+$dark-minimal-button-background-color-active: transparent;
+$dark-minimal-button-color-hover: transparent;
+
+/* STROKE */
+$pt-dark-button-outlined-hover-background-color: $g-dark-base5;

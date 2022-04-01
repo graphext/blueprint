@@ -4,6 +4,8 @@
 @import "../../common/variables";
 @import "./common";
 
+@import "overrides";
+
 /*
 Button
 
@@ -207,5 +209,3 @@ a.#{$ns}-button {
     }
   }
 }
-
-@import "overrides";

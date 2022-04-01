@@ -1,68 +1,72 @@
-.#{$ns}-button.#{$ns}-action-button {
-  padding-left: 32px;
-  padding-right: 32px;
+.#{$ns}-button {
   text-transform: uppercase;
 }
 
-.#{$ns}-button:focus {
-  outline: none;
+.#{$ns}-dark button.#{$ns}-button.#{$ns}-minimal.#{$ns}-intent-primary:hover {
+  background-color: $dark-minimal-button-background-color-hover;
+  color: $pt-dark-button-text-color;
+}
+
+.#{$ns}-dark button.#{$ns}-button.#{$ns}-minimal.#{$ns}-intent-primary.#{$ns}-active {
+  background-color: $dark-minimal-button-background-color-hover;
 }
 
 .#{$ns}-button-text {
   font-size: 12px;
-  font-weight: bold;
+  font-weight: 400;
 }
 
-.#{$ns}-dark .#{$ns}-button.#{$ns}-minimal.#{$ns}-intent-primary:hover,
-.#{$ns}-button.#{$ns}-minimal.#{$ns}-intent-primary:hover {
-  background-color: inherit;
-}
+/* same as _commmon.scss to overwrite it*/
+@mixin pt-dark-button() {
+  background-color: $dark-button-background-color;
+  background-image: $dark-button-gradient;
+  box-shadow: $dark-button-box-shadow;
+  color: $pt-dark-button-text-color; /* changed */
 
-.#{$ns}-dark .#{$ns}-button.#{$ns}-minimal {
+
+
+  &.#{ns}-icon {
+    color: $pt-dark-button-text-color;
+  }
+
+  &:hover:not([class*="#{$ns}-outlined"]), /* changed */
+  &:active,
+  &.#{$ns}-active {
+    color: $pt-dark-button-text-color; /* changed */
+  }
+
+  &:hover {
+    @include pt-dark-button-hover();
+  }
+
+  &:active,
+  &.#{$ns}-active {
+    @include pt-dark-button-active();
+  }
+
   &:disabled,
-  &:disabled:hover,
-  &.#{$ns}-disabled,
-  &.#{$ns}-disabled:hover{
-    background-color: $dark-minimal-button-background-color;
-    opacity: 0.5;
+  &.#{$ns}-disabled {
+    @include pt-dark-button-disabled();
+  }
+
+  .#{$ns}-button-spinner .#{$ns}-spinner-head {
+    background: $dark-progress-track-color;
+    stroke: $dark-progress-head-color;
   }
 }
 
-.#{$ns}-dark .#{$ns}-button, .#{$ns}-dark .#{$ns}-button:not([class*="bp3-intent-"]), .#{$ns}-button:not([class*="bp3-intent-"]) {
-  background-image: none;
-}
+/* same as _commmon.scss to overwrite it*/
+@mixin pt-dark-button-outlined() {
+  border-color: rgba($white, 0.4);
 
-.#{$ns}-dark .#{$ns}-button:not([class*="bp3-intent-"]) .#{$ns}-icon {
- color: $white;
-}
+  &:disabled,
+  &:disabled:hover,
+  &.#{$ns}-disabled,
+  &.#{$ns}-disabled:hover {
+    border-color: rgba($white, 0.2);
+  }
 
-.#{$ns}-button-group .#{$ns}-button {
-  min-width: 48px;
-}
-
-.#{$ns}-button-group .#{$ns}-button:not(:last-child),
-.#{$ns}-button-group .#{$ns}-popover-wrapper:not(:last-child) .#{$ns}-button {
-  border-right: 1px solid $g-dark-base3;
-}
-
-.#{$ns}-dark .#{$ns}-button-group .#{$ns}-button:not([class*="bp3-intent-"]) {
-  box-shadow: none;
-}
-
-// Fix - Button icons without intent not 100% white
-$pt-gp-dark-icon-color: $g-white;
-
-.#{$ns}-button {
-  .#{$ns}-dark & {
-    &:not([class*="#{$ns}-intent-"]) {
-      &[class*="#{$ns}-icon-"]::before {
-        color: $pt-gp-dark-icon-color;
-      }
-      #{$icon-classes} {
-        &:not([class*="#{$ns}-intent-"]) {
-          color: $pt-gp-dark-icon-color;
-        }
-      }
-    }
+  &:hover { /* added */
+    background: $pt-dark-button-outlined-hover-background-color;
   }
 }
