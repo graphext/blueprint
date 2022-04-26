@@ -2,8 +2,14 @@
 # The setup (just first time):
 # docker-compose run bp sh -c 'yarn && yarn compile'
 #
-# In order to update Markdowns
+# In order to update Markdowns:
 # docker-compose run bp sh -c 'yarn docs-data'
+#
+# To only work with core:
+# docker-compose run -p 9999:9999 bp sh -c 'yarn dev:core'
+#
+# To compile "core" CSS for Storybook and copy on @blueprintjs folder:
+# docker-compose run storybook-core
 #
 version: '3'
 services:
@@ -14,5 +20,16 @@ services:
     volumes:
       - .:/hostdata
       - ${DEVELOPMENT_DIR}/config/npmrc:/root/.npmrc
+      - ${DEVELOPMENT_DIR}/repositories/graphext/node_modules/@blueprintjs:/root/graphext/blueprintjs
+    ports:
+      - "9999:9999"
+  storybook-core:
+    image: node:12
+    command: sh -c 'cd packages/core && yarn compile:css && cp -R lib/css ../../../root/graphext/blueprintjs/core/lib'
+    working_dir: /hostdata
+    volumes:
+      - .:/hostdata
+      - ${DEVELOPMENT_DIR}/config/npmrc:/root/.npmrc
+      - ${DEVELOPMENT_DIR}/repositories/graphext/node_modules/@blueprintjs:/root/graphext/blueprintjs
     ports:
       - "9999:9999"
