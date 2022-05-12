@@ -1,4 +1,32 @@
-.#{$ns}-tooltip, .#{$ns}-tooltip .#{$ns}-popover-content {
+.#{$ns}-tooltip2,
+.#{$ns}-tooltip2 .#{$ns}-popover2-content {
   border-radius: $pt-grid-size;
   font-size: 12px;
+  line-height: 14px;
+}
+
+.#{$ns}-tooltip2 {
+
+  // To adjust arrow placement
+  $g-tooltip2-arrow-adjust: 7px;
+
+  &.#{$ns}-popover2-placement-top .#{$ns}-popover2-arrow {
+    transform: translateY(- $g-tooltip2-arrow-adjust);
+  }
+
+  &.#{$ns}-popover2-placement-left .#{$ns}-popover2-arrow {
+    transform: translateX(- $g-tooltip2-arrow-adjust);
+  }
+
+  &.#{$ns}-popover2-placement-bottom .#{$ns}-popover2-arrow {
+    transform: translateY($g-tooltip2-arrow-adjust);
+  }
+
+  &.#{$ns}-popover2-placement-right .#{$ns}-popover2-arrow {
+    transform: translateX($g-tooltip2-arrow-adjust);
+  }
+
+  &.#{$ns}-g-no-arrow > .#{$ns}-popover2-arrow{
+    display: none;
+  }
 }

@@ -1,4 +1,9 @@
-$pt-tooltip2-box-shadow: $custom-shadow;
-
 $dark-tooltip2-background-color: $dark-gray0;
 $dark-tooltip2-text-color: $white1;
+
+$pt-tooltip2-box-shadow: none;
+$pt-dark-tooltip2-box-shadow: none;
+$pt-dark-drop-shadow-opacity: 0;
+$pt-dark-border-shadow-opacity: 0;
+
+$tooltip2-padding-horizontal: $pt-grid-size;
