@@ -2,12 +2,6 @@
   color: inherit;
 }
 
-.#{$ns}-dark {
-  .#{$ns}-tab {
-    color: $blue3;
-  }
-}
-
 .#{$ns}-tab-indicator-wrapper {
   z-index: 1;
 
@@ -22,10 +16,155 @@
     flex: 1;
     margin: 0;
     text-align: center;
-    border-bottom: 2px solid transparent;
+  }
+}
 
-    &:not([aria-selected="true"]) {
-      border-bottom-color: $dark-gray1;
+/* hover effect =>
+ - dark theme: background effect + color
+ - white theme: color
+*/
+.#{$ns}-tab {
+  padding-left: 8px;
+  padding-right: 8px;
+  &:not([aria-disabled="true"]):hover {
+    color: $pt-intent-primary;
+  }
+}
+
+.#{$ns}-dark {
+  .#{$ns}-tab {
+    &:not([aria-disabled="true"]):hover {
+      color: $pt-intent-primary;
+      background-color: rgba($pt-intent-primary, 0.1);
     }
   }
 }
+
+.#{$ns}-dark {
+  .#{$ns}-tabs.#{$ns}-vertical {
+    > .#{$ns}-tab-list {
+      .#{$ns}-tab {
+        &:not([aria-disabled="true"]):hover {
+          color: $pt-intent-primary;
+          background-color: rgba($pt-intent-primary, 0.1);
+        }
+      }
+    }
+  }
+}
+
+
+/* overrides default bp value */
+.#{$ns}-tab-list {
+  > *:not(:last-child) {
+    margin-right: 0;
+  }
+}
+
+/*
+horizontal => align items horizontally (one after another)
+vertical =>  align items vertically (one on top of another) => we need to override bp effect in this case
+*/
+
+.#{$ns}-tabs.#{$ns}-vertical {
+  > .#{$ns}-tab-list {
+    .#{$ns}-tab {
+      border-radius: 0;
+      &[aria-selected="true"] {
+        background-color: transparent;
+     }
+    }
+  }
+}
+
+/*
+Available classNames to place the stroke line in the desired position:
+- top => .#{$ns}-g-stroke-line-top => example: bp3-g-stroke-line-top
+- right => .#{$ns}-g-stroke-line-right => example: bp3-g-stroke-line-right
+- bottom => .#{$ns}-g-stroke-line-bottom => example: bp3-g-stroke-line-bottom
+- left => .#{$ns}-g-stroke-line-left => example: bp3-g-stroke-line-left
+
+Hints:
+- inset: changes the shadow to one inside the frame.
+- if color is omitted => it takes the default color
+  (helpfully for dark and light theme differentiation => no need extra rules for each theme)
+- minus sign (-) in offset-x or offset-y changes the line position.
+
+We need to win the specificity of the vertical selector that sets box-shadow: none (declared in the _tabs.scss file):
+.#{$ns}-tabs.#{$ns}-vertical {
+(...)
+  > .#{$ns}-tab-list {
+    (...)
+    .#{$ns}-tab {
+      (...)
+      &[aria-selected="true"] {
+        box-shadow: none; => we need to override this
+      }
+    }
+    (...)
+}
+
+That's why we use (for example) this selector for vertical tabs: .#{$ns}-g-stroke-line-top.#{$ns}-tabs.#{$ns}-vertical.
+*/
+
+
+// stroke line position => top
+.#{$ns}-g-stroke-line-top,
+.#{$ns}-g-stroke-line-top.#{$ns}-tabs.#{$ns}-vertical {
+  > .#{$ns}-tab-list {
+    .#{$ns}-tab {
+      &[aria-selected="true"] {
+        box-shadow: inset 0 ($tab-indicator-width);
+      }
+      &:not([aria-disabled="true"]):hover,
+      &[aria-selected="true"]:hover {
+        box-shadow: inset 0 ($tab-indicator-width) $pt-intent-primary;
+      }
+    }
+  }
+}
+
+
+// stroke line position => right
+.#{$ns}-g-stroke-line-right,
+.#{$ns}-g-stroke-line-right.#{$ns}-tabs.#{$ns}-vertical {
+
+  .#{$ns}-tab {
+    &[aria-selected="true"] {
+      box-shadow: inset (-$tab-indicator-width) 0;
+    }
+    &:not([aria-disabled="true"]):hover,
+    &[aria-selected="true"]:hover {
+      box-shadow: inset (-$tab-indicator-width) 0 $pt-intent-primary;
+    }
+  }
+}
+
+// stroke line position => bottom
+.#{$ns}-g-stroke-line-bottom,
+.#{$ns}-g-stroke-line-bottom.#{$ns}-tabs.#{$ns}-vertical {
+  .#{$ns}-tab {
+    &[aria-selected="true"] {
+      box-shadow: inset 0 (-$tab-indicator-width) 0;
+    }
+    &:not([aria-disabled="true"]):hover,
+    &[aria-selected="true"]:hover {
+      box-shadow: inset 0 (-$tab-indicator-width) 0 $pt-intent-primary;
+    }
+  }
+}
+
+// stroke line position => left
+.#{$ns}-g-stroke-line-left,
+.#{$ns}-g-stroke-line-left.#{$ns}-tabs.#{$ns}-vertical {
+  .#{$ns}-tab {
+    &[aria-selected="true"] {
+      box-shadow: inset $tab-indicator-width 0;
+    }
+    &:not([aria-disabled="true"]):hover,
+    &[aria-selected="true"]:hover {
+      box-shadow: inset $tab-indicator-width 0 $pt-intent-primary;
+    }
+  }
+}
+
