@@ -1,8 +1,8 @@
 {
-  "@blueprintjs/core": "3.53.0-graphext07",
-  "@blueprintjs/datetime": "3.23.20-graphext07",
-  "@blueprintjs/icons": "3.32.0-graphext07",
-  "@blueprintjs/select": "3.18.12-graphext07",
-  "@blueprintjs/table": "3.9.14-graphext07",
-  "@blueprintjs/popover2": "0.13.0-graphext07"
+  "@blueprintjs/core": "3.53.0-graphext08",
+  "@blueprintjs/datetime": "3.23.20-graphext08",
+  "@blueprintjs/icons": "3.32.0-graphext08",
+  "@blueprintjs/select": "3.18.12-graphext08",
+  "@blueprintjs/table": "3.9.14-graphext08",
+  "@blueprintjs/popover2": "0.13.0-graphext08"
 }
