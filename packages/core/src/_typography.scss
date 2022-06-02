@@ -6,6 +6,7 @@
 @import "common/variables";
 @import "common/mixins";
 @import "~@blueprintjs/icons/src/icons";
+@import "common/customs";
 
 /*
 Headings
@@ -457,3 +458,5 @@ Styleguide rtl
 .#{$ns}-dark {
   color: $pt-dark-text-color;
 }
+
+@import "overrides";

@@ -1,0 +1,30 @@
+@import "common/mixins";
+
+.#{$ns}-heading {
+  @include heading-typography();
+  margin: 0;
+  padding: 0;
+}
+
+// tag: (font-size, line-height)
+$headings: (
+  "h1": (20px, 24px),
+  "h2": (18px, 16px),
+  "h3": (14px, 16px),
+  "h4": (12px, 14px),
+  "h5": (10px, 12px),
+  "h6": (8px, 12px)
+) !default;
+
+@each $tag, $props in $headings {
+  %#{$tag} {
+    font-size: nth($props, 1);
+    line-height: nth($props, 2);
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+
+  #{$tag}.#{$ns}-heading {
+    @extend %#{$tag};
+  }
+}

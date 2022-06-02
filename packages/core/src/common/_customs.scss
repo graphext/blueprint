@@ -81,6 +81,8 @@ $pt-dark-intent-text-colors: (
   "danger" : $red5,
 );
 
+$pt-dark-text-color-muted: $white3 !default;
+
 
 // ------------------------- Color aliases -------------------------------
 
@@ -125,7 +127,7 @@ $g-primary3: shade($g-dark-primary3, 20%);
 $g-primary4: shade($g-dark-primary4, 30%);
 $g-primary5: shade($g-dark-primary5, 20%);
 
-$g-dark-grey1: hsl(220, 4%, 84%); 
+$g-dark-grey1: hsl(220, 4%, 84%);
 $g-dark-grey2: hsl(220, 4%, 84%);
 $g-dark-grey3: hsl(223, 3%, 59%);
 $g-dark-grey4: hsl(222, 5%, 44%);
