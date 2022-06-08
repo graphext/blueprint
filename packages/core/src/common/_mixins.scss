@@ -3,6 +3,7 @@
 
 @import "colors";
 @import "flex";
+@import "mixins-overwrites";
 
 $pt-intent-colors: (
   "primary": $pt-intent-primary,
@@ -77,9 +78,6 @@ $pt-dark-intent-text-colors: (
   -moz-outline-radius: 6px;
 }
 
-@function border-shadow($alpha, $color: $black, $size: 1px) {
-  @return 0 0 0 $size rgba($color, $alpha);
-}
 
 // returns the padding necessary to center text in a container of the given height.
 // default line-height is that of base typography, 18px assuming 14px font-size.
