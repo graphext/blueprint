@@ -3,7 +3,6 @@
 
 @import "colors";
 @import "flex";
-@import "mixins-overwrites";
 
 $pt-intent-colors: (
   "primary": $pt-intent-primary,
@@ -105,3 +104,5 @@ $pt-dark-intent-text-colors: (
 @mixin new-render-layer() {
   transform: translateZ(0);
 }
+
+@import "mixins-overwrites";
