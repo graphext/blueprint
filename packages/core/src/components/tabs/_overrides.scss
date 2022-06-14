@@ -1,14 +1,14 @@
 .#{$ns}-tab > * {
   color: inherit;
 }
-
+/*
 .#{$ns}-tab-indicator-wrapper {
   z-index: 1;
 
   .#{$ns}-tab-indicator {
     bottom: -$tab-indicator-width;
   }
-}
+}*/
 
 // Allow tabs to fill available width
 .#{$ns}-tabs-fill {
@@ -40,7 +40,7 @@
 
   &:not([aria-disabled="true"]):hover {
     color: $pt-intent-primary;
-    background-color: $tab-background-color-light;
+    background-color: $tab-background-color-light !important; /* to win !important when animate */
   }
 
   &[aria-disabled="true"] {
@@ -54,7 +54,7 @@
   .#{$ns}-tab {
     &:not([aria-disabled="true"]):hover {
       color: $pt-intent-primary;
-      background-color: $tab-background-color-dark;
+      background-color: $tab-background-color-dark !important; /* to win !important when animate */
     }
 
     &[aria-disabled="true"] {
@@ -175,13 +175,13 @@ $stroke-line-left: inset $tab-indicator-width 0;
 
 // light theme & dark theme
 .#{$ns}-dark .#{$ns}-tab,
-.#{$ns}-tab {
+.#{$ns}-tab-list .#{$ns}-tab {
   &[aria-selected="true"] {
-    box-shadow: $stroke-line-bottom;
+    box-shadow: $stroke-line-bottom !important;
   }
 
   &:not([aria-disabled="true"]):hover {
-    box-shadow: $stroke-line-bottom $pt-intent-primary;
+    box-shadow: $stroke-line-bottom $pt-intent-primary !important; /* to win !important when animate */
   }
 }
 
@@ -191,15 +191,42 @@ $stroke-line-left: inset $tab-indicator-width 0;
     .#{$ns}-tab {
 
       &[aria-selected="true"] {
-        box-shadow: $stroke-line-left;
+        box-shadow: $stroke-line-left !important;
       }
 
       &:not([aria-disabled="true"]):hover {
-        box-shadow: $stroke-line-left $pt-intent-primary;
+        box-shadow: $stroke-line-left $pt-intent-primary !important; /* to win !important when animate */
       }
     }
   }
 }
+/**/
+/*.#{$ns}-tab-indicator-wrapper {
+  .#{$ns}-tab-indicator {
+    color: white;
+    .#{$ns}-tab {
+      &:not([aria-disabled="true"]):hover {
+        box-shadow: $stroke-line-top $pt-intent-primary;
+      }
+    }
+  }
+}*/
+
+.#{$ns}-tabs.#{$ns}-vertical {
+  > .#{$ns}-tab-list {
+    .#{$ns}-tab-indicator-wrapper .#{$ns}-tab-indicator {
+
+      /* make stroke line vertical left */
+      height: inherit;
+      width: $tab-indicator-width;
+      /*overwrite BP styles*/
+      border-radius: 0;
+      background-color: $pt-intent-primary;
+    }
+  }
+}
+
+
 
 /*
   Stroke line position declaration.
@@ -215,12 +242,16 @@ $stroke-line-left: inset $tab-indicator-width 0;
 .#{$ns}-g-stroke-line-top.#{$ns}-tabs.#{$ns}-vertical {
     .#{$ns}-tab {
       &[aria-selected="true"] {
-        box-shadow: $stroke-line-top;
+        box-shadow: $stroke-line-top !important;
       }
       &:not([aria-disabled="true"]):hover {
-        box-shadow: $stroke-line-top $pt-intent-primary;
+        box-shadow: $stroke-line-top $pt-intent-primary !important;
       }
     }
+
+  .#{$ns}-tab-indicator-wrapper .#{$ns}-tab-indicator {
+    background-color: transparent;
+  }
 }
 
 
@@ -230,11 +261,15 @@ $stroke-line-left: inset $tab-indicator-width 0;
 
   .#{$ns}-tab {
     &[aria-selected="true"] {
-      box-shadow: $stroke-line-right;
+      box-shadow: $stroke-line-right !important;
     }
     &:not([aria-disabled="true"]):hover {
-      box-shadow: $stroke-line-right $pt-intent-primary;
+      box-shadow: $stroke-line-right $pt-intent-primary !important;
     }
+  }
+
+  .#{$ns}-tab-indicator-wrapper .#{$ns}-tab-indicator {
+    background-color: transparent;
   }
 }
 
@@ -243,25 +278,40 @@ $stroke-line-left: inset $tab-indicator-width 0;
 .#{$ns}-g-stroke-line-bottom.#{$ns}-tabs.#{$ns}-vertical {
   .#{$ns}-tab {
     &[aria-selected="true"] {
-      box-shadow: $stroke-line-bottom;
+      box-shadow: $stroke-line-bottom !important;
     }
     &:not([aria-disabled="true"]):hover {
-      box-shadow: $stroke-line-bottom $pt-intent-primary;
+      box-shadow: $stroke-line-bottom $pt-intent-primary !important;
     }
   }
 }
+
+.#{$ns}-g-stroke-line-bottom.#{$ns}-tabs.#{$ns}-vertical {
+  .#{$ns}-tab-indicator-wrapper .#{$ns}-tab-indicator {
+    background-color: transparent;
+  }
+}
+
 
 // stroke line position => left
 .#{$ns}-g-stroke-line-left,
 .#{$ns}-g-stroke-line-left.#{$ns}-tabs.#{$ns}-vertical {
   .#{$ns}-tab {
     &[aria-selected="true"] {
-      box-shadow: $stroke-line-left;
+      box-shadow: $stroke-line-left !important;
     }
     &:not([aria-disabled="true"]):hover {
-      box-shadow: $stroke-line-left $pt-intent-primary;
+      box-shadow: $stroke-line-left $pt-intent-primary !important;
     }
   }
 }
+
+
+.#{$ns}-g-stroke-line-left {
+  .#{$ns}-tab-indicator-wrapper .#{$ns}-tab-indicator {
+    background-color: transparent;
+  }
+}
+
 
 /* Stroke line declaration ends here */
