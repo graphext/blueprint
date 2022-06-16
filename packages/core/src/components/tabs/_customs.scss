@@ -1,3 +1,11 @@
 $dark-tab-color-selected: $white1;
 $tab-color-selected: $black;
 $tab-indicator-width: 2px;
+
+$tab-background-color-dark: #2F4151; //TODO use color variable => base6-dark
+$tab-background-color-light: #F2FAFE; //TODO use color variable => base6-light
+
+$tab-color-disabled-dark: #6A6D74; //TODO use color variable => grey4 dark theme
+$tab-color-disabled-light: #6A6D74; //TODO use color variable => grey1 light theme
+
+$pt-transition-duration: 250ms

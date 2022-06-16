@@ -1,14 +1,6 @@
 .#{$ns}-tab > * {
   color: inherit;
 }
-/*
-.#{$ns}-tab-indicator-wrapper {
-  z-index: 1;
-
-  .#{$ns}-tab-indicator {
-    bottom: -$tab-indicator-width;
-  }
-}*/
 
 // Allow tabs to fill available width
 .#{$ns}-tabs-fill {
@@ -19,7 +11,6 @@
   }
 }
 
-
 /* overrides default bp value */
 .#{$ns}-tab-list {
   > *:not(:last-child) {
@@ -27,80 +18,44 @@
   }
 }
 
+.#{$ns}-tabs.#{$ns}-vertical .#{$ns}-tab,
+.#{$ns}-tab {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
 /*
 - hover effect (only if not disabled) => background + color
 - disabled: specific color
  */
 
-// light theme (vertical and horizontal)
-.#{$ns}-tabs.#{$ns}-vertical .#{$ns}-tab,
-.#{$ns}-tab {
-  padding-left: 8px;
-  padding-right: 8px;
-
+@mixin setHoverAndDisabledEffect($hover_color, $disabled_color) {
   &:not([aria-disabled="true"]):hover {
     color: $pt-intent-primary;
-    background-color: $tab-background-color-light !important; /* to win !important when animate */
+    background-color: $hover_color !important; /* to win BP !important when animate */
   }
 
   &[aria-disabled="true"] {
-    color: $tab-color-disabled-light;
+    color: $disabled_color;
   }
+}
+
+// light theme (vertical and horizontal)
+.#{$ns}-tabs.#{$ns}-vertical .#{$ns}-tab,
+.#{$ns}-tab {
+  @include setHoverAndDisabledEffect($tab-background-color-light, $tab-color-disabled-light);
 }
 
 // dark theme (vertical and horizontal)
 .#{$ns}-dark {
   .#{$ns}-tabs.#{$ns}-vertical .#{$ns}-tab,
   .#{$ns}-tab {
-    &:not([aria-disabled="true"]):hover {
-      color: $pt-intent-primary;
-      background-color: $tab-background-color-dark !important; /* to win !important when animate */
-    }
-
-    &[aria-disabled="true"] {
-      color: $tab-color-disabled-dark;
-    }
+    @include setHoverAndDisabledEffect($tab-background-color-dark, $tab-color-disabled-dark);
   }
 }
 
 /*
-//vertical light
-.#{$ns}-tabs.#{$ns}-vertical {
-    > .#{$ns}-tab-list {
-      .#{$ns}-tab {
-        &:not([aria-disabled="true"]):hover {
-          color: $pt-intent-primary;
-          background-color: $tab-background-color-light;
-        }
-
-        &[aria-disabled="true"] {
-          color: $tab-color-disabled-light;
-        }
-    }
-  }
-}*/
-/*
-.#{$ns}-dark {
-  .#{$ns}-tabs.#{$ns}-vertical {
-    > .#{$ns}-tab-list {
-      .#{$ns}-tab {
-        &:not([aria-disabled="true"]):hover {
-          color: $pt-intent-primary;
-          background-color: $tab-background-color-dark;
-        }
-
-        &[aria-disabled="true"] {
-          color: $tab-color-disabled-dark;
-        }
-      }
-    }
-  }
-}*/
-
-
-/*
-horizontal => align items horizontally (one after another)
-vertical =>  align items vertically (one on top of another) => we need to override bp effect in this case
+vertical property => it align items vertically and gives them an effect that we need to override
 */
 
 .#{$ns}-tabs.#{$ns}-vertical {
@@ -120,7 +75,7 @@ We need to handle:
  - the default value (no stroke line is defined)
  - the 4 positions of the stroke line (top, right, bottom, left)
 
-If the tab is disabled, the line should appear in the desired color.
+If the tab is disabled, the stroke line should appear in the disabled color.
 If the tab is disabled and active, the disabled styles should win.
 
 
@@ -152,70 +107,38 @@ $stroke-line-right: inset (-$tab-indicator-width) 0;
 $stroke-line-bottom: inset 0 (-$tab-indicator-width) 0;
 $stroke-line-left: inset $tab-indicator-width 0;
 
+@mixin strokeLine ($strokeLinePosition) {
+  .#{$ns}-tab {
+    &[aria-selected="true"] {
+      box-shadow: $strokeLinePosition !important;
+    }
+    &:not([aria-disabled="true"]):hover {
+      box-shadow: $strokeLinePosition $pt-intent-primary !important;
+    }
+  }
+}
+
 /*  Here we are setting the default values if the position of the stroke line is not defined.
     - vertical list => stroke line left
     - horizontal list => stroke line bottom
 */
 
-// dark theme
-/*
-.#{$ns}-dark {
-  .#{$ns}-tab {
-
-    &[aria-selected="true"] {
-      box-shadow: $stroke-line-bottom;
-    }
-
-    &:not([aria-disabled="true"]):hover {
-      box-shadow: $stroke-line-bottom $pt-intent-primary;
-    }
-  }
-}
-*/
-
 // light theme & dark theme
-.#{$ns}-dark .#{$ns}-tab,
-.#{$ns}-tab-list .#{$ns}-tab {
-  &[aria-selected="true"] {
-    box-shadow: $stroke-line-bottom !important;
-  }
-
-  &:not([aria-disabled="true"]):hover {
-    box-shadow: $stroke-line-bottom $pt-intent-primary !important; /* to win !important when animate */
-  }
+.#{$ns}-dark,
+.#{$ns}-tab-list {
+  @include strokeLine($stroke-line-bottom);
 }
 
 //vertical tabs
 .#{$ns}-tabs.#{$ns}-vertical {
   > .#{$ns}-tab-list {
-    .#{$ns}-tab {
-
-      &[aria-selected="true"] {
-        box-shadow: $stroke-line-left !important;
-      }
-
-      &:not([aria-disabled="true"]):hover {
-        box-shadow: $stroke-line-left $pt-intent-primary !important; /* to win !important when animate */
-      }
-    }
+    @include strokeLine($stroke-line-left);
   }
 }
-/**/
-/*.#{$ns}-tab-indicator-wrapper {
-  .#{$ns}-tab-indicator {
-    color: white;
-    .#{$ns}-tab {
-      &:not([aria-disabled="true"]):hover {
-        box-shadow: $stroke-line-top $pt-intent-primary;
-      }
-    }
-  }
-}*/
 
 .#{$ns}-tabs.#{$ns}-vertical {
   > .#{$ns}-tab-list {
     .#{$ns}-tab-indicator-wrapper .#{$ns}-tab-indicator {
-
       /* make stroke line vertical left */
       height: inherit;
       width: $tab-indicator-width;
@@ -226,8 +149,6 @@ $stroke-line-left: inset $tab-indicator-width 0;
   }
 }
 
-
-
 /*
   Stroke line position declaration.
   Available classNames to place the stroke line in the desired position:
@@ -237,81 +158,48 @@ $stroke-line-left: inset $tab-indicator-width 0;
     - left => .#{$ns}-g-stroke-line-left => example: bp3-g-stroke-line-left
 */
 
-// stroke line position => top
-.#{$ns}-g-stroke-line-top,
-.#{$ns}-g-stroke-line-top.#{$ns}-tabs.#{$ns}-vertical {
-    .#{$ns}-tab {
-      &[aria-selected="true"] {
-        box-shadow: $stroke-line-top !important;
-      }
-      &:not([aria-disabled="true"]):hover {
-        box-shadow: $stroke-line-top $pt-intent-primary !important;
-      }
-    }
-
+@mixin disableAnimation() {
   .#{$ns}-tab-indicator-wrapper .#{$ns}-tab-indicator {
     background-color: transparent;
   }
+}
+
+// stroke line position => top
+.#{$ns}-g-stroke-line-top,
+.#{$ns}-g-stroke-line-top.#{$ns}-tabs.#{$ns}-vertical {
+
+  @include strokeLine($stroke-line-top);
+  @include disableAnimation();
 }
 
 
 // stroke line position => right
 .#{$ns}-g-stroke-line-right,
 .#{$ns}-g-stroke-line-right.#{$ns}-tabs.#{$ns}-vertical {
-
-  .#{$ns}-tab {
-    &[aria-selected="true"] {
-      box-shadow: $stroke-line-right !important;
-    }
-    &:not([aria-disabled="true"]):hover {
-      box-shadow: $stroke-line-right $pt-intent-primary !important;
-    }
-  }
-
-  .#{$ns}-tab-indicator-wrapper .#{$ns}-tab-indicator {
-    background-color: transparent;
-  }
+  @include strokeLine($stroke-line-right);
+  @include disableAnimation();
 }
 
 // stroke line position => bottom
 .#{$ns}-g-stroke-line-bottom,
 .#{$ns}-g-stroke-line-bottom.#{$ns}-tabs.#{$ns}-vertical {
-  .#{$ns}-tab {
-    &[aria-selected="true"] {
-      box-shadow: $stroke-line-bottom !important;
-    }
-    &:not([aria-disabled="true"]):hover {
-      box-shadow: $stroke-line-bottom $pt-intent-primary !important;
-    }
-  }
+  @include strokeLine($stroke-line-bottom);
 }
 
+//bottom is default styles if horizontal list (animation effect should work)
 .#{$ns}-g-stroke-line-bottom.#{$ns}-tabs.#{$ns}-vertical {
-  .#{$ns}-tab-indicator-wrapper .#{$ns}-tab-indicator {
-    background-color: transparent;
-  }
+  @include disableAnimation();
 }
-
 
 // stroke line position => left
 .#{$ns}-g-stroke-line-left,
 .#{$ns}-g-stroke-line-left.#{$ns}-tabs.#{$ns}-vertical {
-  .#{$ns}-tab {
-    &[aria-selected="true"] {
-      box-shadow: $stroke-line-left !important;
-    }
-    &:not([aria-disabled="true"]):hover {
-      box-shadow: $stroke-line-left $pt-intent-primary !important;
-    }
-  }
+  @include strokeLine($stroke-line-left);
 }
 
-
+//left is default styles if vertical list (animation effect should work)
 .#{$ns}-g-stroke-line-left {
-  .#{$ns}-tab-indicator-wrapper .#{$ns}-tab-indicator {
-    background-color: transparent;
-  }
+  @include disableAnimation();
 }
-
 
 /* Stroke line declaration ends here */

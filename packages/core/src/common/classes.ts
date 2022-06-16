@@ -378,3 +378,11 @@ export function positionClass(position: Position | undefined) {
     }
     return `${NS}-position-${position}`;
 }
+
+/* CUSTOM GRAPHEXT CLASSES */
+
+/* TABS */
+export const TAB_STROKE_LINE_TOP = `${NS}-g-stroke-line-top`;
+export const TAB_STROKE_LINE_RIGHT = `${NS}-g-stroke-line-right`;
+export const TAB_STROKE_LINE_BOTTOM = `${NS}-g-stroke-line-bottom`;
+export const TAB_STROKE_LINE_LEFT = `${NS}-g-stroke-line-left`;
