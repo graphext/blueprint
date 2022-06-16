@@ -16,12 +16,12 @@
     "verify": "run-p dist lint"
   },
   "dependencies": {
-    "@blueprintjs/core": "3.53.0-graphext11",
-    "@blueprintjs/datetime": "3.23.20-graphext11",
-    "@blueprintjs/icons": "3.32.0-graphext11",
-    "@blueprintjs/popover2": "0.13.0-graphext11",
-    "@blueprintjs/select": "3.18.12-graphext11",
-    "@blueprintjs/table": "3.9.14-graphext11",
+    "@blueprintjs/core": "3.53.0-graphext12",
+    "@blueprintjs/datetime": "3.23.20-graphext12",
+    "@blueprintjs/icons": "3.32.0-graphext12",
+    "@blueprintjs/popover2": "0.13.0-graphext12",
+    "@blueprintjs/select": "3.18.12-graphext12",
+    "@blueprintjs/table": "3.9.14-graphext12",
     "@blueprintjs/timezone": "^3.9.20",
     "classnames": "^2.2",
     "core-js": "^3.8.1",
