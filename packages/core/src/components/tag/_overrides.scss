@@ -1,10 +1,23 @@
+@mixin custom-tag-kind($kind, $color: white, $background-color: transparent, $border: transparent) {
+  &.#{$ns}-kind-g-#{$kind} {
+    color: $color;
+    background-color: $background-color;
+    box-shadow: inset 0 0 0 1px $border;
+  }
+}
+
 .#{$ns}-tag {
   color: $g-grey1;
 
   padding: 4px 8px;
-  font-weight: 400;
-  font-size: 14px;
-  
+  font-size: $pt-font-size;
+
+  // For multiline tags
+  >span>p {
+    color: $g-grey1;
+    font-size: $pt-font-size-small;
+  }
+
   &:focus {
     outline: none;
   }
@@ -16,8 +29,15 @@
 
   .#{$ns}-dark & {
     color: $g-dark-grey1;
+
+    // For multiline tags
+    >span>p {
+      color: $g-dark-grey1;
+      font-size: $pt-font-size-small;
+    }
   }
 
+  // Interactive Tag:
   &.#{$ns}-interactive {
     cursor: pointer;
 
@@ -40,27 +60,162 @@
       &:hover {
         background-color: $g-dark-base4;
       }
-  
+
       &.#{$ns}-active,
       &:active {
         background-color: $g-dark-base3;
       }
-  
+
       &.#{$ns}-g-disabled {
         background-color: $g-dark-base3;
         color: $g-dark-grey3;
       }
     }
   }
+
+  // Lozenge
+  &.#{$ns}-lozenge {
+    border-radius: 8px;
+    font-size: $pt-font-size-extra-small;
+    text-transform: uppercase;
+
+    color: $g-black;
+    background-color: $g-base1;
+
+    // Custom kinds light theme:
+    @include custom-tag-kind(folder, $g-wizard-23-700, $g-wizard-23-200);
+    @include custom-tag-kind(insight, $g-wizard-26-700, $g-wizard-26-200);
+    @include custom-tag-kind(publish, $g-water-700, $g-water-200);
+    @include custom-tag-kind(project, $g-wizard-18-700, $g-wizard-18-200);
+    @include custom-tag-kind(danger, $g-error-700, $g-error-200);
+    @include custom-tag-kind(updated, $g-grass-700, $g-grass-200);
+    @include custom-tag-kind('active', $g-avocado-700, $g-avocado-200);
+    @include custom-tag-kind(inRecipe, $g-wizard-4-700, $g-wizard-4-200);
+    @include custom-tag-kind(notInRecipe, $g-wood-700, $g-wood-200);
+    @include custom-tag-kind(recreate, $g-water-700, $g-water-200);
+    @include custom-tag-kind(pending, $g-grey1, $g-base2);
+
+    // Custom kinds dark theme:
+    .#{$ns}-dark & {
+      color: $g-white;
+      background-color: $g-dark-base1;
+      @include custom-tag-kind(folder, $g-white, $g-wizard-23-600);
+      @include custom-tag-kind(insight, $g-white, $g-wizard-26-600);
+      @include custom-tag-kind(publish, $g-white, $g-water-600);
+      @include custom-tag-kind(project, $g-white, $g-wizard-18-600);
+      @include custom-tag-kind(danger, $g-white, $g-error-600);
+      @include custom-tag-kind(updated, $g-white, $g-grass-600);
+      @include custom-tag-kind('active', $g-white, $g-avocado-700);
+      @include custom-tag-kind(inRecipe, $g-white, $g-wizard-4-600);
+      @include custom-tag-kind(notInRecipe, $g-white, $g-wood-600);
+      @include custom-tag-kind(recreate, $g-white, $g-water-600);
+      @include custom-tag-kind(pending, $g-white, $g-dark-base2);
+    }
+
+
+    // Interactive
+    &.#{$ns}-interactive {
+      &:hover {
+        @include custom-tag-kind(folder, $g-wizard-23-700, $g-wizard-23-100);
+        @include custom-tag-kind(insight, $g-wizard-26-700, $g-wizard-26-100);
+        @include custom-tag-kind(publish, $g-water-700, $g-water-500);
+        @include custom-tag-kind(project, $g-wizard-18-700, $g-wizard-18-500);
+        @include custom-tag-kind(danger, $g-error-700, $g-error-500);
+        @include custom-tag-kind(updated, $g-grass-700, $g-grass-500);
+        @include custom-tag-kind('active', $g-avocado-700, $g-avocado-500);
+        @include custom-tag-kind(inRecipe, $g-wizard-4-700, $g-wizard-4-500);
+        @include custom-tag-kind(notInRecipe, $g-wood-700, $g-wood-500);
+        @include custom-tag-kind(recreate, $g-water-700, $g-water-500);
+        @include custom-tag-kind(pending, $g-grey1, $g-base1);
+      }
+
+      &.#{$ns}-active,
+      &:active {
+        box-shadow: inset 0 0 0 1px $g-black;
+        @include custom-tag-kind(folder, $g-wizard-23-700, $g-wizard-23-200, $g-wizard-23-700);
+        @include custom-tag-kind(insight, $g-wizard-26-700, $g-wizard-26-200, $g-wizard-26-700);
+        @include custom-tag-kind(publish, $g-water-700, $g-water-200, $g-water-700);
+        @include custom-tag-kind(project, $g-wizard-18-700, $g-wizard-18-200, $g-wizard-18-700);
+        @include custom-tag-kind(danger, $g-error-700, $g-error-200, $g-error-700);
+        @include custom-tag-kind(updated, $g-grass-700, $g-grass-200, $g-grass-700);
+        @include custom-tag-kind('active', $g-avocado-700, $g-avocado-200, $g-avocado-700);
+        @include custom-tag-kind(inRecipe, $g-wizard-4-700, $g-wizard-4-200, $g-wizard-4-700);
+        @include custom-tag-kind(notInRecipe, $g-wood-700, $g-wood-200, $g-wood-700);
+        @include custom-tag-kind(recreate, $g-water-700, $g-water-200, $g-water-700);
+        @include custom-tag-kind(pending, $g-grey1, $g-base2, $g-grey1);
+      }
+
+      &.#{$ns}-g-disabled {
+        @include custom-tag-kind(folder, $g-wizard-23-400, $g-wizard-23-200);
+        @include custom-tag-kind(insight, $g-wizard-26-400, $g-wizard-26-200);
+        @include custom-tag-kind(publish, $g-water-400, $g-water-200);
+        @include custom-tag-kind(project, $g-wizard-18-400, $g-wizard-18-200);
+        @include custom-tag-kind(danger, $g-error-400, $g-error-200);
+        @include custom-tag-kind(updated, $g-grass-400, $g-grass-200);
+        @include custom-tag-kind('active', $g-avocado-400, $g-avocado-200);
+        @include custom-tag-kind(inRecipe, $g-wizard-4-400, $g-wizard-4-200);
+        @include custom-tag-kind(notInRecipe, $g-wood-400, $g-wood-200);
+        @include custom-tag-kind(recreate, $g-water-400, $g-water-200);
+        @include custom-tag-kind(pending, $g-grey4, $g-base1);
+      }
+
+      .#{$ns}-dark & {
+        &:hover {
+          @include custom-tag-kind(folder, $g-white, $g-wizard-23-500);
+          @include custom-tag-kind(insight, $g-white, $g-wizard-26-500);
+          @include custom-tag-kind(publish, $g-white, $g-water-500);
+          @include custom-tag-kind(project, $g-white, $g-wizard-18-500);
+          @include custom-tag-kind(danger, $g-white, $g-error-500);
+          @include custom-tag-kind(updated, $g-white, $g-grass-500);
+          @include custom-tag-kind('active', $g-white, $g-avocado-500);
+          @include custom-tag-kind(inRecipe, $g-white, $g-wizard-4-500);
+          @include custom-tag-kind(notInRecipe, $g-white, $g-wood-500);
+          @include custom-tag-kind(recreate, $g-white, $g-water-500);
+          @include custom-tag-kind(pending, $g-white, $g-dark-base3);
+        }
+
+        &.#{$ns}-active,
+        &:active {
+          box-shadow: inset 0 0 0 1px $g-white;
+          @include custom-tag-kind(folder, $g-white, $g-wizard-23-600, $g-wizard-23-700);
+          @include custom-tag-kind(insight, $g-white, $g-wizard-26-600, $g-wizard-26-700);
+          @include custom-tag-kind(publish, $g-white, $g-water-600, $g-water-700);
+          @include custom-tag-kind(project, $g-white, $g-wizard-18-600, $g-wizard-18-700);
+          @include custom-tag-kind(danger, $g-white, $g-error-600, $g-error-700);
+          @include custom-tag-kind(updated, $g-white, $g-grass-600, $g-grass-700);
+          @include custom-tag-kind('active', $g-white, $g-avocado-700, $g-avocado-800);
+          @include custom-tag-kind(inRecipe, $g-white, $g-wizard-4-600, $g-wizard-4-700);
+          @include custom-tag-kind(notInRecipe, $g-white, $g-wood-600, $g-wood-700);
+          @include custom-tag-kind(recreate, $g-white, $g-water-600, $g-water-700);
+          @include custom-tag-kind(pending, $g-white, $g-dark-base2, $g-dark-base1);
+        }
+
+        &.#{$ns}-g-disabled {
+          @include custom-tag-kind(folder, $g-wizard-23-700, $g-wizard-23-800);
+          @include custom-tag-kind(insight, $g-wizard-26-700, $g-wizard-26-800);
+          @include custom-tag-kind(publish, $g-water-700, $g-water-800);
+          @include custom-tag-kind(project, $g-wizard-18-700, $g-wizard-18-800);
+          @include custom-tag-kind(danger, $g-error-700, $g-error-800);
+          @include custom-tag-kind(updated, $g-grass-700, $g-grass-800);
+          @include custom-tag-kind('active', $g-avocado-700, $g-avocado-800);
+          @include custom-tag-kind(inRecipe, $g-wizard-4-700, $g-wizard-4-800);
+          @include custom-tag-kind(notInRecipe, $g-wood-700, $g-wood-800);
+          @include custom-tag-kind(recreate, $g-water-700, $g-water-800);
+          @include custom-tag-kind(pending, $g-dark-grey4, $g-dark-base3);
+        }
+      }
+    }
+  }
+
 }
 
 .#{$ns}-tag .#{$ns}-large,
 .#{$ns}-tag.#{$ns}-large {
   line-height: $pt-grid-size * 2;
-  font-weight: 400;
-  font-size: 14px;
+  font-size: $pt-font-size;
   padding: 8px;
   border-radius: 12px;
+
   // This is forced because they use the 12px cross icon
   & .#{$ns}-tag-remove {
     padding: 0;
@@ -70,9 +225,7 @@
 
 .#{$ns}-tag .#{$ns}-g-small,
 .#{$ns}-tag.#{$ns}-g-small {
-  font-weight: 400;
-  font-size: 10px;
-  line-height: 12px;
+  font-size: $pt-font-size-extra-small;
   min-height: 20px;
   padding: 2px 8px;
   
