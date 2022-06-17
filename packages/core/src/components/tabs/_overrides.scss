@@ -30,7 +30,7 @@
  */
 
 @mixin setHoverAndDisabledEffect($hover_color, $disabled_color) {
-  &:not([aria-disabled="true"]):hover {
+  &:not([aria-disabled="true"]):not(.#{$ns}-g-tab-disable-hover-effect):hover {
     color: $pt-intent-primary;
     background-color: $hover_color !important; /* to win BP !important when animate */
   }
@@ -112,7 +112,7 @@ $stroke-line-left: inset $tab-indicator-width 0;
     &[aria-selected="true"] {
       box-shadow: $strokeLinePosition !important;
     }
-    &:not([aria-disabled="true"]):hover {
+    &:not([aria-disabled="true"]):not(.#{$ns}-g-tab-disable-hover-effect):hover {
       box-shadow: $strokeLinePosition $pt-intent-primary !important;
     }
   }

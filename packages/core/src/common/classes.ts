@@ -386,3 +386,6 @@ export const TAB_STROKE_LINE_TOP = `${NS}-g-stroke-line-top`;
 export const TAB_STROKE_LINE_RIGHT = `${NS}-g-stroke-line-right`;
 export const TAB_STROKE_LINE_BOTTOM = `${NS}-g-stroke-line-bottom`;
 export const TAB_STROKE_LINE_LEFT = `${NS}-g-stroke-line-left`;
+
+/* TAB */
+export const TAB_DISABLE_HOVER_EFFECT = `${NS}-g-tab-disable-hover-effect`;
