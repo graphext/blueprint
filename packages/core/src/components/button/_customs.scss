@@ -18,7 +18,6 @@ $dark-minimal-button-background-color-active: rgba($dark-gray5, 0.3);
 
 $pt-border-radius: $pt-button-border-radius; // Custom border radius just used once in _common.scss
 
-// Every item is 1px less because the border of the buttons is 1px too.
-$button-padding-small: 0px 3px;
-$button-padding: 3px 7px; // $button-padding: 7px 11px;
-$button-padding-large: 7px 11px; // $button-padding-large: 7px 23px;
+$button-padding-small: 0px 4px;
+$button-padding: 4px 8px;
+$button-padding-large: 8px 12px;
