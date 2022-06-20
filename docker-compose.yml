@@ -23,7 +23,7 @@ services:
       - ${DEVELOPMENT_DIR}/repositories/graphext/node_modules/@blueprintjs:/root/graphext/blueprintjs
     ports:
       - "9999:9999"
-  storybook-core:
+  core:
     image: node:12
     command: sh -c 'cd packages/core && yarn compile:css && cp -R lib/css ../../../root/graphext/blueprintjs/core/lib'
     working_dir: /hostdata
