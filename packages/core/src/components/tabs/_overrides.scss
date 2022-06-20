@@ -136,6 +136,12 @@ $stroke-line-left: inset $tab-indicator-width 0;
   }
 }
 
+/*
+  Vertical Tabs when animated:
+  In BP, when vertical is used, the active tab is shown with background-color
+  But here we need that the stroke animated line is shown in the desired theme color.
+*/
+
 .#{$ns}-tabs.#{$ns}-vertical {
   > .#{$ns}-tab-list {
     .#{$ns}-tab-indicator-wrapper .#{$ns}-tab-indicator {
@@ -144,7 +150,18 @@ $stroke-line-left: inset $tab-indicator-width 0;
       width: $tab-indicator-width;
       /*overwrite BP styles*/
       border-radius: 0;
-      background-color: $pt-intent-primary;
+      background-color: $tab-color-selected;
+    }
+  }
+}
+
+
+.#{$ns}-dark {
+  .#{$ns}-tabs.#{$ns}-vertical {
+    > .#{$ns}-tab-list {
+      .#{$ns}-tab-indicator-wrapper .#{$ns}-tab-indicator {
+        background-color: $dark-tab-color-selected;
+      }
     }
   }
 }
