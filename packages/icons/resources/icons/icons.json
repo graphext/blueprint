@@ -224,6 +224,20 @@
     "content": "\\e9e0"
   },
   {
+    "displayName": "Plot",
+    "iconName": "g-plot",
+    "tags": "plot",
+    "group": "Graphext",
+    "content": "\\e0bb"
+  },
+  {
+    "displayName": "Build",
+    "iconName": "g-build",
+    "tags": "plot, build, customize",
+    "group": "Graphext",
+    "content": "\\e0bb"
+  },
+  {
     "displayName": "Unpin",
     "iconName": "g-unpin",
     "tags": "safety unpin, detach",
