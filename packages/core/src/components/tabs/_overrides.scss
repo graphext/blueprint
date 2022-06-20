@@ -29,12 +29,14 @@
 - disabled: specific color
  */
 
-@mixin setHoverAndDisabledEffect($hover_color, $disabled_color) {
+@mixin hoverEffect($hover_color) {
   &:not([aria-disabled="true"]):not(.#{$ns}-g-tab-disable-hover-effect):hover {
     color: $pt-intent-primary;
     background-color: $hover_color !important; /* to win BP !important when animate */
   }
+}
 
+@mixin disabledEffect($disabled_color) {
   &[aria-disabled="true"] {
     color: $disabled_color;
   }
@@ -43,14 +45,16 @@
 // light theme (vertical and horizontal)
 .#{$ns}-tabs.#{$ns}-vertical .#{$ns}-tab,
 .#{$ns}-tab {
-  @include setHoverAndDisabledEffect($tab-background-color-light, $tab-color-disabled-light);
+  @include hoverEffect($tab-background-color-light);
+  @include disabledEffect($tab-color-disabled-light)
 }
 
 // dark theme (vertical and horizontal)
 .#{$ns}-dark {
   .#{$ns}-tabs.#{$ns}-vertical .#{$ns}-tab,
   .#{$ns}-tab {
-    @include setHoverAndDisabledEffect($tab-background-color-dark, $tab-color-disabled-dark);
+    @include hoverEffect($tab-background-color-dark);
+    @include disabledEffect($tab-color-disabled-dark)
   }
 }
 
