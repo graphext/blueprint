@@ -19,9 +19,9 @@ $pt-border-radius: 16px;
 $pt-input-height: 32px;
 
 // Buttons
-$pt-button-height: 32px;
-$pt-button-height-small: 24px;
-$pt-button-height-large: 40px;
+$pt-button-height: 24px;
+$pt-button-height-small: 20px;
+$pt-button-height-large: 32px;
 
 
 // ------------------------- Colors -----------------------------------
@@ -143,13 +143,12 @@ $g-dark-base4: hsl(221, 14%, 22%);
 $g-dark-base5: hsl(225, 13%, 25%);
 
 // To Be Defined in the New Design System https://www.figma.com/file/1rUpciJJRVQZiNqEzggaAN/NEW---Design-System?node-id=0%3A1 :
-// $g-base0: hsl(0, 0%, 9%);
-// $g-base1: hsl(225, 55%, 96%);
-// $g-base2: hsl(228, 38%, 97%);
-// $g-base3: hsl(228, 38%, 97%);
-// $g-base4: hsl(0, 0%, 98%);
-// $g-base5: hsl(225, 13%, 25%);
-
+$g-base0: hsl(225, 75%, 96%);
+$g-base1: hsl(225, 55%, 96%);
+$g-base2: hsl(228, 38%, 97%);
+$g-base3: hsl(228, 38%, 97%);
+$g-base4: hsl(0, 0%, 98%);
+$g-base5: hsl(0, 0%, 100%);
 
 // all shadow lists must be the same length to avoid flicker in transitions.
 $pt-elevation-shadow-0: 0 0 0 1px transparent,
