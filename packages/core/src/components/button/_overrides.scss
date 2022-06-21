@@ -29,30 +29,30 @@
 }
 
 .#{$ns}-dark .#{$ns}-button,
-.#{$ns}-dark .#{$ns}-button:not([class*="bp3-intent-"]),
-.#{$ns}-button:not([class*="bp3-intent-"]) {
+.#{$ns}-dark .#{$ns}-button:not([class*="#{$ns}-intent-"]),
+.#{$ns}-button:not([class*="#{$ns}-intent-"]) {
   background-image: none;
 }
 
-.#{$ns}-dark .#{$ns}-button:not([class*="bp3-intent-"]) .#{$ns}-icon {
+.#{$ns}-dark .#{$ns}-button:not([class*="#{$ns}-intent-"]) .#{$ns}-icon {
   color: $white;
 }
 
-.#{$ns}-button-group .#{$ns}-button {
+.#{$ns}-button-group:not([class*="#{$ns}-minimal"]) .#{$ns}-button {
   min-width: 48px;
 }
 
-.#{$ns}-button-group:not(.bp3-minimal) .#{$ns}-button:not(:last-child),
-.#{$ns}-button-group:not(.bp3-minimal) .#{$ns}-popover-wrapper:not(:last-child) .#{$ns}-button {
+.#{$ns}-button-group:not([class*="#{$ns}-minimal"]) .#{$ns}-button:not(:last-child),
+.#{$ns}-button-group:not([class*="#{$ns}-minimal"]) .#{$ns}-popover-wrapper:not(:last-child) .#{$ns}-button {
   border-right: 1px solid $g-dark-base3;
 }
 
-.#{$ns}-button-group.bp3-minimal .#{$ns}-button:not(:last-child),
-.#{$ns}-button-group.bp3-minimal .#{$ns}-popover-wrapper:not(:last-child) .#{$ns}-button {
+.#{$ns}-button-group.#{$ns}-minimal .#{$ns}-button:not(:last-child),
+.#{$ns}-button-group.#{$ns}-minimal .#{$ns}-popover-wrapper:not(:last-child) .#{$ns}-button {
   border-right: 1px solid transparent;
 }
 
-.#{$ns}-dark .#{$ns}-button-group .#{$ns}-button:not([class*="bp3-intent-"]) {
+.#{$ns}-dark .#{$ns}-button-group .#{$ns}-button:not([class*="#{$ns}-intent-"]) {
   box-shadow: none;
 }
 
@@ -88,7 +88,7 @@ $pt-gp-dark-icon-color: $g-white;
 
 // CUSTOM kinds for buttons:
 .#{$ns}-button[class*="#{$ns}-kind-g-"] {
-  
+
   // Custom loading spinner inside Button:
   .#{$ns}-spinner {
     .#{$ns}-spinner-track {
@@ -149,7 +149,7 @@ $pt-gp-dark-icon-color: $g-white;
         stroke: $g-dark-grey4;
       }
       svg {
-        stroke-width: 6px; 
+        stroke-width: 6px;
       }
     }
 
