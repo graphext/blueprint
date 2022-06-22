@@ -38,18 +38,8 @@
   color: $white;
 }
 
-.#{$ns}-button-group:not([class*="#{$ns}-minimal"]) .#{$ns}-button {
+.#{$ns}-button-group:not([class*="#{$ns}-g-strech"]) .#{$ns}-button {
   min-width: 48px;
-}
-
-.#{$ns}-button-group:not([class*="#{$ns}-minimal"]) .#{$ns}-button:not(:last-child),
-.#{$ns}-button-group:not([class*="#{$ns}-minimal"]) .#{$ns}-popover-wrapper:not(:last-child) .#{$ns}-button {
-  border-right: 1px solid $g-dark-base3;
-}
-
-.#{$ns}-button-group.#{$ns}-minimal .#{$ns}-button:not(:last-child),
-.#{$ns}-button-group.#{$ns}-minimal .#{$ns}-popover-wrapper:not(:last-child) .#{$ns}-button {
-  border-right: 1px solid transparent;
 }
 
 .#{$ns}-dark .#{$ns}-button-group .#{$ns}-button:not([class*="#{$ns}-intent-"]) {
@@ -248,6 +238,6 @@ $pt-gp-dark-icon-color: $g-white;
 }
 
 // Change min-width of buttons in button-groups
-.#{$ns}-button-group.#{$ns}-vertical .#{$ns}-button {
+.#{$ns}-button-group.#{$ns}-vertical:not([class*="#{$ns}-g-strech"]) .#{$ns}-button {
   min-width: 32px;
 }
