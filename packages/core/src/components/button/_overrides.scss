@@ -181,7 +181,15 @@ $pt-gp-dark-icon-color: $g-white;
 
 // CUSTOM class for extra-small and extra-large sizes:
 .#{$ns}-button {
-  &.#{$ns}-g-extra-small {
+  &.#{$ns}-large {
+    min-height: 40px;
+    min-width: 40px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 20px;
+  }
+
+  &.#{$ns}-g-extra-extra-small {
     min-height: 16px;
     min-width: 16px;
     padding-left: 0px;
@@ -194,15 +202,13 @@ $pt-gp-dark-icon-color: $g-white;
     }
   }
 
-  &.#{$ns}-g-extra-large {
-    min-height: 40px;
-    min-width: 40px;
-    padding-left: 15px;
-    padding-right: 15px;
-    border-radius: 20px;
-  }
-
-  &.#{$ns}-small {
+  &.#{$ns}-g-extra-small {
+    min-height: 20px;
+    min-width: 20px;
+    padding-left: 4px;
+    padding-right: 4px;
+    padding-top: 0px;
+    padding-bottom: 0px;
     .#{$ns}-icon>svg {
       height: 12px;
       width: 12px;
@@ -213,21 +219,20 @@ $pt-gp-dark-icon-color: $g-white;
 // CUSTOM class for action buttons with new sizes
 .#{$ns}-button.#{$ns}-g-action-button {
   text-transform: uppercase;
-  padding-left: 16px;
-  padding-right: 16px;
+  padding-left: 24px;
+  padding-right: 24px;
 
-  &.#{$ns}-small,
-  &.#{$ns}-g-extra-small {
+  &.#{$ns}-g-extra-small,
+  &.#{$ns}-g-extra-extra-small {
     padding-top: 0px;
     padding-bottom: 0px;
     padding-left: 8px;
     padding-right: 8px;
   }
 
-  &.#{$ns}-large,
-  &.#{$ns}-g-extra-large {
-    padding-left: 24px;
-    padding-right: 24px;
+  &.#{$ns}-small {
+    padding-left: 16px;
+    padding-right: 16px;
   }
 
 }
