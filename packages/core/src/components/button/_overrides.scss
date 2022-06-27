@@ -125,7 +125,7 @@ $pt-gp-dark-icon-color: $g-white;
 
     &:disabled,
     &.#{$ns}-disabled {
-      @include custom-button-kind(primary, $g-primary3, $g-primary4);
+      @include custom-button-kind(primary, $g-primary2, $g-primary4);
       @include custom-button-kind(secondary, $g-primary5, $g-base3);
       @include custom-button-kind(stroked, $g-grey4, transparent, $g-grey4);
       @include custom-button-kind(ghost, $g-primary4, transparent, transparent);
@@ -210,7 +210,7 @@ $pt-gp-dark-icon-color: $g-white;
 
       &:disabled,
       &.#{$ns}-disabled {
-        @include custom-button-kind(primary, $g-dark-primary3, $g-dark-primary4);
+        @include custom-button-kind(primary, $g-dark-primary2, $g-dark-primary4);
         @include custom-button-kind(secondary, $g-dark-primary5, $g-dark-base3);
         @include custom-button-kind(stroked, $g-dark-grey4, transparent, $g-dark-grey4);
         @include custom-button-kind(ghost, $g-dark-primary4, transparent, transparent);
