@@ -264,10 +264,10 @@ $pt-gp-dark-icon-color: $g-white;
   &.#{$ns}-g-extra-extra-small {
     min-height: 16px;
     min-width: 16px;
-    padding-left: 0px;
-    padding-right: 0px;
-    padding-top: 0px;
-    padding-bottom: 0px;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
 
     .#{$ns}-icon>svg {
       height: 10px;
@@ -278,11 +278,7 @@ $pt-gp-dark-icon-color: $g-white;
   &.#{$ns}-g-extra-small {
     min-height: 20px;
     min-width: 20px;
-    padding-left: 4px;
-    padding-right: 4px;
-    padding-top: 0px;
-    padding-bottom: 0px;
-
+    padding: 0 4px;
     .#{$ns}-icon>svg {
       height: 12px;
       width: 12px;
@@ -298,8 +294,8 @@ $pt-gp-dark-icon-color: $g-white;
 
   &.#{$ns}-g-extra-small,
   &.#{$ns}-g-extra-extra-small {
-    padding-top: 0px;
-    padding-bottom: 0px;
+    padding-top: 0;
+    padding-bottom: 0;
     padding-left: 8px;
     padding-right: 8px;
   }
