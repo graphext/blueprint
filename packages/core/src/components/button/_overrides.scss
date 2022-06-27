@@ -19,6 +19,7 @@
 }
 
 .#{$ns}-dark .#{$ns}-button.#{$ns}-minimal {
+
   &:disabled,
   &:disabled:hover,
   &.#{$ns}-disabled,
@@ -55,6 +56,7 @@ $pt-gp-dark-icon-color: $g-white;
       &[class*="#{$ns}-icon-"]::before {
         color: $pt-gp-dark-icon-color;
       }
+
       #{$icon-classes} {
         &:not([class*="#{$ns}-intent-"]) {
           color: $pt-gp-dark-icon-color;
@@ -84,9 +86,11 @@ $pt-gp-dark-icon-color: $g-white;
     .#{$ns}-spinner-track {
       stroke: $g-dark-grey1;
     }
+
     .#{$ns}-spinner-head {
       stroke: $g-dark-grey4;
     }
+
     svg {
       stroke-width: 6px;
     }
@@ -95,37 +99,70 @@ $pt-gp-dark-icon-color: $g-white;
   box-shadow: none;
 
   // Light Theme
-  @include custom-button-kind(primary, $g-white, $g-primary1);
-  @include custom-button-kind(secondary, $g-dark-primary1, $g-dark-base4);
-  @include custom-button-kind(stroked, $g-dark-grey1, transparent, $g-dark-grey1);
-  @include custom-button-kind(ghost, $g-primary1, transparent, transparent);
-  @include custom-button-kind(group, $g-grey1, $g-base4);
+  &:not([class*="#{$ns}-intent-"]) {
+    @include custom-button-kind(primary, $g-white, $g-primary1);
+    @include custom-button-kind(secondary, $g-primary1, $g-base4);
+    @include custom-button-kind(stroked, $g-grey1, transparent, $g-grey1);
+    @include custom-button-kind(ghost, $g-primary1, transparent, transparent);
+    @include custom-button-kind(group, $g-grey1, $g-base4);
 
-  &:hover {
-    @include custom-button-kind(primary, $g-white, $g-primary2);
-    @include custom-button-kind(secondary, $g-dark-primary2, $g-dark-base5);
-    @include custom-button-kind(stroked, $g-dark-grey1, $g-dark-base5, $g-dark-grey1);
-    @include custom-button-kind(ghost, $g-primary2, $g-base5, transparent);
-    @include custom-button-kind(group, $g-grey1, $g-base5);
+    &:hover {
+      @include custom-button-kind(primary, $g-white, $g-primary2);
+      @include custom-button-kind(secondary, $g-primary2, $g-base5);
+      @include custom-button-kind(stroked, $g-grey1, $g-base5, $g-grey1);
+      @include custom-button-kind(ghost, $g-primary2, transparent, transparent);
+      @include custom-button-kind(group, $g-grey1, $g-base5);
+    }
+
+    &:active,
+    &.#{$ns}-active {
+      @include custom-button-kind(primary, $g-white, $g-primary1, $g-primary3);
+      @include custom-button-kind(secondary, $g-primary3, $g-base4);
+      @include custom-button-kind(stroked, $g-black, transparent, $g-black);
+      @include custom-button-kind(ghost, $g-primary3, transparent, transparent);
+      @include custom-button-kind(group, $g-grey1, $g-base3);
+    }
+
+    &:disabled,
+    &.#{$ns}-disabled {
+      @include custom-button-kind(primary, $g-primary2, $g-primary4);
+      @include custom-button-kind(secondary, $g-primary5, $g-base3);
+      @include custom-button-kind(stroked, $g-grey4, transparent, $g-grey4);
+      @include custom-button-kind(ghost, $g-primary4, transparent, transparent);
+      @include custom-button-kind(group, $g-grey1, $g-base3);
+    }
   }
 
-  &:active,
-  &.#{$ns}-active {
-    @include custom-button-kind(primary, $g-white, $g-primary1, $g-primary3);
-    @include custom-button-kind(secondary, $g-dark-primary3, $g-dark-base4);
-    @include custom-button-kind(stroked, $g-white, transparent, $g-white);
-    @include custom-button-kind(ghost, $g-primary3, transparent, transparent);
-    @include custom-button-kind(group, $g-grey1, $g-base3);
+  &.#{$ns}-intent-danger {
+    @include custom-button-kind(primary, $g-white, $g-error-600);
+    @include custom-button-kind(secondary, $g-error-600, $g-base4);
+    @include custom-button-kind(stroked, $g-error-600, transparent, $g-error-600);
+    @include custom-button-kind(ghost, $g-error-600, transparent, transparent);
+
+    &:hover {
+      @include custom-button-kind(primary, $g-white, $g-error-500);
+      @include custom-button-kind(secondary, $g-error-500, $g-base5);
+      @include custom-button-kind(stroked, $g-error-600, $g-base5, $g-error-600);
+      @include custom-button-kind(ghost, $g-error-500, transparent, transparent);
+    }
+
+    &:active,
+    &.#{$ns}-active {
+      @include custom-button-kind(primary, $g-white, $g-error-600, $g-error-700);
+      @include custom-button-kind(secondary, $g-error-700, $g-base4);
+      @include custom-button-kind(stroked, $g-error-700, transparent, $g-error-700);
+      @include custom-button-kind(ghost, $g-error-700, transparent, transparent);
+    }
+
+    &:disabled,
+    &.#{$ns}-disabled {
+      @include custom-button-kind(primary, $g-error-600, $g-error-800);
+      @include custom-button-kind(secondary, $g-error-300, $g-base3);
+      @include custom-button-kind(stroked, $g-error-300, transparent, $g-error-300);
+      @include custom-button-kind(ghost, $g-error-300, transparent, transparent);
+    }
   }
 
-  &:disabled,
-  &.#{$ns}-disabled {
-    @include custom-button-kind(primary, $g-primary3, $g-primary4);
-    @include custom-button-kind(secondary, $g-dark-primary5, $g-dark-base3);
-    @include custom-button-kind(stroked, $g-dark-grey4, transparent, $g-dark-grey4);
-    @include custom-button-kind(ghost, $g-primary4, transparent, transparent);
-    @include custom-button-kind(group, $g-grey1, $g-base3);
-  }
 
   // Dark Theme
   .#{$ns}-dark & {
@@ -135,45 +172,80 @@ $pt-gp-dark-icon-color: $g-white;
       .#{$ns}-spinner-track {
         stroke: $g-dark-base0;
       }
+
       .#{$ns}-spinner-head {
         stroke: $g-dark-grey4;
       }
+
       svg {
         stroke-width: 6px;
       }
     }
 
     box-shadow: none;
-    @include custom-button-kind(primary, $g-white, $g-dark-primary1);
-    @include custom-button-kind(secondary, $g-dark-primary1, $g-dark-base4);
-    @include custom-button-kind(stroked, $g-dark-grey1, transparent, $g-dark-grey1);
-    @include custom-button-kind(ghost, $g-dark-primary1, transparent, transparent);
-    @include custom-button-kind(group, $g-white, $g-dark-base4);
 
-    &:hover {
-      @include custom-button-kind(primary, $g-white, $g-dark-primary2);
-      @include custom-button-kind(secondary, $g-dark-primary2, $g-dark-base5);
-      @include custom-button-kind(stroked, $g-dark-grey1, $g-dark-base5, $g-dark-grey1);
-      @include custom-button-kind(ghost, $g-dark-primary2, transparent, transparent);
-      @include custom-button-kind(group, $g-white, $g-dark-base5);
+    &:not([class*="#{$ns}-intent-"]) {
+      @include custom-button-kind(primary, $g-white, $g-dark-primary1);
+      @include custom-button-kind(secondary, $g-dark-primary1, $g-dark-base4);
+      @include custom-button-kind(stroked, $g-dark-grey1, transparent, $g-dark-grey1);
+      @include custom-button-kind(ghost, $g-dark-primary1, transparent, transparent);
+      @include custom-button-kind(group, $g-white, $g-dark-base4);
+
+      &:hover {
+        @include custom-button-kind(primary, $g-white, $g-dark-primary2);
+        @include custom-button-kind(secondary, $g-dark-primary2, $g-dark-base5);
+        @include custom-button-kind(stroked, $g-dark-grey1, $g-dark-base5, $g-dark-grey1);
+        @include custom-button-kind(ghost, $g-dark-primary2, transparent, transparent);
+        @include custom-button-kind(group, $g-white, $g-dark-base5);
+      }
+
+      &:active,
+      &.#{$ns}-active {
+        @include custom-button-kind(primary, $g-white, $g-dark-primary1, $g-dark-primary3);
+        @include custom-button-kind(secondary, $g-dark-primary3, $g-dark-base4);
+        @include custom-button-kind(stroked, $g-white, transparent, $g-white);
+        @include custom-button-kind(ghost, $g-dark-primary3, transparent, transparent);
+        @include custom-button-kind(group, $g-white, $g-dark-primary3);
+      }
+
+      &:disabled,
+      &.#{$ns}-disabled {
+        @include custom-button-kind(primary, $g-dark-primary2, $g-dark-primary4);
+        @include custom-button-kind(secondary, $g-dark-primary5, $g-dark-base3);
+        @include custom-button-kind(stroked, $g-dark-grey4, transparent, $g-dark-grey4);
+        @include custom-button-kind(ghost, $g-dark-primary4, transparent, transparent);
+        @include custom-button-kind(group, $g-dark-grey3, $g-dark-base3);
+      }
     }
 
-    &:active,
-    &.#{$ns}-active {
-      @include custom-button-kind(primary, $g-white, $g-dark-primary1, $g-dark-primary3);
-      @include custom-button-kind(secondary, $g-dark-primary3, $g-dark-base4);
-      @include custom-button-kind(stroked, $g-white, transparent, $g-white);
-      @include custom-button-kind(ghost, $g-dark-primary3, transparent, transparent);
-      @include custom-button-kind(group, $g-white, $g-dark-primary3);
-    }
+    &.#{$ns}-intent-danger {
+      @include custom-button-kind(primary, $g-white, $g-error-600);
+      @include custom-button-kind(secondary, $g-error-600, $g-dark-base4);
+      @include custom-button-kind(stroked, $g-dark-grey1, transparent, $g-error-600);
+      @include custom-button-kind(ghost, $g-error-600, transparent, transparent);
 
-    &:disabled,
-    &.#{$ns}-disabled {
-      @include custom-button-kind(primary, $g-dark-primary3, $g-dark-primary4);
-      @include custom-button-kind(secondary, $g-dark-primary5, $g-dark-base3);
-      @include custom-button-kind(stroked, $g-dark-grey4, transparent, $g-dark-grey4);
-      @include custom-button-kind(ghost, $g-dark-primary4, transparent, transparent);
-      @include custom-button-kind(group, $g-dark-grey3, $g-dark-base3);
+      &:hover {
+        @include custom-button-kind(primary, $g-white, $g-error-500);
+        @include custom-button-kind(secondary, $g-error-500, $g-dark-base5);
+        @include custom-button-kind(stroked, $g-dark-grey1, $g-dark-base5, $g-error-500);
+        @include custom-button-kind(ghost, $g-error-500, transparent, transparent);
+      }
+
+      &:active,
+      &.#{$ns}-active {
+        @include custom-button-kind(primary, $g-white, $g-error-600, $g-error-700);
+        @include custom-button-kind(secondary, $g-error-700, $g-dark-base4);
+        @include custom-button-kind(stroked, $g-white, transparent, $g-error-800);
+        @include custom-button-kind(ghost, $g-error-700, transparent, transparent);
+      }
+
+      &:disabled,
+      &.#{$ns}-disabled {
+        @include custom-button-kind(primary, $g-error-800, $g-error-600);
+        @include custom-button-kind(secondary, $g-error-800, $g-dark-base3);
+        @include custom-button-kind(stroked, $g-dark-grey4, transparent, $g-error-800);
+        @include custom-button-kind(ghost, $g-error-800, transparent, transparent);
+      }
     }
 
   }
@@ -181,20 +253,7 @@ $pt-gp-dark-icon-color: $g-white;
 
 // CUSTOM class for extra-small and extra-large sizes:
 .#{$ns}-button {
-  &.#{$ns}-g-extra-small {
-    min-height: 16px;
-    min-width: 16px;
-    padding-left: 0px;
-    padding-right: 0px;
-    padding-top: 0px;
-    padding-bottom: 0px;
-    .#{$ns}-icon>svg {
-      height: 10px;
-      width: 10px;
-    }
-  }
-
-  &.#{$ns}-g-extra-large {
+  &.#{$ns}-large {
     min-height: 40px;
     min-width: 40px;
     padding-left: 15px;
@@ -202,7 +261,24 @@ $pt-gp-dark-icon-color: $g-white;
     border-radius: 20px;
   }
 
-  &.#{$ns}-small {
+  &.#{$ns}-g-extra-extra-small {
+    min-height: 16px;
+    min-width: 16px;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+
+    .#{$ns}-icon>svg {
+      height: 10px;
+      width: 10px;
+    }
+  }
+
+  &.#{$ns}-g-extra-small {
+    min-height: 20px;
+    min-width: 20px;
+    padding: 0 4px;
     .#{$ns}-icon>svg {
       height: 12px;
       width: 12px;
@@ -213,21 +289,20 @@ $pt-gp-dark-icon-color: $g-white;
 // CUSTOM class for action buttons with new sizes
 .#{$ns}-button.#{$ns}-g-action-button {
   text-transform: uppercase;
-  padding-left: 16px;
-  padding-right: 16px;
+  padding-left: 24px;
+  padding-right: 24px;
 
-  &.#{$ns}-small,
-  &.#{$ns}-g-extra-small {
-    padding-top: 0px;
-    padding-bottom: 0px;
+  &.#{$ns}-g-extra-small,
+  &.#{$ns}-g-extra-extra-small {
+    padding-top: 0;
+    padding-bottom: 0;
     padding-left: 8px;
     padding-right: 8px;
   }
 
-  &.#{$ns}-large,
-  &.#{$ns}-g-extra-large {
-    padding-left: 24px;
-    padding-right: 24px;
+  &.#{$ns}-small {
+    padding-left: 16px;
+    padding-right: 16px;
   }
 
 }
