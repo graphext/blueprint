@@ -394,9 +394,6 @@ export const BUTTON_KIND_GROUP = `${NS}-kind-g-group`;
 
 /* BUTTON GROUP */
 export const BUTTON_GROUP_STRECH = `${NS}-g-strech`;
-export const TAB_STROKE_LINE_RIGHT = `${NS}-g-stroke-line-right`;
-export const TAB_STROKE_LINE_BOTTOM = `${NS}-g-stroke-line-bottom`;
-export const TAB_STROKE_LINE_LEFT = `${NS}-g-stroke-line-left`;
 
 /* TABS */
 export const TAB_STROKE_LINE_TOP = `${NS}-g-stroke-line-top`;
