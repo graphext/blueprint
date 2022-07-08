@@ -231,6 +231,20 @@
     "content": "\\e0bb"
   },
   {
+    "displayName": "Build",
+    "iconName": "g-build",
+    "tags": "plot, build, customize",
+    "group": "Graphext",
+    "content": "\\e0bb"
+  },
+  {
+    "displayName": "Left",
+    "iconName": "g-arrow-left-2",
+    "tags": "arrow, left, plot",
+    "group": "Graphext",
+    "content": "\\e0bb"
+  },
+  {
     "displayName": "Unpin",
     "iconName": "g-unpin",
     "tags": "safety unpin, detach",
