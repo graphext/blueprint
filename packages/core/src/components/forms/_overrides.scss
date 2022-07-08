@@ -89,7 +89,7 @@
   box-sizing: border-box;
   padding-left: $input-padding-horizontal;
   padding-right: $input-padding-horizontal;
-  box-shadow: none !important;
+  box-shadow: none;
 
   &.#{$ns}-large {
     padding: 0 $input-padding-horizontal * 1.5;
@@ -100,7 +100,7 @@
 // Numeric Input Control Group
 .#{$ns}-numeric-input {
   .#{$ns}-button-group.#{$ns}-vertical > .#{$ns}-button {
-    box-shadow: none !important;
+    box-shadow: none;
     background-color: $dark-gray4;
 
     & > .#{$ns}-icon{

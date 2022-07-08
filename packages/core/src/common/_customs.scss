@@ -125,7 +125,7 @@ $g-primary3: shade($g-dark-primary3, 20%);
 $g-primary4: shade($g-dark-primary4, 30%);
 $g-primary5: shade($g-dark-primary5, 20%);
 
-$g-dark-grey1: hsl(220, 4%, 84%); 
+$g-dark-grey1: hsl(220, 4%, 84%);
 $g-dark-grey2: hsl(220, 4%, 84%);
 $g-dark-grey3: hsl(223, 3%, 59%);
 $g-dark-grey4: hsl(222, 5%, 44%);
@@ -143,9 +143,163 @@ $g-dark-base4: hsl(221, 14%, 22%);
 $g-dark-base5: hsl(225, 13%, 25%);
 
 // To Be Defined in the New Design System https://www.figma.com/file/1rUpciJJRVQZiNqEzggaAN/NEW---Design-System?node-id=0%3A1 :
-// $g-base0: hsl(0, 0%, 9%);
-// $g-base1: hsl(225, 55%, 96%);
-// $g-base2: hsl(228, 38%, 97%);
-// $g-base3: hsl(228, 38%, 97%);
-// $g-base4: hsl(0, 0%, 98%);
-// $g-base5: hsl(225, 13%, 25%);
+$g-base0: hsl(225, 75%, 96%);
+$g-base1: hsl(225, 55%, 96%);
+$g-base2: hsl(228, 38%, 97%);
+$g-base3: hsl(228, 38%, 97%);
+$g-base4: hsl(0, 0%, 98%);
+$g-base5: hsl(0, 0%, 100%);
+
+// all shadow lists must be the same length to avoid flicker in transitions.
+$pt-elevation-shadow-0: 0 0 0 1px transparent,
+                        0 0 0 rgba($black, 0),
+                        0 0 0 rgba($black, 0) !default;
+$pt-dark-elevation-shadow-0: 0 0 0 1px transparent,
+                             0 0 0 rgba($black, 0),
+                             0 0 0 rgba($black, 0) !default;
+
+// Custom colors with shades: 
+
+// $g-example-25: ;
+// $g-example-50: ;
+// $g-example-100: ;
+// $g-example-200: ;
+// $g-example-300: ;
+// $g-example-400: ;
+// $g-example-500: ;
+// $g-example-600: ;
+// $g-example-700: ;
+// $g-example-800: ;
+// $g-example-900: ;
+
+$g-wizard-23-25: #FEFEFF;
+$g-wizard-23-50: #F7F8FD;
+$g-wizard-23-100: #EAEEFA;
+$g-wizard-23-200: #DAE0F6;
+$g-wizard-23-300: #B5BFED;
+$g-wizard-23-400: #8495E1;
+$g-wizard-23-500: #5B71D7;
+$g-wizard-23-600: #445DD1;
+$g-wizard-23-700: #22358B;
+$g-wizard-23-800: #1B2A6F;
+$g-wizard-23-900: #111A46;
+
+$g-wizard-26-25: #FDFCFD;
+$g-wizard-26-50: #FAF9FB;
+$g-wizard-26-100: #F3EFF5;
+$g-wizard-26-200: #EAE3ED;
+$g-wizard-26-300: #D5C7DC;
+$g-wizard-26-400: #B8A1C4;
+$g-wizard-26-500: #A182B0;
+$g-wizard-26-600: #805C92;
+$g-wizard-26-700: #5D436A;
+$g-wizard-26-800: #4A3554;
+$g-wizard-26-900: #2F2235;
+
+$g-water-25: #FAFEFF;
+$g-water-50: #EBFCFF;
+$g-water-100: #E0F3F6;
+$g-water-200: #D0ECF1;
+$g-water-300: #BCE7EB;
+$g-water-400: #A1DAE3;
+$g-water-500: #82CDD9;
+$g-water-600: #56BCCC;
+$g-water-700: #287985;
+$g-water-800: #20606A;
+$g-water-900: #143C43;
+
+$g-wizard-18-25: #FDFEFB;
+$g-wizard-18-50: #F9FBF4;
+$g-wizard-18-100: #F5F8ED;
+$g-wizard-18-200: #EDF2DE;
+$g-wizard-18-300: #DBE5BD;
+$g-wizard-18-400: #C4D491;
+$g-wizard-18-500: #B0C66C;
+$g-wizard-18-600: #81973B;
+$g-wizard-18-700: #6B7D31;
+$g-wizard-18-800: #556327;
+$g-wizard-18-900: #353E18;
+
+$g-error-25: #FEFBFB;
+$g-error-50: #FAF0F0;
+$g-error-100: #F7E8E8;
+$g-error-200: #F3DDDD;
+$g-error-300: #E7BBBB;
+$g-error-400: #D78E8E;
+$g-error-500: #CC7070;
+$g-error-600: #B83939;
+$g-error-700: #993030;
+$g-error-800: #7B2626;
+$g-error-900: #3D1313;
+
+$g-grass-25: #FBFDFB;
+$g-grass-50: #F8FCF8;
+$g-grass-100: #EDF7ED;
+$g-grass-200: #DFF1DF;
+$g-grass-300: #C0E2C0;
+$g-grass-400: #95CF95;
+$g-grass-500: #68BB68;
+$g-grass-600: #2CA02C;
+$g-grass-700: #258825;
+$g-grass-800: #1D6B1D;
+$g-grass-900: #0F350F;
+
+$g-avocado-25: #FEFEFB;
+$g-avocado-50: #FBFDF2;
+$g-avocado-100: #F8FCE9;
+$g-avocado-200: #E9F4B5;
+$g-avocado-300: #E8F3B4;
+$g-avocado-400: #D3E96D;
+$g-avocado-500: #C7E347;
+$g-avocado-600: #BCDD22;
+$g-avocado-700: #7D9317;
+$g-avocado-800: #5E6F11;
+$g-avocado-900: #3F4A0B;
+
+$g-wizard-4-25: #FCFDFC;
+$g-wizard-4-50: #F7F9F6;
+$g-wizard-4-100: #F1F5F0;
+$g-wizard-4-200: #E6ECE4;
+$g-wizard-4-300: #CEDAC8;
+$g-wizard-4-400: #B8C9B0;
+$g-wizard-4-500: #89A97A;
+$g-wizard-4-600: #446734;
+$g-wizard-4-700: #466935;
+$g-wizard-4-800: #3A582C;
+$g-wizard-4-900: #263A1D;
+
+$g-wood-25: #FBF9F9;
+$g-wood-50: #F5F0EF;
+$g-wood-100: #EBE2E0;
+$g-wood-200: #E1D3D0;
+$g-wood-300: #CFB9B4;
+$g-wood-400: #B99992;
+$g-wood-500: #A67C73;
+$g-wood-600: #8C564B;
+$g-wood-700: #71453C;
+$g-wood-800: #5A3730;
+$g-wood-900: #2F1D19;
+
+$g-denim-25: #FBFDFE;
+$g-denim-50: #FAF8FC;
+$g-denim-100: #ECF3F9;
+$g-denim-200: #DDE8F3;
+$g-denim-300: #B6D3E7;
+$g-denim-400: #90BCDA;
+$g-denim-500: #55A8E2;
+$g-denim-600: #1F77B4;
+$g-denim-700: #1A6396;
+$g-denim-800: #144E75;
+$g-denim-900: #0D314A;
+
+$g-purple-25: #FDFCFD;
+$g-purple-50: #F7F1F8;
+$g-purple-100: #E1CCE5;
+$g-purple-200: #CCAAD4;
+$g-purple-300: #B380BE;
+$g-purple-400: #9A55A8;
+$g-purple-500: #802B93;
+$g-purple-600: #67007D;
+$g-purple-700: #560068;
+$g-purple-800: #450053;
+$g-purple-900: #22002A;

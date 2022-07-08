@@ -378,3 +378,22 @@ export function positionClass(position: Position | undefined) {
     }
     return `${NS}-position-${position}`;
 }
+
+/* CUSTOM GRAPHEXT CLASSES */
+
+/* BUTTON */
+export const BUTTON_ACTION = `${NS}-g-action-button`;
+export const BUTTON_SMALL_BORDER_RADIUS = `${NS}-g-button-small-border-radius`;
+export const BUTTON_SIZE_EXTRA_SMALL = `${NS}-g-extra-small`;
+export const BUTTON_SIZE_EXTRA_EXTRA_SMALL = `${NS}-g-extra-extra-small`;
+export const BUTTON_KIND_PRIMARY = `${NS}-kind-g-primary`;
+export const BUTTON_KIND_SECONDARY = `${NS}-kind-g-secondary`;
+export const BUTTON_KIND_STROKED = `${NS}-kind-g-stroked`;
+export const BUTTON_KIND_GHOST = `${NS}-kind-g-ghost`;
+export const BUTTON_KIND_GROUP = `${NS}-kind-g-group`;
+
+/* BUTTON GROUP */
+export const BUTTON_GROUP_STRECH = `${NS}-g-strech`;
+export const TAB_STROKE_LINE_RIGHT = `${NS}-g-stroke-line-right`;
+export const TAB_STROKE_LINE_BOTTOM = `${NS}-g-stroke-line-bottom`;
+export const TAB_STROKE_LINE_LEFT = `${NS}-g-stroke-line-left`;
