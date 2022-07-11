@@ -1,6 +1,10 @@
 .#{$ns}-dialog {
   padding-top: 24px;
   padding-bottom: 24px;
+
+  .#{$ns}-multistep-dialog-panels {
+    padding-top: 8px;
+  }
 }
 
 .#{$ns}-dialog-header, .#{$ns}-dark .#{$ns}-dialog-header {
