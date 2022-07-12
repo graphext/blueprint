@@ -2,7 +2,7 @@
   color: inherit;
 }
 
-// Allow tabs to fill available width
+// custom class to allow tabs to fill available width
 .#{$ns}-tabs-fill {
   .#{$ns}-tab {
     flex: 1;
@@ -20,18 +20,17 @@
 
 .#{$ns}-tabs.#{$ns}-vertical .#{$ns}-tab,
 .#{$ns}-tab {
-  padding-left: 8px;
-  padding-right: 8px;
+  padding-left: $padding-between-tabs;
+  padding-right: $padding-between-tabs;
 }
 
 /*
-- hover effect (only if not disabled) => background + color
+- hover effect (only if not disabled) => background
 - disabled: specific color
  */
 
 @mixin hover-effect($hover_color) {
   &:not([aria-disabled="true"]):not(.#{$ns}-g-tab-disable-hover-effect):hover {
-    color: $pt-intent-primary;
     background-color: $hover_color !important; /* to win BP !important when animate */
   }
 }
