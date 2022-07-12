@@ -401,5 +401,8 @@ export const TAB_STROKE_LINE_RIGHT = `${NS}-g-stroke-line-right`;
 export const TAB_STROKE_LINE_BOTTOM = `${NS}-g-stroke-line-bottom`;
 export const TAB_STROKE_LINE_LEFT = `${NS}-g-stroke-line-left`;
 
+export const TABS_FILL_SPACE = `${NS}-tabs-fill`;
+
+
 /* TAB */
 export const TAB_DISABLE_HOVER_EFFECT = `${NS}-g-tab-disable-hover-effect`;
