@@ -2,30 +2,234 @@
   color: inherit;
 }
 
-.#{$ns}-dark {
-  .#{$ns}-tab {
-    color: $blue3;
-  }
-}
-
-.#{$ns}-tab-indicator-wrapper {
-  z-index: 1;
-
-  .#{$ns}-tab-indicator {
-    bottom: -$tab-indicator-width;
-  }
-}
-
-// Allow tabs to fill available width
+// custom class to allow tabs to fill available width
 .#{$ns}-tabs-fill {
   .#{$ns}-tab {
     flex: 1;
     margin: 0;
     text-align: center;
-    border-bottom: 2px solid transparent;
+  }
+}
 
-    &:not([aria-selected="true"]) {
-      border-bottom-color: $dark-gray1;
+/* overrides default bp value */
+.#{$ns}-tab-list {
+  > *:not(:last-child) {
+    margin-right: 0;
+  }
+}
+
+.#{$ns}-tabs.#{$ns}-vertical .#{$ns}-tab,
+.#{$ns}-tab {
+  padding-left: $padding-between-tabs;
+  padding-right: $padding-between-tabs;
+}
+
+/*
+- hover effect (only if not disabled) => background
+- disabled: specific color
+ */
+
+@mixin hover-effect($hover_color) {
+  &:not([aria-disabled="true"]):not(.#{$ns}-g-tab-disable-hover-effect):hover {
+    background-color: $hover_color !important; /* to win BP !important when animate */
+  }
+}
+
+@mixin disabled-effect($disabled_color) {
+  &[aria-disabled="true"] {
+    color: $disabled_color;
+  }
+}
+
+// light theme (vertical and horizontal)
+.#{$ns}-tabs.#{$ns}-vertical .#{$ns}-tab,
+.#{$ns}-tab {
+  @include hover-effect($tab-background-color-light);
+  @include disabled-effect($tab-color-disabled-light)
+}
+
+// dark theme (vertical and horizontal)
+.#{$ns}-dark {
+  .#{$ns}-tabs.#{$ns}-vertical .#{$ns}-tab,
+  .#{$ns}-tab {
+    @include hover-effect($tab-background-color-dark);
+    @include disabled-effect($tab-color-disabled-dark)
+  }
+}
+
+/*
+vertical property => it align items vertically and gives them an effect that we need to override
+*/
+
+.#{$ns}-tabs.#{$ns}-vertical {
+  > .#{$ns}-tab-list {
+    .#{$ns}-tab {
+      border-radius: 0;
+      &[aria-selected="true"] {
+        background-color: transparent;
+     }
     }
   }
 }
+
+/*
+Here starts the declaration of the stroke line styles.
+We need to handle:
+ - the default value (no stroke line is defined)
+ - the 4 positions of the stroke line (top, right, bottom, left)
+
+If the tab is disabled, the stroke line should appear in the disabled color.
+If the tab is disabled and active, the disabled styles should win.
+
+Also, be aware of how the 'animated' effect works (it adds a new <div> with some translation effects to
+achieve the it). In this case, the stroke line (added as a box-shadow effect) should not be visible
+and vice-versa.
+
+Hints:
+- inset: changes the shadow to one inside the frame.
+- if color is omitted => it takes the default color
+  (helpfully for dark and light theme differentiation => no need extra rules for each theme)
+- minus sign (-) in offset-x or offset-y changes the line position.
+
+We need to win the specificity of the vertical selector that sets box-shadow: none (declared in the _tabs.scss file):
+.#{$ns}-tabs.#{$ns}-vertical {
+(...)
+  > .#{$ns}-tab-list {
+    (...)
+    .#{$ns}-tab {
+      (...)
+      &[aria-selected="true"] {
+        box-shadow: none; => we need to override this
+      }
+    }
+    (...)
+}
+
+That's why we use (for example) this selector for vertical tabs: .#{$ns}-g-stroke-line-top.#{$ns}-tabs.#{$ns}-vertical.
+*/
+
+$stroke-line-top: inset 0 ($tab-indicator-width);
+$stroke-line-right: inset (-$tab-indicator-width) 0;
+$stroke-line-bottom: inset 0 (-$tab-indicator-width) 0;
+$stroke-line-left: inset $tab-indicator-width 0;
+
+@mixin strokeLine ($strokeLinePosition) {
+  .#{$ns}-tab {
+    &[aria-selected="true"] {
+      box-shadow: $strokeLinePosition !important;
+    }
+    &:not([aria-disabled="true"]):not(.#{$ns}-g-tab-disable-hover-effect):hover {
+      box-shadow: $strokeLinePosition $pt-intent-primary !important;
+    }
+  }
+}
+
+/*  Here we are setting the default values if the position of the stroke line is not defined.
+    - vertical list => stroke line left
+    - horizontal list => stroke line bottom
+*/
+
+// light theme & dark theme
+.#{$ns}-dark,
+.#{$ns}-tab-list {
+  @include strokeLine($stroke-line-bottom);
+}
+
+//vertical tabs
+.#{$ns}-tabs.#{$ns}-vertical {
+  > .#{$ns}-tab-list {
+    @include strokeLine($stroke-line-left);
+  }
+}
+
+/*
+  Vertical Tabs when animated:
+  In BP, when vertical is used, the active tab is shown with background-color
+  But here we need that the stroke animated line is shown in the desired theme color.
+*/
+
+.#{$ns}-tabs.#{$ns}-vertical {
+  > .#{$ns}-tab-list {
+    .#{$ns}-tab-indicator-wrapper .#{$ns}-tab-indicator {
+      /* make stroke line vertical left */
+      height: inherit;
+      width: $tab-indicator-width;
+      /*overwrite BP styles*/
+      border-radius: 0;
+      background-color: $tab-color-selected;
+    }
+  }
+}
+
+
+.#{$ns}-dark {
+  .#{$ns}-tabs.#{$ns}-vertical {
+    > .#{$ns}-tab-list {
+      .#{$ns}-tab-indicator-wrapper .#{$ns}-tab-indicator {
+        background-color: $dark-tab-color-selected;
+      }
+    }
+  }
+}
+
+/*
+  Stroke line position declaration.
+  Available classNames to place the stroke line in the desired position:
+    - top => .#{$ns}-g-stroke-line-top => example: bp3-g-stroke-line-top
+    - right => .#{$ns}-g-stroke-line-right => example: bp3-g-stroke-line-right
+    - bottom => .#{$ns}-g-stroke-line-bottom => example: bp3-g-stroke-line-bottom
+    - left => .#{$ns}-g-stroke-line-left => example: bp3-g-stroke-line-left
+*/
+
+/*
+  We need to hide the animated stroke line when we are handling one of the 'unsupported' stroke line positions.
+  The supported cases are:
+  - horizontal => bottom line
+  - vertical => left line
+  In the other positions, we will need to hide the animated bar.
+*/
+@mixin hide-animated-stroke-line() {
+  .#{$ns}-tab-indicator-wrapper {
+    display: none;
+  }
+}
+
+// stroke line position => top
+.#{$ns}-g-stroke-line-top,
+.#{$ns}-g-stroke-line-top.#{$ns}-tabs.#{$ns}-vertical {
+
+  @include strokeLine($stroke-line-top);
+  @include hide-animated-stroke-line();
+}
+
+
+// stroke line position => right
+.#{$ns}-g-stroke-line-right,
+.#{$ns}-g-stroke-line-right.#{$ns}-tabs.#{$ns}-vertical {
+  @include strokeLine($stroke-line-right);
+  @include hide-animated-stroke-line();
+}
+
+// stroke line position => bottom
+// bottom + horizontal => animation effect should work
+.#{$ns}-g-stroke-line-bottom,
+.#{$ns}-g-stroke-line-bottom.#{$ns}-tabs.#{$ns}-vertical {
+  @include strokeLine($stroke-line-bottom);
+}
+
+.#{$ns}-g-stroke-line-bottom.#{$ns}-tabs.#{$ns}-vertical {
+  @include hide-animated-stroke-line();
+}
+
+// stroke line position => left
+//left + vertical => animation effect should work
+.#{$ns}-g-stroke-line-left,
+.#{$ns}-g-stroke-line-left.#{$ns}-tabs.#{$ns}-vertical {
+  @include strokeLine($stroke-line-left);
+}
+
+.#{$ns}-g-stroke-line-left {
+  @include hide-animated-stroke-line();
+}
+
+/* Stroke line declaration ends here */
