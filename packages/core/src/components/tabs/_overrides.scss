@@ -24,6 +24,11 @@
   padding-right: $padding-between-tabs;
 }
 
+/* padding between tabs and panels when it is vertical */
+.#{$ns}-tabs.#{$ns}-vertical .#{$ns}-tab-panel {
+  padding-left: 32px;
+}
+
 /*
 - hover effect (only if not disabled) => background
 - disabled: specific color
