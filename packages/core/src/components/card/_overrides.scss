@@ -1,0 +1,29 @@
+.#{$ns}-card {
+  border: 1px solid $card-background-color;
+
+  &.#{$ns}-dark,
+  .#{$ns}-dark & {
+    border: 1px solid $dark-card-background-color;
+  }
+
+  &:hover {
+    border-color: $card-hover-border-color;
+
+    &.#{$ns}-dark,
+    .#{$ns}-dark & {
+      border: 1px solid $dark-card-hover-border-color;
+    }
+  }
+
+  &.#{$ns}-disabled {
+    filter: opacity(60%);
+  }
+
+  &.#{$ns}-kind-g-active {
+    border-color: $g-primary3;
+  }
+
+  &.#{$ns}-kind-g-error {
+    border-color: $g-error-600;
+  }
+}
