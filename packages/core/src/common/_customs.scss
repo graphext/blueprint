@@ -142,13 +142,13 @@ $g-dark-base3: hsl(225, 14%, 19%);
 $g-dark-base4: hsl(221, 14%, 22%);
 $g-dark-base5: hsl(225, 13%, 25%);
 
-// To Be Defined in the New Design System https://www.figma.com/file/1rUpciJJRVQZiNqEzggaAN/NEW---Design-System?node-id=0%3A1 :
-$g-base0: hsl(225, 75%, 96%);
-$g-base1: hsl(225, 55%, 96%);
-$g-base2: hsl(228, 38%, 97%);
-$g-base3: hsl(228, 38%, 97%);
-$g-base4: hsl(0, 0%, 98%);
-$g-base5: hsl(0, 0%, 100%);
+$g-base0: hsl(0, 0%, 100%);
+$g-base1: hsl(240, 20%, 99%);
+$g-base2: hsl(195, 20%, 96%);
+$g-base3: hsl(225, 22%, 96%);
+$g-base4: hsl(231, 26%, 95%);
+$g-base5: hsl(227, 18%, 90%);
+$g-base6: hsl(200, 86%, 97%);
 
 // all shadow lists must be the same length to avoid flicker in transitions.
 $pt-elevation-shadow-0: 0 0 0 1px transparent,
