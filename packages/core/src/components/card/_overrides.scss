@@ -16,14 +16,32 @@
   }
 
   &.#{$ns}-disabled {
-    filter: opacity(60%);
+    pointer-events: none;
+
+    > * {
+      opacity: .85;
+    }
+
+    &.#{$ns}-dark,
+    .#{$ns}-dark & {
+      > * {
+        opacity: .6;
+      }
+    }
+
+    &.#{$ns}-interactive:hover {
+      box-shadow: none;
+      cursor: auto;
+    }
   }
 
-  &.#{$ns}-kind-g-active {
+  &.#{$ns}-kind-g-active,
+  &.#{$ns}-kind-g-active:hover {
     border-color: $g-primary3;
   }
 
-  &.#{$ns}-kind-g-error {
+  &.#{$ns}-kind-g-error,
+  &.#{$ns}-kind-g-error:hover {
     border-color: $g-error-600;
   }
 }
