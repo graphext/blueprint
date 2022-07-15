@@ -26,7 +26,18 @@
     transform: translateX($g-tooltip2-arrow-adjust);
   }
 
-  &.#{$ns}-g-no-arrow > .#{$ns}-popover2-arrow{
-    display: none;
+  // Remove shadow of arrow
+  .#{$ns}-popover2-arrow::before {
+    box-shadow: none;
   }
+
+}
+
+.#{$ns}-popover2 {
+
+  // Remove shadow of arrow
+  .#{$ns}-popover2-arrow::before {
+    box-shadow: none;
+  }
+
 }

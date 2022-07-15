@@ -117,7 +117,7 @@ $g-dark-primary4: shade($g-dark-primary1, 30%); //30% shade
 $g-dark-primary5: shade($g-dark-primary1, 40%); //40% shade
 
 $g-white: hsl(0, 0%, 100%);
-$g-black: hsl(0, 0%, 10%);
+$g-black: #404040;
 
 $g-primary1: shade($g-dark-primary1, 20%);
 $g-primary2: shade($g-dark-primary2, 20%);
@@ -157,6 +157,14 @@ $pt-elevation-shadow-0: 0 0 0 1px transparent,
 $pt-dark-elevation-shadow-0: 0 0 0 1px transparent,
                              0 0 0 rgba($black, 0),
                              0 0 0 rgba($black, 0) !default;
+
+// Custom colors without shades:
+
+$g-dark-orange: #FF7F0E;
+$g-orange: tint($g-dark-orange, 20%);
+$g-dark-wizard-10: #2E6537;
+$g-wizard-10: tint($g-dark-wizard-10, 20%);
+
 
 // Custom colors with shades: 
 
