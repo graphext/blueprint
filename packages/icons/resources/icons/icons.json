@@ -1142,7 +1142,7 @@
   },
   {
     "displayName": "Sync mode",
-    "iconName": "g-sync",
+    "iconName": "g-sync-mode",
     "tags": "theme, sync mode, dark, light, half white, half black",
     "group": "Graphext",
     "content": "\\25D0"
