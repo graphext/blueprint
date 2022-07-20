@@ -13,8 +13,8 @@ $tooltip2-padding-horizontal: $pt-grid-size;
 
 // We use dark-theme colors for Tooltip intents:
 $pt-intent-colors: (
-  "primary": $g-dark-primary1,
-  "success": $g-dark-wizard-10,
-  "warning": $g-dark-orange,
+  "primary": $g-primary-600,
+  "success": $g-grass-600,
+  "warning": $g-orange-600,
   "danger" : $g-error-600
 );
