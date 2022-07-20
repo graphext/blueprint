@@ -1,6 +1,6 @@
 @import "~@blueprintjs/core/src/components/button/common";
 
-.#{$ns}-popover2, .#{$ns}-popover2.#{$ns}-dark {
+.#{$ns}-popover2:not(.#{$ns}-tooltip2), .#{$ns}-popover2.#{$ns}-dark:not(.#{$ns}-tooltip2) {
   @each $intent, $colors in $button-intents {
     &.#{$ns}-intent-#{$intent} {
       @include popover2-appearance(
