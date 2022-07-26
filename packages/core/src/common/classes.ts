@@ -395,6 +395,10 @@ export const BUTTON_KIND_GROUP = `${NS}-kind-g-group`;
 /* BUTTON GROUP */
 export const BUTTON_GROUP_STRECH = `${NS}-g-strech`;
 
+/* CARDS */
+export const CARD_ACTIVE = `${NS}-kind-g-active`;
+export const CARD_ERROR = `${NS}-kind-g-error`;
+
 /* TABS */
 export const TAB_STROKE_LINE_TOP = `${NS}-g-stroke-line-top`;
 export const TAB_STROKE_LINE_RIGHT = `${NS}-g-stroke-line-right`;
@@ -402,7 +406,6 @@ export const TAB_STROKE_LINE_BOTTOM = `${NS}-g-stroke-line-bottom`;
 export const TAB_STROKE_LINE_LEFT = `${NS}-g-stroke-line-left`;
 
 export const TABS_FILL_SPACE = `${NS}-tabs-fill`;
-
 
 /* TAB */
 export const TAB_DISABLE_HOVER_EFFECT = `${NS}-g-tab-disable-hover-effect`;
