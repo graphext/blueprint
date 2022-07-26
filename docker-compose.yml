@@ -33,3 +33,13 @@ services:
       - ${DEVELOPMENT_DIR}/repositories/graphext/node_modules/@blueprintjs:/root/graphext/blueprintjs
     ports:
       - "9999:9999"
+  popover:
+    image: node:12
+    command: sh -c 'cd packages/popover2 && yarn compile:css && cp -R lib/css ../../../root/graphext/blueprintjs/popover2/lib'
+    working_dir: /hostdata
+    volumes:
+      - .:/hostdata
+      - ${DEVELOPMENT_DIR}/config/npmrc:/root/.npmrc
+      - ${DEVELOPMENT_DIR}/repositories/graphext/node_modules/@blueprintjs:/root/graphext/blueprintjs
+    ports:
+      - "9999:9999"
