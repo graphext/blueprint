@@ -396,6 +396,7 @@ export const BUTTON_KIND_GROUP = `${NS}-kind-g-group`;
 export const BUTTON_GROUP_STRECH = `${NS}-g-strech`;
 
 /* CARDS */
+export const CARD_CLICKABLE = `${NS}-clickable`;
 export const CARD_ACTIVE = `${NS}-kind-g-active`;
 export const CARD_ERROR = `${NS}-kind-g-error`;
 

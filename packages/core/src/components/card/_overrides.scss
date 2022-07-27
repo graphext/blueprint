@@ -6,7 +6,7 @@
     border: 1px solid $dark-card-background-color;
   }
 
-  &:hover {
+  &.#{$ns}-clickable:hover {
     border-color: $card-hover-border-color;
 
     &.#{$ns}-dark,
