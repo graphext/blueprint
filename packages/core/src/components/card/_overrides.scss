@@ -6,12 +6,12 @@
     border: 1px solid $dark-card-background-color;
   }
 
-  &:hover {
+  &.#{$ns}-clickable:hover {
     border-color: $card-hover-border-color;
 
     &.#{$ns}-dark,
     .#{$ns}-dark & {
-      border: 1px solid $dark-card-hover-border-color;
+      border-color: $dark-card-hover-border-color;
     }
   }
 
@@ -36,12 +36,12 @@
   }
 
   &.#{$ns}-kind-g-active,
-  &.#{$ns}-kind-g-active:hover {
+  &.#{$ns}-kind-g-active.#{$ns}-clickable:hover {
     border-color: $g-primary-700;
   }
 
   &.#{$ns}-kind-g-error,
-  &.#{$ns}-kind-g-error:hover {
+  &.#{$ns}-kind-g-error.#{$ns}-clickable:hover {
     border-color: $g-error-600;
   }
 }
