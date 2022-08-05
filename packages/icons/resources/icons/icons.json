@@ -1147,8 +1147,20 @@
     "group": "Graphext",
     "content": "\\25D0"
   },
-
-
+  {
+    "displayName": "Save mode",
+    "iconName": "g-save-mode",
+    "tags": "autosave, on, recipe",
+    "group": "Graphext",
+    "content": "\\25D0"
+  },
+  {
+    "displayName": "Save mode off",
+    "iconName": "g-no-save-mode",
+    "tags": "autosave, off, recipe",
+    "group": "Graphext",
+    "content": "\\25D0"
+  },
   {
     "displayName": "Blank",
     "iconName": "blank",
