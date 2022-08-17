@@ -4,8 +4,8 @@
   }
 
   // Avoid heading to overwrite Tab line-height
-  &.h4,
-  &.heading-4 {
+  & h4,
+  & .heading-4 {
     line-height: $pt-button-height;
 
     .#{$ns}-large > & {
