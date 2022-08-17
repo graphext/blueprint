@@ -1,5 +1,17 @@
-.#{$ns}-tab > * {
-  color: inherit;
+.#{$ns}-tab {
+  & > * {
+    color: inherit;
+  }
+
+  // Avoid heading to overwrite Tab line-height
+  &.h4,
+  &.heading-4 {
+    line-height: $pt-button-height;
+
+    .#{$ns}-large > & {
+      line-height: $pt-button-height-large;
+    }
+  }
 }
 
 // custom class to allow tabs to fill available width
