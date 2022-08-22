@@ -410,3 +410,6 @@ export const TABS_FILL_SPACE = `${NS}-tabs-fill`;
 
 /* TAB */
 export const TAB_DISABLE_HOVER_EFFECT = `${NS}-g-tab-disable-hover-effect`;
+
+/* TOAST */
+export const TOAST_HIDE_CLOSE_BUTTON = `${NS}-g-toast-hide-close-button`;
