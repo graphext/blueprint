@@ -1,20 +1,14 @@
 .#{$ns}-tab {
+  font-size: 12px;
+  text-transform: uppercase;
+
   & > * {
     color: inherit;
   }
 
   .#{$ns}-large > & {
+    font-size: 12px;
     line-height: 48px;
-  }
-
-  // Avoid heading to overwrite Tab line-height
-  & h4,
-  & .heading-4 {
-    line-height: $pt-button-height;
-
-    .#{$ns}-large > & {
-      line-height: 48px;
-    }
   }
 }
 
