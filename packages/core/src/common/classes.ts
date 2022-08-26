@@ -408,5 +408,7 @@ export const TAB_STROKE_LINE_LEFT = `${NS}-g-stroke-line-left`;
 
 export const TABS_FILL_SPACE = `${NS}-tabs-fill`;
 
+export const TABS_NO_PADDING = `${NS}-tabs-no-padding`;
+
 /* TAB */
 export const TAB_DISABLE_HOVER_EFFECT = `${NS}-g-tab-disable-hover-effect`;
