@@ -17,3 +17,7 @@ $dark-minimal-button-background-color-hover: rgba($dark-gray5, 0.15);
 $dark-minimal-button-background-color-active: rgba($dark-gray5, 0.3);
 
 $pt-border-radius: $pt-button-border-radius; // Custom border radius just used once in _common.scss
+
+$button-padding-small: 0px 4px;
+$button-padding: 4px 8px;
+$button-padding-large: 8px 12px;

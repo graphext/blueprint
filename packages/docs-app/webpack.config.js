@@ -42,6 +42,7 @@ module.exports = Object.assign({}, baseConfig, {
                 // to: is relative to dist/
                 { from: "src/index.html", to: "." },
                 { from: "src/assets/favicon.png", to: "assets" },
+                { from: "src/assets/latolatin.css", to: "assets" },
             ],
         }),
     ]),

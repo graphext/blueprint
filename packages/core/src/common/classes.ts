@@ -283,11 +283,6 @@ export const TABS = `${TAB}s`;
 export const TAG = `${NS}-tag`;
 export const TAG_REMOVE = `${TAG}-remove`;
 
-/* TAG */
-export const TAG_SMALL = `${NS}-g-small`;
-export const TAG_CONTENT_FIXED_TOP = `${NS}-g-fixTop`;
-export const TAG_DISABLED = `${NS}-g-disabled`;
-
 export const TAG_INPUT = `${NS}-tag-input`;
 export const TAG_INPUT_ICON = `${TAG_INPUT}-icon`;
 export const TAG_INPUT_VALUES = `${TAG_INPUT}-values`;
@@ -383,3 +378,36 @@ export function positionClass(position: Position | undefined) {
     }
     return `${NS}-position-${position}`;
 }
+
+/* CUSTOM GRAPHEXT CLASSES */
+
+/* BUTTON */
+export const BUTTON_ACTION = `${NS}-g-action-button`;
+export const BUTTON_SMALL_BORDER_RADIUS = `${NS}-g-button-small-border-radius`;
+export const BUTTON_SIZE_EXTRA_SMALL = `${NS}-g-extra-small`;
+export const BUTTON_SIZE_EXTRA_EXTRA_SMALL = `${NS}-g-extra-extra-small`;
+export const BUTTON_KIND_PRIMARY = `${NS}-kind-g-primary`;
+export const BUTTON_KIND_SECONDARY = `${NS}-kind-g-secondary`;
+export const BUTTON_KIND_STROKED = `${NS}-kind-g-stroked`;
+export const BUTTON_KIND_GHOST = `${NS}-kind-g-ghost`;
+export const BUTTON_KIND_GROUP = `${NS}-kind-g-group`;
+
+/* BUTTON GROUP */
+export const BUTTON_GROUP_STRECH = `${NS}-g-strech`;
+
+/* TABS */
+export const TAB_STROKE_LINE_TOP = `${NS}-g-stroke-line-top`;
+export const TAB_STROKE_LINE_RIGHT = `${NS}-g-stroke-line-right`;
+export const TAB_STROKE_LINE_BOTTOM = `${NS}-g-stroke-line-bottom`;
+export const TAB_STROKE_LINE_LEFT = `${NS}-g-stroke-line-left`;
+
+export const TABS_FILL_SPACE = `${NS}-tabs-fill`;
+
+
+/* TAB */
+export const TAB_DISABLE_HOVER_EFFECT = `${NS}-g-tab-disable-hover-effect`;
+
+/* TAG */
+export const TAG_SMALL = `${NS}-g-small`;
+export const TAG_CONTENT_FIXED_TOP = `${NS}-g-fixTop`;
+export const TAG_DISABLED = `${NS}-g-disabled`;

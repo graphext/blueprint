@@ -31,7 +31,7 @@ $black: #000000;
 
 $dark-gray0: #161616;
 $dark-gray1: #1F2024;
-$dark-gray2: #272B33;
+$dark-gray2: #272A33;
 $dark-gray3: #2A2E38;
 $dark-gray4: #313641;
 $dark-gray5: #363B47;
@@ -118,7 +118,7 @@ $g-dark-primary4: shade($g-dark-primary1, 30%); //30% shade
 $g-dark-primary5: shade($g-dark-primary1, 40%); //40% shade
 
 $g-white: hsl(0, 0%, 100%);
-$g-black: hsl(0, 0%, 10%);
+$g-black: #404040;
 
 $g-primary1: shade($g-dark-primary1, 20%);
 $g-primary2: shade($g-dark-primary2, 20%);
@@ -138,18 +138,26 @@ $g-grey4: $g-dark-grey1;
 
 $g-dark-base0: hsl(0, 0%, 9%);
 $g-dark-base1: hsl(228, 7%, 13%);
-$g-dark-base2: hsl(220, 13%, 18%);
+$g-dark-base2: hsl(225, 13%, 18%);
 $g-dark-base3: hsl(225, 14%, 19%);
 $g-dark-base4: hsl(221, 14%, 22%);
 $g-dark-base5: hsl(225, 13%, 25%);
 
 // To Be Defined in the New Design System https://www.figma.com/file/1rUpciJJRVQZiNqEzggaAN/NEW---Design-System?node-id=0%3A1 :
-$g-base0: hsl(0, 0%, 9%);
+$g-base0: hsl(225, 75%, 96%);
 $g-base1: hsl(225, 55%, 96%);
 $g-base2: hsl(228, 38%, 97%);
 $g-base3: hsl(228, 38%, 97%);
 $g-base4: hsl(0, 0%, 98%);
-$g-base5: hsl(225, 13%, 25%);
+$g-base5: hsl(0, 0%, 100%);
+
+// all shadow lists must be the same length to avoid flicker in transitions.
+$pt-elevation-shadow-0: 0 0 0 1px transparent,
+                        0 0 0 rgba($black, 0),
+                        0 0 0 rgba($black, 0) !default;
+$pt-dark-elevation-shadow-0: 0 0 0 1px transparent,
+                             0 0 0 rgba($black, 0),
+                             0 0 0 rgba($black, 0) !default;
 
 // Custom colors with shades: 
 
@@ -164,6 +172,18 @@ $g-base5: hsl(225, 13%, 25%);
 // $g-example-700: ;
 // $g-example-800: ;
 // $g-example-900: ;
+
+$g-primary-25: #FAFDFF;
+$g-primary-50: #E8F5FD;
+$g-primary-100: #CCE9FA;
+$g-primary-200: #AADAF6;
+$g-primary-300: #80C8F1;
+$g-primary-400: #55B6ED;
+$g-primary-500: #2BA3E8;
+$g-primary-600: #0091E4;
+$g-primary-700: #0066A0;
+$g-primary-800: #005789;
+$g-primary-900: #112446;
 
 $g-wizard-23-25: #FEFEFF;
 $g-wizard-23-50: #F7F8FD;
@@ -296,3 +316,27 @@ $g-purple-600: #67007D;
 $g-purple-700: #560068;
 $g-purple-800: #450053;
 $g-purple-900: #22002A;
+
+$g-orange-25: #FFFCFA;
+$g-orange-50: #FFFAF5;
+$g-orange-100: #FFF1E5;
+$g-orange-200: #FFE7D1;
+$g-orange-300: #FFCEA3;
+$g-orange-400: #FFAE66;
+$g-orange-500: #FF9436;
+$g-orange-600: #FF7F0E;
+$g-orange-700: #D46A0C;
+$g-orange-800: #804007;
+$g-orange-900: #470D0D;
+
+$g-wizard-10-25: #FCFDFC;
+$g-wizard-10-50: #EDF2EE;
+$g-wizard-10-100: #D5E0D7;
+$g-wizard-10-200: #B9CCBC;
+$g-wizard-10-300: #96B29B;
+$g-wizard-10-400: #74987A;
+$g-wizard-10-500: #517F58;
+$g-wizard-10-600: #2E6537;
+$g-wizard-10-700: #26542E;
+$g-wizard-10-800: #1F4325;
+$g-wizard-10-900: #17331C;

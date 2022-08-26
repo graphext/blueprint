@@ -28,6 +28,12 @@
     border-radius: 0 $pt-button-border-radius $pt-button-border-radius 0;
   }
 
+  // round all the corners of the only child element
+  > :only-child {
+    border-radius: $pt-button-border-radius;
+    margin-right: 0;
+  }
+
   // bring back border radius on these buttons
   .#{$ns}-input-group .#{$ns}-button {
     border-radius: $pt-border-radius;
@@ -89,7 +95,7 @@
   box-sizing: border-box;
   padding-left: $input-padding-horizontal;
   padding-right: $input-padding-horizontal;
-  box-shadow: none !important;
+  box-shadow: none;
 
   &.#{$ns}-large {
     padding: 0 $input-padding-horizontal * 1.5;
@@ -100,7 +106,7 @@
 // Numeric Input Control Group
 .#{$ns}-numeric-input {
   .#{$ns}-button-group.#{$ns}-vertical > .#{$ns}-button {
-    box-shadow: none !important;
+    box-shadow: none;
     background-color: $dark-gray4;
 
     & > .#{$ns}-icon{

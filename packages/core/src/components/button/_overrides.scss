@@ -1,6 +1,6 @@
 .#{$ns}-button.#{$ns}-action-button {
-  padding-left: 32px;
-  padding-right: 32px;
+  padding-left: 24px;
+  padding-right: 24px;
   text-transform: uppercase;
 }
 
@@ -10,7 +10,7 @@
 
 .#{$ns}-button-text {
   font-size: 12px;
-  font-weight: bold;
+  font-weight: 400;
 }
 
 .#{$ns}-dark .#{$ns}-button.#{$ns}-minimal.#{$ns}-intent-primary:hover,
@@ -19,33 +19,31 @@
 }
 
 .#{$ns}-dark .#{$ns}-button.#{$ns}-minimal {
+
   &:disabled,
   &:disabled:hover,
   &.#{$ns}-disabled,
-  &.#{$ns}-disabled:hover{
+  &.#{$ns}-disabled:hover {
     background-color: $dark-minimal-button-background-color;
     opacity: 0.5;
   }
 }
 
-.#{$ns}-dark .#{$ns}-button, .#{$ns}-dark .#{$ns}-button:not([class*="bp3-intent-"]), .#{$ns}-button:not([class*="bp3-intent-"]) {
+.#{$ns}-dark .#{$ns}-button,
+.#{$ns}-dark .#{$ns}-button:not([class*="#{$ns}-intent-"]),
+.#{$ns}-button:not([class*="#{$ns}-intent-"]) {
   background-image: none;
 }
 
-.#{$ns}-dark .#{$ns}-button:not([class*="bp3-intent-"]) .#{$ns}-icon {
- color: $white;
+.#{$ns}-dark .#{$ns}-button:not([class*="#{$ns}-intent-"]) .#{$ns}-icon {
+  color: $white;
 }
 
-.#{$ns}-button-group .#{$ns}-button {
+.#{$ns}-button-group:not([class*="#{$ns}-g-strech"]) .#{$ns}-button {
   min-width: 48px;
 }
 
-.#{$ns}-button-group .#{$ns}-button:not(:last-child),
-.#{$ns}-button-group .#{$ns}-popover-wrapper:not(:last-child) .#{$ns}-button {
-  border-right: 1px solid $g-dark-base3;
-}
-
-.#{$ns}-dark .#{$ns}-button-group .#{$ns}-button:not([class*="bp3-intent-"]) {
+.#{$ns}-dark .#{$ns}-button-group .#{$ns}-button:not([class*="#{$ns}-intent-"]) {
   box-shadow: none;
 }
 
@@ -58,6 +56,7 @@ $pt-gp-dark-icon-color: $g-white;
       &[class*="#{$ns}-icon-"]::before {
         color: $pt-gp-dark-icon-color;
       }
+
       #{$icon-classes} {
         &:not([class*="#{$ns}-intent-"]) {
           color: $pt-gp-dark-icon-color;
@@ -65,4 +64,255 @@ $pt-gp-dark-icon-color: $g-white;
       }
     }
   }
+}
+
+@mixin custom-button-kind($kind, $color: transparent, $background-color: transparent, $border: $background-color) {
+  &.#{$ns}-kind-g-#{$kind} {
+    color: $color;
+    background-color: $background-color;
+    box-shadow: inset 0 0 0 1px $border;
+
+    .#{$ns}-icon {
+      color: $color;
+    }
+  }
+}
+
+// CUSTOM kinds for buttons:
+.#{$ns}-button[class*="#{$ns}-kind-g-"] {
+
+  // Custom loading spinner inside Button:
+  .#{$ns}-spinner {
+    .#{$ns}-spinner-track {
+      stroke: $g-dark-grey1;
+    }
+
+    .#{$ns}-spinner-head {
+      stroke: $g-dark-grey4;
+    }
+
+    svg {
+      stroke-width: 6px;
+    }
+  }
+
+  box-shadow: none;
+
+  // Light Theme
+  &:not([class*="#{$ns}-intent-"]) {
+    @include custom-button-kind(primary, $g-white, $g-primary1);
+    @include custom-button-kind(secondary, $g-primary1, $g-base4);
+    @include custom-button-kind(stroked, $g-grey1, transparent, $g-grey1);
+    @include custom-button-kind(ghost, $g-primary1, transparent, transparent);
+    @include custom-button-kind(group, $g-grey1, $g-base4);
+
+    &:hover {
+      @include custom-button-kind(primary, $g-white, $g-primary2);
+      @include custom-button-kind(secondary, $g-primary2, $g-base5);
+      @include custom-button-kind(stroked, $g-grey1, $g-base5, $g-grey1);
+      @include custom-button-kind(ghost, $g-primary2, transparent, transparent);
+      @include custom-button-kind(group, $g-grey1, $g-base5);
+    }
+
+    &:active,
+    &.#{$ns}-active {
+      @include custom-button-kind(primary, $g-white, $g-primary1, $g-primary3);
+      @include custom-button-kind(secondary, $g-primary3, $g-base4);
+      @include custom-button-kind(stroked, $g-black, transparent, $g-black);
+      @include custom-button-kind(ghost, $g-primary3, transparent, transparent);
+      @include custom-button-kind(group, $g-grey1, $g-base3);
+    }
+
+    &:disabled,
+    &.#{$ns}-disabled {
+      @include custom-button-kind(primary, $g-primary2, $g-primary4);
+      @include custom-button-kind(secondary, $g-primary5, $g-base3);
+      @include custom-button-kind(stroked, $g-grey4, transparent, $g-grey4);
+      @include custom-button-kind(ghost, $g-primary4, transparent, transparent);
+      @include custom-button-kind(group, $g-grey1, $g-base3);
+    }
+  }
+
+  &.#{$ns}-intent-danger {
+    @include custom-button-kind(primary, $g-white, $g-error-600);
+    @include custom-button-kind(secondary, $g-error-600, $g-base4);
+    @include custom-button-kind(stroked, $g-error-600, transparent, $g-error-600);
+    @include custom-button-kind(ghost, $g-error-600, transparent, transparent);
+
+    &:hover {
+      @include custom-button-kind(primary, $g-white, $g-error-500);
+      @include custom-button-kind(secondary, $g-error-500, $g-base5);
+      @include custom-button-kind(stroked, $g-error-600, $g-base5, $g-error-600);
+      @include custom-button-kind(ghost, $g-error-500, transparent, transparent);
+    }
+
+    &:active,
+    &.#{$ns}-active {
+      @include custom-button-kind(primary, $g-white, $g-error-600, $g-error-700);
+      @include custom-button-kind(secondary, $g-error-700, $g-base4);
+      @include custom-button-kind(stroked, $g-error-700, transparent, $g-error-700);
+      @include custom-button-kind(ghost, $g-error-700, transparent, transparent);
+    }
+
+    &:disabled,
+    &.#{$ns}-disabled {
+      @include custom-button-kind(primary, $g-error-600, $g-error-800);
+      @include custom-button-kind(secondary, $g-error-300, $g-base3);
+      @include custom-button-kind(stroked, $g-error-300, transparent, $g-error-300);
+      @include custom-button-kind(ghost, $g-error-300, transparent, transparent);
+    }
+  }
+
+
+  // Dark Theme
+  .#{$ns}-dark & {
+
+    // Custom loading spinner inside Button for dark theme:
+    .#{$ns}-spinner {
+      .#{$ns}-spinner-track {
+        stroke: $g-dark-base0;
+      }
+
+      .#{$ns}-spinner-head {
+        stroke: $g-dark-grey4;
+      }
+
+      svg {
+        stroke-width: 6px;
+      }
+    }
+
+    box-shadow: none;
+
+    &:not([class*="#{$ns}-intent-"]) {
+      @include custom-button-kind(primary, $g-white, $g-dark-primary1);
+      @include custom-button-kind(secondary, $g-dark-primary1, $g-dark-base4);
+      @include custom-button-kind(stroked, $g-dark-grey1, transparent, $g-dark-grey1);
+      @include custom-button-kind(ghost, $g-dark-primary1, transparent, transparent);
+      @include custom-button-kind(group, $g-white, $g-dark-base4);
+
+      &:hover {
+        @include custom-button-kind(primary, $g-white, $g-dark-primary2);
+        @include custom-button-kind(secondary, $g-dark-primary2, $g-dark-base5);
+        @include custom-button-kind(stroked, $g-dark-grey1, $g-dark-base5, $g-dark-grey1);
+        @include custom-button-kind(ghost, $g-dark-primary2, transparent, transparent);
+        @include custom-button-kind(group, $g-white, $g-dark-base5);
+      }
+
+      &:active,
+      &.#{$ns}-active {
+        @include custom-button-kind(primary, $g-white, $g-dark-primary1, $g-dark-primary3);
+        @include custom-button-kind(secondary, $g-dark-primary3, $g-dark-base4);
+        @include custom-button-kind(stroked, $g-white, transparent, $g-white);
+        @include custom-button-kind(ghost, $g-dark-primary3, transparent, transparent);
+        @include custom-button-kind(group, $g-white, $g-dark-primary3);
+      }
+
+      &:disabled,
+      &.#{$ns}-disabled {
+        @include custom-button-kind(primary, $g-dark-primary2, $g-dark-primary4);
+        @include custom-button-kind(secondary, $g-dark-primary5, $g-dark-base3);
+        @include custom-button-kind(stroked, $g-dark-grey4, transparent, $g-dark-grey4);
+        @include custom-button-kind(ghost, $g-dark-primary4, transparent, transparent);
+        @include custom-button-kind(group, $g-dark-grey3, $g-dark-base3);
+      }
+    }
+
+    &.#{$ns}-intent-danger {
+      @include custom-button-kind(primary, $g-white, $g-error-600);
+      @include custom-button-kind(secondary, $g-error-600, $g-dark-base4);
+      @include custom-button-kind(stroked, $g-dark-grey1, transparent, $g-error-600);
+      @include custom-button-kind(ghost, $g-error-600, transparent, transparent);
+
+      &:hover {
+        @include custom-button-kind(primary, $g-white, $g-error-500);
+        @include custom-button-kind(secondary, $g-error-500, $g-dark-base5);
+        @include custom-button-kind(stroked, $g-dark-grey1, $g-dark-base5, $g-error-500);
+        @include custom-button-kind(ghost, $g-error-500, transparent, transparent);
+      }
+
+      &:active,
+      &.#{$ns}-active {
+        @include custom-button-kind(primary, $g-white, $g-error-600, $g-error-700);
+        @include custom-button-kind(secondary, $g-error-700, $g-dark-base4);
+        @include custom-button-kind(stroked, $g-white, transparent, $g-error-800);
+        @include custom-button-kind(ghost, $g-error-700, transparent, transparent);
+      }
+
+      &:disabled,
+      &.#{$ns}-disabled {
+        @include custom-button-kind(primary, $g-error-800, $g-error-600);
+        @include custom-button-kind(secondary, $g-error-800, $g-dark-base3);
+        @include custom-button-kind(stroked, $g-dark-grey4, transparent, $g-error-800);
+        @include custom-button-kind(ghost, $g-error-800, transparent, transparent);
+      }
+    }
+
+  }
+}
+
+// CUSTOM class for extra-small and extra-large sizes:
+.#{$ns}-button {
+  &.#{$ns}-large {
+    min-height: 40px;
+    min-width: 40px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 20px;
+  }
+
+  &.#{$ns}-g-extra-extra-small {
+    min-height: 16px;
+    min-width: 16px;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+
+    .#{$ns}-icon>svg {
+      height: 10px;
+      width: 10px;
+    }
+  }
+
+  &.#{$ns}-g-extra-small {
+    min-height: 20px;
+    min-width: 20px;
+    padding: 0 4px;
+    .#{$ns}-icon>svg {
+      height: 12px;
+      width: 12px;
+    }
+  }
+}
+
+// CUSTOM class for action buttons with new sizes
+.#{$ns}-button.#{$ns}-g-action-button {
+  text-transform: uppercase;
+  padding-left: 24px;
+  padding-right: 24px;
+
+  &.#{$ns}-g-extra-small,
+  &.#{$ns}-g-extra-extra-small {
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  &.#{$ns}-small {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+}
+
+// CUSTOM class for small border radius on buttons
+.#{$ns}-button.#{$ns}-g-button-small-border-radius {
+  border-radius: 8px;
+}
+
+// Change min-width of buttons in button-groups
+.#{$ns}-button-group.#{$ns}-vertical:not([class*="#{$ns}-g-strech"]) .#{$ns}-button {
+  min-width: 32px;
 }

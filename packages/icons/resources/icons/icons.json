@@ -224,6 +224,27 @@
     "content": "\\e9e0"
   },
   {
+    "displayName": "Plot",
+    "iconName": "g-plot",
+    "tags": "plot",
+    "group": "Graphext",
+    "content": "\\e0bb"
+  },
+  {
+    "displayName": "Build",
+    "iconName": "g-build",
+    "tags": "plot, build, customize",
+    "group": "Graphext",
+    "content": "\\e0bb"
+  },
+  {
+    "displayName": "Left",
+    "iconName": "g-arrow-left-2",
+    "tags": "arrow, left, plot",
+    "group": "Graphext",
+    "content": "\\e0bb"
+  },
+  {
     "displayName": "Unpin",
     "iconName": "g-unpin",
     "tags": "safety unpin, detach",
@@ -1105,6 +1126,29 @@
     "group": "Graphext",
     "content": "\\26D4"
   },
+  {
+    "displayName": "Light mode",
+    "iconName": "g-light-mode_2",
+    "tags": "theme, light, circle, white",
+    "group": "Graphext",
+    "content": "\\25CB"
+  },
+  {
+    "displayName": "Dark mode",
+    "iconName": "g-dark-mode_2",
+    "tags": "theme, dark, circle, black",
+    "group": "Graphext",
+    "content": "\\25CF"
+  },
+  {
+    "displayName": "Sync mode",
+    "iconName": "g-sync-mode",
+    "tags": "theme, sync mode, dark, light, half white, half black",
+    "group": "Graphext",
+    "content": "\\25D0"
+  },
+
+
   {
     "displayName": "Blank",
     "iconName": "blank",

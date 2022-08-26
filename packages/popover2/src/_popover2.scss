@@ -117,3 +117,5 @@ span.#{$ns}-popover2-target {
   // this is important for span tag as default inline display height only includes text.
   // div tag can be used for display: block, which works fine.
 }
+
+@import "popover2-overrides";

@@ -135,3 +135,8 @@ At this point, we were able to work as we used to do (PR in `graphext` and then 
 `@blueprint/popover2` package is going to replace `@blueprint/core` popover in `Blueprintjs V5`. 
 The use of this package is recommended to be prepared and also because it is more efficient than the previous one.
 We must take into account that the 'custom' version of this package for graphext exists since `graphext04`, so if we try to use a previous version it will return an error because it does not exist in our private repository.
+
+## Developing with Graphext, Storybook and Blueprint:
+
+There are some special commands on `docker-compose.yml` created to work easier with Graphext, Storybook and Blueprint.
+There is more information about it on **WORKING WITH 🔵 BLUEPRINT** section of [Storybook readme.](https://pre.graphext.com/storybook/?path=/story/design-system-how-to-use--page)
