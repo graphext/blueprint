@@ -283,6 +283,11 @@ export const TABS = `${TAB}s`;
 export const TAG = `${NS}-tag`;
 export const TAG_REMOVE = `${TAG}-remove`;
 
+/* TAG */
+export const TAG_SMALL = `${NS}-g-small`;
+export const TAG_CONTENT_FIXED_TOP = `${NS}-g-fixTop`;
+export const TAG_DISABLED = `${NS}-g-disabled`;
+
 export const TAG_INPUT = `${NS}-tag-input`;
 export const TAG_INPUT_ICON = `${TAG_INPUT}-icon`;
 export const TAG_INPUT_VALUES = `${TAG_INPUT}-values`;
