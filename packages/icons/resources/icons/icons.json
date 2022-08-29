@@ -210,6 +210,13 @@
     "content": "\\e9de"
   },
   {
+    "displayName": "Check2",
+    "iconName": "g-check2",
+    "tags": "tick, accept, confirm, valid, correct, ok, circle",
+    "group": "Graphext",
+    "content": "\\2731"
+  },
+  {
     "displayName": "Label",
     "iconName": "g-label",
     "tags": "tag, identification, id",

@@ -412,3 +412,6 @@ export const TABS_NO_PADDING = `${NS}-tabs-no-padding`;
 
 /* TAB */
 export const TAB_DISABLE_HOVER_EFFECT = `${NS}-g-tab-disable-hover-effect`;
+
+/* TOAST */
+export const TOAST_HIDE_CLOSE_BUTTON = `${NS}-g-toast-hide-close-button`;
