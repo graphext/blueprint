@@ -74,7 +74,7 @@
   }
 
   // Lozenge
-  &.#{$ns}-lozenge {
+  &.#{$ns}-g-lozenge {
     border-radius: 8px;
     font-size: $pt-font-size-extra-small;
     text-transform: uppercase;
@@ -209,8 +209,8 @@
 
 }
 
-.#{$ns}-tag .#{$ns}-large,
-.#{$ns}-tag.#{$ns}-large {
+.#{$ns}-tag .#{$ns}-large :not(.#{$ns}-g-lozenge),
+.#{$ns}-tag.#{$ns}-large:not(.#{$ns}-g-lozenge) {
   line-height: $pt-grid-size * 2;
   font-size: $pt-font-size;
   padding: 8px;
@@ -221,6 +221,13 @@
     padding: 0;
     margin-right: 0 !important;
   }
+}
+
+.#{$ns}-tag .#{$ns}-large .#{$ns}-g-lozenge,
+.#{$ns}-tag.#{$ns}-large.#{$ns}-g-lozenge {
+  font-size: $pt-font-size-extra-small;
+  padding: 8px;
+  border-radius: 8px;
 }
 
 .#{$ns}-tag .#{$ns}-g-small,

@@ -403,7 +403,6 @@ export const TAB_STROKE_LINE_LEFT = `${NS}-g-stroke-line-left`;
 
 export const TABS_FILL_SPACE = `${NS}-tabs-fill`;
 
-
 /* TAB */
 export const TAB_DISABLE_HOVER_EFFECT = `${NS}-g-tab-disable-hover-effect`;
 
@@ -411,3 +410,6 @@ export const TAB_DISABLE_HOVER_EFFECT = `${NS}-g-tab-disable-hover-effect`;
 export const TAG_SMALL = `${NS}-g-small`;
 export const TAG_CONTENT_FIXED_TOP = `${NS}-g-fixTop`;
 export const TAG_DISABLED = `${NS}-g-disabled`;
+
+/* LOZENGE */
+export const LOZENGE = `${NS}-g-lozenge`;
