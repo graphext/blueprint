@@ -1,0 +1,8 @@
+.#{$ns}-breadcrumbs {
+  > li {
+    &::after {
+      background: svg-icon("16px/g-divider.svg", (path: (fill: $pt-icon-color)));
+
+    }
+  }
+}
