@@ -38,7 +38,7 @@
   }
 
   // Interactive Tag:
-  &.#{$ns}-interactive {
+  &.#{$ns}-interactive:not(.#{$ns}-g-toggle-tag) {
     cursor: pointer;
 
     &:hover {
@@ -207,6 +207,59 @@
     }
   }
 
+  // CUSTOM kind for Tag component
+  &.#{$ns}-g-toggle-tag {
+    border-radius: 16px;
+    background-color: transparent;
+    color: $g-black;
+
+    &.#{$ns}-g-disabled {
+      background-color: transparent;
+      opacity: 60%;
+
+      &.#{$ns}-interactive {
+        cursor: pointer;
+      }
+    }
+
+    &.#{$ns}-interactive {
+      &:hover {
+        background-color: $g-base5;
+      }
+
+      &.#{$ns}-active,
+      &:active {
+        background-color: $g-base5;
+      }
+    }
+
+    &.#{$ns}-active,
+    &:active {
+      opacity: 100%;
+    }
+
+    .#{$ns}-dark & {
+      background-color: transparent;
+      color: $g-white;
+
+      &.#{$ns}-interactive {
+        &:hover {
+          background-color: $g-dark-base5;
+        }
+
+        &.#{$ns}-active,
+        &:active {
+          background-color: $g-dark-base5;
+        }
+      }
+
+      &.#{$ns}-active,
+      &:active {
+        background-color: $g-dark-base5;
+      }
+    }
+  }
+
 }
 
 .#{$ns}-tag .#{$ns}-large :not(.#{$ns}-g-lozenge),
@@ -215,6 +268,11 @@
   font-size: $pt-font-size;
   padding: 8px;
   border-radius: 12px;
+
+  &.#{$ns}-g-toggle-tag,
+  & .#{$ns}-g-toggle-tag {
+    border-radius: 16px;
+  }
 
   // This is forced because they use the 12px cross icon
   & .#{$ns}-tag-remove {
@@ -235,7 +293,7 @@
   font-size: $pt-font-size-extra-small;
   min-height: 20px;
   padding: 2px 8px;
-  
+
 }
 
 .#{$ns}-tag-remove:focus {
