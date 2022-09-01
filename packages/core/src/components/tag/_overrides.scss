@@ -230,12 +230,8 @@
       &.#{$ns}-active,
       &:active {
         background-color: $g-base5;
+        opacity: 100%;
       }
-    }
-
-    &.#{$ns}-active,
-    &:active {
-      opacity: 100%;
     }
 
     .#{$ns}-dark & {
@@ -250,13 +246,10 @@
         &.#{$ns}-active,
         &:active {
           background-color: $g-dark-base5;
+          opacity: 100%;
         }
       }
 
-      &.#{$ns}-active,
-      &:active {
-        background-color: $g-dark-base5;
-      }
     }
   }
 
