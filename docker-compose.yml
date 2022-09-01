@@ -9,7 +9,7 @@
 # docker-compose run -p 9999:9999 bp sh -c 'yarn dev:core'
 #
 # To compile "core" CSS for Storybook and copy on @blueprintjs folder:
-# docker-compose run storybook-core
+# docker-compose run core
 #
 version: '3'
 services:
