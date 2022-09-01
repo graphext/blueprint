@@ -1,5 +1,5 @@
-@mixin custom-tag-kind($kind, $color: white, $background-color: transparent, $border: transparent) {
-  &.#{$ns}-kind-g-#{$kind} {
+@mixin custom-lozenge-color($colorName, $color: white, $background-color: transparent, $border: transparent) {
+  &.#{$ns}-color-g-#{$colorName} {
     color: $color;
     background-color: $background-color;
     box-shadow: inset 0 0 0 1px $border;
@@ -79,129 +79,156 @@
     font-size: $pt-font-size-extra-small;
     text-transform: uppercase;
 
-    color: $g-black;
-    background-color: $g-base1;
+    color: $g-grey2;
+    background-color: $g-base2;
 
     // Custom kinds light theme:
-    @include custom-tag-kind(folder, $g-wizard-23-700, $g-wizard-23-200);
-    @include custom-tag-kind(insight, $g-wizard-26-700, $g-wizard-26-200);
-    @include custom-tag-kind(publish, $g-water-700, $g-water-200);
-    @include custom-tag-kind(project, $g-wizard-18-700, $g-wizard-18-200);
-    @include custom-tag-kind(danger, $g-error-700, $g-error-200);
-    @include custom-tag-kind(updated, $g-grass-700, $g-grass-200);
-    @include custom-tag-kind('active', $g-avocado-700, $g-avocado-200);
-    @include custom-tag-kind(inRecipe, $g-wizard-4-700, $g-wizard-4-200);
-    @include custom-tag-kind(notInRecipe, $g-wood-700, $g-wood-200);
-    @include custom-tag-kind(recreate, $g-water-700, $g-water-200);
-    @include custom-tag-kind(pending, $g-grey1, $g-base2);
+    @include custom-lozenge-color('denim', $g-denim-700, $g-denim-200);
+    @include custom-lozenge-color('avocado', $g-avocado-700, $g-avocado-200);
+    @include custom-lozenge-color('lavander', $g-lavander-700, $g-lavander-200);
+    @include custom-lozenge-color('plum', $g-plum-700, $g-plum-200);
+    @include custom-lozenge-color('error', $g-error-700, $g-error-200);
+    @include custom-lozenge-color('water', $g-water-700, $g-water-200);
+    @include custom-lozenge-color('grass', $g-grass-700, $g-grass-200);
+    @include custom-lozenge-color('base', $g-black, $g-base2);
+    @include custom-lozenge-color('base2', $g-dark-base5, $g-base1);
+    @include custom-lozenge-color('golden', $g-golden-700, $g-golden-200);
+    @include custom-lozenge-color('wood', $g-wood-700, $g-wood-200);
+    @include custom-lozenge-color('pacific', $g-pacific-700, $g-pacific-200);
 
     // Custom kinds dark theme:
     .#{$ns}-dark & {
-      color: $g-white;
-      background-color: $g-dark-base1;
-      @include custom-tag-kind(folder, $g-white, $g-wizard-23-600);
-      @include custom-tag-kind(insight, $g-white, $g-wizard-26-600);
-      @include custom-tag-kind(publish, $g-white, $g-water-600);
-      @include custom-tag-kind(project, $g-white, $g-wizard-18-600);
-      @include custom-tag-kind(danger, $g-white, $g-error-600);
-      @include custom-tag-kind(updated, $g-white, $g-grass-600);
-      @include custom-tag-kind('active', $g-white, $g-avocado-700);
-      @include custom-tag-kind(inRecipe, $g-white, $g-wizard-4-600);
-      @include custom-tag-kind(notInRecipe, $g-white, $g-wood-600);
-      @include custom-tag-kind(recreate, $g-white, $g-water-600);
-      @include custom-tag-kind(pending, $g-white, $g-dark-base2);
+      color: $g-dark-grey2;
+      background-color: $g-dark-base2;
+
+      @include custom-lozenge-color('denim', $g-white, $g-denim-600);
+      @include custom-lozenge-color('avocado', $g-white, $g-avocado-600);
+      @include custom-lozenge-color('lavander', $g-white, $g-lavander-600);
+      @include custom-lozenge-color('plum', $g-white, $g-plum-600);
+      @include custom-lozenge-color('error', $g-white, $g-error-600);
+      @include custom-lozenge-color('water', $g-white, $g-water-600);
+      @include custom-lozenge-color('grass', $g-white, $g-grass-600);
+      @include custom-lozenge-color('base', $g-white, $g-dark-base2);
+      @include custom-lozenge-color('base2', $g-white, $g-dark-base2);
+      @include custom-lozenge-color('golden', $g-white, $g-golden-600);
+      @include custom-lozenge-color('wood', $g-white, $g-wood-600);
+      @include custom-lozenge-color('pacific', $g-white, $g-pacific-600);
     }
 
 
     // Interactive
     &.#{$ns}-interactive {
       &:hover {
-        @include custom-tag-kind(folder, $g-wizard-23-700, $g-wizard-23-100);
-        @include custom-tag-kind(insight, $g-wizard-26-700, $g-wizard-26-100);
-        @include custom-tag-kind(publish, $g-water-700, $g-water-500);
-        @include custom-tag-kind(project, $g-wizard-18-700, $g-wizard-18-500);
-        @include custom-tag-kind(danger, $g-error-700, $g-error-500);
-        @include custom-tag-kind(updated, $g-grass-700, $g-grass-500);
-        @include custom-tag-kind('active', $g-avocado-700, $g-avocado-500);
-        @include custom-tag-kind(inRecipe, $g-wizard-4-700, $g-wizard-4-500);
-        @include custom-tag-kind(notInRecipe, $g-wood-700, $g-wood-500);
-        @include custom-tag-kind(recreate, $g-water-700, $g-water-500);
-        @include custom-tag-kind(pending, $g-grey1, $g-base1);
+        color: $g-black;
+        background-color: $g-base5;
+
+        @include custom-lozenge-color('denim', $g-denim-700, $g-denim-100);
+        @include custom-lozenge-color('avocado', $g-avocado-700, $g-avocado-100);
+        @include custom-lozenge-color('lavander', $g-lavander-700, $g-lavander-100);
+        @include custom-lozenge-color('plum', $g-plum-700, $g-plum-100);
+        @include custom-lozenge-color('error', $g-error-700, $g-error-100);
+        @include custom-lozenge-color('water', $g-water-700, $g-water-100);
+        @include custom-lozenge-color('grass', $g-grass-700, $g-grass-100);
+        @include custom-lozenge-color('base', $g-black, $g-base1);
+        @include custom-lozenge-color('base2', $g-dark-base5, $g-base1);
+        @include custom-lozenge-color('golden', $g-golden-700, $g-golden-100);
+        @include custom-lozenge-color('wood', $g-wood-700, $g-wood-100);
+        @include custom-lozenge-color('pacific', $g-pacific-700, $g-pacific-100);
       }
 
       &.#{$ns}-active,
       &:active {
+        color: $g-black;
+        background-color: $g-base5;
         box-shadow: inset 0 0 0 1px $g-black;
-        @include custom-tag-kind(folder, $g-wizard-23-700, $g-wizard-23-200, $g-wizard-23-700);
-        @include custom-tag-kind(insight, $g-wizard-26-700, $g-wizard-26-200, $g-wizard-26-700);
-        @include custom-tag-kind(publish, $g-water-700, $g-water-200, $g-water-700);
-        @include custom-tag-kind(project, $g-wizard-18-700, $g-wizard-18-200, $g-wizard-18-700);
-        @include custom-tag-kind(danger, $g-error-700, $g-error-200, $g-error-700);
-        @include custom-tag-kind(updated, $g-grass-700, $g-grass-200, $g-grass-700);
-        @include custom-tag-kind('active', $g-avocado-700, $g-avocado-200, $g-avocado-700);
-        @include custom-tag-kind(inRecipe, $g-wizard-4-700, $g-wizard-4-200, $g-wizard-4-700);
-        @include custom-tag-kind(notInRecipe, $g-wood-700, $g-wood-200, $g-wood-700);
-        @include custom-tag-kind(recreate, $g-water-700, $g-water-200, $g-water-700);
-        @include custom-tag-kind(pending, $g-grey1, $g-base2, $g-grey1);
+
+        @include custom-lozenge-color('denim', $g-denim-700, $g-denim-200, $g-denim-700);
+        @include custom-lozenge-color('avocado', $g-avocado-700, $g-avocado-200, $g-avocado-700);
+        @include custom-lozenge-color('lavander', $g-lavander-700, $g-lavander-200, $g-lavander-700);
+        @include custom-lozenge-color('plum', $g-plum-700, $g-plum-200, $g-plum-700);
+        @include custom-lozenge-color('error', $g-error-700, $g-error-200, $g-error-700);
+        @include custom-lozenge-color('water', $g-water-700, $g-water-200, $g-water-700);
+        @include custom-lozenge-color('grass', $g-grass-700, $g-grass-200, $g-grass-700);
+        @include custom-lozenge-color('base', $g-black, $g-base2, $g-black);
+        @include custom-lozenge-color('base2', $g-base5, $g-base1, $g-base5);
+        @include custom-lozenge-color('golden', $g-golden-700, $g-golden-200, $g-golden-700);
+        @include custom-lozenge-color('wood', $g-wood-700, $g-wood-200, $g-wood-700);
+        @include custom-lozenge-color('pacific', $g-pacific-700, $g-pacific-200, $g-pacific-700);
       }
 
       &.#{$ns}-g-disabled {
-        @include custom-tag-kind(folder, $g-wizard-23-400, $g-wizard-23-200);
-        @include custom-tag-kind(insight, $g-wizard-26-400, $g-wizard-26-200);
-        @include custom-tag-kind(publish, $g-water-400, $g-water-200);
-        @include custom-tag-kind(project, $g-wizard-18-400, $g-wizard-18-200);
-        @include custom-tag-kind(danger, $g-error-400, $g-error-200);
-        @include custom-tag-kind(updated, $g-grass-400, $g-grass-200);
-        @include custom-tag-kind('active', $g-avocado-400, $g-avocado-200);
-        @include custom-tag-kind(inRecipe, $g-wizard-4-400, $g-wizard-4-200);
-        @include custom-tag-kind(notInRecipe, $g-wood-400, $g-wood-200);
-        @include custom-tag-kind(recreate, $g-water-400, $g-water-200);
-        @include custom-tag-kind(pending, $g-grey4, $g-base1);
+        color: $g-dark-grey2;
+        background-color: $g-dark-base2;
+
+        @include custom-lozenge-color('denim', $g-denim-400, $g-denim-200);
+        @include custom-lozenge-color('avocado', $g-avocado-400, $g-avocado-200);
+        @include custom-lozenge-color('lavander', $g-lavander-400, $g-lavander-200);
+        @include custom-lozenge-color('plum', $g-plum-400, $g-plum-200);
+        @include custom-lozenge-color('error', $g-error-500, $g-error-200);
+        @include custom-lozenge-color('water', $g-water-500, $g-water-200);
+        @include custom-lozenge-color('grass', $g-grass-500, $g-grass-200);
+        @include custom-lozenge-color('base', $g-grey4, $g-base1);
+        @include custom-lozenge-color('base2', $g-grey4, $g-base1);
+        @include custom-lozenge-color('golden', $g-golden-700, $g-golden-200);
+        @include custom-lozenge-color('wood', $g-wood-500, $g-wood-200);
+        @include custom-lozenge-color('pacific', $g-pacific-500, $g-pacific-200);
       }
 
       .#{$ns}-dark & {
         &:hover {
-          @include custom-tag-kind(folder, $g-white, $g-wizard-23-500);
-          @include custom-tag-kind(insight, $g-white, $g-wizard-26-500);
-          @include custom-tag-kind(publish, $g-white, $g-water-500);
-          @include custom-tag-kind(project, $g-white, $g-wizard-18-500);
-          @include custom-tag-kind(danger, $g-white, $g-error-500);
-          @include custom-tag-kind(updated, $g-white, $g-grass-500);
-          @include custom-tag-kind('active', $g-white, $g-avocado-500);
-          @include custom-tag-kind(inRecipe, $g-white, $g-wizard-4-500);
-          @include custom-tag-kind(notInRecipe, $g-white, $g-wood-500);
-          @include custom-tag-kind(recreate, $g-white, $g-water-500);
-          @include custom-tag-kind(pending, $g-white, $g-dark-base3);
+          color: $g-white;
+          background-color: $g-dark-base5;
+
+          @include custom-lozenge-color('denim', $g-white, $g-denim-500);
+          @include custom-lozenge-color('avocado', $g-white, $g-avocado-500);
+          @include custom-lozenge-color('lavander', $g-white, $g-lavander-500);
+          @include custom-lozenge-color('plum', $g-white, $g-plum-500);
+          @include custom-lozenge-color('error', $g-white, $g-error-500);
+          @include custom-lozenge-color('water', $g-white, $g-water-500);
+          @include custom-lozenge-color('grass', $g-white, $g-grass-500);
+          @include custom-lozenge-color('base', $g-white, $g-dark-base3);
+          @include custom-lozenge-color('base2', $g-white, $g-dark-base3);
+          @include custom-lozenge-color('golden', $g-white, $g-golden-500);
+          @include custom-lozenge-color('wood', $g-white, $g-wood-500);
+          @include custom-lozenge-color('pacific', $g-white, $g-pacific-500);
         }
 
         &.#{$ns}-active,
         &:active {
-          box-shadow: inset 0 0 0 1px $g-white;
-          @include custom-tag-kind(folder, $g-white, $g-wizard-23-600, $g-wizard-23-700);
-          @include custom-tag-kind(insight, $g-white, $g-wizard-26-600, $g-wizard-26-700);
-          @include custom-tag-kind(publish, $g-white, $g-water-600, $g-water-700);
-          @include custom-tag-kind(project, $g-white, $g-wizard-18-600, $g-wizard-18-700);
-          @include custom-tag-kind(danger, $g-white, $g-error-600, $g-error-700);
-          @include custom-tag-kind(updated, $g-white, $g-grass-600, $g-grass-700);
-          @include custom-tag-kind('active', $g-white, $g-avocado-700, $g-avocado-800);
-          @include custom-tag-kind(inRecipe, $g-white, $g-wizard-4-600, $g-wizard-4-700);
-          @include custom-tag-kind(notInRecipe, $g-white, $g-wood-600, $g-wood-700);
-          @include custom-tag-kind(recreate, $g-white, $g-water-600, $g-water-700);
-          @include custom-tag-kind(pending, $g-white, $g-dark-base2, $g-dark-base1);
+          color: $g-dark-grey2;
+          background-color: $g-dark-base2;
+          box-shadow: inset 0 0 0 1px $g-dark-base3;
+
+          @include custom-lozenge-color('denim', $g-white, $g-denim-600, $g-denim-700);
+          @include custom-lozenge-color('avocado', $g-white, $g-avocado-600, $g-avocado-700);
+          @include custom-lozenge-color('lavander', $g-white, $g-lavander-600, $g-lavander-700);
+          @include custom-lozenge-color('plum', $g-white, $g-plum-600, $g-plum-700);
+          @include custom-lozenge-color('error', $g-white, $g-error-600, $g-error-700);
+          @include custom-lozenge-color('water', $g-white, $g-water-600, $g-water-700);
+          @include custom-lozenge-color('grass', $g-white, $g-grass-600, $g-grass-700);
+          @include custom-lozenge-color('base', $g-white, $g-dark-base2, $g-dark-base3);
+          @include custom-lozenge-color('base2', $g-white, $g-dark-base2, $g-dark-base3);
+          @include custom-lozenge-color('golden', $g-white, $g-golden-600, $g-golden-700);
+          @include custom-lozenge-color('wood', $g-white, $g-wood-600, $g-wood-700);
+          @include custom-lozenge-color('pacific', $g-white, $g-pacific-600, $g-pacific-700);
         }
 
         &.#{$ns}-g-disabled {
-          @include custom-tag-kind(folder, $g-wizard-23-700, $g-wizard-23-800);
-          @include custom-tag-kind(insight, $g-wizard-26-700, $g-wizard-26-800);
-          @include custom-tag-kind(publish, $g-water-700, $g-water-800);
-          @include custom-tag-kind(project, $g-wizard-18-700, $g-wizard-18-800);
-          @include custom-tag-kind(danger, $g-error-700, $g-error-800);
-          @include custom-tag-kind(updated, $g-grass-700, $g-grass-800);
-          @include custom-tag-kind('active', $g-avocado-700, $g-avocado-800);
-          @include custom-tag-kind(inRecipe, $g-wizard-4-700, $g-wizard-4-800);
-          @include custom-tag-kind(notInRecipe, $g-wood-700, $g-wood-800);
-          @include custom-tag-kind(recreate, $g-water-700, $g-water-800);
-          @include custom-tag-kind(pending, $g-dark-grey4, $g-dark-base3);
+          color: $g-dark-grey2;
+          background-color: $g-dark-base2;
+
+          @include custom-lozenge-color('denim', $g-denim-700, $g-denim-800);
+          @include custom-lozenge-color('avocado', $g-avocado-700, $g-avocado-800);
+          @include custom-lozenge-color('lavander', $g-lavander-700, $g-lavander-800);
+          @include custom-lozenge-color('plum', $g-plum-700, $g-plum-800);
+          @include custom-lozenge-color('error', $g-error-700, $g-error-800);
+          @include custom-lozenge-color('water', $g-water-700, $g-water-800);
+          @include custom-lozenge-color('grass', $g-grass-700, $g-grass-800);
+          @include custom-lozenge-color('base', $g-dark-grey4, $g-dark-base3);
+          @include custom-lozenge-color('base2', $g-dark-grey4, $g-dark-base3);
+          @include custom-lozenge-color('golden', $g-golden-700, $g-golden-800);
+          @include custom-lozenge-color('wood', $g-wood-700, $g-wood-800);
+          @include custom-lozenge-color('pacific', $g-pacific-700, $g-pacific-800);
         }
       }
     }

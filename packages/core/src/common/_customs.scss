@@ -118,7 +118,7 @@ $g-dark-primary4: shade($g-dark-primary1, 30%); //30% shade
 $g-dark-primary5: shade($g-dark-primary1, 40%); //40% shade
 
 $g-white: hsl(0, 0%, 100%);
-$g-black: #404040;
+$g-black: #333;
 
 $g-primary1: shade($g-dark-primary1, 20%);
 $g-primary2: shade($g-dark-primary2, 20%);
@@ -126,38 +126,39 @@ $g-primary3: shade($g-dark-primary3, 20%);
 $g-primary4: shade($g-dark-primary4, 30%);
 $g-primary5: shade($g-dark-primary5, 20%);
 
-$g-dark-grey1: hsl(220, 4%, 84%);
-$g-dark-grey2: hsl(220, 4%, 84%);
-$g-dark-grey3: hsl(223, 3%, 59%);
-$g-dark-grey4: hsl(222, 5%, 44%);
+$g-dark-grey1: #E5E5E6;
+$g-dark-grey2: #CACBCE;
+$g-dark-grey3: #94979E;
+$g-dark-grey4: #61646B;
 
-$g-grey1: $g-dark-grey4;
-$g-grey2: $g-dark-grey3;
-$g-grey3: $g-dark-grey2;
-$g-grey4: $g-dark-grey1;
+$g-grey1: #61646B;
+$g-grey2: #94979E;
+$g-grey3: #CACBCE;
+$g-grey4: #E5E5E6;
 
-$g-dark-base0: hsl(0, 0%, 9%);
-$g-dark-base1: hsl(228, 7%, 13%);
-$g-dark-base2: hsl(225, 13%, 18%);
-$g-dark-base3: hsl(225, 14%, 19%);
-$g-dark-base4: hsl(221, 14%, 22%);
-$g-dark-base5: hsl(225, 13%, 25%);
+$g-dark-base0: #161616;
+$g-dark-base1: #1F2024;
+$g-dark-base2: #25272E;
+$g-dark-base3: #2A2E38;
+$g-dark-base4: #313641;
+$g-dark-base5: #363B47;
+$g-dark-base5: #2F4151;
 
-// To Be Defined in the New Design System https://www.figma.com/file/1rUpciJJRVQZiNqEzggaAN/NEW---Design-System?node-id=0%3A1 :
-$g-base0: hsl(225, 75%, 96%);
-$g-base1: hsl(225, 55%, 96%);
-$g-base2: hsl(228, 38%, 97%);
-$g-base3: hsl(228, 38%, 97%);
-$g-base4: hsl(0, 0%, 98%);
-$g-base5: hsl(0, 0%, 100%);
+$g-base0: #FFFFFF;
+$g-base1: #FCFCFD;
+$g-base2: #F8F9FB;
+$g-base3: #F4F5F8;
+$g-base4: #EEEFF5;
+$g-base5: #E1E3EA;
+$g-base5: #F2FAFE;
 
 // all shadow lists must be the same length to avoid flicker in transitions.
 $pt-elevation-shadow-0: 0 0 0 1px transparent,
-                        0 0 0 rgba($black, 0),
-                        0 0 0 rgba($black, 0) !default;
+  0 0 0 rgba($black, 0),
+  0 0 0 rgba($black, 0) !default;
 $pt-dark-elevation-shadow-0: 0 0 0 1px transparent,
-                             0 0 0 rgba($black, 0),
-                             0 0 0 rgba($black, 0) !default;
+  0 0 0 rgba($black, 0),
+  0 0 0 rgba($black, 0) !default;
 
 // Custom colors with shades: 
 
@@ -340,3 +341,51 @@ $g-wizard-10-600: #2E6537;
 $g-wizard-10-700: #26542E;
 $g-wizard-10-800: #1F4325;
 $g-wizard-10-900: #17331C;
+
+$g-lavander-25: #FCFBFD;
+$g-lavander-50: #FAF8FC;
+$g-lavander-100: #F2EDF7;
+$g-lavander-200: #E8DFF1;
+$g-lavander-300: #D4C3E5;
+$g-lavander-400: #C3AADA;
+$g-lavander-500: #AA86CB;
+$g-lavander-600: #9467BD;
+$g-lavander-700: #60437A;
+$g-lavander-800: #463159;
+$g-lavander-900: #2C1F38;
+
+$g-plum-25: #FDFBFC;
+$g-plum-50: #FCF8FA;
+$g-plum-100: #F7EDF2;
+$g-plum-200: #EFDCE5;
+$g-plum-300: #E3C0D0;
+$g-plum-400: #CF95B0;
+$g-plum-500: #C07297;
+$g-plum-600: #A02B62;
+$g-plum-700: #892554;
+$g-plum-800: #6B1D41;
+$g-plum-900: #44122A;
+
+$g-golden-25: #FFFDFA;
+$g-golden-50: #FFFAF0;
+$g-golden-100: #FFEECD;
+$g-golden-200: #FFE2AC;
+$g-golden-300: #FFD483;
+$g-golden-400: #FFC65A;
+$g-golden-500: #FFB730;
+$g-golden-600: #FFA907;
+$g-golden-700: #D08A06;
+$g-golden-800: #9A6604;
+$g-golden-900: #553802;
+
+$g-pacific-25: #FAFEFF;
+$g-pacific-50: #F1FAFE;
+$g-pacific-100: #E7F7FE;
+$g-pacific-200: #CCEFFC;
+$g-pacific-300: #AAE4FA;
+$g-pacific-400: #80D7F8;
+$g-pacific-500: #55CAF6;
+$g-pacific-600: #00AFF1;
+$g-pacific-700: #007EAD;
+$g-pacific-800: #00638A;
+$g-pacific-900: #143643;
