@@ -408,10 +408,18 @@ export const TAB_STROKE_LINE_LEFT = `${NS}-g-stroke-line-left`;
 
 export const TABS_FILL_SPACE = `${NS}-tabs-fill`;
 
-export const TABS_NO_PADDING = `${NS}-tabs-no-padding`;
-
 /* TAB */
 export const TAB_DISABLE_HOVER_EFFECT = `${NS}-g-tab-disable-hover-effect`;
+export const TABS_NO_PADDING = `${NS}-tabs-no-padding`;
 
 /* TOAST */
 export const TOAST_HIDE_CLOSE_BUTTON = `${NS}-g-toast-hide-close-button`;
+
+/* TAG */
+export const TAG_SMALL = `${NS}-g-small`;
+export const TAG_CONTENT_FIXED_TOP = `${NS}-g-fixTop`;
+export const TAG_DISABLED = `${NS}-g-disabled`;
+export const TAG_TOGGLE = `${NS}-g-toggle-tag`;
+
+/* LOZENGE */
+export const LOZENGE = `${NS}-g-lozenge`;
