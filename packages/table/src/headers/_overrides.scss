@@ -21,7 +21,7 @@
 
   &.#{$ns}-table-header-selected::before {
     background-image: none;
-    background-color: rgba($g-grey4, 0.1);
+    background-color: rgba($g-light-grey4, 0.1);
   }
 }
 
@@ -30,7 +30,7 @@
   .#{$ns}-table-selection-enabled &:hover{
     &::before {
       .#{$ns}-dark & {
-        background-color: rgba($g-grey4, 0.1);
+        background-color: rgba($g-light-grey4, 0.1);
       }
     }
   }
