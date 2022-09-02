@@ -85,7 +85,7 @@
     // Custom kinds light theme:
     @include custom-lozenge-color('denim', $g-denim-700, $g-denim-200);
     @include custom-lozenge-color('avocado', $g-avocado-700, $g-avocado-200);
-    @include custom-lozenge-color('lavander', $g-lavander-700, $g-lavander-200);
+    @include custom-lozenge-color('lavender', $g-lavender-700, $g-lavender-200);
     @include custom-lozenge-color('plum', $g-plum-700, $g-plum-200);
     @include custom-lozenge-color('error', $g-error-700, $g-error-200);
     @include custom-lozenge-color('water', $g-water-700, $g-water-200);
@@ -103,7 +103,7 @@
 
       @include custom-lozenge-color('denim', $g-white, $g-denim-600);
       @include custom-lozenge-color('avocado', $g-white, $g-avocado-600);
-      @include custom-lozenge-color('lavander', $g-white, $g-lavander-600);
+      @include custom-lozenge-color('lavender', $g-white, $g-lavender-600);
       @include custom-lozenge-color('plum', $g-white, $g-plum-600);
       @include custom-lozenge-color('error', $g-white, $g-error-600);
       @include custom-lozenge-color('water', $g-white, $g-water-600);
@@ -124,7 +124,7 @@
 
         @include custom-lozenge-color('denim', $g-denim-700, $g-denim-100);
         @include custom-lozenge-color('avocado', $g-avocado-700, $g-avocado-100);
-        @include custom-lozenge-color('lavander', $g-lavander-700, $g-lavander-100);
+        @include custom-lozenge-color('lavender', $g-lavender-700, $g-lavender-100);
         @include custom-lozenge-color('plum', $g-plum-700, $g-plum-100);
         @include custom-lozenge-color('error', $g-error-700, $g-error-100);
         @include custom-lozenge-color('water', $g-water-700, $g-water-100);
@@ -144,7 +144,7 @@
 
         @include custom-lozenge-color('denim', $g-denim-700, $g-denim-200, $g-denim-700);
         @include custom-lozenge-color('avocado', $g-avocado-700, $g-avocado-200, $g-avocado-700);
-        @include custom-lozenge-color('lavander', $g-lavander-700, $g-lavander-200, $g-lavander-700);
+        @include custom-lozenge-color('lavender', $g-lavender-700, $g-lavender-200, $g-lavender-700);
         @include custom-lozenge-color('plum', $g-plum-700, $g-plum-200, $g-plum-700);
         @include custom-lozenge-color('error', $g-error-700, $g-error-200, $g-error-700);
         @include custom-lozenge-color('water', $g-water-700, $g-water-200, $g-water-700);
@@ -157,12 +157,12 @@
       }
 
       &.#{$ns}-g-disabled {
-        color: $g-dark-grey2;
-        background-color: $g-dark-base2;
+        color: $g-grey2;
+        background-color: $g-base2;
 
         @include custom-lozenge-color('denim', $g-denim-400, $g-denim-200);
         @include custom-lozenge-color('avocado', $g-avocado-400, $g-avocado-200);
-        @include custom-lozenge-color('lavander', $g-lavander-400, $g-lavander-200);
+        @include custom-lozenge-color('lavender', $g-lavender-400, $g-lavender-200);
         @include custom-lozenge-color('plum', $g-plum-400, $g-plum-200);
         @include custom-lozenge-color('error', $g-error-500, $g-error-200);
         @include custom-lozenge-color('water', $g-water-500, $g-water-200);
@@ -181,7 +181,7 @@
 
           @include custom-lozenge-color('denim', $g-white, $g-denim-500);
           @include custom-lozenge-color('avocado', $g-white, $g-avocado-500);
-          @include custom-lozenge-color('lavander', $g-white, $g-lavander-500);
+          @include custom-lozenge-color('lavender', $g-white, $g-lavender-500);
           @include custom-lozenge-color('plum', $g-white, $g-plum-500);
           @include custom-lozenge-color('error', $g-white, $g-error-500);
           @include custom-lozenge-color('water', $g-white, $g-water-500);
@@ -201,7 +201,7 @@
 
           @include custom-lozenge-color('denim', $g-white, $g-denim-600, $g-denim-700);
           @include custom-lozenge-color('avocado', $g-white, $g-avocado-600, $g-avocado-700);
-          @include custom-lozenge-color('lavander', $g-white, $g-lavander-600, $g-lavander-700);
+          @include custom-lozenge-color('lavender', $g-white, $g-lavender-600, $g-lavender-700);
           @include custom-lozenge-color('plum', $g-white, $g-plum-600, $g-plum-700);
           @include custom-lozenge-color('error', $g-white, $g-error-600, $g-error-700);
           @include custom-lozenge-color('water', $g-white, $g-water-600, $g-water-700);
@@ -219,7 +219,7 @@
 
           @include custom-lozenge-color('denim', $g-denim-700, $g-denim-800);
           @include custom-lozenge-color('avocado', $g-avocado-700, $g-avocado-800);
-          @include custom-lozenge-color('lavander', $g-lavander-700, $g-lavander-800);
+          @include custom-lozenge-color('lavender', $g-lavender-700, $g-lavender-800);
           @include custom-lozenge-color('plum', $g-plum-700, $g-plum-800);
           @include custom-lozenge-color('error', $g-error-700, $g-error-800);
           @include custom-lozenge-color('water', $g-water-700, $g-water-800);
