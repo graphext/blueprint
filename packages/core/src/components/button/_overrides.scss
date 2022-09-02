@@ -103,16 +103,16 @@ $pt-gp-dark-icon-color: $g-white;
   &:not([class*="#{$ns}-intent-"]) {
     @include custom-button-kind(primary, $g-white, $g-primary1);
     @include custom-button-kind(secondary, $g-primary1, $g-light-base4);
-    @include custom-button-kind(stroked, $g-grey1, transparent, $g-grey1);
+    @include custom-button-kind(stroked, $g-light-grey1, transparent, $g-light-grey1);
     @include custom-button-kind(ghost, $g-primary1, transparent, transparent);
-    @include custom-button-kind(group, $g-grey1, $g-light-base4);
+    @include custom-button-kind(group, $g-light-grey1, $g-light-base4);
 
     &:hover {
       @include custom-button-kind(primary, $g-white, $g-primary2);
       @include custom-button-kind(secondary, $g-primary2, $g-light-base5);
-      @include custom-button-kind(stroked, $g-grey1, $g-light-base5, $g-grey1);
+      @include custom-button-kind(stroked, $g-light-grey1, $g-light-base5, $g-light-grey1);
       @include custom-button-kind(ghost, $g-primary2, transparent, transparent);
-      @include custom-button-kind(group, $g-grey1, $g-light-base5);
+      @include custom-button-kind(group, $g-light-grey1, $g-light-base5);
     }
 
     &:active,
@@ -121,16 +121,16 @@ $pt-gp-dark-icon-color: $g-white;
       @include custom-button-kind(secondary, $g-primary3, $g-light-base4);
       @include custom-button-kind(stroked, $g-black, transparent, $g-black);
       @include custom-button-kind(ghost, $g-primary3, transparent, transparent);
-      @include custom-button-kind(group, $g-grey1, $g-light-base3);
+      @include custom-button-kind(group, $g-light-grey1, $g-light-base3);
     }
 
     &:disabled,
     &.#{$ns}-disabled {
       @include custom-button-kind(primary, $g-primary2, $g-primary4);
       @include custom-button-kind(secondary, $g-primary5, $g-light-base3);
-      @include custom-button-kind(stroked, $g-grey4, transparent, $g-grey4);
+      @include custom-button-kind(stroked, $g-light-grey4, transparent, $g-light-grey4);
       @include custom-button-kind(ghost, $g-primary4, transparent, transparent);
-      @include custom-button-kind(group, $g-grey1, $g-light-base3);
+      @include custom-button-kind(group, $g-light-grey1, $g-light-base3);
     }
   }
 

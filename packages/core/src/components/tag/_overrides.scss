@@ -7,14 +7,14 @@
 }
 
 .#{$ns}-tag {
-  color: $g-grey1;
+  color: $g-light-grey1;
 
   padding: 4px 8px;
   font-size: $pt-font-size;
 
   // For multiline tags
   >span>p {
-    color: $g-grey1;
+    color: $g-light-grey1;
     font-size: $pt-font-size-small;
   }
 
@@ -42,18 +42,18 @@
     cursor: pointer;
 
     &:hover {
-      background-color: $g-base4;
+      background-color: $g-light-base4;
     }
 
     &.#{$ns}-active,
     &:active {
-      background-color: $g-base3;
+      background-color: $g-light-base3;
     }
 
     &.#{$ns}-g-disabled {
       cursor: not-allowed;
-      background-color: $g-base3;
-      color: $g-grey4;
+      background-color: $g-light-base3;
+      color: $g-light-grey4;
     }
 
     .#{$ns}-dark & {
@@ -79,8 +79,8 @@
     font-size: $pt-font-size-extra-small;
     text-transform: uppercase;
 
-    color: $g-grey2;
-    background-color: $g-base2;
+    color: $g-light-grey2;
+    background-color: $g-light-base2;
 
     // Custom kinds light theme:
     @include custom-lozenge-color('denim', $g-denim-700, $g-denim-200);
@@ -90,8 +90,8 @@
     @include custom-lozenge-color('error', $g-error-700, $g-error-200);
     @include custom-lozenge-color('water', $g-water-700, $g-water-200);
     @include custom-lozenge-color('grass', $g-grass-700, $g-grass-200);
-    @include custom-lozenge-color('base', $g-black, $g-base2);
-    @include custom-lozenge-color('base2', $g-dark-base5, $g-base1);
+    @include custom-lozenge-color('base', $g-black, $g-light-base2);
+    @include custom-lozenge-color('base2', $g-dark-base5, $g-light-base1);
     @include custom-lozenge-color('golden', $g-golden-700, $g-golden-200);
     @include custom-lozenge-color('wood', $g-wood-700, $g-wood-200);
     @include custom-lozenge-color('pacific', $g-pacific-700, $g-pacific-200);
@@ -120,7 +120,7 @@
     &.#{$ns}-interactive {
       &:hover {
         color: $g-black;
-        background-color: $g-base5;
+        background-color: $g-light-base5;
 
         @include custom-lozenge-color('denim', $g-denim-700, $g-denim-100);
         @include custom-lozenge-color('avocado', $g-avocado-700, $g-avocado-100);
@@ -129,8 +129,8 @@
         @include custom-lozenge-color('error', $g-error-700, $g-error-100);
         @include custom-lozenge-color('water', $g-water-700, $g-water-100);
         @include custom-lozenge-color('grass', $g-grass-700, $g-grass-100);
-        @include custom-lozenge-color('base', $g-black, $g-base1);
-        @include custom-lozenge-color('base2', $g-dark-base5, $g-base1);
+        @include custom-lozenge-color('base', $g-black, $g-light-base1);
+        @include custom-lozenge-color('base2', $g-dark-base5, $g-light-base1);
         @include custom-lozenge-color('golden', $g-golden-700, $g-golden-100);
         @include custom-lozenge-color('wood', $g-wood-700, $g-wood-100);
         @include custom-lozenge-color('pacific', $g-pacific-700, $g-pacific-100);
@@ -139,7 +139,7 @@
       &.#{$ns}-active,
       &:active {
         color: $g-black;
-        background-color: $g-base5;
+        background-color: $g-light-base5;
         box-shadow: inset 0 0 0 1px $g-black;
 
         @include custom-lozenge-color('denim', $g-denim-700, $g-denim-200, $g-denim-700);
@@ -149,16 +149,16 @@
         @include custom-lozenge-color('error', $g-error-700, $g-error-200, $g-error-700);
         @include custom-lozenge-color('water', $g-water-700, $g-water-200, $g-water-700);
         @include custom-lozenge-color('grass', $g-grass-700, $g-grass-200, $g-grass-700);
-        @include custom-lozenge-color('base', $g-black, $g-base2, $g-black);
-        @include custom-lozenge-color('base2', $g-base5, $g-base1, $g-base5);
+        @include custom-lozenge-color('base', $g-black, $g-light-base2, $g-black);
+        @include custom-lozenge-color('base2', $g-light-base5, $g-light-base1, $g-light-base5);
         @include custom-lozenge-color('golden', $g-golden-700, $g-golden-200, $g-golden-700);
         @include custom-lozenge-color('wood', $g-wood-700, $g-wood-200, $g-wood-700);
         @include custom-lozenge-color('pacific', $g-pacific-700, $g-pacific-200, $g-pacific-700);
       }
 
       &.#{$ns}-g-disabled {
-        color: $g-grey2;
-        background-color: $g-base2;
+        color: $g-light-grey2;
+        background-color: $g-light-base2;
 
         @include custom-lozenge-color('denim', $g-denim-400, $g-denim-200);
         @include custom-lozenge-color('avocado', $g-avocado-400, $g-avocado-200);
@@ -167,8 +167,8 @@
         @include custom-lozenge-color('error', $g-error-500, $g-error-200);
         @include custom-lozenge-color('water', $g-water-500, $g-water-200);
         @include custom-lozenge-color('grass', $g-grass-500, $g-grass-200);
-        @include custom-lozenge-color('base', $g-grey4, $g-base1);
-        @include custom-lozenge-color('base2', $g-grey4, $g-base1);
+        @include custom-lozenge-color('base', $g-light-grey4, $g-light-base1);
+        @include custom-lozenge-color('base2', $g-light-grey4, $g-light-base1);
         @include custom-lozenge-color('golden', $g-golden-700, $g-golden-200);
         @include custom-lozenge-color('wood', $g-wood-500, $g-wood-200);
         @include custom-lozenge-color('pacific', $g-pacific-500, $g-pacific-200);
@@ -251,12 +251,12 @@
 
     &.#{$ns}-interactive {
       &:hover {
-        background-color: $g-base5;
+        background-color: $g-light-base5;
       }
 
       &.#{$ns}-active,
       &:active {
-        background-color: $g-base5;
+        background-color: $g-light-base5;
         opacity: 100%;
       }
     }
