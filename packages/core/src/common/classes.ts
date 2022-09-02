@@ -395,6 +395,11 @@ export const BUTTON_KIND_GROUP = `${NS}-kind-g-group`;
 /* BUTTON GROUP */
 export const BUTTON_GROUP_STRECH = `${NS}-g-strech`;
 
+/* CARDS */
+export const CARD_CLICKABLE = `${NS}-clickable`;
+export const CARD_ACTIVE = `${NS}-kind-g-active`;
+export const CARD_ERROR = `${NS}-kind-g-error`;
+
 /* TABS */
 export const TAB_STROKE_LINE_TOP = `${NS}-g-stroke-line-top`;
 export const TAB_STROKE_LINE_RIGHT = `${NS}-g-stroke-line-right`;
@@ -405,6 +410,10 @@ export const TABS_FILL_SPACE = `${NS}-tabs-fill`;
 
 /* TAB */
 export const TAB_DISABLE_HOVER_EFFECT = `${NS}-g-tab-disable-hover-effect`;
+export const TABS_NO_PADDING = `${NS}-tabs-no-padding`;
+
+/* TOAST */
+export const TOAST_HIDE_CLOSE_BUTTON = `${NS}-g-toast-hide-close-button`;
 
 /* TAG */
 export const TAG_SMALL = `${NS}-g-small`;

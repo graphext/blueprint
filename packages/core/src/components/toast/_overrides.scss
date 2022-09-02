@@ -3,3 +3,10 @@
     background-color: $dark-gray5;
   }
 }
+.#{$ns}-toast.#{$ns}-g-toast-hide-close-button {
+  .#{$ns}-button-group {
+    button[aria-label="Close"] {
+      display: none;
+    }
+  }
+}

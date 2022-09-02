@@ -1,5 +1,15 @@
-.#{$ns}-tab > * {
-  color: inherit;
+.#{$ns}-tab {
+  font-size: 12px;
+  text-transform: uppercase;
+
+  & > * {
+    color: inherit;
+  }
+
+  .#{$ns}-large > & {
+    font-size: 12px;
+    line-height: 48px;
+  }
 }
 
 // custom class to allow tabs to fill available width
@@ -18,11 +28,25 @@
   }
 }
 
-.#{$ns}-tabs.#{$ns}-vertical .#{$ns}-tab,
 .#{$ns}-tab {
   padding-left: $padding-between-tabs;
   padding-right: $padding-between-tabs;
 }
+
+/* lateral padding for tabs when it is vertical */
+.#{$ns}-tabs.#{$ns}-vertical > .#{$ns}-tab-list .#{$ns}-tab {
+  padding-left: 32px;
+  padding-right: 24px;
+}
+
+/* Class to remove padding in tabs */
+.#{$ns}-tabs-no-padding {
+  & .#{$ns}-tab,
+  &.#{$ns}-tabs.#{$ns}-vertical > .#{$ns}-tab-list .#{$ns}-tab {
+    padding: 0;
+  }
+}
+
 
 /* padding between tabs and panels when it is vertical */
 .#{$ns}-tabs.#{$ns}-vertical .#{$ns}-tab-panel {
