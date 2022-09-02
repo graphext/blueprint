@@ -4,15 +4,15 @@
 }
 
 .#{$ns}-table-selection-region {
-  background-color: rgba($g-grey4, 0.1);
+  background-color: rgba($g-light-grey4, 0.1);
   border-top: none;
-  border-left: 1px solid $g-grey4;
+  border-left: 1px solid $g-light-grey4;
 
   .#{$ns}-table-column-headers & {
-    border-left: 1px solid $g-grey4;
+    border-left: 1px solid $g-light-grey4;
   }
   
   .#{$ns}-table-row-headers & {
-    border-left: 1px solid $g-grey4;
+    border-left: 1px solid $g-light-grey4;
   }
 }
