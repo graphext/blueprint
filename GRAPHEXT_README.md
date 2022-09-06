@@ -140,3 +140,6 @@ We must take into account that the 'custom' version of this package for graphext
 
 There are some special commands on `docker-compose.yml` created to work easier with Graphext, Storybook and Blueprint.
 There is more information about it on **WORKING WITH 🔵 BLUEPRINT** section of [Storybook readme.](https://pre.graphext.com/storybook/?path=/story/design-system-how-to-use--page)
+
+## Warning:
+**DO NOT USE the `%` on CSS Opacity because it breaks on Graphext build**, use instead `opacity: 0.5;` for example.

@@ -242,7 +242,7 @@
 
     &.#{$ns}-g-disabled {
       background-color: transparent;
-      opacity: 60%;
+      opacity: 0.6;
 
       &.#{$ns}-interactive {
         cursor: pointer;
@@ -257,7 +257,7 @@
       &.#{$ns}-active,
       &:active {
         background-color: $g-light-base5;
-        opacity: 100%;
+        opacity: 1;
       }
     }
 
@@ -273,7 +273,7 @@
         &.#{$ns}-active,
         &:active {
           background-color: $g-dark-base5;
-          opacity: 100%;
+          opacity: 1;
         }
       }
 
