@@ -217,6 +217,13 @@
     "content": "\\2731"
   },
   {
+    "displayName": "Saveoff",
+    "iconName": "g-save-off",
+    "tags": "nosave, nochanges, cancel",
+    "group": "Graphext",
+    "content": "\\2731"
+  },
+  {
     "displayName": "Label",
     "iconName": "g-label",
     "tags": "tag, identification, id",
