@@ -287,6 +287,13 @@
     "content": "\\e9e3"
   },
   {
+    "displayName": "Divider",
+    "iconName": "g-divider",
+    "tags": "divider, slash, separation",
+    "group": "Graphext",
+    "content": "\\002F"
+  },
+  {
     "displayName": "Down",
     "iconName": "g-down",
     "tags": "arrow, bottom",
