@@ -5,6 +5,7 @@
   line-height: 14px;
 }
 
+.#{$ns}-popover2,
 .#{$ns}-tooltip2 {
 
   // To adjust arrow placement
@@ -25,15 +26,6 @@
   &.#{$ns}-popover2-placement-right .#{$ns}-popover2-arrow {
     transform: translateX($g-tooltip2-arrow-adjust);
   }
-
-  // Remove shadow of arrow
-  .#{$ns}-popover2-arrow::before {
-    box-shadow: none;
-  }
-
-}
-
-.#{$ns}-popover2 {
 
   // Remove shadow of arrow
   .#{$ns}-popover2-arrow::before {
