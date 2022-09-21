@@ -33,3 +33,8 @@
   }
 
 }
+
+.#{$ns}-popover2:not(.#{$ns}-tooltip2) .#{$ns}-popover2-content {
+  border-radius: $pt-grid-size;
+  padding: 2 * $pt-grid-size;
+}
