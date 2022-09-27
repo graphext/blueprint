@@ -5,7 +5,6 @@
   line-height: 14px;
 }
 
-.#{$ns}-popover2,
 .#{$ns}-tooltip2 {
 
   // To adjust arrow placement
@@ -34,6 +33,33 @@
 
 }
 
-.#{$ns}-popover2 .#{$ns}-popover2-content {
-  border-radius: $pt-grid-size;
+.#{$ns}-popover2 {
+
+  // To adjust arrow placement
+  $g-tooltip2-arrow-adjust: 5px;
+
+  &.#{$ns}-popover2-placement-top .#{$ns}-popover2-arrow {
+    transform: translateY(- $g-tooltip2-arrow-adjust);
+  }
+
+  &.#{$ns}-popover2-placement-left .#{$ns}-popover2-arrow {
+    transform: translateX(- $g-tooltip2-arrow-adjust);
+  }
+
+  &.#{$ns}-popover2-placement-bottom .#{$ns}-popover2-arrow {
+    transform: translateY($g-tooltip2-arrow-adjust);
+  }
+
+  &.#{$ns}-popover2-placement-right .#{$ns}-popover2-arrow {
+    transform: translateX($g-tooltip2-arrow-adjust);
+  }
+
+  // Remove shadow of arrow
+  .#{$ns}-popover2-arrow::before {
+    box-shadow: none;
+  }
+
+  .#{$ns}-popover2-content {
+    border-radius: $pt-grid-size;
+  }
 }
