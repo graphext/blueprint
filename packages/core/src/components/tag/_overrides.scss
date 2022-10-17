@@ -95,6 +95,7 @@
     @include custom-lozenge-color('golden', $g-golden-700, $g-golden-200);
     @include custom-lozenge-color('wood', $g-wood-700, $g-wood-200);
     @include custom-lozenge-color('pacific', $g-pacific-700, $g-pacific-200);
+    @include custom-lozenge-color('graphext', $g-graphext-700, $g-graphext-200);
 
     // Custom kinds dark theme:
     .#{$ns}-dark & {
@@ -113,6 +114,7 @@
       @include custom-lozenge-color('golden', $g-white, $g-golden-600);
       @include custom-lozenge-color('wood', $g-white, $g-wood-600);
       @include custom-lozenge-color('pacific', $g-white, $g-pacific-600);
+      @include custom-lozenge-color('graphext', $g-white, $g-graphext-600);
     }
 
 
@@ -134,6 +136,7 @@
         @include custom-lozenge-color('golden', $g-golden-700, $g-golden-100);
         @include custom-lozenge-color('wood', $g-wood-700, $g-wood-100);
         @include custom-lozenge-color('pacific', $g-pacific-700, $g-pacific-100);
+        @include custom-lozenge-color('graphext', $g-graphext-700, $g-graphext-100);
       }
 
       &.#{$ns}-active,
@@ -154,6 +157,7 @@
         @include custom-lozenge-color('golden', $g-golden-700, $g-golden-200, $g-golden-700);
         @include custom-lozenge-color('wood', $g-wood-700, $g-wood-200, $g-wood-700);
         @include custom-lozenge-color('pacific', $g-pacific-700, $g-pacific-200, $g-pacific-700);
+        @include custom-lozenge-color('graphext', $g-graphext-700, $g-graphext-200, $g-graphext-700);
       }
 
       &.#{$ns}-g-disabled {
@@ -172,6 +176,7 @@
         @include custom-lozenge-color('golden', $g-golden-700, $g-golden-200);
         @include custom-lozenge-color('wood', $g-wood-500, $g-wood-200);
         @include custom-lozenge-color('pacific', $g-pacific-500, $g-pacific-200);
+        @include custom-lozenge-color('graphext', $g-graphext-500, $g-graphext-200);
       }
 
       .#{$ns}-dark & {
@@ -191,6 +196,7 @@
           @include custom-lozenge-color('golden', $g-white, $g-golden-500);
           @include custom-lozenge-color('wood', $g-white, $g-wood-500);
           @include custom-lozenge-color('pacific', $g-white, $g-pacific-500);
+          @include custom-lozenge-color('pacific', $g-white, $g-graphext-500);
         }
 
         &.#{$ns}-active,
@@ -211,6 +217,7 @@
           @include custom-lozenge-color('golden', $g-white, $g-golden-600, $g-golden-700);
           @include custom-lozenge-color('wood', $g-white, $g-wood-600, $g-wood-700);
           @include custom-lozenge-color('pacific', $g-white, $g-pacific-600, $g-pacific-700);
+          @include custom-lozenge-color('graphext', $g-white, $g-graphext-600, $g-graphext-700);
         }
 
         &.#{$ns}-g-disabled {
@@ -229,6 +236,7 @@
           @include custom-lozenge-color('golden', $g-golden-700, $g-golden-800);
           @include custom-lozenge-color('wood', $g-wood-700, $g-wood-800);
           @include custom-lozenge-color('pacific', $g-pacific-700, $g-pacific-800);
+          @include custom-lozenge-color('graphext', $g-graphext-700, $g-graphext-800);
         }
       }
     }
