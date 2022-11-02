@@ -399,6 +399,8 @@ export const BUTTON_GROUP_STRECH = `${NS}-g-strech`;
 export const CARD_CLICKABLE = `${NS}-clickable`;
 export const CARD_ACTIVE = `${NS}-kind-g-active`;
 export const CARD_ERROR = `${NS}-kind-g-error`;
+export const CARD_DASHED = `${NS}-kind-g-dashed`;
+export const CARD_TRANSPARENT = `${NS}-g-transparent`;
 
 /* TABS */
 export const TAB_STROKE_LINE_TOP = `${NS}-g-stroke-line-top`;

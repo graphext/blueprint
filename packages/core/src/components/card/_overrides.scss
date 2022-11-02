@@ -44,4 +44,31 @@
   &.#{$ns}-kind-g-error.#{$ns}-clickable:hover {
     border-color: $g-error-600;
   }
+
+  &.#{$ns}-kind-g-dashed {
+    border: 1px dashed $g-light-grey3;
+    .#{$ns}-dark & {
+      border-color: $g-dark-grey3;
+    }
+  }
+
+  &.#{$ns}-kind-g-dashed.#{$ns}-clickable:hover {
+    border-color: $g-light-grey1;
+    .#{$ns}-dark & {
+      border-color: $g-dark-grey1;
+    }
+  }
+
+  &.#{$ns}-disabled {
+    &.#{$ns}-kind-g-dashed {
+      border-color: $g-light-grey4;
+      .#{$ns}-dark & {
+        border-color: $g-dark-grey4;
+      }
+    }
+  }
+
+  &.#{$ns}-g-transparent {
+    background-color: transparent;
+  }
 }
