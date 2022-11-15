@@ -40,6 +40,13 @@
     border-color: $g-primary-700;
   }
 
+  &.#{$ns}-g-opened {
+    border-color: $g-light-base5;
+    .#{$ns}-dark & {
+      border-color: $g-dark-base5;
+    }
+  }
+
   &.#{$ns}-kind-g-error,
   &.#{$ns}-kind-g-error.#{$ns}-clickable:hover {
     border-color: $g-error-600;

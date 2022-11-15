@@ -401,6 +401,7 @@ export const CARD_ACTIVE = `${NS}-kind-g-active`;
 export const CARD_ERROR = `${NS}-kind-g-error`;
 export const CARD_DASHED = `${NS}-kind-g-dashed`;
 export const CARD_TRANSPARENT = `${NS}-g-transparent`;
+export const CARD_OPENED = `${NS}-g-opened`;
 
 /* TABS */
 export const TAB_STROKE_LINE_TOP = `${NS}-g-stroke-line-top`;
