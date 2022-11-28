@@ -59,12 +59,10 @@
   &.#{$ns}-checkbox {
     .#{$ns}-control-indicator {
       border-radius: 4px;
-      background: $g-light-base4;  // removes gradient
       box-shadow: none;
 
       .#{$ns}-dark & {
         box-shadow: none;
-        background: $g-dark-base4;
       }
     }
     input:checked ~ .#{$ns}-control-indicator{
