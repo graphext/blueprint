@@ -68,6 +68,7 @@
       }
     }
     input:checked ~ .#{$ns}-control-indicator{
+      background-color: $pt-intent-primary;
       &::before {
         background-image: svg-icon("16px/g-check.svg", (path: (fill: $white)));
       }
