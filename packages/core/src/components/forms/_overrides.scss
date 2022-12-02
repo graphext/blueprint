@@ -78,16 +78,18 @@
 .#{$ns}-control {
   &.#{$ns}-radio {
     input:checked ~ .#{$ns}-control-indicator::before {
-      background-image: radial-gradient($pt-intent-primary, $pt-intent-primary 28%, transparent 32%);
+      background-image: radial-gradient($pt-intent-primary, $pt-intent-primary 33%, transparent 37%);
     }
-    input:checked ~ .#{$ns}-control-indicator{
-      background-color: $dark-gray5;
+    input:checked ~ .#{$ns}-control-indicator {
+      background-color: $g-light-base4;
     }
   }
 }
 .#{$ns}-dark .#{$ns}-control {
-  &.#{$ns}-radio:hover input:checked~.#{$ns}-control-indicator{
-    background-color: $dark-gray5;
+  &.#{$ns}-radio {
+    input:checked ~ .#{$ns}-control-indicator {
+      background-color: $g-dark-base4;
+    }
   }
 }
 
@@ -111,9 +113,13 @@
 .#{$ns}-numeric-input {
   .#{$ns}-button-group.#{$ns}-vertical > .#{$ns}-button {
     box-shadow: none;
-    background-color: $dark-gray4;
+    background-color: $g-light-base4;
 
-    & > .#{$ns}-icon{
+    .#{$ns}-dark & {
+      background-color: $g-dark-base4;
+    }
+
+    & > .#{$ns}-icon {
       transform: scale(0.8);
       color: $pt-intent-primary;
     }
