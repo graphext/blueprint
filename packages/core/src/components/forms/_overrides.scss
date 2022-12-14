@@ -53,16 +53,37 @@
   }
 }
 
+/**
+  * BP uses box-shadow to add border without changing the size of the element.
+ *  Here we use it to add a subtle border in elements like: checkbox & radio button.
+ */
+@mixin box-shadow-as-border($color) {
+  box-shadow: inset 0 0 0 1px $color !important;
+}
+
+
 
 // CheckBox
+/**
+* We want a custom checked state: we change the background-image added with ::before selector.
+* Also, we want custom colors.
+*/
 .#{$ns}-control {
   &.#{$ns}-checkbox {
     .#{$ns}-control-indicator {
       border-radius: 4px;
-      box-shadow: none;
+      @include box-shadow-as-border($g-light-grey4);
 
       .#{$ns}-dark & {
-        box-shadow: none;
+        @include box-shadow-as-border($g-dark-grey4);
+      }
+    }
+
+    input:checked ~ .#{$ns}-control-indicator,
+    input:indeterminate ~ .#{$ns}-control-indicator {
+      @include box-shadow-as-border($g-primary-100);
+      .#{$ns}-dark & {
+        @include box-shadow-as-border($g-primary-700);
       }
     }
     input:checked ~ .#{$ns}-control-indicator{
@@ -75,19 +96,34 @@
 
 
 // Radio
+/**
+* We use the opposite colors that BP proposes for checked radio:
+*   - BP: center white and border blue
+*   - Graphext: center blue and border white
+*/
+
 .#{$ns}-control {
   &.#{$ns}-radio {
+    .#{$ns}-control-indicator {
+      @include box-shadow-as-border($g-light-grey4);
+      .#{$ns}-dark & {
+        @include box-shadow-as-border($g-dark-grey4);
+      }
+    }
+
     input:checked ~ .#{$ns}-control-indicator::before {
-      background-image: radial-gradient($pt-intent-primary, $pt-intent-primary 28%, transparent 32%);
+      background-image: radial-gradient($pt-intent-primary, $pt-intent-primary 33%, transparent 37%);
     }
-    input:checked ~ .#{$ns}-control-indicator{
-      background-color: $dark-gray5;
+
+    input:checked ~ .#{$ns}-control-indicator {
+      background-color: $g-light-base4;
+      @include box-shadow-as-border($g-primary-100);
+
+      .#{$ns}-dark & {
+        background-color: $g-dark-base4;
+        @include box-shadow-as-border($g-primary-700);
+      }
     }
-  }
-}
-.#{$ns}-dark .#{$ns}-control {
-  &.#{$ns}-radio:hover input:checked~.#{$ns}-control-indicator{
-    background-color: $dark-gray5;
   }
 }
 
@@ -95,12 +131,24 @@
 // Inputs
 // (every input is a round input for us)
 .#{$ns}-input {
+    &::placeholder {
+      color: $g-light-grey3 !important;
+      .#{$ns}-dark & {
+        color: $g-dark-grey3 !important;
+      }
+    }
+
+  font-weight: normal;
   border-radius: $pt-input-height / 2;
   box-sizing: border-box;
   padding-left: $input-padding-horizontal;
   padding-right: $input-padding-horizontal;
   box-shadow: none;
 
+  color: black;
+  .#{$ns}-dark & {
+    color: white;
+  }
   &.#{$ns}-large {
     padding: 0 $input-padding-horizontal * 1.5;
   }
@@ -111,9 +159,13 @@
 .#{$ns}-numeric-input {
   .#{$ns}-button-group.#{$ns}-vertical > .#{$ns}-button {
     box-shadow: none;
-    background-color: $dark-gray4;
+    background-color: $g-light-base4;
 
-    & > .#{$ns}-icon{
+    .#{$ns}-dark & {
+      background-color: $g-dark-base4;
+    }
+
+    & > .#{$ns}-icon {
       transform: scale(0.8);
       color: $pt-intent-primary;
     }
