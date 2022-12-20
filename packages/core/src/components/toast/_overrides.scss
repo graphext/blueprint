@@ -2,11 +2,48 @@
   &.#{$ns}-dark {
     background-color: $dark-gray5;
   }
-}
-.#{$ns}-toast.#{$ns}-g-toast-hide-close-button {
-  .#{$ns}-button-group {
-    button[aria-label="Close"] {
-      display: none;
+
+  // Override close button color & hover for Toast with intent none
+  .#{$ns}-button[aria-label="Close"] {
+    &:not([class*="#{$ns}-intent-"]) {
+      .#{$ns}-icon:not([class*="#{$ns}-intent-"]) {
+        color: $g-primary-600;
+      }
+
+      &:hover,
+      &:focus,
+      &:active {
+        background: none;
+
+        .#{$ns}-icon:not([class*="#{$ns}-intent-"]) {
+          color: $g-primary-500;
+        }
+      }
+    }
+  }
+
+  // Override close button color & hover for Toast with intent
+  &[class*="#{$ns}-intent-"] .#{$ns}-button[aria-label="Close"] {
+    .#{$ns}-icon {
+      color: $g-dark-grey1 !important;
+    }
+
+    &:hover,
+    &:focus,
+    &:active {
+      background: none !important;
+
+      .#{$ns}-icon {
+        color: $g-white !important;
+      }
+    }
+  }
+
+  &.#{$ns}-g-toast-hide-close-button {
+    .#{$ns}-button-group {
+      .#{$ns}-button[aria-label="Close"] {
+        display: none;
+      }
     }
   }
 }
