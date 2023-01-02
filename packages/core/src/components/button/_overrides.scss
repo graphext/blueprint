@@ -315,6 +315,11 @@ $pt-gp-dark-icon-color: $g-white;
   border-radius: 8px;
 }
 
+// CUSTOM class for extra small border radius on buttons
+.#{$ns}-button.#{$ns}-g-button-extra-small-border-radius {
+  border-radius: 2px;
+}
+
 // Change min-width of buttons in button-groups
 .#{$ns}-button-group.#{$ns}-vertical:not([class*="#{$ns}-g-strech"]) .#{$ns}-button {
   min-width: 32px;

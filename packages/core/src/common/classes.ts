@@ -384,6 +384,7 @@ export function positionClass(position: Position | undefined) {
 /* BUTTON */
 export const BUTTON_ACTION = `${NS}-g-action-button`;
 export const BUTTON_SMALL_BORDER_RADIUS = `${NS}-g-button-small-border-radius`;
+export const BUTTON_EXTRA_SMALL_BORDER_RADIUS = `${NS}-g-button-extra-small-border-radius`;
 export const BUTTON_SIZE_EXTRA_SMALL = `${NS}-g-extra-small`;
 export const BUTTON_SIZE_EXTRA_EXTRA_SMALL = `${NS}-g-extra-extra-small`;
 export const BUTTON_KIND_PRIMARY = `${NS}-kind-g-primary`;
