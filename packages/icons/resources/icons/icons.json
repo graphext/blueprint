@@ -294,6 +294,20 @@
     "content": "\\002F"
   },
   {
+    "displayName": "Constrain",
+    "iconName": "g-constrain",
+    "tags": "join, restrain, attached",
+    "group": "Graphext",
+    "content": "\\002F"
+  },
+  {
+    "displayName": "No constrain",
+    "iconName": "g-constrain-no",
+    "tags": "loose, detached, disjoin",
+    "group": "Graphext",
+    "content": "\\002F"
+  },
+  {
     "displayName": "Down",
     "iconName": "g-down",
     "tags": "arrow, bottom",
