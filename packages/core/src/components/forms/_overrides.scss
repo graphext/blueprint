@@ -130,6 +130,22 @@
 
 // Inputs
 // (every input is a round input for us)
+
+@mixin box-shadow-default-style {
+  box-shadow: none !important;
+  &:focus,
+  &:hover {
+    @include box-shadow-as-border($g-light-base5);
+    .#{$ns}-dark & {
+      @include box-shadow-as-border($g-dark-base5);
+    }
+
+    &:disabled {
+      box-shadow: none !important;
+    }
+  }
+}
+
 .#{$ns}-input {
     &::placeholder {
       color: $g-light-grey3 !important;
@@ -143,7 +159,6 @@
   box-sizing: border-box;
   padding-left: $input-padding-horizontal;
   padding-right: $input-padding-horizontal;
-  box-shadow: none;
 
   color: black;
   .#{$ns}-dark & {
@@ -152,17 +167,7 @@
   &.#{$ns}-large {
     padding: 0 $input-padding-horizontal * 1.5;
   }
-
-  &:hover {
-    @include box-shadow-as-border($g-light-base5);
-    .#{$ns}-dark & {
-      @include box-shadow-as-border($g-dark-base5);
-    }
-
-    &:disabled {
-      box-shadow: none !important;
-    }
-  }
+  @include box-shadow-default-style;
 }
 
 /*  For input-intent-danger and input-intent-primary, we want:
@@ -181,7 +186,10 @@
        <input class="bp3-input bp3-intent-primary">
 
 */
+
+/*It includes :focus because it should behave the same as hover effect */
 @mixin box-shadow-hover-and-disabled($color, $color-disabled) {
+  &:focus,
   &:hover {
     &:disabled {
       box-shadow: $color-disabled !important;
@@ -222,16 +230,13 @@
 /* We think that intent warning & success are not very useful => default colors */
 .#{$ns}-input.#{$ns}-intent-warning,
 .#{$ns}-input.#{$ns}-intent-success {
-  box-shadow: none;
-  &:hover {
-    @include box-shadow-as-border($g-light-base5);
-    .#{$ns}-dark & {
-      @include box-shadow-as-border($g-dark-base5);
-    }
+ @include box-shadow-default-style;
+}
 
-    &:disabled {
-      box-shadow: none !important;
-    }
+.#{$ns}-input-group.#{$ns}-intent-warning,
+.#{$ns}-input-group.#{$ns}-intent-success {
+  .#{$ns}-input {
+    @include box-shadow-default-style;
   }
 }
 
