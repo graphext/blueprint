@@ -152,10 +152,91 @@
   &.#{$ns}-large {
     padding: 0 $input-padding-horizontal * 1.5;
   }
+
+  &:hover {
+    @include box-shadow-as-border($g-light-base5);
+    .#{$ns}-dark & {
+      @include box-shadow-as-border($g-dark-base5);
+    }
+
+    &:disabled {
+      box-shadow: none !important;
+    }
+  }
+}
+
+/*  For input-intent-danger and input-intent-primary, we want:
+      - default color: g-[color]-600 + hover: g-[color]-500
+      - disabled: g-[color]-800 (without hover effect)
+
+    Be aware that it should work with both InputGroup & Input:
+      InputGroup html:
+       <div class="bp3-input-group bp3-intent-primary">
+          (...)
+          <input class="bp3-input">
+          (...)
+       </div>
+
+      Input html:
+       <input class="bp3-input bp3-intent-primary">
+
+*/
+@mixin box-shadow-hover-and-disabled($color, $color-disabled) {
+  &:hover {
+    &:disabled {
+      box-shadow: $color-disabled !important;
+    }
+    @include box-shadow-as-border($color);
+  }
+
+  &:disabled {
+    @include box-shadow-as-border($color-disabled);
+  }
+}
+
+.#{$ns}-input.#{$ns}-intent-danger {
+  @include box-shadow-as-border($g-error-600);
+  @include box-shadow-hover-and-disabled($g-error-500, $g-error-800)
+}
+
+.#{$ns}-input-group.#{$ns}-intent-danger {
+  .#{$ns}-input {
+    @include box-shadow-as-border($g-error-600);
+    @include box-shadow-hover-and-disabled($g-error-500, $g-error-800)
+  }
 }
 
 
-// Numeric Input Control Group
+.#{$ns}-input.#{$ns}-intent-primary {
+  @include box-shadow-as-border($g-primary-600);
+  @include box-shadow-hover-and-disabled($g-primary-500, $g-primary-800)
+}
+
+.#{$ns}-input-group.#{$ns}-intent-primary {
+  .#{$ns}-input {
+    @include box-shadow-as-border($g-primary-600);
+    @include box-shadow-hover-and-disabled($g-primary-500, $g-primary-800)
+  }
+}
+
+/* We think that intent warning & success are not very useful => default colors */
+.#{$ns}-input.#{$ns}-intent-warning,
+.#{$ns}-input.#{$ns}-intent-success {
+  box-shadow: none;
+  &:hover {
+    @include box-shadow-as-border($g-light-base5);
+    .#{$ns}-dark & {
+      @include box-shadow-as-border($g-dark-base5);
+    }
+
+    &:disabled {
+      box-shadow: none !important;
+    }
+  }
+}
+
+
+  // Numeric Input Control Group
 .#{$ns}-numeric-input {
   .#{$ns}-button-group.#{$ns}-vertical > .#{$ns}-button {
     box-shadow: none;
