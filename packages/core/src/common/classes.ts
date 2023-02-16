@@ -392,6 +392,7 @@ export const BUTTON_KIND_SECONDARY = `${NS}-kind-g-secondary`;
 export const BUTTON_KIND_STROKED = `${NS}-kind-g-stroked`;
 export const BUTTON_KIND_GHOST = `${NS}-kind-g-ghost`;
 export const BUTTON_KIND_GROUP = `${NS}-kind-g-group`;
+export const BUTTON_TEXT_NORMAL = `${NS}-button-text-normal`;
 
 /* BUTTON GROUP */
 export const BUTTON_GROUP_STRECH = `${NS}-g-strech`;

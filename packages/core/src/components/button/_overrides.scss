@@ -14,6 +14,11 @@
   line-height: 14px;
 }
 
+// bp3-button-text-normal to be used in Anchor for a parragraph like font size
+.#{$ns}-button-text-normal .#{$ns}-button-text {
+  font-size: $pt-font-size;
+}
+
 .#{$ns}-dark .#{$ns}-button.#{$ns}-minimal.#{$ns}-intent-primary:hover,
 .#{$ns}-button.#{$ns}-minimal.#{$ns}-intent-primary:hover {
   background-color: inherit;
