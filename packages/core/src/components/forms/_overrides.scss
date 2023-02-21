@@ -241,7 +241,7 @@
 }
 
 
-  // Numeric Input Control Group
+// Numeric Input Control Group
 .#{$ns}-numeric-input {
   .#{$ns}-button-group.#{$ns}-vertical > .#{$ns}-button {
     box-shadow: none;
@@ -255,5 +255,17 @@
       transform: scale(0.8);
       color: $pt-intent-primary;
     }
+  }
+}
+
+// Switch
+.#{$ns}-switch {
+  &.#{$ns}-control {
+    line-height: $control-indicator-size;
+  }
+
+  .#{$ns}-control-indicator {
+    /* Reset -3px margin-top */
+    margin-top: 0;
   }
 }
