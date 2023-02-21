@@ -308,6 +308,13 @@
     "content": "\\002F"
   },
   {
+    "displayName": "Time",
+    "iconName": "g-time",
+    "tags": "time, clock, recurrence, history",
+    "group": "Graphext",
+    "content": "\\002F"
+  },
+  {
     "displayName": "Down",
     "iconName": "g-down",
     "tags": "arrow, bottom",
