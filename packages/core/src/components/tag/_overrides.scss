@@ -53,7 +53,7 @@
     &.#{$ns}-g-disabled {
       cursor: not-allowed;
       background-color: $g-light-base3;
-      color: $g-light-grey4;
+      color: $g-light-grey3;
     }
 
     .#{$ns}-dark & {
@@ -129,7 +129,7 @@
       @include custom-lozenge-color('error', $g-error-500, $g-error-200);
       @include custom-lozenge-color('water', $g-water-500, $g-water-200);
       @include custom-lozenge-color('grass', $g-grass-500, $g-grass-200);
-      // @include custom-lozenge-color('base', $g-light-grey4, $g-light-base1);
+      @include custom-lozenge-color('base', $g-light-grey3, $g-light-base3);
       @include custom-lozenge-color('base2', $g-light-grey4, $g-light-base1);
       @include custom-lozenge-color('golden', $g-golden-700, $g-golden-200);
       @include custom-lozenge-color('wood', $g-wood-500, $g-wood-200);
@@ -147,7 +147,7 @@
         @include custom-lozenge-color('error', $g-error-700, $g-error-800);
         @include custom-lozenge-color('water', $g-water-700, $g-water-800);
         @include custom-lozenge-color('grass', $g-grass-700, $g-grass-800);
-        // @include custom-lozenge-color('base', $g-dark-grey4, $g-dark-base3);
+        @include custom-lozenge-color('base', $g-dark-grey4, $g-dark-base2);
         @include custom-lozenge-color('base2', $g-dark-grey4, $g-dark-base3);
         @include custom-lozenge-color('golden', $g-golden-700, $g-golden-800);
         @include custom-lozenge-color('wood', $g-wood-700, $g-wood-800);
