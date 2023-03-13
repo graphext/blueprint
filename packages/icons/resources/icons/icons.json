@@ -315,6 +315,13 @@
     "content": "\\002F"
   },
   {
+    "displayName": "Upload",
+    "iconName": "g-upload",
+    "tags": "upload, file, connect",
+    "group": "Graphext",
+    "content": "\\002F"
+  },
+  {
     "displayName": "Down",
     "iconName": "g-down",
     "tags": "arrow, bottom",
