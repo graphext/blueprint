@@ -1,0 +1,28 @@
+.#{$ns}-menu-item.#{$ns}-active {
+  color: $g-black !important;
+  .#{$ns}-menu-item-label {
+    color: $g-black !important;
+  }
+}
+
+.#{$ns}-dark {
+  .#{$ns}-menu-item.#{$ns}-active {
+    color: $g-white !important;
+    .#{$ns}-menu-item-label {
+      color: $g-white !important;
+    }
+  }
+}
+
+/**
+* Necessary to fix BP omnibar documentation
+* because they use text-muted and it was difficult to read because of the color contrast
+**/
+.#{$ns}-omnibar.docs-navigator-menu {
+  .#{$ns}-menu-item.#{$ns}-active {
+    .#{$ns}-text-muted {
+      color: $g-light-grey1 !important;
+    }
+  }
+}
+
