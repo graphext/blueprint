@@ -41,7 +41,7 @@ The following packages of this monorepo have been already updated by Graphext an
     - `select`
     - `icons`
     - `table`
-    - `popover2` 
+    - `popover2`
 
 ## How to publish the changes
 
@@ -62,7 +62,12 @@ After that you can upgrade the version of the changed packages adding +1 after t
     docker-compose run bp node scripts/syncVersions.js
     ```
 
-And publish the affected packages like:
+And last but not least... be careful when publishing with npm, latest node + npm versions [are a bit problematic](https://github.com/palantir/blueprint/issues/5645#issuecomment-1270349229). It's recommended to do it from the docker-compose bp service (which has the appropriate node version):
+
+```
+docker-compose run bp /bin/bash
+```
+and then publish the desired packages:
 ```
 cd packages/core && npm publish && cd ../../ && cd packages/icons && npm publish && cd ../../ && cd packages/datetime && npm publish && cd ../../ && cd packages/table && npm publish && cd ../../ && cd packages/select && npm publish && cd ../../ && cd packages/popover2 && npm publish && cd ../../
 ```
@@ -132,7 +137,7 @@ This is how we included the changes from palantir in our repository.
 At this point, we were able to work as we used to do (PR in `graphext` and then if you want to deploy your changes, merge it into `deploy`).
 
 ### About popover2 situation
-`@blueprint/popover2` package is going to replace `@blueprint/core` popover in `Blueprintjs V5`. 
+`@blueprint/popover2` package is going to replace `@blueprint/core` popover in `Blueprintjs V5`.
 The use of this package is recommended to be prepared and also because it is more efficient than the previous one.
 We must take into account that the 'custom' version of this package for graphext exists since `graphext04`, so if we try to use a previous version it will return an error because it does not exist in our private repository.
 
