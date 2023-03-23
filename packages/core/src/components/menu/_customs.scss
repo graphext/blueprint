@@ -1,6 +1,10 @@
 $menu-item-border-radius: $pt-border-radius;
 
-$dark-menu-item-color-hover: $dark-gray5;
-$dark-menu-item-color-active: $dark-gray5 !important; // Important is needed here because the classname "bp3-intent-primary" applied to active menu items.
+$dark-menu-item-color-hover: $g-dark-base5;
+$dark-menu-item-color-active: $g-dark-base5 !important; // Important is needed here because the classname "bp3-intent-primary" applied to active menu items.
+
+$menu-item-color-hover: $g-light-base5;
+$menu-item-color-active: $g-light-base5 !important;
 
 $dark-menu-background-color: $g-dark-base3; // Same background as Popover
+$menu-background-color: $g-light-base3;
