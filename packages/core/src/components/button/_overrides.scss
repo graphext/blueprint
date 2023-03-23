@@ -128,7 +128,7 @@ $pt-gp-dark-icon-color: $g-white;
       @include custom-button-kind(secondary, $g-primary-300, $g-light-base5, $g-primary-100);
       @include custom-button-kind(stroked, $g-black, $g-light-base5, $g-primary-100);
       @include custom-button-kind(ghost, $g-primary-300, $g-light-base5, $g-primary-100);
-      @include custom-button-kind(group, $g-white, $g-primary-300);
+      @include custom-button-kind(group, $g-white, $g-primary-400);
     }
 
     &:disabled,
