@@ -3,9 +3,11 @@ $input-padding-horizontal: $pt-grid-size * 2;
 $input-font-weight: 300;
 
 $dark-input-background-color: $g-dark-base4;
+$dark-input-background-color-disabled: $g-dark-base4;
 $dark-input-shadow-color-focus: transparent;
 
 $input-background-color: $g-light-base4;
+$input-background-color-disabled: $g-light-base4;
 $input-shadow-color-focus: transparent;
 
 $input-box-shadow: 0 0 0 0 transparent;
