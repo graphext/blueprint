@@ -1,13 +1,62 @@
-.#{$ns}-dark .#{$ns}-slider-handle, .#{$ns}-dark .#{$ns}-slider-handle:hover{
-  background-color: $pt-intent-primary;
+/** Handler color */
+.#{$ns}-dark .#{$ns}-slider-handle,
+.#{$ns}-dark .#{$ns}-slider-handle:hover {
+  background-color: $g-dark-active;
+  background-image: none;
 }
-.#{$ns}-dark .#{$ns}-slider-handle:active, .#{$ns}-dark .#{$ns}-slider-handle.#{$ns}-active{
-  background-color: $pt-intent-primary;
+
+.#{$ns}-dark .#{$ns}-slider-handle:active,
+.#{$ns}-dark .#{$ns}-slider-handle.#{$ns}-active {
+  background-color: $g-dark-active;
 }
-.#{$ns}-slider-label{
+
+.#{$ns}-slider-handle,
+.#{$ns}-slider-handle:hover {
+  background-color: $g-light-active;
+  background-image: none;
+}
+
+.#{$ns}-slider-handle:active,
+.#{$ns}-slider-handle.#{$ns}-active {
+  background-color: $g-light-active;
+}
+
+/* progress bar color */
+.#{$ns}-slider-progress.#{$ns}-intent-primary {
+  background-color: $g-light-active;
+}
+
+.#{$ns}-dark .#{$ns}-slider-progress.#{$ns}-intent-primary {
+  background-color: $g-dark-active;
+}
+
+/* slider label */
+.#{$ns}-slider-label {
   padding: 4px 8px;
   font-size: 11px;
 }
-.#{$ns}-slider.#{$ns}-axis-hidden .#{$ns}-slider-axis{
+
+.#{$ns}-slider.#{$ns}-axis-hidden .#{$ns}-slider-axis {
   display: none;
+}
+
+.#{$ns}-slider-label {
+  color: $g-light-grey2 !important;
+}
+
+.#{$ns}-slider-handle .#{$ns}-slider-label {
+  background-color: $g-light-base1 !important;
+  color: $g-black !important;
+  border-radius: 4px;
+}
+
+.#{$ns}-dark {
+  .#{$ns}-slider-label {
+    color: $g-dark-grey4;
+
+  }
+  .#{$ns}-slider-handle .#{$ns}-slider-label {
+    background-color: $g-dark-base0 !important;
+    color: $g-white !important;
+  }
 }
