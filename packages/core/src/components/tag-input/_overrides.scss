@@ -5,6 +5,13 @@
     width: 100%;
     font-size: 14px;
     line-height: 16px;
+
+    &::placeholder {
+      color: $g-light-grey3 !important;
+      .#{$ns}-dark & {
+        color: $g-dark-grey3 !important;
+      }
+    }
   }
 }
 
@@ -14,13 +21,13 @@
   border-radius: 24px;
   padding-left: 8px;
   box-shadow: $custom-shadow;
-  color: black;
+  color: $g-black;
   font-size: 16px;
   font-weight: normal;
 
   .#{$ns}-dark & {
     background-color: $g-dark-base3;
-    color: white;
+    color: $g-white;
   }
 
 }
