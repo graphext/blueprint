@@ -96,15 +96,28 @@
       }
     }
   }
+
+  &.#{$ns}-checkbox.#{$ns}-disabled {
+    input:checked ~ .#{$ns}-control-indicator,
+    input:indeterminate ~ .#{$ns}-control-indicator {
+      background-color: $g-primary-500 !important;
+
+      .#{$ns}-dark & {
+        background-color: $g-primary-700 !important;
+      }
+    }
+  }
 }
 
 .#{$ns}-control:hover {
-  input:checked ~ .#{$ns}-control-indicator,
-  input:indeterminate ~ .#{$ns}-control-indicator {
-    background-color: $g-primary-500 !important;
+  &.#{$ns}-checkbox {
+    input:checked ~ .#{$ns}-control-indicator,
+    input:indeterminate ~ .#{$ns}-control-indicator {
+      background-color: $g-primary-500 !important;
 
-    .#{$ns}-dark & {
-      background-color: $g-primary-700 !important;
+      .#{$ns}-dark & {
+        background-color: $g-primary-700 !important;
+      }
     }
   }
 }
