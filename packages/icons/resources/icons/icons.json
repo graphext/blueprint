@@ -217,6 +217,20 @@
     "content": "\\2731"
   },
   {
+    "displayName": "Cloud",
+    "iconName": "g-cloud",
+    "tags": "cloud, autosave",
+    "group": "Graphext",
+    "content": "\\2601"
+  },
+  {
+    "displayName": "Cloud-no",
+    "iconName": "g-cloud-no",
+    "tags": "cloud, disabled, autosave",
+    "group": "Graphext",
+    "content": "\\1F327"
+  },
+  {
     "displayName": "Saveoff",
     "iconName": "g-save-off",
     "tags": "nosave, nochanges, cancel",
