@@ -60,105 +60,6 @@ $red3: #db3737;
 $red4: #f55656;
 $red5: #ff7373;
 
-$white1: #ffffff;
-$white2: rgba(255, 255, 255, 0.8);
-$white3: rgba(255, 255, 255, 0.5);
-$white4: rgba(255, 255, 255, 0.3);
-
-$pt-intent-primary: #0091E4;
-$pt-dark-link-color: $pt-intent-primary; // for links
-
-$pt-intent-text-colors: (
-  "primary": $pt-intent-primary,
-  "success": $green2,
-  "warning": $orange2,
-  "danger" : $red2,
-);
-
-$pt-dark-intent-text-colors: (
-  "primary": $pt-intent-primary,
-  "success": $green5,
-  "warning": $orange5,
-  "danger" : $red5,
-);
-
-
-// ------------------------- Color aliases -------------------------------
-
-$pt-dark-icon-color: $white3;
-$pt-dark-icon-color-hover: $white3;
-
-$pt-dark-divider-black: $white3;
-
-
-// ------------------------- Components -------------------------------
-
-// Custom shadow for buttons, selects, tag-inputs, tooltips & datetime
-$custom-shadow: 0 0 12px rgba($black, 0.25);
-
-// Custom shadow for popover (New Design System)
-$pt-dark-border-shadow-opacity: 0.1;
-
-// ------------------------- New Design System Colors -------------------------------
-
-// Functions to get tint effect
-@function tint($color, $percentage) {
-  @return mix(white, $color, $percentage);
-}
-
-// Functions to get shade effect
-@function shade($color, $percentage) {
-  @return mix(black, $color, $percentage);
-}
-
-$g-dark-primary1: #0091E4;
-$g-dark-primary2: tint($g-dark-primary1, 20%); //20% tint
-$g-dark-primary3: shade($g-dark-primary1, 20%); //20% shade
-$g-dark-primary4: shade($g-dark-primary1, 30%); //30% shade
-$g-dark-primary5: shade($g-dark-primary1, 40%); //40% shade
-
-$g-white: #FFF;
-$g-black: #333;
-
-$g-primary1: shade($g-dark-primary1, 20%);
-$g-primary2: shade($g-dark-primary2, 20%);
-$g-primary3: shade($g-dark-primary3, 20%);
-$g-primary4: shade($g-dark-primary4, 30%);
-$g-primary5: shade($g-dark-primary5, 20%);
-
-$g-dark-grey1: #E5E5E6;
-$g-dark-grey2: #BDBEC2;
-$g-dark-grey3: #94979E;
-$g-dark-grey4: #61646B;
-
-$g-light-grey1: #61646B;
-$g-light-grey2: #94979E;
-$g-light-grey3: #BDBEC2;
-$g-light-grey4: #E5E5E6;
-
-$g-dark-base0: #161616;
-$g-dark-base1: #1F2024;
-$g-dark-base2: #25272E;
-$g-dark-base3: #2A2E38;
-$g-dark-base4: #313641;
-$g-dark-base5: #363B47;
-$g-dark-base6: #2F4151;
-
-$g-light-base0: #FEFEFE;
-$g-light-base1: #FCFCFD;
-$g-light-base2: #F3F3F3;
-$g-light-base3: #FAFAFA;
-$g-light-base4: #EDEDED;
-$g-light-base5: #E3E3E3;
-$g-light-base6: #E8E8E8;
-
-// all shadow lists must be the same length to avoid flicker in transitions.
-$pt-elevation-shadow-0: 0 0 0 1px transparent,
-  0 0 0 rgba($black, 0),
-  0 0 0 rgba($black, 0) !default;
-$pt-dark-elevation-shadow-0: 0 0 0 1px transparent,
-  0 0 0 rgba($black, 0),
-  0 0 0 rgba($black, 0) !default;
 
 // Custom colors with shades:
 
@@ -197,9 +98,6 @@ $g-primary-600: #0091E4;
 $g-primary-700: #0066A0;
 $g-primary-800: #005789;
 $g-primary-900: #112446;
-
-$g-light-active: $g-primary-400;
-$g-dark-active: $g-primary-600;
 
 $g-wizard-23-25: #FEFEFF;
 $g-wizard-23-50: #F7F8FD;
@@ -404,3 +302,96 @@ $g-pacific-600: #00AFF1;
 $g-pacific-700: #007EAD;
 $g-pacific-800: #00638A;
 $g-pacific-900: #143643;
+
+$white1: #ffffff;
+$white2: rgba(255, 255, 255, 0.8);
+$white3: rgba(255, 255, 255, 0.5);
+$white4: rgba(255, 255, 255, 0.3);
+
+$g-white: #FFF;
+$g-black: #333;
+
+$g-light-active: $g-primary-400;
+$g-dark-active: $g-primary-600;
+
+$pt-intent-primary: $g-primary-600;
+$pt-dark-link-color: $g-dark-active; // for links
+$pt-link-color: $g-light-active; // for links
+
+
+// ------------------------- Color aliases -------------------------------
+
+$pt-dark-icon-color: $white3;
+$pt-dark-icon-color-hover: $white3;
+
+$pt-dark-divider-black: $white3;
+
+
+// ------------------------- Components -------------------------------
+
+// Custom shadow for buttons, selects, tag-inputs, tooltips & datetime
+$custom-shadow: 0 0 12px rgba($black, 0.25);
+
+// Custom shadow for popover (New Design System)
+$pt-dark-border-shadow-opacity: 0.1;
+
+// ------------------------- New Design System Colors -------------------------------
+
+// Functions to get tint effect
+@function tint($color, $percentage) {
+  @return mix(white, $color, $percentage);
+}
+
+// Functions to get shade effect
+@function shade($color, $percentage) {
+  @return mix(black, $color, $percentage);
+}
+
+$g-dark-grey1: #D8D8DA;
+$g-dark-grey2: #BDBEC2;
+$g-dark-grey3: #94979E;
+$g-dark-grey4: #61646B;
+
+$g-light-grey1: #61646B;
+$g-light-grey2: #94979E;
+$g-light-grey3: #BDBEC2;
+$g-light-grey4: #D8D8DA;
+
+$g-dark-base0: #161616;
+$g-dark-base1: #1F2024;
+$g-dark-base2: #25272E;
+$g-dark-base3: #2A2E38;
+$g-dark-base4: #313641;
+$g-dark-base5: #363B47;
+$g-dark-base6: #2F4151;
+
+$g-light-base0: #FEFEFE;
+$g-light-base1: #EDEDED;
+$g-light-base2: #F3F3F3;
+$g-light-base3: #FAFAFA;
+$g-light-base4: #FCFCFD;
+$g-light-base5: #DEDEDE;
+$g-light-base6: #F2FAFE;
+
+
+// all shadow lists must be the same length to avoid flicker in transitions.
+$pt-elevation-shadow-0: 0 0 0 1px transparent,
+  0 0 0 rgba($black, 0),
+  0 0 0 rgba($black, 0) !default;
+$pt-dark-elevation-shadow-0: 0 0 0 1px transparent,
+  0 0 0 rgba($black, 0),
+  0 0 0 rgba($black, 0) !default;
+
+$pt-intent-text-colors: (
+  "primary": $g-light-active,
+  "success": $green2,
+  "warning": $orange2,
+  "danger" : $red2,
+);
+
+$pt-dark-intent-text-colors: (
+  "primary": $g-dark-active,
+  "success": $green5,
+  "warning": $orange5,
+  "danger" : $red5,
+);
