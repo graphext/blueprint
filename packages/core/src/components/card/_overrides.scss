@@ -87,4 +87,23 @@
   &.#{$ns}-g-transparent {
     background-color: transparent;
   }
+
+  &.#{$ns}-g-intent-primary {
+    background-color: $g-light-active;
+    border-color: $g-light-active;
+    .#{$ns}-dark & {
+      background-color: $g-dark-active;
+      border-color: $g-dark-active;
+    }
+
+    &.#{$ns}-interactive:hover {
+      border-color: $g-primary-100 ;
+      background-color: $g-primary-300;
+
+      .#{$ns}-dark & {
+        border-color: $g-primary-300;
+        background-color: $g-primary-500;
+      }
+    }
+  }
 }
