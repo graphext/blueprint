@@ -97,11 +97,11 @@
     }
 
     &.#{$ns}-interactive:hover {
-      border-color: $g-primary-100 ;
+      border-color: $g-primary-200 ;
       background-color: $g-primary-300;
 
       .#{$ns}-dark & {
-        border-color: $g-primary-300;
+        border-color: $g-primary-400;
         background-color: $g-primary-500;
       }
     }
