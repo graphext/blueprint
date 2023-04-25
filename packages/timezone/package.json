@@ -35,8 +35,8 @@
     "verify": "npm-run-all compile -p dist test lint"
   },
   "dependencies": {
-    "@blueprintjs/core": "3.53.0-graphext75",
-    "@blueprintjs/select": "3.18.12-graphext75",
+    "@blueprintjs/core": "3.53.0-graphext76",
+    "@blueprintjs/select": "3.18.12-graphext76",
     "classnames": "^2.2",
     "moment": "^2.29.0",
     "moment-timezone": "^0.5.31",
