@@ -26,7 +26,6 @@
   }
 }
 
-
 .#{$ns}-menu-header {
   color: $g-light-grey3;
 
@@ -41,5 +40,17 @@
 .#{$ns}-dark {
   .#{$ns}-menu-header {
     color: $g-dark-grey3;
+  }
+}
+
+.#{$ns}-menu-item-label {
+  color: $g-light-grey2;
+  font-size: $pt-font-size-small;
+  line-height: $pt-font-size;
+}
+
+.#{$ns}-dark {
+  .#{$ns}-menu-item-label {
+    color: $g-dark-grey2;
   }
 }
