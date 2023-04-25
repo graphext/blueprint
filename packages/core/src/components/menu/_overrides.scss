@@ -26,3 +26,20 @@
   }
 }
 
+
+.#{$ns}-menu-header {
+  color: $g-light-grey3;
+
+  & > h6 {
+    font-size: $pt-font-size-small;
+    line-height: $pt-font-size;
+    font-weight: 400;
+    padding-top: 1.5 * $pt-grid-size;
+  }
+}
+
+.#{$ns}-dark {
+  .#{$ns}-menu-header {
+    color: $g-dark-grey3;
+  }
+}
