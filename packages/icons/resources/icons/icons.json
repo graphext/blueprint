@@ -7,6 +7,13 @@
     "content": "\\e9c5"
   },
   {
+    "displayName": "Cross small",
+    "iconName": "g-x-small",
+    "tags": "close, cross, delete, small",
+    "group": "Graphext",
+    "content": "\\26CC"
+  },
+  {
     "displayName": "Search",
     "iconName": "g-search",
     "tags": "inspection, exploration, magnifying glass",
