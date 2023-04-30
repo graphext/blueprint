@@ -347,6 +347,25 @@ $custom-shadow: 0 0 12px rgba($black, 0.25);
 // Custom shadow for popover (New Design System)
 $pt-dark-border-shadow-opacity: 0.1;
 
+$g-shadow-light-1: 0px 4px 4px 0px hsla(0, 0%, 30%, 0.1), 0px -1px 4px 0px hsla(0, 0%, 30%, 0.1);
+$g-shadow-light-2: 0px 8px 8px 0px hsla(0, 0%, 30%, 0.1), 0px -1px 8px 0px hsla(0, 0%, 30%, 0.1);
+$g-shadow-light-3: 0px 16px 16px 0px hsla(0, 0%, 30%, 0.1), 0px -1px 16px 0px hsla(0, 0%, 30%, 0.1);
+
+
+$g-shadow-dark-1: 0px 4px 4px 0px hsla(0, 0%, 8%, 0.3), 0px -1px 4px 0px hsla(0, 0%, 8%, 0.3);
+$g-shadow-dark-2: 0px 8px 8px 0px hsla(0, 0%, 8%, 0.3), 0px -1px 8px 0px hsla(0, 0%, 8%, 0.3);
+$g-shadow-dark-3: 0px 16px 16px 0px hsla(0, 0%, 8%, 0.3), 0px -1px 16px 0px hsla(0, 0%, 8%, 0.3);
+
+
+/*
+$g-shadow-light-1: 0px 4px 4px 0px red, 0px -1px 4px 0px red;
+$g-shadow-dark-3: 0px 16px 16px 0px red, 0px -1px 16px 0px red;
+
+
+$g-shadow-dark-1: 0px 4px 4px 0px blue, 0px -1px 4px 0px blue;
+$g-shadow-light-3: 0px 16px 16px 0px blue, 0px -1px 16px 0px blue;
+*/
+
 // ------------------------- New Design System Colors -------------------------------
 
 // Functions to get tint effect

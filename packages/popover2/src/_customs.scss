@@ -4,8 +4,9 @@ $dark-tooltip2-text-color: $g-white;
 $tooltip2-background-color: $g-light-base0;
 $tooltip2-text-color: $g-black;
 
-$pt-tooltip2-box-shadow: none;
-$pt-dark-tooltip2-box-shadow: none;
+$pt-tooltip2-box-shadow: $g-shadow-light-1;
+$pt-dark-tooltip2-box-shadow: $g-shadow-dark-1;
+
 $pt-dark-drop-shadow-opacity: 0;
 $pt-dark-border-shadow-opacity: 0;
 
@@ -21,3 +22,6 @@ $pt-intent-colors: (
 
 $pt-dark-popover2-background-color: $g-dark-base3;
 $pt-popover2-background-color: $g-light-base3;
+
+$pt-popover2-box-shadow: $g-shadow-light-1;
+$pt-dark-popover2-box-shadow: $g-shadow-dark-1;

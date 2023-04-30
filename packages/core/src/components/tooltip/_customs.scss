@@ -1,6 +1,10 @@
 @import "../../common/customs";
 
-$pt-tooltip-box-shadow: $custom-shadow;
+$pt-tooltip-box-shadow: $g-shadow-light-1;
+$pt-dark-tooltip-box-shadow: $g-shadow-dark-1;
 
-$dark-tooltip-background-color: $dark-gray0;
-$dark-tooltip-text-color: $white1;
+$dark-tooltip-background-color: $g-dark-base0;
+$tooltip-background-color: $g-light-base0;
+
+$dark-tooltip-text-color: $g-white;
+$tooltip-text-color: $g-black;
