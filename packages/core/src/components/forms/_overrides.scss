@@ -61,7 +61,12 @@
   box-shadow: inset 0 0 0 1px $color !important;
 }
 
-
+.#{$ns}-control.#{$ns}-disabled {
+  color: $g-light-grey3;
+  .#{$ns}-dark & {
+    color: $g-dark-grey3;
+  }
+}
 
 // CheckBox
 /**
@@ -72,21 +77,22 @@
   &.#{$ns}-checkbox {
     .#{$ns}-control-indicator {
       border-radius: 4px;
-      @include box-shadow-as-border($g-light-grey4);
+      background-image: none;
+      @include box-shadow-as-border($g-light-base5);
 
       .#{$ns}-dark & {
-        @include box-shadow-as-border($g-dark-grey4);
+        @include box-shadow-as-border($g-dark-base5);
       }
     }
 
     input:checked ~ .#{$ns}-control-indicator,
     input:indeterminate ~ .#{$ns}-control-indicator {
-      background-color: $g-light-active;
-      @include box-shadow-as-border($g-primary-100);
+      background-color: $g-primary-600;
+      @include box-shadow-as-border($g-primary-200);
 
       .#{$ns}-dark & {
-       background-color: $g-dark-active;
-        @include box-shadow-as-border($g-primary-700);
+        background-color: $g-primary-500;
+        @include box-shadow-as-border($g-primary-300);
       }
     }
 
@@ -98,30 +104,44 @@
   }
 
   &.#{$ns}-checkbox.#{$ns}-disabled {
+    .#{$ns}-control-indicator {
+      background-color: $g-light-base4;
+      .#{$ns}-dark & {
+        background-color: $g-dark-base4;
+      }
+    }
     input:checked ~ .#{$ns}-control-indicator,
     input:indeterminate ~ .#{$ns}-control-indicator {
-      background-color: $g-primary-500 !important;
+      background-color: $g-primary-300 !important;
+      @include box-shadow-as-border($g-primary-300);
 
       .#{$ns}-dark & {
         background-color: $g-primary-700 !important;
+        @include box-shadow-as-border($g-primary-700);
       }
     }
   }
 }
 
-.#{$ns}-control:hover {
+.#{$ns}-control:not(.#{$ns}-disabled):hover {
   &.#{$ns}-checkbox {
     input:checked ~ .#{$ns}-control-indicator,
     input:indeterminate ~ .#{$ns}-control-indicator {
-      background-color: $g-primary-500 !important;
+      background-color: $g-primary-600;
+      .#{$ns}-dark & {
+        background-color: $g-primary-500;
+      }
+    }
+
+    .#{$ns}-control-indicator {
+      @include box-shadow-as-border($g-primary-600);
 
       .#{$ns}-dark & {
-        background-color: $g-primary-700 !important;
+        @include box-shadow-as-border($g-primary-500);
       }
     }
   }
 }
-
 
 // Radio
 /**
@@ -133,23 +153,70 @@
 .#{$ns}-control {
   &.#{$ns}-radio {
     .#{$ns}-control-indicator {
-      @include box-shadow-as-border($g-light-grey4);
+      background-image: none;
+      @include box-shadow-as-border($g-light-base5);
       .#{$ns}-dark & {
-        @include box-shadow-as-border($g-dark-grey4);
+        @include box-shadow-as-border($g-dark-base5);
       }
     }
 
     input:checked ~ .#{$ns}-control-indicator::before {
-      background-image: radial-gradient($pt-intent-primary, $pt-intent-primary 33%, transparent 37%);
+      background-image: radial-gradient($g-primary-600, $g-primary-600 33%, transparent 37%);
+      .#{$ns}-dark & {
+        background-image: radial-gradient($g-primary-500, $g-primary-500 33%, transparent 37%);
+      }
     }
 
     input:checked ~ .#{$ns}-control-indicator {
       background-color: $g-light-base4;
-      @include box-shadow-as-border($g-primary-100);
+      background-image: none;
+      @include box-shadow-as-border($g-primary-200);
 
       .#{$ns}-dark & {
+        background-image: none;
         background-color: $g-dark-base4;
+        @include box-shadow-as-border($g-primary-300);
+      }
+    }
+  }
+}
+
+.#{$ns}-control.#{$ns}-disabled {
+  &.#{$ns}-radio {
+    input:checked ~ .#{$ns}-control-indicator::before {
+      opacity: 1;
+      background-image: radial-gradient($g-primary-300, $g-primary-300 33%, transparent 37%);
+      .#{$ns}-dark & {
+        background-image: radial-gradient($g-primary-700, $g-primary-700 33%, transparent 37%);
+      }
+    }
+
+    .#{$ns}-control-indicator {
+      background-color: $g-light-base4;
+      .#{$ns}-dark & {
+        background-color: $g-dark-base4;
+      }
+    }
+
+    input:checked ~ .#{$ns}-control-indicator {
+      @include box-shadow-as-border($g-primary-300);
+
+      .#{$ns}-dark & {
         @include box-shadow-as-border($g-primary-700);
+      }
+    }
+  }
+}
+
+.#{$ns}-control:not(.#{$ns}-disabled):hover {
+  &.#{$ns}-radio {
+    .#{$ns}-control-indicator {
+      background-color: $g-light-base4 !important;
+      @include box-shadow-as-border($g-primary-600);
+
+      .#{$ns}-dark & {
+        background-color: $g-dark-base4 !important;
+        @include box-shadow-as-border($g-primary-500);
       }
     }
   }
@@ -176,9 +243,9 @@
 
 .#{$ns}-input {
     &::placeholder {
-      color: $g-light-grey2 !important;
+      color: $g-light-grey3 !important;
       .#{$ns}-dark & {
-        color: $g-dark-grey2 !important;
+        color: $g-dark-grey3 !important;
       }
     }
 
@@ -239,28 +306,60 @@
   }
 }
 
+.#{$ns}-input {
+  @include box-shadow-as-border($g-light-base5);
+  .#{$ns}-dark & {
+    @include box-shadow-as-border($g-dark-base5);
+  }
+}
+
+.#{$ns}-input-group {
+  .#{$ns}-input {
+    @include box-shadow-as-border($g-light-base5);
+
+    .#{$ns}-dark & {
+      @include box-shadow-as-border($g-dark-base5);
+    }
+  }
+}
+
 .#{$ns}-input.#{$ns}-intent-danger {
-  @include box-shadow-as-border($g-error-600);
-  @include box-shadow-hover-and-disabled($g-error-500, $g-error-800)
+  @include box-shadow-as-border($g-error-500);
+  @include box-shadow-hover-and-disabled($g-error-500, $g-error-500);
+  .#{$ns}-dark & {
+    @include box-shadow-as-border($g-error-600);
+    @include box-shadow-hover-and-disabled($g-error-600, $g-error-600);
+  }
 }
 
 .#{$ns}-input-group.#{$ns}-intent-danger {
   .#{$ns}-input {
-    @include box-shadow-as-border($g-error-600);
-    @include box-shadow-hover-and-disabled($g-error-500, $g-error-800)
+    @include box-shadow-as-border($g-error-500);
+    @include box-shadow-hover-and-disabled($g-error-500, $g-error-500);
+    .#{$ns}-dark & {
+      @include box-shadow-as-border($g-error-600);
+      @include box-shadow-hover-and-disabled($g-error-600, $g-error-600);
+    }
   }
 }
 
-
 .#{$ns}-input.#{$ns}-intent-primary {
-  @include box-shadow-as-border($g-primary-600);
-  @include box-shadow-hover-and-disabled($g-primary-500, $g-primary-800)
+  @include box-shadow-as-border($g-primary-500);
+  @include box-shadow-hover-and-disabled($g-primary-500, $g-primary-500);
+  .#{$ns}-dark & {
+    @include box-shadow-as-border($g-primary-600);
+    @include box-shadow-hover-and-disabled($g-primary-600, $g-primary-600);
+  }
 }
 
 .#{$ns}-input-group.#{$ns}-intent-primary {
   .#{$ns}-input {
-    @include box-shadow-as-border($g-primary-600);
-    @include box-shadow-hover-and-disabled($g-primary-500, $g-primary-800)
+    @include box-shadow-as-border($g-primary-500);
+    @include box-shadow-hover-and-disabled($g-primary-500, $g-primary-500);
+    .#{$ns}-dark & {
+      @include box-shadow-as-border($g-primary-600);
+      @include box-shadow-hover-and-disabled($g-primary-600, $g-primary-600);
+    }
   }
 }
 
@@ -291,6 +390,12 @@
     & > .#{$ns}-icon {
       transform: scale(0.8);
       color: $pt-intent-primary;
+    }
+  }
+  .#{$ns}-button-group.#{$ns}-vertical {
+    border: 1px solid $g-light-base5;
+    .#{$ns}-dark & {
+      border-color: $g-dark-base5;
     }
   }
 }
