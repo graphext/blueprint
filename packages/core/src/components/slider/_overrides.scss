@@ -41,18 +41,18 @@
 }
 
 .#{$ns}-slider-label {
-  color: $g-light-grey2 !important;
+  color: $g-light-grey3 !important;
 }
 
 .#{$ns}-slider-handle .#{$ns}-slider-label {
-  background-color: $g-light-base1 !important;
+  background-color: $g-light-base0 !important;
   color: $g-black !important;
   border-radius: 4px;
 }
 
 .#{$ns}-dark {
   .#{$ns}-slider-label {
-    color: $g-dark-grey4;
+    color: $g-dark-grey3;
 
   }
   .#{$ns}-slider-handle .#{$ns}-slider-label {

@@ -337,11 +337,14 @@
   outline: 0;
 }
 
-$g-tag-cross-svg: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2.135 2.788a.462.462 0 01.653-.653L8 7.347l5.212-5.212a.462.462 0 11.653.653L8.653 8l5.212 5.212a.461.461 0 11-.653.653L8 8.653l-5.212 5.212a.461.461 0 11-.653-.653L7.347 8 2.135 2.788z' fill='%230091E4'/%3E%3C/svg%3E%0A");
+/* fill g-x-small icon with the given color */
+@mixin g-x-small($color) {
+  background: svg-icon("16px/g-x-small.svg", (path: (fill: $color)));
+}
+
 
 .#{$ns}-tag-remove {
-  color: $g-light-active;
-  background-image: $g-tag-cross-svg;
+  @include g-x-small($g-light-active);
   opacity: 1;
   background-position: center;
   background-repeat: no-repeat;
@@ -354,11 +357,14 @@ $g-tag-cross-svg: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox=
   max-height: 16px;
 
   .#{$ns}-dark & {
-    color: $g-dark-active;
+    @include g-x-small($g-dark-active);
   }
 
   &:hover {
-    color: $g-tag-cross-svg;
+    @include g-x-small($g-light-active-hover);
+    .#{$ns}-dark & {
+      @include g-x-small($g-dark-active-hover);
+    }
   }
 
   & svg {
