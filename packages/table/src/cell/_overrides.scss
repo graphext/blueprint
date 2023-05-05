@@ -37,7 +37,7 @@
 
 @mixin pt-table-borders-mixin($border-width, $frozen-border-width, $border-color) {
   $border-right-default: $border-width 0 0 $border-color;
-  $border-bottom-default: 0 $border-width 0 transparent;
+  $border-bottom-default: 0 $border-width 0 $border-color;
   $inset-border-right-default: inset (-$border-width) 0 0 $border-color;
   $inset-border-bottom-default: inset 0 (-$border-width) 0 transparent;
   $inset-border-right-frozen: inset (-$frozen-border-width) 0 0 $border-color;
@@ -99,6 +99,8 @@
   }
 
   .#{$ns}-table-quadrant-top-left {
+    border-bottom: $border-width solid $border-color;
+    border-right: $border-width solid $border-color;
     .#{$ns}-table-cell {
       &.#{$ns}-table-last-in-row {
         box-shadow: $inset-border-bottom-default, $inset-border-right-frozen;
