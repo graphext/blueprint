@@ -239,9 +239,15 @@ $g-dark-active: $g-primary-600;
 $g-light-active-hover: $g-primary-600;
 $g-dark-active-hover: $g-primary-500;
 
+$g-light-active-disabled: $g-primary-300;
+$g-dark-active-disabled: $g-primary-700;
+
 $pt-intent-primary: $g-primary-600;
 $pt-dark-link-color: $g-dark-active; // for links
 $pt-link-color: $g-light-active; // for links
+
+$g-light-highlight-hover: $g-highlight-600;
+$g-dark-highlight-hover: $g-highlight-500;
 
 
 // ------------------------- Color aliases -------------------------------
@@ -292,9 +298,9 @@ $g-shadow-light-3: 0px 16px 16px 0px blue, 0px -1px 16px 0px blue;
 }
 
 $g-dark-grey1: #D8D8DA;
-$g-dark-grey2: #D9D9D9;
-$g-dark-grey3: #A6A6A6;
-$g-dark-grey4: #676767;
+$g-dark-grey2: #D7D8DB;
+$g-dark-grey3: #A2A4A9;
+$g-dark-grey4: #63656B;
 
 $g-light-grey1: #61646B;
 $g-light-grey2: #404040;

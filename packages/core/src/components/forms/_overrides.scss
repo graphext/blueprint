@@ -227,16 +227,11 @@
 // (every input is a round input for us)
 
 @mixin box-shadow-default-style {
-  box-shadow: none !important;
   &:focus,
   &:hover {
     @include box-shadow-as-border($g-light-base5);
     .#{$ns}-dark & {
       @include box-shadow-as-border($g-dark-base5);
-    }
-
-    &:disabled {
-      box-shadow: none !important;
     }
   }
 }
