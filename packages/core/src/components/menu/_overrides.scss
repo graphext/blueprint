@@ -27,7 +27,7 @@
 }
 
 .#{$ns}-menu-header {
-  color: $g-light-grey3;
+  color: $g-light-grey2;
 
   & > h6 {
     font-size: $pt-font-size-small;
@@ -39,7 +39,7 @@
 
 .#{$ns}-dark {
   .#{$ns}-menu-header {
-    color: $g-dark-grey3;
+    color: $g-dark-grey2;
   }
 }
 
