@@ -22,9 +22,11 @@
 
   &.#{$ns}-table-header-selected::before {
     background-image: none;
+    /* #191919 (black) with 8% opacity */
     background-color: rgba(25, 25, 25, 0.08);
 
     .#{$ns}-dark & {
+      /* #FFF (white) with 8% opacity */
       background-color: rgba(255, 255, 255, 0.08);
     }
   }
@@ -34,9 +36,11 @@
 .#{$ns}-table-header.#{$ns}-table-header-selected {
   .#{$ns}-table-selection-enabled &:hover {
     &::before {
+      /* #191919 (black) with 8% opacity */
       background-color: rgba(25, 25, 25, 0.08);
 
       .#{$ns}-dark & {
+        /* #FFF (white) with 8% opacity */
         background-color: rgba(255, 255, 255, 0.08);
       }
     }

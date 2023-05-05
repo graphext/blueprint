@@ -11,6 +11,10 @@
 .#{$ns}-table-striped {
 
     .#{$ns}-table-row-headers {
+      color: $g-black;
+      .#{$ns}-dark & {
+        color: $g-white;
+      }
       .#{$ns}-table-header[class$="0"],
       .#{$ns}-table-header[class$="2"],
       .#{$ns}-table-header[class$="4"],
