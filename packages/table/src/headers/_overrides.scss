@@ -13,24 +13,31 @@
   .#{$ns}-table-selection-enabled &:hover,
   &.#{$ns}-table-header-active {
     &::before {
+      background-color: unset;
       .#{$ns}-dark & {
-        background-color: none;
+        background-color: unset;
       }
     }
   }
 
   &.#{$ns}-table-header-selected::before {
     background-image: none;
-    background-color: rgba($g-light-grey4, 0.1);
+    background-color: rgba(25, 25, 25, 0.08);
+
+    .#{$ns}-dark & {
+      background-color: rgba(255, 255, 255, 0.08);
+    }
   }
 }
 
 // Same background-color when hover table header
 .#{$ns}-table-header.#{$ns}-table-header-selected {
-  .#{$ns}-table-selection-enabled &:hover{
+  .#{$ns}-table-selection-enabled &:hover {
     &::before {
+      background-color: rgba(25, 25, 25, 0.08);
+
       .#{$ns}-dark & {
-        background-color: rgba($g-light-grey4, 0.1);
+        background-color: rgba(255, 255, 255, 0.08);
       }
     }
   }
@@ -39,6 +46,7 @@
 // Removing strange artefacts when selected
 .#{$ns}-table-th-menu-container-background {
   .#{$ns}-table-selection-enabled .#{$ns}-table-header.#{$ns}-table-header-selected:hover & {
+    background-image: none;
     .#{$ns}-dark & {
       background-image: none;
     }
