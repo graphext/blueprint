@@ -4,15 +4,26 @@
 }
 
 .#{$ns}-table-selection-region {
-  background-color: rgba($g-light-grey4, 0.1);
   border-top: none;
-  border-left: 1px solid $g-light-grey4;
+  border-left: 1px solid $g-black;
+  background-color: rgba(25, 25, 25, 0.08);
+
+  .#{$ns}-dark & {
+    background-color: rgba(255, 255, 255, 0.08);
+    border-left: 1px solid $g-white;
+  }
 
   .#{$ns}-table-column-headers & {
-    border-left: 1px solid $g-light-grey4;
+    border-left: 1px solid $g-black;
+    .#{$ns}-dark & {
+      border-left: 1px solid $g-white;
+    }
   }
-  
+
   .#{$ns}-table-row-headers & {
-    border-left: 1px solid $g-light-grey4;
+    border-left: 1px solid $g-black;
+    .#{$ns}-dark & {
+      border-left: 1px solid $g-white;
+    }
   }
 }

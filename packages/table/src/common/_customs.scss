@@ -1,16 +1,27 @@
 
-$dark-table-background-color: $dark-gray3;
-$dark-cell-background-color: $dark-gray2;
+/* dark theme */
+$dark-table-background-color: $g-dark-base3;
+$dark-cell-background-color: $g-dark-base3;
 
 $dark-cell-border-color: $dark-gray4;
-$dark-cell-text-color: $white2;
+$dark-cell-text-color: $g-white;
 
-$dark-header-background-color: $dark-gray3;
-$dark-header-hover-background-color: $dark-gray3;
+$dark-header-background-color: $g-dark-base3;
+$dark-header-hover-background-color: $g-dark-base3;
+
+/* light theme */
+$table-background-color: $g-light-base3;
+$cell-background-color: $g-light-base3;
+
+$cell-border-color: $g-light-base5;
+$cell-text-color: $g-black;
+
+$header-background-color: $g-light-base3;
+$header-hover-background-color: $g-light-base3;
+
+/* general */
 
 $cell-padding-horizontal: $pt-grid-size * 2;
 $cell-height: $pt-grid-size * 3;
 $large-cell-height: $pt-grid-size * 5;
-
- $dark-cell-border-color: $dark-gray4;
 

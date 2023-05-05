@@ -27,7 +27,7 @@
 }
 
 .#{$ns}-menu-header {
-  color: $g-light-grey3;
+  color: $g-light-grey2;
 
   & > h6 {
     font-size: $pt-font-size-small;
@@ -39,18 +39,18 @@
 
 .#{$ns}-dark {
   .#{$ns}-menu-header {
-    color: $g-dark-grey3;
+    color: $g-dark-grey2;
   }
 }
 
 .#{$ns}-menu-item-label {
-  color: $g-light-grey2;
+  color: $g-light-grey1;
   font-size: $pt-font-size-small;
   line-height: $pt-font-size;
 }
 
 .#{$ns}-dark {
   .#{$ns}-menu-item-label {
-    color: $g-dark-grey2;
+    color: $g-dark-grey1;
   }
 }

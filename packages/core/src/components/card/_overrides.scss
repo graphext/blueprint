@@ -19,7 +19,7 @@
     pointer-events: none;
 
     > * {
-      opacity: .85;
+      opacity: .4;
     }
 
     &.#{$ns}-dark,
@@ -37,7 +37,10 @@
 
   &.#{$ns}-kind-g-active,
   &.#{$ns}-kind-g-active.#{$ns}-clickable:hover {
-    border-color: $g-primary-700;
+    border-color: $g-light-active-hover;
+    .#{$ns}-dark & {
+      border-color: $g-dark-active-hover;
+    }
   }
 
   &.#{$ns}-g-opened {
@@ -62,24 +65,24 @@
   }
 
   &.#{$ns}-kind-g-dashed {
-    border: 1px dashed $g-light-grey3;
+    border: 1px dashed $g-highlight-500;
     .#{$ns}-dark & {
-      border-color: $g-dark-grey3;
+      border-color: $g-highlight-600;
     }
   }
 
   &.#{$ns}-kind-g-dashed.#{$ns}-clickable:hover {
-    border-color: $g-light-grey1;
+    border-color: $g-highlight-600;
     .#{$ns}-dark & {
-      border-color: $g-dark-grey1;
+      border-color: $g-highlight-500;
     }
   }
 
   &.#{$ns}-disabled {
     &.#{$ns}-kind-g-dashed {
-      border-color: $g-light-grey4;
+      border-color: $g-highlight-300;
       .#{$ns}-dark & {
-        border-color: $g-dark-grey4;
+        border-color: $g-highlight-700;
       }
     }
   }
@@ -98,11 +101,11 @@
 
     &.#{$ns}-interactive:hover {
       border-color: $g-primary-200 ;
-      background-color: $g-primary-300;
+      background-color: $g-light-active-hover;
 
       .#{$ns}-dark & {
-        border-color: $g-primary-400;
-        background-color: $g-primary-500;
+        border-color: $g-primary-300;
+        background-color: $g-dark-active-hover;
       }
     }
   }

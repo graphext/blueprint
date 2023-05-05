@@ -108,66 +108,66 @@ $pt-gp-dark-icon-color: $g-white;
 
   // Light Theme
   &:not([class*="#{$ns}-intent-"]) {
-    @include custom-button-kind(primary, $g-white, $g-primary-400);
-    @include custom-button-kind(secondary, $g-primary-400, $g-light-base4);
-    @include custom-button-kind(stroked, black, transparent, $g-primary-400);
-    @include custom-button-kind(ghost, $g-primary-400, transparent, transparent);
-    @include custom-button-kind(group, $g-light-grey1, $g-light-base4);
+    @include custom-button-kind(primary, $g-white, $g-primary-500);
+    @include custom-button-kind(secondary, $g-primary-500, $g-light-base4);
+    @include custom-button-kind(stroked, $g-black, transparent, $g-primary-500);
+    @include custom-button-kind(ghost, $g-primary-500, transparent, transparent);
+    @include custom-button-kind(group, $g-black, $g-light-base4);
 
     &:hover {
-      @include custom-button-kind(primary, $g-white, $g-primary-300);
-      @include custom-button-kind(secondary, $g-primary-300, $g-light-base5);
-      @include custom-button-kind(stroked, $g-black, $g-light-base5, $g-primary-300);
-      @include custom-button-kind(ghost, $g-primary-300, transparent, transparent);
-      @include custom-button-kind(group, $g-light-grey1, $g-light-base5);
+      @include custom-button-kind(primary, $g-white, $g-primary-600);
+      @include custom-button-kind(secondary, $g-primary-600, $g-light-base3);
+      @include custom-button-kind(stroked, $g-black, $g-light-base3, $g-primary-600);
+      @include custom-button-kind(ghost, $g-primary-600, transparent, transparent);
+      @include custom-button-kind(group, $g-black, $g-light-base3);
     }
 
     &:active,
     &.#{$ns}-active {
-      @include custom-button-kind(primary, $g-white, $g-primary-300, $g-primary-100);
-      @include custom-button-kind(secondary, $g-primary-300, $g-light-base5, $g-primary-100);
-      @include custom-button-kind(stroked, $g-black, $g-light-base5, $g-primary-100);
-      @include custom-button-kind(ghost, $g-primary-300, $g-light-base5, $g-primary-100);
-      @include custom-button-kind(group, $g-white, $g-primary-400);
+      @include custom-button-kind(primary, $g-white, $g-primary-600, $g-primary-200);
+      @include custom-button-kind(secondary, $g-primary-600, $g-light-base3, $g-primary-200);
+      @include custom-button-kind(stroked, $g-black, $g-light-base3, $g-primary-200);
+      @include custom-button-kind(ghost, $g-primary-600, $g-light-base4, $g-primary-200);
+      @include custom-button-kind(group, $g-white, $g-primary-500);
     }
 
     &:disabled,
     &.#{$ns}-disabled {
-      @include custom-button-kind(primary, $g-primary-400, $g-primary-200);
-      @include custom-button-kind(secondary, $g-primary-200, $g-light-base3);
-      @include custom-button-kind(stroked, $g-light-grey3, transparent, $g-primary-200);
-      @include custom-button-kind(ghost, $g-primary-200, transparent, transparent);
-      @include custom-button-kind(group, $g-light-grey1, $g-light-base3);
+      @include custom-button-kind(primary, $g-primary-500, $g-primary-300);
+      @include custom-button-kind(secondary, $g-primary-300, $g-light-base3);
+      @include custom-button-kind(stroked, $g-light-grey3, transparent, $g-primary-300);
+      @include custom-button-kind(ghost, $g-primary-300, transparent, transparent);
+      @include custom-button-kind(group, $g-light-grey3, $g-light-base3);
     }
   }
 
   &.#{$ns}-intent-danger {
-    @include custom-button-kind(primary, $g-white, $g-error-400);
-    @include custom-button-kind(secondary, $g-error-400, $g-light-base4);
-    @include custom-button-kind(stroked, black, transparent, $g-error-400);
-    @include custom-button-kind(ghost, $g-error-400, transparent, transparent);
+    @include custom-button-kind(primary, $g-white, $g-error-500);
+    @include custom-button-kind(secondary, $g-error-500, $g-light-base4);
+    @include custom-button-kind(stroked, $g-black, transparent, $g-error-500);
+    @include custom-button-kind(ghost, $g-error-500, transparent, transparent);
 
     &:hover {
-      @include custom-button-kind(primary, $g-white, $g-error-300);
-      @include custom-button-kind(secondary, $g-error-300, $g-light-base5);
-      @include custom-button-kind(stroked, black, $g-light-base5, $g-error-300);
-      @include custom-button-kind(ghost, $g-error-300, transparent, transparent);
+      @include custom-button-kind(primary, $g-white, $g-error-600);
+      @include custom-button-kind(secondary, $g-error-600, $g-light-base3);
+      @include custom-button-kind(stroked, $g-black, $g-light-base3, $g-error-600);
+      @include custom-button-kind(ghost, $g-error-600, transparent, transparent);
     }
 
     &:active,
     &.#{$ns}-active {
-      @include custom-button-kind(primary, $g-white, $g-error-300, $g-error-100);
-      @include custom-button-kind(secondary, $g-error-300, $g-light-base5, $g-error-100);
-      @include custom-button-kind(stroked, black, $g-light-base5, $g-error-100);
-      @include custom-button-kind(ghost, $g-error-300, $g-light-base5, $g-error-100);
+      @include custom-button-kind(primary, $g-white, $g-error-600, $g-error-200);
+      @include custom-button-kind(secondary, $g-error-600, $g-light-base3, $g-error-200);
+      @include custom-button-kind(stroked, $g-black, $g-light-base3, $g-error-200);
+      @include custom-button-kind(ghost, $g-error-600, $g-light-base3, $g-error-200);
     }
 
     &:disabled,
     &.#{$ns}-disabled {
-      @include custom-button-kind(primary, $g-error-400, $g-error-200);
-      @include custom-button-kind(secondary, $g-error-200, $g-light-base3);
-      @include custom-button-kind(stroked, $g-light-grey3, transparent, $g-error-200);
-      @include custom-button-kind(ghost, $g-error-200, transparent, transparent);
+      @include custom-button-kind(primary, $g-error-500, $g-error-300);
+      @include custom-button-kind(secondary, $g-error-300, $g-light-base3);
+      @include custom-button-kind(stroked, $g-light-grey3, transparent, $g-error-300);
+      @include custom-button-kind(ghost, $g-error-300, transparent, transparent);
     }
   }
 

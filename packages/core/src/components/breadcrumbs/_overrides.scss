@@ -1,8 +1,11 @@
 .#{$ns}-breadcrumbs {
   > li {
     &::after {
-      background: svg-icon("16px/g-divider.svg", (path: (fill: $pt-icon-color)));
+      background: svg-icon("16px/g-divider.svg", (path: (fill: $g-light-grey2)));
 
+      .#{$ns}-dark & {
+        background: svg-icon("16px/g-divider.svg", (path: (fill: $g-dark-grey2)));
+      }
     }
   }
 }

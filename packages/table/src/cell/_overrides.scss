@@ -1,9 +1,21 @@
 // _cell
 
 .#{$ns}-table-striped {
+  .#{$ns}-table-cell-ledger-even {
+    background-color: $g-light-base2 !important;
+  }
+
+  .#{$ns}-table-cell-ledger-odd {
+    background-color: $g-light-base3 !important;
+  }
+
   .#{$ns}-dark & {
+    .#{$ns}-table-cell-ledger-even {
+      background-color: $g-dark-base2 !important;
+    }
+
     .#{$ns}-table-cell-ledger-odd {
-      background-color: $dark-table-background-color;
+      background-color: $g-dark-base3 !important;
     }
   }
 }
