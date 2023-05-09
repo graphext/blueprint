@@ -1,6 +1,7 @@
 /** Handler color */
 .#{$ns}-dark .#{$ns}-slider-handle,
 .#{$ns}-dark .#{$ns}-slider-handle:hover {
+  box-shadow: none;
   background-color: $g-dark-active;
   background-image: none;
 }
@@ -12,6 +13,7 @@
 
 .#{$ns}-slider-handle,
 .#{$ns}-slider-handle:hover {
+  box-shadow: none;
   background-color: $g-light-active;
   background-image: none;
 }
