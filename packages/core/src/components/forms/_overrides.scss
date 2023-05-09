@@ -404,11 +404,11 @@
 
 // Label
 label.#{$ns}-label {
-  color: $g-light-grey1;
+  color: $g-light-grey2;
   font-size: $pt-font-size-small;
 
   .#{$ns}-dark & {
-    color: $g-dark-grey1;
+    color: $g-dark-grey2;
   }
 }
 
