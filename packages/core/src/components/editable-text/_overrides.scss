@@ -1,15 +1,21 @@
-.#{$ns}-dark .#{$ns}-editable-text.#{$ns}-editable-text-editing::before, .#{$ns}-editable-text.#{$ns}-editable-text-editing::before{
-  box-shadow: none;
-}
-
-.#{$ns}-dark .#{$ns}-editable-text:hover::before{
-  box-shadow: none;
-  background: $dark-gray5;
+.#{$ns}-editable-text:hover::before {
+  background-color: $input-background-color;
+  .#{$ns}-dark & {
+    background-color: $dark-input-background-color;
+  }
 }
 
 // Removing hover background when it's disabled
-.#{$ns}-dark .#{$ns}-editable-text.#{$ns}-disabled:hover::before{
+.#{$ns}-editable-text.#{$ns}-disabled:hover::before {
   background: none;
+}
+
+
+.#{$ns}-editable-text.#{$ns}-editable-text-editing::before {
+  box-shadow: inset 0 0 0 1px $g-light-base5 !important;
+  .#{$ns}-dark & {
+    box-shadow: inset 0 0 0 1px $g-dark-base5 !important;
+  }
 }
 
 // Custom function for position in editable-text
@@ -19,6 +25,16 @@
   position: absolute;
   right: $width;
   top: $height;
+}
+
+.#{$ns}-editable-text-input {
+  &::placeholder {
+    color: $input-placeholder-color !important;
+    .#{$ns}-dark & {
+      /* $dark-input-placeholder-color variable in '_editable-text.scss' is overwritten in '_customs.scss' but is not working */
+      color: $dark-input-placeholder-color !important;
+    }
+  }
 }
 
 .#{$ns}-editable-text {
@@ -38,6 +54,55 @@
     &::before {
       border-radius: 8px;
       @include position-editable-text(-8px, -8px); // Should be the same as margin
+    }
+  }
+}
+
+.#{$ns}-editable-text.#{$ns}-disabled {
+  &:hover::before {
+    box-shadow: none;
+    .#{$ns}-dark & {
+      box-shadow: none;
+    }
+  }
+
+}
+
+//custom colors for intent
+.#{$ns}-editable-text:not(.#{$ns}-disabled) {
+  @each $intent, $color in $pt-intent-colors {
+    &.#{$ns}-intent-#{$intent} {
+      .#{$ns}-editable-text-input,
+      .#{$ns}-editable-text-content {
+        color: $g-black;
+      }
+
+      &:hover::before {
+        box-shadow: inset 0 0 0 1px $color !important;
+      }
+
+      &.#{$ns}-editable-text-editing::before {
+        box-shadow: inset 0 0 0 1px $color !important;
+      }
+    }
+  }
+
+  .#{$ns}-dark & {
+    @each $intent, $color in $pt-g-dark-intent-colors {
+      &.#{$ns}-intent-#{$intent} {
+        .#{$ns}-editable-text-input,
+        .#{$ns}-editable-text-content {
+          color: $g-white;
+        }
+
+        &:hover::before {
+          box-shadow: inset 0 0 0 1px $color !important;
+        }
+
+        &.#{$ns}-editable-text-editing::before {
+          box-shadow: inset 0 0 0 1px $color !important;
+        }
+      }
     }
   }
 }
