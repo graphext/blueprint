@@ -336,3 +336,18 @@ $pt-dark-intent-text-colors: (
   "warning": $g-orange-600,
   "danger" : $g-error-600,
 );
+
+$pt-intent-colors: (
+  "primary": $g-light-active,
+  "success": $g-grass-500,
+  "warning": $g-orange-500,
+  "danger" : $g-error-500,
+);
+
+/* BP does not have different basic intent colors for dark theme */
+$pt-g-dark-intent-colors: (
+  "primary": $g-dark-active,
+  "success": $g-grass-600,
+  "warning": $g-orange-600,
+  "danger" : $g-error-600,
+);
