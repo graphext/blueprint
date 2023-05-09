@@ -399,3 +399,18 @@
     margin-top: 0;
   }
 }
+
+
+// Label
+label.#{$ns}-label {
+  color: $g-light-grey1;
+  font-size: $pt-font-size-small;
+
+  .#{$ns}-dark & {
+    color: $g-dark-grey1;
+  }
+}
+
+.#{$ns}-form-group label.#{$ns}-label {
+  margin-bottom: $pt-grid-size;
+}
