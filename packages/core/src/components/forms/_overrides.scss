@@ -416,6 +416,14 @@
     padding-right: $pt-grid-size;
     margin-right: 0;
   }
+
+  &:not(.#{$ns}-inline) label.#{$ns}-label {
+    /* We need a flex layout to position labelInfo at the end of the FormGroup */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 14px; /* Fixed height to avoid labelInfo to increase label height */
+  }
 }
 
 
