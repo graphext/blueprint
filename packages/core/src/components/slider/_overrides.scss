@@ -43,22 +43,22 @@
 }
 
 .#{$ns}-slider-label {
-  color: $g-light-grey3 !important;
+  color: $g-light-grey2 !important;
 }
 
 .#{$ns}-slider-handle .#{$ns}-slider-label {
-  background-color: $g-light-base0 !important;
+  background-color: $g-light-base1 !important;
   color: $g-black !important;
   border-radius: 4px;
 }
 
 .#{$ns}-dark {
   .#{$ns}-slider-label {
-    color: $g-dark-grey3;
+    color: $g-dark-grey2;
 
   }
   .#{$ns}-slider-handle .#{$ns}-slider-label {
-    background-color: $g-dark-base0 !important;
+    background-color: $g-dark-base1 !important;
     color: $g-white !important;
   }
 }

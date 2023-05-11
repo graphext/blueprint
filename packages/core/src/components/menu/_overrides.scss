@@ -27,7 +27,7 @@
 }
 
 .#{$ns}-menu-header {
-  color: $g-light-grey2;
+  color: $g-light-grey1;
 
   & > h6 {
     font-size: $pt-font-size-small;
@@ -35,22 +35,22 @@
     font-weight: 400;
     padding-top: 1.5 * $pt-grid-size;
   }
+  &.#{$ns}-disabled {
+    color: $g-light-grey2;
+  }
 }
 
 .#{$ns}-dark {
   .#{$ns}-menu-header {
-    color: $g-dark-grey2;
+    color: $g-dark-grey1;
+  }
+  &.#{$ns}-disabled {
+    color: $g-dark-grey2
   }
 }
 
 .#{$ns}-menu-item-label {
-  color: $g-light-grey1;
+  //color: pt-[dark-]text-muted
   font-size: $pt-font-size-small;
   line-height: $pt-font-size;
-}
-
-.#{$ns}-dark {
-  .#{$ns}-menu-item-label {
-    color: $g-dark-grey1;
-  }
 }

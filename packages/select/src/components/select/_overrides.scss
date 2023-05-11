@@ -6,11 +6,6 @@
   margin-top: 0;
 }
 
-.#{$ns}-popover.#{$ns}-dark,
-.#{$ns}-dark .#{$ns}-popover {
-  box-shadow: $custom-shadow;
-}
-
 // MultiSelect
 .#{$ns}-tag-input.#{$ns}-multi-select .#{$ns}-tag-input-values {
   margin-top: 0;
