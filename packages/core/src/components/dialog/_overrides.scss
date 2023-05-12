@@ -1,4 +1,5 @@
 .#{$ns}-dialog {
+  background-color: $g-light-base2;
   padding-top: 24px;
   padding-bottom: 24px;
 
@@ -12,6 +13,11 @@
 
   .#{$ns}-dialog-footer {
     margin-top: 32px;
+  }
+
+  &.#{$ns}-dark,
+  .#{$ns}-dark & {
+    background-color: $g-dark-base2;
   }
 }
 

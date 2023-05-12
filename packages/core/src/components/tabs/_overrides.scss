@@ -12,6 +12,10 @@
   }
 }
 
+.#{$ns}-tab-indicator-wrapper {
+  transition-duration: 250ms;
+};
+
 // custom class to allow tabs to fill available width
 .#{$ns}-tabs-fill {
   .#{$ns}-tab {
