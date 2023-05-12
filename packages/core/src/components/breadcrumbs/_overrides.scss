@@ -9,3 +9,18 @@
     }
   }
 }
+
+.#{$ns}-breadcrumb {
+  color: $g-black;
+
+  .#{$ns}-dark & {
+    color: $g-white;
+  }
+}
+
+.#{$ns}-breadcrumb.#{$ns}-disabled {
+  color: $g-light-grey1;
+  .#{$ns}-dark & {
+    color: $g-dark-grey1;
+  }
+}

@@ -26,41 +26,6 @@ $pt-button-height-large: 40px;
 
 
 // ------------------------- Colors -----------------------------------
-
-$black: #000000;
-
-$dark-gray0: #161616;
-$dark-gray1: #1F2024;
-$dark-gray2: #272A33;
-$dark-gray3: #2A2E38;
-$dark-gray4: #313641;
-$dark-gray5: #363B47;
-
-$blue1: #00507f;
-$blue2: #0071b2;
-$blue3: #0091e5;
-$blue4: #00a1ff;
-$blue5: #47b2f0;
-
-$green1: #0a6640;
-$green2: #0d8050;
-$green3: #0f9960;
-$green4: #15b371;
-$green5: #3dcc91;
-
-$orange1: #a66321;
-$orange2: #bf7326;
-$orange3: #d9822b;
-$orange4: #f29d49;
-$orange5: #ffb366;
-
-$red1: #a82a2a;
-$red2: #c23030;
-$red3: #db3737;
-$red4: #f55656;
-$red5: #ff7373;
-
-
 // Custom colors with shades:
 
 // $g-example-25: ;
@@ -225,11 +190,6 @@ $g-highlight-700: #595C65;
 $g-highlight-800: #3C3E43;
 $g-highlight-900: #1E1F22;
 
-$white1: #ffffff;
-$white2: rgba(255, 255, 255, 0.8);
-$white3: rgba(255, 255, 255, 0.5);
-$white4: rgba(255, 255, 255, 0.3);
-
 $g-white: #FFF;
 $g-black: #191919;
 
@@ -249,27 +209,9 @@ $pt-link-color: $g-light-active; // for links
 $g-light-highlight-hover: $g-highlight-600;
 $g-dark-highlight-hover: $g-highlight-500;
 
-
-// ------------------------- Color aliases -------------------------------
-
-$pt-dark-icon-color: $white3;
-$pt-dark-icon-color-hover: $white3;
-
-$pt-dark-divider-black: $white3;
-
-
-// ------------------------- Components -------------------------------
-
-// Custom shadow for buttons, selects, tag-inputs, tooltips & datetime
-$custom-shadow: 0 0 12px rgba($black, 0.25);
-
-// Custom shadow for popover (New Design System)
-$pt-dark-border-shadow-opacity: 0.1;
-
 $g-shadow-light-1: 0px 4px 4px 0px hsla(0, 0%, 30%, 0.1), 0px -1px 4px 0px hsla(0, 0%, 30%, 0.1);
 $g-shadow-light-2: 0px 8px 8px 0px hsla(0, 0%, 30%, 0.1), 0px -1px 8px 0px hsla(0, 0%, 30%, 0.1);
 $g-shadow-light-3: 0px 16px 16px 0px hsla(0, 0%, 30%, 0.1), 0px -1px 16px 0px hsla(0, 0%, 30%, 0.1);
-
 
 $g-shadow-dark-1: 0px 4px 4px 0px hsla(0, 0%, 8%, 0.3), 0px -1px 4px 0px hsla(0, 0%, 8%, 0.3);
 $g-shadow-dark-2: 0px 8px 8px 0px hsla(0, 0%, 8%, 0.3), 0px -1px 8px 0px hsla(0, 0%, 8%, 0.3);
@@ -278,25 +220,13 @@ $g-shadow-dark-3: 0px 16px 16px 0px hsla(0, 0%, 8%, 0.3), 0px -1px 16px 0px hsla
 
 // ------------------------- New Design System Colors -------------------------------
 
-// Functions to get tint effect
-@function tint($color, $percentage) {
-  @return mix(white, $color, $percentage);
-}
+$g-dark-grey1: #D7D8DB;
+$g-dark-grey2: #A2A4A9;
+$g-dark-grey3: #63656B;
 
-// Functions to get shade effect
-@function shade($color, $percentage) {
-  @return mix(black, $color, $percentage);
-}
-
-$g-dark-grey1: #D8D8DA;
-$g-dark-grey2: #D7D8DB;
-$g-dark-grey3: #A2A4A9;
-$g-dark-grey4: #63656B;
-
-$g-light-grey1: #61646B;
-$g-light-grey2: #404040;
-$g-light-grey3: #808080;
-$g-light-grey4: #CCCCCC;
+$g-light-grey1: #404040;
+$g-light-grey2: #808080;
+$g-light-grey3: #cccccc;
 
 $g-dark-base0: #161616;
 $g-dark-base1: #1F2024;
@@ -314,14 +244,6 @@ $g-light-base4: #FCFCFD;
 $g-light-base5: #DEDEDE;
 $g-light-base6: #F2FAFE;
 
-
-// all shadow lists must be the same length to avoid flicker in transitions.
-$pt-elevation-shadow-0: 0 0 0 1px transparent,
-  0 0 0 rgba($black, 0),
-  0 0 0 rgba($black, 0) !default;
-$pt-dark-elevation-shadow-0: 0 0 0 1px transparent,
-  0 0 0 rgba($black, 0),
-  0 0 0 rgba($black, 0) !default;
 
 $pt-intent-text-colors: (
   "primary": $g-light-active,
@@ -352,5 +274,28 @@ $pt-g-dark-intent-colors: (
   "danger" : $g-error-600,
 );
 
+/* common variables used by BP: don't override them in _customs.scss files */
+$pt-text-color-muted: $g-light-grey1;
+$pt-text-color-disabled: $g-light-grey3;
+
+$pt-dark-text-color-muted: $g-dark-grey1;
+$pt-dark-text-color-disabled: $g-dark-grey3;
+
 $pt-divider-black: $g-light-base5;
 $pt-dark-divider-black: $g-dark-base5;
+
+$pt-elevation-shadow-3: $g-shadow-light-1;
+$pt-dark-elevation-shadow-3: $g-shadow-dark-1;
+
+$pt-elevation-shadow-4: $g-shadow-light-3;
+
+$pt-icon-color: $g-black;
+$pt-icon-color-hover: $g-black;
+
+$pt-dark-icon-color: $g-white;
+$pt-dark-icon-color-hover: $g-white;
+
+$pt-transition-duration: 250ms;
+
+$pt-dark-text-color: $g-white;
+$pt-text-color: $g-black;

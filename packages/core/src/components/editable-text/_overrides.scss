@@ -31,7 +31,6 @@
   &::placeholder {
     color: $input-placeholder-color !important;
     .#{$ns}-dark & {
-      /* $dark-input-placeholder-color variable in '_editable-text.scss' is overwritten in '_customs.scss' but is not working */
       color: $dark-input-placeholder-color !important;
     }
   }

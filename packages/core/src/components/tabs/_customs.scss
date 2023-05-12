@@ -4,13 +4,8 @@ $tab-indicator-width: 2px;
 
 $padding-between-tabs: 16px;
 
-$tab-background-color-dark: #2F4151; //TODO use color variable => base6-dark
-$tab-background-color-light: #F2FAFE; //TODO use color variable => base6-light
+$tab-background-color-dark: $g-dark-base6;
+$tab-background-color-light: $g-light-base6;
 
-$tab-color-disabled-dark: #6A6D74; //TODO use color variable => grey4 dark theme
-$tab-color-disabled-light: #6A6D74; //TODO use color variable => grey1 light theme
-
-$pt-transition-duration: 250ms;
-
-$pt-dark-text-color: $g-white;
-$pt-text-color: $g-black;
+$tab-color-disabled-dark: $g-dark-grey2;
+$tab-color-disabled-light: $g-light-grey2;

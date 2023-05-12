@@ -90,11 +90,11 @@ $pt-gp-dark-icon-color: $g-white;
   // Custom loading spinner inside Button:
   .#{$ns}-spinner {
     .#{$ns}-spinner-track {
-      stroke: $g-dark-grey1;
+      stroke: $g-dark-grey2;
     }
 
     .#{$ns}-spinner-head {
-      stroke: $g-dark-grey4;
+      stroke: $g-dark-grey3;
     }
 
     svg {
@@ -182,7 +182,7 @@ $pt-gp-dark-icon-color: $g-white;
       }
 
       .#{$ns}-spinner-head {
-        stroke: $g-dark-grey4;
+        stroke: $g-dark-grey3;
       }
 
       svg {
@@ -220,7 +220,7 @@ $pt-gp-dark-icon-color: $g-white;
       &.#{$ns}-disabled {
         @include custom-button-kind(primary, $g-primary-400, $g-primary-700);
         @include custom-button-kind(secondary, $g-primary-700, $g-dark-base3);
-        @include custom-button-kind(stroked, $g-dark-grey4, transparent, $g-primary-700);
+        @include custom-button-kind(stroked, $g-dark-grey3, transparent, $g-primary-700);
         @include custom-button-kind(ghost, $g-primary-700, transparent, transparent);
         @include custom-button-kind(group, $g-dark-grey3, $g-dark-base3);
       }
@@ -251,7 +251,7 @@ $pt-gp-dark-icon-color: $g-white;
       &.#{$ns}-disabled {
         @include custom-button-kind(primary, $g-error-400, $g-error-700);
         @include custom-button-kind(secondary, $g-error-700, $g-dark-base3);
-        @include custom-button-kind(stroked, $g-dark-grey4, transparent, $g-error-700);
+        @include custom-button-kind(stroked, $g-dark-grey3, transparent, $g-error-700);
         @include custom-button-kind(ghost, $g-error-700, transparent, transparent);
       }
     }

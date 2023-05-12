@@ -7,14 +7,14 @@
 }
 
 .#{$ns}-tag {
-  color: $g-light-grey1;
+  color: $g-black;
 
   padding: 4px 8px;
   font-size: $pt-font-size;
 
   // For multiline tags
   >span>p {
-    color: $g-light-grey1;
+    color: $g-black;
     font-size: $pt-font-size-small;
   }
 
@@ -28,11 +28,11 @@
   }
 
   .#{$ns}-dark & {
-    color: $g-dark-grey1;
+    color: $g-white;
 
     // For multiline tags
     >span>p {
-      color: $g-dark-grey1;
+      color: $g-white;
       font-size: $pt-font-size-small;
     }
   }
@@ -53,7 +53,7 @@
     &.#{$ns}-g-disabled {
       cursor: not-allowed;
       background-color: $g-light-base3;
-      color: $g-light-grey3;
+      color: $g-light-grey2;
     }
 
     .#{$ns}-dark & {
@@ -68,7 +68,7 @@
 
       &.#{$ns}-g-disabled {
         background-color: $g-dark-base3;
-        color: $g-dark-grey3;
+        color: $g-dark-grey2;
       }
     }
   }
@@ -91,7 +91,6 @@
     @include custom-lozenge-color('water', $g-water-700, $g-water-200);
     @include custom-lozenge-color('grass', $g-grass-700, $g-grass-200);
     @include custom-lozenge-color('base', $g-black, $g-light-base2);
-    @include custom-lozenge-color('base2', $g-dark-base5, $g-light-base1);
     @include custom-lozenge-color('golden', $g-golden-700, $g-golden-200);
     @include custom-lozenge-color('wood', $g-wood-700, $g-wood-200);
     @include custom-lozenge-color('pacific', $g-pacific-700, $g-pacific-200);
@@ -111,7 +110,6 @@
       @include custom-lozenge-color('water', $g-white, $g-water-600);
       @include custom-lozenge-color('grass', $g-white, $g-grass-600);
       @include custom-lozenge-color('base', $g-white, $g-dark-base2);
-      @include custom-lozenge-color('base2', $g-white, $g-dark-base2);
       @include custom-lozenge-color('golden', $g-white, $g-golden-600);
       @include custom-lozenge-color('wood', $g-white, $g-wood-600);
       @include custom-lozenge-color('pacific', $g-white, $g-pacific-600);
@@ -131,8 +129,7 @@
       @include custom-lozenge-color('error', $g-error-500, $g-error-200);
       @include custom-lozenge-color('water', $g-water-500, $g-water-200);
       @include custom-lozenge-color('grass', $g-grass-500, $g-grass-200);
-      @include custom-lozenge-color('base', $g-light-grey3, $g-light-base3);
-      @include custom-lozenge-color('base2', $g-light-grey4, $g-light-base1);
+      @include custom-lozenge-color('base', $g-light-grey2, $g-light-base3);
       @include custom-lozenge-color('golden', $g-golden-700, $g-golden-200);
       @include custom-lozenge-color('wood', $g-wood-500, $g-wood-200);
       @include custom-lozenge-color('pacific', $g-pacific-500, $g-pacific-200);
@@ -150,8 +147,7 @@
         @include custom-lozenge-color('error', $g-error-700, $g-error-800);
         @include custom-lozenge-color('water', $g-water-700, $g-water-800);
         @include custom-lozenge-color('grass', $g-grass-700, $g-grass-800);
-        @include custom-lozenge-color('base', $g-dark-grey4, $g-dark-base2);
-        @include custom-lozenge-color('base2', $g-dark-grey4, $g-dark-base3);
+        @include custom-lozenge-color('base', $g-dark-grey2, $g-dark-base2);
         @include custom-lozenge-color('golden', $g-golden-700, $g-golden-800);
         @include custom-lozenge-color('wood', $g-wood-700, $g-wood-800);
         @include custom-lozenge-color('pacific', $g-pacific-700, $g-pacific-800);
@@ -174,7 +170,6 @@
         @include custom-lozenge-color('water', $g-water-700, $g-water-100);
         @include custom-lozenge-color('grass', $g-grass-700, $g-grass-100);
         @include custom-lozenge-color('base', $g-black, $g-light-base1);
-        @include custom-lozenge-color('base2', $g-dark-base5, $g-light-base1);
         @include custom-lozenge-color('golden', $g-golden-700, $g-golden-100);
         @include custom-lozenge-color('wood', $g-wood-700, $g-wood-100);
         @include custom-lozenge-color('pacific', $g-pacific-700, $g-pacific-100);
@@ -196,7 +191,6 @@
         @include custom-lozenge-color('water', $g-water-700, $g-water-200, $g-water-700);
         @include custom-lozenge-color('grass', $g-grass-700, $g-grass-200, $g-grass-700);
         @include custom-lozenge-color('base', $g-black, $g-light-base2, $g-black);
-        @include custom-lozenge-color('base2', $g-light-base5, $g-light-base1, $g-light-base5);
         @include custom-lozenge-color('golden', $g-golden-700, $g-golden-200, $g-golden-700);
         @include custom-lozenge-color('wood', $g-wood-700, $g-wood-200, $g-wood-700);
         @include custom-lozenge-color('pacific', $g-pacific-700, $g-pacific-200, $g-pacific-700);
@@ -217,7 +211,6 @@
           @include custom-lozenge-color('water', $g-white, $g-water-500);
           @include custom-lozenge-color('grass', $g-white, $g-grass-500);
           @include custom-lozenge-color('base', $g-white, $g-dark-base3);
-          @include custom-lozenge-color('base2', $g-white, $g-dark-base3);
           @include custom-lozenge-color('golden', $g-white, $g-golden-500);
           @include custom-lozenge-color('wood', $g-white, $g-wood-500);
           @include custom-lozenge-color('pacific', $g-white, $g-pacific-500);
@@ -240,7 +233,6 @@
           @include custom-lozenge-color('water', $g-white, $g-water-600, $g-water-700);
           @include custom-lozenge-color('grass', $g-white, $g-grass-600, $g-grass-700);
           @include custom-lozenge-color('base', $g-white, $g-dark-base2, $g-dark-base3);
-          @include custom-lozenge-color('base2', $g-white, $g-dark-base2, $g-dark-base3);
           @include custom-lozenge-color('golden', $g-white, $g-golden-600, $g-golden-700);
           @include custom-lozenge-color('wood', $g-white, $g-wood-600, $g-wood-700);
           @include custom-lozenge-color('pacific', $g-white, $g-pacific-600, $g-pacific-700);
