@@ -152,6 +152,8 @@
 
 .#{$ns}-control {
   &.#{$ns}-radio {
+    line-height: 16px;
+
     .#{$ns}-control-indicator {
       background-image: none;
       @include box-shadow-as-border($g-light-base5);
@@ -423,6 +425,20 @@
     align-items: center;
     justify-content: space-between;
     height: 14px; /* Fixed height to avoid labelInfo to increase label height */
+  }
+
+  /* Clear margins for first & last controls in a Form group */
+  .#{$ns}-control:first-child {
+    margin-top: 0;
+  }
+  .#{$ns}-control:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Clear margins for inline controls in a Form group */
+  .#{$ns}-control.#{$ns}-inline {
+    margin-top: 0;
+    margin-bottom: 0;
   }
 }
 
