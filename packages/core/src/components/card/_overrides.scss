@@ -48,7 +48,7 @@
   }
 
   &.#{$ns}-g-opened {
-    border-color: $g-light-base5 !important;
+    border-color: $g-light-base5;
     &.#{$ns}-kind-g-error & {
       border-color: $g-error-600;
     }
