@@ -1,6 +1,10 @@
 .#{$ns}-card {
   border: 1px solid $card-background-color;
 
+  &.#{$ns}-elevation-0 {
+    box-shadow: none;
+  }
+
   &.#{$ns}-dark,
   .#{$ns}-dark & {
     border: 1px solid $dark-card-background-color;
@@ -44,7 +48,7 @@
   }
 
   &.#{$ns}-g-opened {
-    border-color: $g-light-base5;
+    border-color: $g-light-base5 !important;
     &.#{$ns}-kind-g-error & {
       border-color: $g-error-600;
     }
