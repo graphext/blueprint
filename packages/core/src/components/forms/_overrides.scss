@@ -87,22 +87,30 @@
 
     input:checked ~ .#{$ns}-control-indicator,
     input:indeterminate ~ .#{$ns}-control-indicator {
-      background-color: $g-primary-600;
-      @include box-shadow-as-border($g-primary-200);
+      background-color: $g-light-active;
+      @include box-shadow-as-border($g-light-active-border);
 
       .#{$ns}-dark & {
-        background-color: $g-primary-500;
-        @include box-shadow-as-border($g-primary-300);
+        background-color: $g-dark-active;
+        @include box-shadow-as-border($g-dark-active-border);
       }
     }
 
     input:checked ~ .#{$ns}-control-indicator {
       &::before {
-        background-image: svg-icon("16px/g-check.svg", (path: (fill: $white)));
+        background-image: svg-icon("16px/g-check.svg", (path: (fill: $g-white)));
+        scale: 0.8;
+      }
+    }
+    input:indeterminate ~ .#{$ns}-control-indicator {
+      &::before {
+        background-image: svg-icon("16px/g-less.svg", (path: (fill: $g-white)));
+        scale: 0.8;
       }
     }
   }
 
+  /* when disabled */
   &.#{$ns}-checkbox.#{$ns}-disabled {
     .#{$ns}-control-indicator {
       background-color: $g-light-base4;
@@ -112,12 +120,12 @@
     }
     input:checked ~ .#{$ns}-control-indicator,
     input:indeterminate ~ .#{$ns}-control-indicator {
-      background-color: $g-primary-300 !important;
-      @include box-shadow-as-border($g-primary-300);
+      background-color: $g-light-active-disabled !important;
+      @include box-shadow-as-border($g-light-active-disabled);
 
       .#{$ns}-dark & {
-        background-color: $g-primary-700 !important;
-        @include box-shadow-as-border($g-primary-700);
+        background-color: $g-dark-active-disabled !important;
+        @include box-shadow-as-border($g-dark-active-disabled);
       }
     }
   }
@@ -127,17 +135,17 @@
   &.#{$ns}-checkbox {
     input:checked ~ .#{$ns}-control-indicator,
     input:indeterminate ~ .#{$ns}-control-indicator {
-      background-color: $g-primary-600;
+      background-color: $g-light-active;
       .#{$ns}-dark & {
-        background-color: $g-primary-500;
+        background-color: $g-dark-active;
       }
     }
 
     .#{$ns}-control-indicator {
-      @include box-shadow-as-border($g-primary-600);
+      @include box-shadow-as-border($g-light-active-hover);
 
       .#{$ns}-dark & {
-        @include box-shadow-as-border($g-primary-500);
+        @include box-shadow-as-border($g-dark-active-hover);
       }
     }
   }
@@ -163,21 +171,21 @@
     }
 
     input:checked ~ .#{$ns}-control-indicator::before {
-      background-image: radial-gradient($g-primary-600, $g-primary-600 33%, transparent 37%);
+      background-image: radial-gradient($g-light-active, $g-light-active 33%, transparent 37%);
       .#{$ns}-dark & {
-        background-image: radial-gradient($g-primary-500, $g-primary-500 33%, transparent 37%);
+        background-image: radial-gradient($g-dark-active, $g-dark-active 33%, transparent 37%);
       }
     }
 
     input:checked ~ .#{$ns}-control-indicator {
       background-color: $g-light-base4;
       background-image: none;
-      @include box-shadow-as-border($g-primary-200);
+      @include box-shadow-as-border($g-light-active-border);
 
       .#{$ns}-dark & {
         background-image: none;
         background-color: $g-dark-base4;
-        @include box-shadow-as-border($g-primary-300);
+        @include box-shadow-as-border($g-dark-active-border);
       }
     }
   }
@@ -187,9 +195,9 @@
   &.#{$ns}-radio {
     input:checked ~ .#{$ns}-control-indicator::before {
       opacity: 1;
-      background-image: radial-gradient($g-primary-300, $g-primary-300 33%, transparent 37%);
+      background-image: radial-gradient($g-light-active-disabled, $g-light-active-disabled 33%, transparent 37%);
       .#{$ns}-dark & {
-        background-image: radial-gradient($g-primary-700, $g-primary-700 33%, transparent 37%);
+        background-image: radial-gradient($g-dark-active-disabled, $g-dark-active-disabled 33%, transparent 37%);
       }
     }
 
@@ -201,10 +209,10 @@
     }
 
     input:checked ~ .#{$ns}-control-indicator {
-      @include box-shadow-as-border($g-primary-300);
+      @include box-shadow-as-border($g-light-active-disabled);
 
       .#{$ns}-dark & {
-        @include box-shadow-as-border($g-primary-700);
+        @include box-shadow-as-border($g-dark-active-disabled);
       }
     }
   }
@@ -214,11 +222,11 @@
   &.#{$ns}-radio {
     .#{$ns}-control-indicator {
       background-color: $g-light-base4 !important;
-      @include box-shadow-as-border($g-primary-600);
+      @include box-shadow-as-border($g-light-active-hover);
 
       .#{$ns}-dark & {
         background-color: $g-dark-base4 !important;
-        @include box-shadow-as-border($g-primary-500);
+        @include box-shadow-as-border($g-dark-active-hover);
       }
     }
   }
@@ -254,9 +262,9 @@
   padding-left: $input-padding-horizontal;
   padding-right: $input-padding-horizontal;
 
-  color: black;
+  color: $g-black;
   .#{$ns}-dark & {
-    color: white;
+    color: $g-white;
   }
   &.#{$ns}-large {
     padding: 0 $input-padding-horizontal * 1.5;
@@ -334,21 +342,21 @@
 }
 
 .#{$ns}-input.#{$ns}-intent-primary {
-  @include box-shadow-as-border($g-primary-500);
-  @include box-shadow-hover-and-disabled($g-primary-500, $g-primary-500);
+  @include box-shadow-as-border($g-light-active);
+  @include box-shadow-hover-and-disabled($g-light-active, $g-light-active);
   .#{$ns}-dark & {
-    @include box-shadow-as-border($g-primary-600);
-    @include box-shadow-hover-and-disabled($g-primary-600, $g-primary-600);
+    @include box-shadow-as-border($g-dark-active);
+    @include box-shadow-hover-and-disabled($g-dark-active, $g-dark-active);
   }
 }
 
 .#{$ns}-input-group.#{$ns}-intent-primary {
   .#{$ns}-input {
-    @include box-shadow-as-border($g-primary-500);
-    @include box-shadow-hover-and-disabled($g-primary-500, $g-primary-500);
+    @include box-shadow-as-border($g-light-active);
+    @include box-shadow-hover-and-disabled($g-light-active, $g-light-active);
     .#{$ns}-dark & {
-      @include box-shadow-as-border($g-primary-600);
-      @include box-shadow-hover-and-disabled($g-primary-600, $g-primary-600);
+      @include box-shadow-as-border($g-dark-active);
+      @include box-shadow-hover-and-disabled($g-dark-active, $g-dark-active);
     }
   }
 }
@@ -379,7 +387,10 @@
 
     & > .#{$ns}-icon {
       transform: scale(0.8);
-      color: $pt-intent-primary;
+      color: $g-light-active;
+      .#{$ns}-dark & {
+        color: $g-dark-active;
+      }
     }
   }
   .#{$ns}-button-group.#{$ns}-vertical {
@@ -391,15 +402,95 @@
 }
 
 
-// Switch
+/*
+* Switch (toggle).
+* Check '_customs.scss' to see the main colors.
+* We included here the changes that can't be done just changing the variables that BP provides.
+* For example it is included here: different circle color when checked or custom border when hover.
+*/
 .#{$ns}-switch {
-  &.#{$ns}-control {
-    line-height: $control-indicator-size;
+  .#{$ns}-switch-inner-text {
+    text-transform: uppercase; /* off / on text in uppercase */
   }
 
-  .#{$ns}-control-indicator {
-    /* Reset -3px margin-top */
-    margin-top: 0;
+  /* inner circle when checked */
+  input:checked ~ .#{$ns}-control-indicator::before {
+    box-shadow: none; /* remove BP box-shadow */
+    background-color: $g-light-active;
+    .#{$ns}-dark & {
+      background-color: $g-dark-active;
+    }
+  }
+  /* inner circle when checked but disabled */
+  &.#{$ns}-control.#{$ns}-disabled {
+    input:checked ~ .#{$ns}-control-indicator::before {
+      background-color: $g-light-active-disabled;
+      .#{$ns}-dark & {
+        background-color: $g-dark-active-disabled;
+      }
+    }
+  }
+
+  /* border when checked */
+  input:checked ~ .#{$ns}-control-indicator {
+    @include box-shadow-as-border($g-light-active-border);
+    .#{$ns}-dark & {
+      @include box-shadow-as-border($g-dark-active-border);
+    }
+  }
+
+  /* text color + border when disabled */
+  &.#{$ns}-control.#{$ns}-disabled {
+    color: $g-light-grey2; /* label text */
+    .#{$ns}-dark & {
+      color: $g-dark-grey2; /* label text */
+    }
+    .#{$ns}-switch-inner-text {
+      color: $g-light-grey3 !important; /* inner text: OFF / ON */
+      .#{$ns}-dark & {
+        color: $g-dark-grey3 !important; /* inner text: OFF / ON */
+      }
+    }
+
+    /* border when checked but disabled */
+    input:checked ~ .#{$ns}-control-indicator {
+      @include box-shadow-as-border($g-light-active-disabled);
+      .#{$ns}-dark & {
+        @include box-shadow-as-border($g-dark-active-disabled);
+      }
+    }
+  }
+
+  /* border when no checked (default) */
+  &.#{$ns}-control {
+    line-height: $control-indicator-size;
+
+    /* when it is not checked, we want the 'off' color as grey1 (dark or light) */
+    .#{$ns}-switch-inner-text {
+      color: $g-light-grey1;
+      .#{$ns}-dark & {
+        color: $g-dark-grey1;
+      }
+    }
+
+    .#{$ns}-control-indicator {
+      @include box-shadow-as-border($g-light-base5);
+      .#{$ns}-dark & {
+        @include box-shadow-as-border($g-dark-base5);
+      }
+    }
+  }
+
+  /* border when hover (if it is disabled => no effect) */
+  &.#{$ns}-control:not(.#{$ns}-disabled):hover {
+    .#{$ns}-control-indicator {
+      background: $g-light-base4;
+      @include box-shadow-as-border($g-light-active);
+      .#{$ns}-dark & {
+        background: $g-dark-base4 !important;
+        @include box-shadow-as-border($g-dark-active);
+      }
+    }
   }
 }
 

@@ -193,6 +193,7 @@ $g-highlight-900: #1E1F22;
 $g-white: #FFF;
 $g-black: #191919;
 
+/* active (primary) colors should be different with each theme */
 $g-light-active: $g-primary-500;
 $g-dark-active: $g-primary-600;
 
@@ -202,9 +203,20 @@ $g-dark-active-hover: $g-primary-500;
 $g-light-active-disabled: $g-primary-300;
 $g-dark-active-disabled: $g-primary-700;
 
-$pt-intent-primary: $g-primary-600;
-$pt-dark-link-color: $g-dark-active; // for links
-$pt-link-color: $g-light-active; // for links
+/* active-border is used in radio buttons, switch, ...*/
+$g-light-active-border: $g-primary-200;
+$g-dark-active-border: $g-primary-300;
+
+/* links */
+$pt-dark-link-color: $g-dark-active;
+$pt-link-color: $g-light-active;
+
+
+$g-light-highlight: $g-highlight-500;
+$g-dark-highlight: $g-highlight-600;
+
+$g-light-highlight-disabled: $g-highlight-300;
+$g-dark-highlight-disabled: $g-highlight-700;
 
 $g-light-highlight-hover: $g-highlight-600;
 $g-dark-highlight-hover: $g-highlight-500;
