@@ -99,6 +99,7 @@
     input:checked ~ .#{$ns}-control-indicator {
       &::before {
         background-image: svg-icon("16px/g-check.svg", (path: (fill: $g-white)));
+        scale: 0.8;
       }
     }
     input:indeterminate ~ .#{$ns}-control-indicator {
