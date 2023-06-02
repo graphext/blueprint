@@ -707,6 +707,13 @@
     "content": "\\ea10"
   },
   {
+    "displayName": "Hashtag",
+    "iconName": "g-hashtag",
+    "tags": "hashtag, hash, number, crosshatch",
+    "group": "Graphext",
+    "content": "\\0023"
+  },
+  {
     "displayName": "Help",
     "iconName": "g-help",
     "tags": "question, mark, doubt, info, support ",
