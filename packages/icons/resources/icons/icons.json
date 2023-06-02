@@ -708,7 +708,7 @@
   },
   {
     "displayName": "Hashtag",
-    "iconName": "g-g-hashtag",
+    "iconName": "g-hashtag",
     "tags": "hashtag, hash, number, crosshatch",
     "group": "Graphext",
     "content": "\\0023"
