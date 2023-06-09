@@ -431,4 +431,4 @@ export const TAG_TOGGLE = `${NS}-g-toggle-tag`;
 export const LOZENGE = `${NS}-g-lozenge`;
 
 /* TABLE */
-export const TABLE_WITH_SAME_COLOR_AND_GRID = `${NS}-g-table-with-same-color-and-grid`;
+export const TABLE_WITH_SAME_BG_COLOR_AND_GRID = `${NS}-g-table-with-same-bg-color-and-grid`;

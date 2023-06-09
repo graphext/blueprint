@@ -29,7 +29,7 @@
 }
 
 /* custom graphext style */
-.#{$ns}-g-table-with-same-color-and-grid {
+.#{$ns}-g-table-with-same-bg-color-and-grid {
   .#{$ns}-table-cell {
     background-color: $g-light-base3;
     .#{$ns}-dark & {
