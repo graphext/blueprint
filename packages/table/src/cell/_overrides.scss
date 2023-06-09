@@ -157,6 +157,29 @@
   );
 }
 
+/* CUSTOM GRAPHEXT TABLE STYLE */
+/* border in cell: bottom & right */
+.#{$ns}-table-cell {
+  .#{$ns}-g-table-with-same-color-and-grid & {
+    box-shadow: inset 0 (-$cell-border-width) 0 $cell-border-color, inset (-$cell-border-width) 0 0 $cell-border-color;
+    .#{$ns}-dark & {
+      box-shadow: inset 0 (-$cell-border-width) 0 $dark-cell-border-color, inset (-$cell-border-width) 0 0 $dark-cell-border-color;
+    }
+  }
+}
+
+/* border in index (first column): bottom & right */
+.#{$ns}-table-row-headers .#{$ns}-table-header {
+  .#{$ns}-g-table-with-same-color-and-grid & {
+    box-shadow: inset 0 (-$cell-border-width) 0 $cell-border-color, $cell-border-width 0 0 $cell-border-color;
+    .#{$ns}-dark & {
+      box-shadow: inset 0 (-$cell-border-width) 0 $dark-cell-border-color, $cell-border-width 0 0 $dark-cell-border-color;
+    }
+  }
+}
+
+/* END */
+
 // Centering cells for 32px height in DATA
 .#{$ns}-table-cell {
   padding: 4px 8px

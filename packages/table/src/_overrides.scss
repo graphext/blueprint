@@ -28,6 +28,16 @@
   }
 }
 
+/* custom graphext style */
+.#{$ns}-g-table-with-same-color-and-grid {
+  .#{$ns}-table-cell {
+    background-color: $g-light-base3;
+    .#{$ns}-dark & {
+      background-color: $g-dark-base3;
+    }
+  }
+}
+
 // Hide handle icon & divider in interaction bar
 // & fill all the column width
 .#{$ns}-table-interaction-bar {
