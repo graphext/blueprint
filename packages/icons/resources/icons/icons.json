@@ -518,6 +518,13 @@
     "content": "\\e9f5"
   },
   {
+    "displayName": "Unlink",
+    "iconName": "g-unlink",
+    "tags": "unlink, disconnect, break",
+    "group": "Graphext",
+    "content": "\\e9f5"
+  },
+  {
     "displayName": "Play",
     "iconName": "g-play",
     "tags": "music, arrow, triangle",
