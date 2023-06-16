@@ -1,6 +1,10 @@
 // Selected region change
 .#{$ns}-table-region {
   border: none;
+  background-color: rgba(25, 25, 25, 0.08);
+  .#{$ns}-dark & {
+    background-color: rgba(255, 255, 255, 0.08);
+  }
 }
 
 .#{$ns}-table-selection-region {
