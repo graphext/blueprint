@@ -1,13 +1,37 @@
+/**
+*   Be aware that in BP documentation, toast container (.bp3-toast) has also the .bp3-dark class.
+*   But for example, in Graphext, the toast container does not have the dark identifier,
+*   and it is a parent container (not direct) who has the class.
+
+    For example:
+    .#{$ns}-toast {
+      background-color: $g-light-base3;
+
+      &.#{$ns}-dark, // necessary if .bp3-toast + .bp3-dark are in the same container
+      .#{$ns}-dark & { // necessary if .bp3-toast has a parent container with the bp3-dark class
+        background-color: $g-dark-base3;
+      }
+    }
+*/
+
 .#{$ns}-toast {
-  &.#{$ns}-dark {
-    background-color: $dark-gray5;
+  &:not([class*="#{$ns}-intent-"]) {
+    background-color: $g-light-base3;
+
+    &.#{$ns}-dark,
+    .#{$ns}-dark & {
+      background-color: $g-dark-base3;
+    }
   }
 
   // Override close button color & hover for Toast with intent none
   .#{$ns}-button[aria-label="Close"] {
     &:not([class*="#{$ns}-intent-"]) {
       .#{$ns}-icon:not([class*="#{$ns}-intent-"]) {
-        color: $g-primary-600;
+        color: $g-light-active;
+        .#{$ns}-dark & {
+          color: $g-dark-active;
+        }
       }
 
       &:hover,
@@ -16,7 +40,10 @@
         background: none;
 
         .#{$ns}-icon:not([class*="#{$ns}-intent-"]) {
-          color: $g-primary-500;
+          color: $g-light-active-hover;
+          .#{$ns}-dark & {
+            color: $g-dark-active-hover;
+          }
         }
       }
     }
@@ -47,3 +74,4 @@
     }
   }
 }
+
