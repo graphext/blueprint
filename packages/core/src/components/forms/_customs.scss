@@ -5,19 +5,19 @@ $input-font-weight: 300;
 $dark-input-background-color: $g-dark-base4;
 $dark-input-background-color-disabled: $g-dark-base4;
 $dark-input-shadow-color-focus: transparent;
-$input-color-disabled: $g-light-grey2 !default;
+$input-color-disabled: $g-light-grey3 !default;
 
 $input-background-color: $g-light-base4;
 $input-background-color-disabled: $g-light-base4;
 $input-shadow-color-focus: transparent;
-$dark-input-color-disabled: $g-dark-grey2 !default;
+$dark-input-color-disabled: $g-dark-grey3 !default;
 
 $input-box-shadow: 0 0 0 0 transparent;
 $input-box-shadow-focus: 0 0 0 0 transparent;
 $pt-dark-input-box-shadow: 0 0 0 0 transparent;
 
-$input-placeholder-color: $g-light-grey2;
-$dark-input-placeholder-color: $g-dark-grey2;
+$input-placeholder-color: $g-light-grey3;
+$dark-input-placeholder-color: $g-dark-grey3;
 
 // Controls
 $pt-input-height-small: 24px;

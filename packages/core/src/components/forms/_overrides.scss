@@ -249,9 +249,9 @@
 .#{$ns}-input {
     &:disabled {
       &::placeholder {
-        color: $g-light-grey2 !important;
+        color: $g-light-grey3 !important;
         .#{$ns}-dark & {
-          color: $g-dark-grey2 !important;
+          color: $g-dark-grey3 !important;
         }
       }
     }
