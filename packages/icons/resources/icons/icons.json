@@ -196,6 +196,13 @@
     "content": "\\e9da"
   },
   {
+    "displayName": "More",
+    "iconName": "g-more-circle",
+    "tags": "plus, add, plus sign, positive",
+    "group": "Graphext",
+    "content": "\\e9da"
+  },
+  {
     "displayName": "less",
     "iconName": "g-less",
     "tags": "substract, minus sign, negative",
