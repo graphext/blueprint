@@ -224,6 +224,13 @@
     "content": "\\e9de"
   },
   {
+    "displayName": "Check small",
+    "iconName": "g-check-small",
+    "tags": "tick, accept, confirm, valid, correct, ok, small",
+    "group": "Graphext",
+    "content": "\\2714"
+  },
+  {
     "displayName": "Check2",
     "iconName": "g-check2",
     "tags": "tick, accept, confirm, valid, correct, ok, circle",
