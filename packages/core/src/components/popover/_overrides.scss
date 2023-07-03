@@ -1,0 +1,11 @@
+/*
+*  This is necessary because some BP components use this popover (instead of popover2) internally.
+*  For example: Menu when has sub-items, Select, Suggest...
+*  In the future, this should not be necessary because in major BP versions, all components will use popover2.
+ */
+
+.#{$ns}-popover {
+  .#{$ns}-popover-content {
+    border-radius: 8px;
+  }
+}

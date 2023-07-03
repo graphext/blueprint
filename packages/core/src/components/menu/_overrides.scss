@@ -10,10 +10,14 @@
     color: $g-white !important;
     .#{$ns}-menu-item-label {
       color: $g-white !important;
-
-    },
+    }
   }
 }
+
+.#{$ns}-menu-item:hover {
+  border-radius: 8px;
+}
+
 /* Hack to render our arrow instead of the one that BP adds when there are sub items. */
 .#{$ns}-submenu {
   .#{$ns}-icon-caret-right:last-of-type {
