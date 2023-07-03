@@ -10,7 +10,7 @@
     "test": "exit 0"
   },
   "dependencies": {
-    "@blueprintjs/core": "3.53.0-graphext101",
+    "@blueprintjs/core": "3.53.0-graphext102",
     "@blueprintjs/docs-theme": "^3.10.20",
     "@documentalist/compiler": "~3.0.0",
     "better-handlebars": "github:wmeldon/better-handlebars",
