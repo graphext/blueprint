@@ -14,6 +14,32 @@
   }
 }
 
+.#{$ns}-menu-item:hover {
+  border-radius: 8px;
+}
+
+/* Hack to render our arrow instead of the one that BP adds when there are sub items. */
+.#{$ns}-submenu {
+  .#{$ns}-icon-caret-right:last-of-type {
+    background: svg-icon("16px/g-arrow-right-small.svg", (path: (fill: $g-light-active)));
+    .#{$ns}-dark & {
+      background: svg-icon("16px/g-arrow-right-small.svg", (path: (fill: $g-dark-active)));
+    }
+  }
+  .#{$ns}-icon-caret-right > svg {
+    visibility: hidden;
+  }
+
+  .#{$ns}-menu-item.#{$ns}-disabled {
+    .#{$ns}-icon-caret-right:last-of-type {
+      background: svg-icon("16px/g-arrow-right-small.svg", (path: (fill: $g-light-active-disabled)));
+      .#{$ns}-dark & {
+        background: svg-icon("16px/g-arrow-right-small.svg", (path: (fill: $g-dark-active-disabled)));
+      }
+    }
+  }
+}
+
 /**
 * Necessary to fix BP omnibar documentation
 * because they use text-muted and it was difficult to read because of the color contrast
