@@ -39,23 +39,22 @@ $switch-background-color-hover: $g-light-base4 !default;
 $switch-background-color-active: $g-light-base4 !default;
 $switch-background-color-disabled: $g-light-base4 !default;
 
-$switch-checked-background-color: $g-light-base4 !default;
-$switch-checked-background-color-hover: $g-light-base4 !default;
-$switch-checked-background-color-active: $g-light-base4 !default;
-$switch-checked-background-color-disabled: $g-light-base4 !default;
-
+$switch-checked-background-color: $g-primary-600 !default;
+$switch-checked-background-color-hover: $g-primary-600 !default;
+$switch-checked-background-color-active: $g-primary-600 !default;
+$switch-checked-background-color-disabled: $g-primary-300 !default;
 
 $dark-switch-background-color: $g-dark-base4 !default;
 $dark-switch-background-color-hover: $g-dark-base4 !default;
 $dark-switch-background-color-active: $g-dark-base4 !default;
 $dark-switch-background-color-disabled: $g-dark-base4 !default;
 
-$dark-switch-checked-background-color: $g-dark-base4 !default;
-$dark-switch-checked-background-color-hover: $g-dark-base4 !default;
-$dark-switch-checked-background-color-active: $g-dark-base4 !default;
-$dark-switch-checked-background-color-disabled: $g-dark-base4 !default;
+$dark-switch-checked-background-color: $g-primary-500 !default;
+$dark-switch-checked-background-color-hover: $g-primary-500 !default;
+$dark-switch-checked-background-color-active: $g-primary-500 !default;
+$dark-switch-checked-background-color-disabled: $g-primary-700 !default;
 
-$switch-indicator-background-color: $g-light-highlight !default;
-$switch-indicator-background-color-disabled: $g-light-highlight-disabled !default;
-$dark-switch-indicator-background-color: $g-dark-highlight !default;
-$dark-switch-indicator-background-color-disabled: $g-dark-highlight-disabled  !default;
+$switch-indicator-background-color: $g-highlight-400 !default;
+$switch-indicator-background-color-disabled: $g-highlight-300 !default;
+$dark-switch-indicator-background-color: $g-highlight-600 !default;
+$dark-switch-indicator-background-color-disabled: $g-highlight-700 !default;

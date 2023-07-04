@@ -409,33 +409,46 @@
 * For example it is included here: different circle color when checked or custom border when hover.
 */
 .#{$ns}-switch {
+  &.#{$ns}-align-right .#{$ns}-control-indicator {
+    margin-top: 0; /* Fix vertical alignment for align-right switch */
+  }
+
   .#{$ns}-switch-inner-text {
+    margin-top: 1px;  /* vertically align off / on text */
     text-transform: uppercase; /* off / on text in uppercase */
   }
 
-  /* inner circle when checked */
-  input:checked ~ .#{$ns}-control-indicator::before {
-    box-shadow: none; /* remove BP box-shadow */
-    background-color: $g-light-active;
+  input:checked ~ .#{$ns}-control-indicator {
+    /* border when checked */
+    @include box-shadow-as-border($switch-checked-background-color);
     .#{$ns}-dark & {
-      background-color: $g-dark-active;
+      @include box-shadow-as-border($dark-switch-checked-background-color);
     }
-  }
-  /* inner circle when checked but disabled */
-  &.#{$ns}-control.#{$ns}-disabled {
-    input:checked ~ .#{$ns}-control-indicator::before {
-      background-color: $g-light-active-disabled;
+
+    /* off / on text color when checked */
+    & .#{$ns}-switch-inner-text {
+      color: $g-black;
       .#{$ns}-dark & {
-        background-color: $g-dark-active-disabled;
+        color: $g-white;
+      }
+    }
+
+    /* inner circle when checked */
+    &::before {
+      background-color: $g-highlight-100;
+      .#{$ns}-dark & {
+        background-color: $g-highlight-300;
       }
     }
   }
 
-  /* border when checked */
-  input:checked ~ .#{$ns}-control-indicator {
-    @include box-shadow-as-border($g-light-active-border);
-    .#{$ns}-dark & {
-      @include box-shadow-as-border($g-dark-active-border);
+  /* inner circle when checked but disabled */
+  &.#{$ns}-control.#{$ns}-disabled {
+    input:checked ~ .#{$ns}-control-indicator::before {
+      background-color: $g-highlight-200;
+      .#{$ns}-dark & {
+        background-color: $g-highlight-400;
+      }
     }
   }
 
@@ -454,9 +467,9 @@
 
     /* border when checked but disabled */
     input:checked ~ .#{$ns}-control-indicator {
-      @include box-shadow-as-border($g-light-active-disabled);
+       @include box-shadow-as-border($switch-background-color-disabled);
       .#{$ns}-dark & {
-        @include box-shadow-as-border($g-dark-active-disabled);
+        @include box-shadow-as-border($dark-switch-background-color-disabled);
       }
     }
   }
@@ -484,11 +497,9 @@
   /* border when hover (if it is disabled => no effect) */
   &.#{$ns}-control:not(.#{$ns}-disabled):hover {
     .#{$ns}-control-indicator {
-      background: $g-light-base4;
-      @include box-shadow-as-border($g-light-active);
+      @include box-shadow-as-border($g-light-active-border);
       .#{$ns}-dark & {
-        background: $g-dark-base4 !important;
-        @include box-shadow-as-border($g-dark-active);
+         @include box-shadow-as-border($g-dark-active-border);
       }
     }
   }
