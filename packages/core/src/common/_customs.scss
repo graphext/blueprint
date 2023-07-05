@@ -207,6 +207,10 @@ $g-dark-active-disabled: $g-primary-700;
 $g-light-active-border: $g-primary-200;
 $g-dark-active-border: $g-primary-300;
 
+/* text-disabled is used in checkbox or switch to change inner color (tick, text) when disabled */
+$g-light-active-text-disabled: $g-primary-400;
+$g-dark-active-text-disabled: $g-primary-500;
+
 /* links */
 $pt-dark-link-color: $g-dark-active;
 $pt-link-color: $g-light-active;

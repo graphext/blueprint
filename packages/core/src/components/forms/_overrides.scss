@@ -62,9 +62,9 @@
 }
 
 .#{$ns}-control.#{$ns}-disabled {
-  color: $g-light-grey3;
+  color: $g-light-grey2;
   .#{$ns}-dark & {
-    color: $g-dark-grey3;
+    color: $g-dark-grey2;
   }
 }
 
@@ -88,14 +88,17 @@
     input:checked ~ .#{$ns}-control-indicator,
     input:indeterminate ~ .#{$ns}-control-indicator {
       background-color: $g-light-active;
-      @include box-shadow-as-border($g-light-active-border);
+      /* weird bug => it is noticeable even though it is the same color as the bg */
+      box-shadow: inset 0 0 0 0 !important;
 
       .#{$ns}-dark & {
         background-color: $g-dark-active;
-        @include box-shadow-as-border($g-dark-active-border);
+        /* weird bug => it is noticeable even though it is the same color as the bg */
+        box-shadow: inset 0 0 0 0 !important;
       }
     }
 
+    /* Checked indicator: always white if not disabled */
     input:checked ~ .#{$ns}-control-indicator {
       &::before {
         background-image: svg-icon("16px/g-check.svg", (path: (fill: $g-white)));
@@ -106,6 +109,26 @@
       &::before {
         background-image: svg-icon("16px/g-less.svg", (path: (fill: $g-white)));
         scale: 0.8;
+      }
+    }
+  }
+
+  /* Checked indicator (check or -) when disabled should change accordingly to current theme */
+  &.#{$ns}-checkbox.#{$ns}-disabled {
+    input:checked ~ .#{$ns}-control-indicator {
+      &::before {
+        background-image: svg-icon("16px/g-check.svg", (path: (fill: $g-light-active-text-disabled)));
+        .#{$ns}-dark & {
+          background-image: svg-icon("16px/g-check.svg", (path: (fill: $g-dark-active-text-disabled)));
+        }
+      }
+    }
+    input:indeterminate ~ .#{$ns}-control-indicator {
+      &::before {
+        background-image: svg-icon("16px/g-less.svg", (path: (fill: $g-light-active-text-disabled)));
+        .#{$ns}-dark & {
+          background-image: svg-icon("16px/g-less.svg", (path: (fill: $g-dark-active-text-disabled)));
+        }
       }
     }
   }
@@ -142,10 +165,10 @@
     }
 
     .#{$ns}-control-indicator {
-      @include box-shadow-as-border($g-light-active-hover);
+      @include box-shadow-as-border($g-light-active-border);
 
       .#{$ns}-dark & {
-        @include box-shadow-as-border($g-dark-active-hover);
+        @include box-shadow-as-border($g-dark-active-border);
       }
     }
   }
@@ -180,12 +203,12 @@
     input:checked ~ .#{$ns}-control-indicator {
       background-color: $g-light-base4;
       background-image: none;
-      @include box-shadow-as-border($g-light-active-border);
+      @include box-shadow-as-border($g-light-active);
 
       .#{$ns}-dark & {
         background-image: none;
         background-color: $g-dark-base4;
-        @include box-shadow-as-border($g-dark-active-border);
+        @include box-shadow-as-border($g-dark-active);
       }
     }
   }
@@ -222,11 +245,11 @@
   &.#{$ns}-radio {
     .#{$ns}-control-indicator {
       background-color: $g-light-base4 !important;
-      @include box-shadow-as-border($g-light-active-hover);
+      @include box-shadow-as-border($g-light-active-border);
 
       .#{$ns}-dark & {
         background-color: $g-dark-base4 !important;
-        @include box-shadow-as-border($g-dark-active-hover);
+        @include box-shadow-as-border($g-dark-active-border);
       }
     }
   }
@@ -408,21 +431,25 @@
 * We included here the changes that can't be done just changing the variables that BP provides.
 * For example it is included here: different circle color when checked or custom border when hover.
 */
+
+.#{$ns}-control.bp3-switch .#{$ns}-control-indicator:before {
+  box-shadow: none;
+}
+
 .#{$ns}-switch {
   &.#{$ns}-align-right .#{$ns}-control-indicator {
     margin-top: 0; /* Fix vertical alignment for align-right switch */
   }
 
   .#{$ns}-switch-inner-text {
-    margin-top: 1px;  /* vertically align off / on text */
     text-transform: uppercase; /* off / on text in uppercase */
   }
 
   input:checked ~ .#{$ns}-control-indicator {
     /* border when checked */
-    @include box-shadow-as-border($switch-checked-background-color);
+    @include box-shadow-as-border($g-light-active);
     .#{$ns}-dark & {
-      @include box-shadow-as-border($dark-switch-checked-background-color);
+      @include box-shadow-as-border($g-dark-active);
     }
 
     /* off / on text color when checked */
@@ -467,9 +494,16 @@
 
     /* border when checked but disabled */
     input:checked ~ .#{$ns}-control-indicator {
-       @include box-shadow-as-border($switch-background-color-disabled);
+       @include box-shadow-as-border($g-light-active-disabled);
       .#{$ns}-dark & {
-        @include box-shadow-as-border($dark-switch-background-color-disabled);
+        @include box-shadow-as-border($g-dark-active-disabled);
+      }
+      /* inner text (ON) */
+      .#{$ns}-switch-inner-text {
+        color: $g-light-active-text-disabled !important;
+        .#{$ns}-dark & {
+          color: $g-dark-active-text-disabled !important;
+        }
       }
     }
   }
