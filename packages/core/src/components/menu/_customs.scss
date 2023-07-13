@@ -1,4 +1,4 @@
-$menu-item-border-radius: $pt-border-radius;
+$menu-item-border-radius: 8px;
 
 $dark-menu-item-color-hover: $g-dark-base5;
 $dark-menu-item-color-active: $g-dark-base5 !important; // Important is needed here because the classname "bp3-intent-primary" applied to active menu items.
