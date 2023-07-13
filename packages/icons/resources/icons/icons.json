@@ -203,6 +203,20 @@
     "content": "\\e9da"
   },
   {
+    "displayName": "Move",
+    "iconName": "g-move",
+    "tags": "move, move to, send first, send last",
+    "group": "Graphext",
+    "content": "\\e9da"
+  },
+  {
+    "displayName": "Change type",
+    "iconName": "g-change-type",
+    "tags": "other type, change type, casting ",
+    "group": "Graphext",
+    "content": "\\e9da"
+  },
+  {
     "displayName": "less",
     "iconName": "g-less",
     "tags": "substract, minus sign, negative",

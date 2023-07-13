@@ -30,8 +30,8 @@
     "verify": "npm-run-all compile -p dist lint"
   },
   "dependencies": {
-    "@blueprintjs/core": "3.53.0-graphext104",
-    "@blueprintjs/select": "3.18.12-graphext104",
+    "@blueprintjs/core": "3.53.0-graphext105",
+    "@blueprintjs/select": "3.18.12-graphext105",
     "@documentalist/client": "~3.0.0",
     "classnames": "^2.2",
     "fuzzaldrin-plus": "^0.6.0",
