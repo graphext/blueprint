@@ -39,3 +39,9 @@
 .#{$ns}-popover-target > div {
   height: 100%;
 }
+
+.#{$ns}-select-popover {
+  .#{$ns}-menu {
+    border-radius: 0;
+  }
+}
