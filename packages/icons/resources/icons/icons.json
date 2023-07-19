@@ -219,9 +219,16 @@
   {
     "displayName": "less",
     "iconName": "g-less",
-    "tags": "substract, minus sign, negative",
+    "tags": "substract, minus sign, negative, line, horizontal",
     "group": "Graphext",
     "content": "\\e9db"
+  },
+  {
+    "displayName": "less-small",
+    "iconName": "g-less-small",
+    "tags": "substract, minus sign, negative, small, line, horizontal",
+    "group": "Graphext",
+    "content": "\\23AF"
   },
   {
     "displayName": "Graph",
