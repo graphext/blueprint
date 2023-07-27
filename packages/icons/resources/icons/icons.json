@@ -1281,6 +1281,13 @@
     "content": "\\25D0"
   },
   {
+    "displayName": "Spark",
+    "iconName": "g-spark",
+    "tags": "spark, shine, sparkle, glow, glitter",
+    "group": "Graphext",
+    "content": "\\2728"
+  },
+  {
     "displayName": "Blank",
     "iconName": "blank",
     "tags": "empty, placeholder",
