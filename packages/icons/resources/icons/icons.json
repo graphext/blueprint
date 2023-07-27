@@ -1288,6 +1288,13 @@
     "content": "\\2728"
   },
   {
+    "displayName": "Send",
+    "iconName": "g-send",
+    "tags": "send, deliver, paper-airplane, post",
+    "group": "Graphext",
+    "content": "\\27A2"
+  },
+  {
     "displayName": "Blank",
     "iconName": "blank",
     "tags": "empty, placeholder",
