@@ -217,6 +217,13 @@
     "content": "\\e9da"
   },
   {
+    "displayName": "Abort",
+    "iconName": "g-abort",
+    "tags": "error, abort, cancel ",
+    "group": "Graphext",
+    "content": "\\e9da"
+  },
+  {
     "displayName": "less",
     "iconName": "g-less",
     "tags": "substract, minus sign, negative, line, horizontal",
