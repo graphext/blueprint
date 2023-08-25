@@ -1302,6 +1302,20 @@
     "content": "\\27A2"
   },
   {
+    "displayName": "Collapse all",
+    "iconName": "g-collapse-all",
+    "tags": "arrows, chevron, reduce",
+    "group": "Graphext",
+    "content": "\\e766"
+  },
+  {
+    "displayName": "Expand all",
+    "iconName": "g-expand-all",
+    "tags": "arrows, chevron, enlarge",
+    "group": "Graphext",
+    "content": "\\e767"
+  },
+  {
     "displayName": "Blank",
     "iconName": "blank",
     "tags": "empty, placeholder",
