@@ -1,3 +1,32 @@
+/** Range slider handler */
+.#{$ns}-slider-handle {
+
+  &.#{$ns}-start,
+  &.#{$ns}-end {
+    width: $handle-size;
+    border-radius: $handle-size / 2;
+  }
+
+  &.#{$ns}-end {
+    margin-left: 0;
+  }
+}
+
+.#{$ns}-slider.#{$ns}-vertical {
+  .#{$ns}-slider-handle {
+
+    &.#{$ns}-end,
+    &.#{$ns}-start {
+      height: $handle-size;
+      border-radius: $handle-size / 2;
+    }
+
+    &.#{$ns}-end {
+       margin-bottom: 0;
+    }
+  }
+}
+
 /** Handler color */
 .#{$ns}-dark .#{$ns}-slider-handle,
 .#{$ns}-dark .#{$ns}-slider-handle:hover {
