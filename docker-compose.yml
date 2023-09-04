@@ -2,44 +2,18 @@
 # The setup (just first time):
 # docker-compose run bp sh -c 'yarn && yarn compile'
 #
-# In order to update Markdowns:
-# docker-compose run bp sh -c 'yarn docs-data'
-#
-# To only work with core:
-# docker-compose run -p 9999:9999 bp sh -c 'yarn dev:core'
-#
-# To compile "core" CSS for Storybook and copy on @blueprintjs folder:
-# docker-compose run core
+# You can use whatever script you want from package.json, just replace the command, for example:
+# - To get blueprint docs: `docker-compose run bp sh -c 'yarn dev:docs'`
 #
 version: '3'
 services:
-  bp:
+  docs:
     image: node:12
-    command: sh -c 'yarn dev'
+    command: sh -c 'yarn && yarn dev'
     working_dir: /hostdata
     volumes:
       - .:/hostdata
       - ${DEVELOPMENT_DIR}/config/npmrc:/root/.npmrc
-      - ${DEVELOPMENT_DIR}/repositories/graphext/node_modules/@blueprintjs:/root/graphext/blueprintjs
+    #   - ${DEVELOPMENT_DIR}/repositories/graphext/node_modules/@blueprintjs:/root/graphext/blueprintjs
     ports:
-      - "9999:9999"
-  core:
-    image: node:12
-    command: sh -c 'cd packages/core && yarn compile:css && cp -R lib/css ../../../root/graphext/blueprintjs/core/lib'
-    working_dir: /hostdata
-    volumes:
-      - .:/hostdata
-      - ${DEVELOPMENT_DIR}/config/npmrc:/root/.npmrc
-      - ${DEVELOPMENT_DIR}/repositories/graphext/node_modules/@blueprintjs:/root/graphext/blueprintjs
-    ports:
-      - "9999:9999"
-  popover:
-    image: node:12
-    command: sh -c 'cd packages/popover2 && yarn compile:css && cp -R lib/css ../../../root/graphext/blueprintjs/popover2/lib'
-    working_dir: /hostdata
-    volumes:
-      - .:/hostdata
-      - ${DEVELOPMENT_DIR}/config/npmrc:/root/.npmrc
-      - ${DEVELOPMENT_DIR}/repositories/graphext/node_modules/@blueprintjs:/root/graphext/blueprintjs
-    ports:
-      - "9999:9999"
+      - "9999:9000"
