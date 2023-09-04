@@ -7,12 +7,12 @@
 #
 version: '3'
 services:
-  docs:
+  bp:
     image: node:12
-    command: sh -c 'yarn && yarn dev'
+    command: 'yarn dev:docs'
     working_dir: /hostdata
     volumes:
-      - .:/hostdata
+      - .:/hostdata:cached
       - ${DEVELOPMENT_DIR}/config/npmrc:/root/.npmrc
     #   - ${DEVELOPMENT_DIR}/repositories/graphext/node_modules/@blueprintjs:/root/graphext/blueprintjs
     ports:
