@@ -273,6 +273,13 @@
     "content": "\\2601"
   },
   {
+    "displayName": "Cloud Integration",
+    "iconName": "g-cloud-integration",
+    "tags": "cloud, autosave, integration, refresh",
+    "group": "Graphext",
+    "content": "\\2601"
+  },
+  {
     "displayName": "Cloud-no",
     "iconName": "g-cloud-no",
     "tags": "cloud, disabled, autosave",
