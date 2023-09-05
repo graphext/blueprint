@@ -27,6 +27,35 @@
   }
 }
 
+/** Align first & last axis labels */
+.#{$ns}-slider:not(.#{$ns}-vertical) {
+  .#{$ns}-slider-axis {
+    .#{$ns}-slider-label:first-child {
+      transform: translate(0, $label-offset);
+      padding-left: 0;
+    }
+
+    .#{$ns}-slider-label:last-child {
+      transform: translate(-100%, $label-offset);
+      padding-right: 0;
+    }
+  }
+}
+
+.#{$ns}-slider.#{$ns}-vertical {
+  .#{$ns}-slider-axis {
+    .#{$ns}-slider-label:first-child {
+      transform: translate($label-offset, 0);
+      padding-bottom: 0;
+    }
+
+    .#{$ns}-slider-label:last-child {
+      transform: translate($label-offset, 100%);
+      padding-top: 0;
+    }
+  }
+}
+
 /** Handler color */
 .#{$ns}-dark .#{$ns}-slider-handle,
 .#{$ns}-dark .#{$ns}-slider-handle:hover {
