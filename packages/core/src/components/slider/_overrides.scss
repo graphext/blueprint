@@ -9,6 +9,10 @@
 
   &.#{$ns}-end {
     margin-left: 0;
+
+    .#{$ns}-slider-label {
+      margin-left: $handle-size / 2;
+    }
   }
 }
 
@@ -19,6 +23,11 @@
     &.#{$ns}-start {
       height: $handle-size;
       border-radius: $handle-size / 2;
+
+      .#{$ns}-slider-label {
+        transform: translate(20px, -50%);
+        margin-top: $handle-size / 2;
+      }
     }
 
     &.#{$ns}-end {
