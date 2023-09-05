@@ -2,6 +2,7 @@
 // Licensed under the Apache License, Version 2.0.
 
 @import "../../common/variables";
+@import "../../common/_customs";
 
 /*
 Tables
@@ -125,9 +126,44 @@ table.#{$ns}-html-table {
   }
 
   &.#{$ns}-html-table-striped {
-    tbody tr:nth-child(odd) td {
-      background: rgba($gray5, 0.15);
+
+    thead {
+      background-color: $g-light-base3;
     }
+
+    thead tr th {
+      vertical-align: middle;
+      height: 48px;
+      padding: 8px;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 16px; 
+      color: $g-black;
+      border-right: 1px solid $g-light-base5;
+      border-bottom: 1px solid $g-light-base5;
+    }
+
+    tbody tr:first-child { 
+      td {
+        -webkit-box-shadow: none;
+        box-shadow: none; 
+      }  
+    }
+
+    tbody tr td {
+      color: $g-light-grey1;
+      border-right: 1px solid $g-light-base5;
+      vertical-align: middle;
+    }
+
+    tbody tr:nth-child(odd) td {
+      background: $g-light-base2;
+    }
+
+    tbody tr:nth-child(even) td {
+      background-color: $g-light-base3;
+    }
+    
   }
 
   // Borders are applied as box-shadows (at the top and left borders of a cell) for better color control.
@@ -171,9 +207,40 @@ table.#{$ns}-html-table {
 
   .#{$ns}-dark & {
     /* stylelint-disable selector-max-compound-selectors */
+
     &.#{$ns}-html-table-striped {
+
+      thead {
+        background-color: $g-dark-base3;
+      }
+
+      thead {
+        tr:last-child {
+          th {
+            box-shadow: none;
+            border-bottom: 2px solid $g-dark-base5;
+          }
+        }
+      }
+      
+      th {
+        color: #FFF;
+        background: $g-dark-base3;
+        border-right: 1px solid $g-dark-base5;
+        border-bottom: 2px solid $g-dark-base5;
+      }
+
+      tbody tr td {
+        color: $g-dark-grey1;
+        border-right: 1px solid var(--base-color-base-5-dark, #363B47);
+      }
+
       tbody tr:nth-child(odd) td {
-        background: rgba($gray1, 0.15);
+        background: $g-dark-base2;
+      }
+
+      tbody tr:nth-child(even) td {
+        background-color: $g-dark-base3;
       }
     }
 
