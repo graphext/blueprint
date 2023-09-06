@@ -4,7 +4,7 @@
 @import "../../common/variables";
 @import "../../common/_customs";
 
-
+$bottom-border-top-width: 2 * $table-border-width;
 
 table.#{$ns}-html-table {
 
@@ -15,7 +15,7 @@ table.#{$ns}-html-table {
   }
 
   tfoot {
-    box-shadow: inset 0 ($table-border-width)  0 0 $table-border-color;
+    box-shadow: inset 0 $bottom-border-top-width  0 0 $table-border-color;
   }
 
   th,
@@ -43,7 +43,7 @@ table.#{$ns}-html-table {
     }
 
     tfoot {
-      box-shadow: inset 0 ($table-border-width)  0 0 $dark-table-border-color;
+      box-shadow: inset 0 $bottom-border-top-width  0 0 $dark-table-border-color;
     }
 
     th {
