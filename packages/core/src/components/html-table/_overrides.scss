@@ -66,6 +66,29 @@ table.#{$ns}-html-table {
     color: $g-light-grey1;
   }
 
+  &.#{$ns}-html-table-condensed,
+  &.#{$ns}-small {
+    th,
+    td {
+      padding-bottom: 4px;
+      padding-top: 4px;
+    }
+  }
+
+  &.#{$ns}-html-table-striped {
+
+    tbody tr:nth-child(odd) td {
+      background: $g-light-base2;
+    }
+
+    .#{$ns}-dark & {
+
+      tbody tr:nth-child(odd) td {
+        background: $g-dark-base2;
+      }
+    }
+  }
+
   .#{$ns}-dark & {
 
     background-color: $g-dark-base3;
