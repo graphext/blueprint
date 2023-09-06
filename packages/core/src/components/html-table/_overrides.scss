@@ -1,0 +1,81 @@
+// Copyright 2015 Palantir Technologies, Inc. All rights reserved.
+// Licensed under the Apache License, Version 2.0.
+
+@import "../../common/variables";
+@import "../../common/_customs";
+
+$bottom-border-top-width: 2 * $table-border-width;
+
+table.#{$ns}-html-table {
+
+  background-color: $g-light-base3;
+
+  thead tr {
+    box-shadow: inset 0 (-$table-border-width)  0 0 $table-border-color;
+  }
+
+  tfoot {
+    box-shadow: inset 0 $bottom-border-top-width  0 0 $table-border-color;
+  }
+
+  th,
+  td {
+    line-height: 16px;
+    padding: 8px;
+  }
+
+  th {
+    color: $g-black;
+    font-weight: 400;
+    vertical-align: middle;
+  }
+
+  td {
+    color: $g-light-grey1;
+  }
+
+  .#{$ns}-dark & {
+
+    background-color: $g-dark-base3;
+
+    thead tr {
+      box-shadow: inset 0 (-$table-border-width)  0 0 $dark-table-border-color;
+    }
+
+    tfoot {
+      box-shadow: inset 0 $bottom-border-top-width  0 0 $dark-table-border-color;
+    }
+
+    th {
+      color: $g-white;
+    }
+
+    td {
+      color: $g-dark-grey1;
+    }
+  }
+
+
+  &.#{$ns}-html-table-condensed,
+  &.#{$ns}-small {
+    th,
+    td {
+      padding-bottom: 4px;
+      padding-top: 4px;
+    }
+  }
+
+  &.#{$ns}-html-table-striped {
+
+    tbody tr:nth-child(odd) td {
+      background: $g-light-base2;
+    }
+
+    .#{$ns}-dark & {
+
+      tbody tr:nth-child(odd) td {
+        background: $g-dark-base2;
+      }
+    }
+  }
+}
