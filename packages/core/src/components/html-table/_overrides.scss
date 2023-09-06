@@ -4,18 +4,50 @@
 @import "../../common/variables";
 @import "../../common/_customs";
 
-$bottom-border-top-width: 2 * $table-border-width;
+$section-border-width: 2 * $table-border-width;
 
 table.#{$ns}-html-table {
 
   background-color: $g-light-base3;
 
   thead tr {
-    box-shadow: inset 0 (-$table-border-width)  0 0 $table-border-color;
+    box-shadow: inset 0 (-$section-border-width) 0 0 $table-border-color;
+
+    th {
+      overflow: hidden;
+      padding-right: 5px;
+      text-overflow: ellipsis;
+      white-space: pre;
+      max-width: 0;
+    }
   }
 
   tfoot {
-    box-shadow: inset 0 $bottom-border-top-width  0 0 $table-border-color;
+    box-shadow: inset 0 $section-border-width  0 0 $table-border-color;
+  }
+
+  tbody tr:first-child,
+  tfoot tr:first-child {
+    th,
+    td {
+      box-shadow: none;
+    }
+  }
+
+  &.#{$ns}-html-table-bordered {
+
+    th:not(:first-child) {
+      box-shadow: inset $table-border-width 0 0 0 $table-border-color;
+    }
+
+    tbody tr td,
+    tfoot tr td {
+      box-shadow: none;
+
+      &:not(:first-child) {
+        box-shadow: inset $table-border-width 0 0 0 $table-border-color;
+      }
+    }
   }
 
   th,
@@ -39,11 +71,11 @@ table.#{$ns}-html-table {
     background-color: $g-dark-base3;
 
     thead tr {
-      box-shadow: inset 0 (-$table-border-width)  0 0 $dark-table-border-color;
+      box-shadow: inset 0 (-$section-border-width)  0 0 $dark-table-border-color;
     }
 
     tfoot {
-      box-shadow: inset 0 $bottom-border-top-width  0 0 $dark-table-border-color;
+      box-shadow: inset 0 $section-border-width  0 0 $dark-table-border-color;
     }
 
     th {
@@ -53,28 +85,27 @@ table.#{$ns}-html-table {
     td {
       color: $g-dark-grey1;
     }
-  }
 
-
-  &.#{$ns}-html-table-condensed,
-  &.#{$ns}-small {
-    th,
-    td {
-      padding-bottom: 4px;
-      padding-top: 4px;
-    }
-  }
-
-  &.#{$ns}-html-table-striped {
-
-    tbody tr:nth-child(odd) td {
-      background: $g-light-base2;
+    tbody tr:first-child,
+    tfoot tr:first-child {
+      th,
+      td {
+        box-shadow: none;
+      }
     }
 
-    .#{$ns}-dark & {
+    &.#{$ns}-html-table-bordered {
+      th:not(:first-child) {
+        box-shadow: inset $table-border-width 0 0 0 $dark-table-border-color;
+      }
 
-      tbody tr:nth-child(odd) td {
-        background: $g-dark-base2;
+      tbody tr td,
+      tfoot tr td {
+        box-shadow: none;
+
+        &:not(:first-child) {
+          box-shadow: inset $table-border-width 0 0 0 $dark-table-border-color;
+        }
       }
     }
   }
