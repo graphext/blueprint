@@ -157,7 +157,7 @@
     }
 
     // Interactive
-    &.#{$ns}-interactive {
+    &.#{$ns}-interactive:not(.#{$ns}-g-disabled) {
       &:hover {
         color: $g-black;
         background-color: $g-light-base5;
