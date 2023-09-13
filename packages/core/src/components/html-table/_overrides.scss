@@ -7,7 +7,7 @@
 $section-border-width: 2 * $table-border-width;
 
 table.#{$ns}-html-table {
-
+  $table-border-color: $g-light-base5;
   background-color: $g-light-base3;
 
   thead tr {
@@ -90,7 +90,7 @@ table.#{$ns}-html-table {
   }
 
   .#{$ns}-dark & {
-
+    $dark-table-border-color: $g-dark-base5;
     background-color: $g-dark-base3;
 
     /* Add bolder bottom border to thead */
