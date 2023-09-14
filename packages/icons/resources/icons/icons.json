@@ -1281,6 +1281,13 @@
     "content": "\\25D0"
   },
   {
+    "displayName": "System mode",
+    "iconName": "g-system-mode",
+    "tags": "theme, sync mode, dark, light, sun, moon, system",
+    "group": "Graphext",
+    "content": "\\2609"
+  },
+  {
     "displayName": "Save mode",
     "iconName": "g-save-mode",
     "tags": "autosave, on, recipe",
