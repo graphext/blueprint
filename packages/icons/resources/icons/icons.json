@@ -1261,13 +1261,27 @@
   },
   {
     "displayName": "Light mode",
+    "iconName": "g-light-mode",
+    "tags": "theme, light, sun, white",
+    "group": "Graphext",
+    "content": "\\1F33B"
+  },
+  {
+    "displayName": "Light mode 2",
     "iconName": "g-light-mode_2",
     "tags": "theme, light, circle, white",
     "group": "Graphext",
     "content": "\\25CB"
   },
   {
-    "displayName": "Dark mode",
+     "displayName": "Dark mode",
+     "iconName": "g-dark-mode",
+     "tags": "theme, dark, moon, black",
+     "group": "Graphext",
+     "content": "\\1F319"
+  },
+  {
+    "displayName": "Dark mode 2",
     "iconName": "g-dark-mode_2",
     "tags": "theme, dark, circle, black",
     "group": "Graphext",
