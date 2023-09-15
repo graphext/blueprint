@@ -3,11 +3,11 @@
 
 @import "../../common/variables";
 @import "../../common/_customs";
+@import "./customs";
 
 $section-border-width: 2 * $table-border-width;
 
 table.#{$ns}-html-table {
-
   background-color: $g-light-base3;
 
   thead tr {
@@ -90,7 +90,6 @@ table.#{$ns}-html-table {
   }
 
   .#{$ns}-dark & {
-
     background-color: $g-dark-base3;
 
     /* Add bolder bottom border to thead */
