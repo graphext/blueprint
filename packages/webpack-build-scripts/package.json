@@ -1,49 +1,49 @@
 {
-    "name": "@blueprintjs/webpack-build-scripts",
-    "version": "5.0.2",
-    "description": "Webpack build scripts for @blueprintjs packages",
-    "type": "module",
-    "main": "index.mjs",
-    "files": [
-        "*.mjs"
-    ],
-    "scripts": {
-        "test": "exit 0"
-    },
-    "dependencies": {
-        "@blueprintjs/node-build-scripts": "^8.0.2",
-        "@pmmmwh/react-refresh-webpack-plugin": "^0.5.10",
-        "assert": "^2.0.0",
-        "autoprefixer": "^10.4.14",
-        "css-loader": "^6.8.1",
-        "cssnano": "^6.0.1",
-        "fork-ts-checker-notifier-webpack-plugin": "^7.0.0",
-        "fork-ts-checker-webpack-plugin": "^8.0.0",
-        "mini-css-extract-plugin": "^2.7.6",
-        "pkg-up": "^4.0.0",
-        "postcss": "^8.4.24",
-        "postcss-discard-comments": "^6.0.0",
-        "postcss-loader": "^7.3.3",
-        "process": "^0.11.10",
-        "react-refresh": "^0.14.0",
-        "react-refresh-typescript": "^2.0.9",
-        "sass": "^1.63.6",
-        "sass-loader": "^13.3.2",
-        "source-map-loader": "^4.0.1",
-        "stream-browserify": "^3.0.0",
-        "style-loader": "^3.3.3",
-        "terser-webpack-plugin": "^5.3.9",
-        "ts-loader": "^9.4.3",
-        "webpack": "^5.88.0",
-        "webpack-bundle-analyzer": "^4.9.0",
-        "webpack-dev-server": "^4.15.1",
-        "webpack-notifier": "^1.15.0"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git@github.com:palantir/blueprint.git",
-        "directory": "packages/webpack-build-scripts"
-    },
-    "author": "Palantir Technologies",
-    "license": "Apache-2.0"
+  "name": "@blueprintjs/webpack-build-scripts",
+  "version": "5.0.2",
+  "description": "Webpack build scripts for @blueprintjs packages",
+  "type": "module",
+  "main": "index.mjs",
+  "files": [
+    "*.mjs"
+  ],
+  "scripts": {
+    "test": "exit 0"
+  },
+  "dependencies": {
+    "@blueprintjs/node-build-scripts": "^8.0.2",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.10",
+    "assert": "^2.0.0",
+    "autoprefixer": "^10.4.14",
+    "css-loader": "^6.8.1",
+    "cssnano": "^6.0.1",
+    "fork-ts-checker-notifier-webpack-plugin": "^7.0.0",
+    "fork-ts-checker-webpack-plugin": "^8.0.0",
+    "mini-css-extract-plugin": "^2.7.6",
+    "pkg-up": "^4.0.0",
+    "postcss": "^8.4.24",
+    "postcss-discard-comments": "^6.0.0",
+    "postcss-loader": "^7.3.3",
+    "process": "^0.11.10",
+    "react-refresh": "^0.14.0",
+    "react-refresh-typescript": "^2.0.9",
+    "sass": "^1.63.6",
+    "sass-loader": "^13.3.2",
+    "source-map-loader": "^4.0.1",
+    "stream-browserify": "^3.0.0",
+    "style-loader": "^3.3.3",
+    "terser-webpack-plugin": "^5.3.9",
+    "ts-loader": "^9.4.3",
+    "webpack": "^5.88.0",
+    "webpack-bundle-analyzer": "^4.9.0",
+    "webpack-dev-server": "^4.15.1",
+    "webpack-notifier": "^1.15.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:palantir/blueprint.git",
+    "directory": "packages/webpack-build-scripts"
+  },
+  "author": "Palantir Technologies",
+  "license": "Apache-2.0"
 }

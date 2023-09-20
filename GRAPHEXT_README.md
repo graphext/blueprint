@@ -69,7 +69,7 @@ docker-compose run bp /bin/bash
 ```
 and then publish the desired packages:
 ```
-cd packages/core && npm publish && cd ../../ && cd packages/icons && npm publish && cd ../../ && cd packages/datetime && npm publish && cd ../../ && cd packages/table && npm publish && cd ../../ && cd packages/select && npm publish && cd ../../ && cd packages/popover2 && npm publish && cd ../../
+cd packages/core && npm publish && cd ../../ && cd packages/icons && npm publish && cd ../../ && cd packages/datetime && npm publish && cd ../../ && cd packages/table && npm publish && cd ../../ && cd packages/select && npm publish && cd ../../
 ```
 
 ## How to add new icons
