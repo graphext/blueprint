@@ -84,7 +84,7 @@ The icons generator script is [`generate-icons-source.js`](packages/node-build-s
         "iconName": "paco",
         "tags": "hombre, mozo, machote",
         "group": "Graphext",
-        "content": "\\e7c5"
+        "codepoint":  99999
     },
     ...
 ```

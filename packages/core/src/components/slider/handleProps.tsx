@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-import * as React from "react";
+import type { CSSProperties, HTMLProps } from "react";
 
-import { Intent, Props } from "../../common";
+import type { Intent, Props } from "../../common";
 
 export const HandleType = {
     /** A full handle appears as a small square. */
@@ -29,7 +29,7 @@ export const HandleType = {
     END: "end" as "end",
 };
 // eslint-disable-next-line @typescript-eslint/no-redeclare
-export type HandleType = typeof HandleType[keyof typeof HandleType];
+export type HandleType = (typeof HandleType)[keyof typeof HandleType];
 
 export const HandleInteractionKind = {
     /** Locked handles prevent other handles from being dragged past then. */
@@ -45,12 +45,11 @@ export const HandleInteractionKind = {
     NONE: "none" as "none",
 };
 // eslint-disable-next-line @typescript-eslint/no-redeclare
-export type HandleInteractionKind = typeof HandleInteractionKind[keyof typeof HandleInteractionKind];
+export type HandleInteractionKind = (typeof HandleInteractionKind)[keyof typeof HandleInteractionKind];
 
-// eslint-disable-next-line deprecation/deprecation
-export type HandleProps = IHandleProps;
-/** @deprecated use HandleProps */
-export interface IHandleProps extends Props {
+export type HandleHtmlProps = Pick<HTMLProps<HTMLSpanElement>, "aria-label" | "aria-labelledby">;
+
+export interface HandleProps extends Props {
     /** Numeric value of this handle. */
     value: number;
 
@@ -61,10 +60,10 @@ export interface IHandleProps extends Props {
     intentBefore?: Intent;
 
     /** Style to use for the track segment immediately after this handle, taking priority over `trackStyleBefore`. */
-    trackStyleAfter?: React.CSSProperties;
+    trackStyleAfter?: CSSProperties;
 
     /** Style to use for the track segment immediately before this handle */
-    trackStyleBefore?: React.CSSProperties;
+    trackStyleBefore?: CSSProperties;
 
     /**
      * How this handle interacts with other handles.
@@ -89,4 +88,9 @@ export interface IHandleProps extends Props {
      * @default "full"
      */
     type?: HandleType;
+
+    /**
+     * A limited subset of HTML props to apply to the rendered `<span>` element.
+     */
+    htmlProps?: HandleHtmlProps;
 }

@@ -21,16 +21,16 @@ import { Classes, H5, HTMLSelect, Label, Switch } from "@blueprintjs/core";
 import { DateRange, DateRangePicker, TimePrecision } from "@blueprintjs/datetime";
 import {
     Example,
+    ExampleProps,
     handleBooleanChange,
     handleNumberChange,
     handleValueChange,
-    IExampleProps,
 } from "@blueprintjs/docs-theme";
 
 import { MomentDateRange } from "./common/momentDate";
 import { PrecisionSelect } from "./common/precisionSelect";
 
-export interface IDateRangePickerExampleState {
+export interface DateRangePickerExampleState {
     allowSingleDayRange?: boolean;
     singleMonthOnly?: boolean;
     contiguousCalendarMonths?: boolean;
@@ -42,13 +42,17 @@ export interface IDateRangePickerExampleState {
     timePrecision?: TimePrecision;
 }
 
-interface IDateOption {
+interface DateOption {
     label: string;
     value?: Date;
 }
 
-const MIN_DATE_OPTIONS: IDateOption[] = [
+const MIN_DATE_OPTIONS: DateOption[] = [
     { label: "None", value: undefined },
+    {
+        label: "1 week ago",
+        value: moment().add(-1, "weeks").toDate(),
+    },
     {
         label: "4 months ago",
         value: moment().add(-4, "months").toDate(),
@@ -59,8 +63,16 @@ const MIN_DATE_OPTIONS: IDateOption[] = [
     },
 ];
 
-const MAX_DATE_OPTIONS: IDateOption[] = [
+const MAX_DATE_OPTIONS: DateOption[] = [
     { label: "None", value: undefined },
+    {
+        label: "Today",
+        value: moment().toDate(),
+    },
+    {
+        label: "1 week from now",
+        value: moment().add(1, "weeks").toDate(),
+    },
     {
         label: "4 months from now",
         value: moment().add(4, "months").toDate(),
@@ -71,8 +83,8 @@ const MAX_DATE_OPTIONS: IDateOption[] = [
     },
 ];
 
-export class DateRangePickerExample extends React.PureComponent<IExampleProps, IDateRangePickerExampleState> {
-    public state: IDateRangePickerExampleState = {
+export class DateRangePickerExample extends React.PureComponent<ExampleProps, DateRangePickerExampleState> {
+    public state: DateRangePickerExampleState = {
         allowSingleDayRange: false,
         contiguousCalendarMonths: true,
         dateRange: [null, null],
@@ -181,7 +193,7 @@ export class DateRangePickerExample extends React.PureComponent<IExampleProps, I
     private renderSelectMenu(
         label: string,
         selectedValue: number | string,
-        options: IDateOption[],
+        options: DateOption[],
         onChange: React.FormEventHandler<HTMLElement>,
     ) {
         return (

@@ -20,27 +20,30 @@ import {
     Button,
     Classes,
     Code,
+    ContextMenu,
     Divider,
     Drawer,
     DrawerSize,
     H5,
     HTMLSelect,
-    OptionProps,
     Label,
+    Menu,
+    MenuItem,
+    OptionProps,
     Position,
     Switch,
 } from "@blueprintjs/core";
 import {
     Example,
+    ExampleProps,
     handleBooleanChange,
     handleStringChange,
     handleValueChange,
-    IExampleProps,
 } from "@blueprintjs/docs-theme";
 
-import { IBlueprintExampleData } from "../../tags/types";
+import { BlueprintExampleData } from "../../tags/types";
 
-export interface IDrawerExampleState {
+export interface DrawerExampleState {
     autoFocus: boolean;
     canEscapeKeyClose: boolean;
     canOutsideClickClose: boolean;
@@ -51,8 +54,8 @@ export interface IDrawerExampleState {
     size: string;
     usePortal: boolean;
 }
-export class DrawerExample extends React.PureComponent<IExampleProps<IBlueprintExampleData>, IDrawerExampleState> {
-    public state: IDrawerExampleState = {
+export class DrawerExample extends React.PureComponent<ExampleProps<BlueprintExampleData>, DrawerExampleState> {
+    public state: DrawerExampleState = {
         autoFocus: true,
         canEscapeKeyClose: true,
         canOutsideClickClose: true,
@@ -92,6 +95,7 @@ export class DrawerExample extends React.PureComponent<IExampleProps<IBlueprintE
                     {...this.state}
                 >
                     <div className={Classes.DRAWER_BODY}>
+                        {/* HACKHACK: strange use of unrelated dialog class, should be refactored */}
                         <div className={Classes.DIALOG_BODY}>
                             <p>
                                 <strong>
@@ -119,6 +123,17 @@ export class DrawerExample extends React.PureComponent<IExampleProps<IBlueprintE
                                 can build upon. And the enterprise data foundation goes where the business drives it.
                             </p>
                             <p>Start the revolution. Unleash the power of data integration with Palantir Foundry.</p>
+                            <ContextMenu
+                                content={
+                                    <Menu>
+                                        <MenuItem text="Menu Item 1" />
+                                    </Menu>
+                                }
+                            >
+                                <Button onClick={this.handleClose}>
+                                    Right Click for a <Code>&lt;ContextMenu /&gt;</Code>
+                                </Button>
+                            </ContextMenu>
                         </div>
                     </div>
                     <div className={Classes.DRAWER_FOOTER}>Footer</div>

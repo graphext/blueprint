@@ -15,18 +15,18 @@
  */
 
 import * as React from "react";
-import { polyfill } from "react-lifecycles-compat";
 
-import { AbstractPureComponent2, Classes } from "../../common";
+import { AbstractPureComponent, Classes, DISPLAYNAME_PREFIX, OptionProps, Props } from "../../common";
 import * as Errors from "../../common/errors";
-import { DISPLAYNAME_PREFIX, OptionProps, Props } from "../../common/props";
 import { isElementOfType } from "../../common/utils";
-import { RadioProps, Radio } from "./controls";
+import { Radio, RadioProps } from "./controls";
 
-// eslint-disable-next-line deprecation/deprecation
-export type RadioGroupProps = IRadioGroupProps;
-/** @deprecated use RadioGroupProps */
-export interface IRadioGroupProps extends Props {
+export interface RadioGroupProps extends Props {
+    /**
+     * Radio elements. This prop is mutually exclusive with `options`.
+     */
+    children?: React.ReactNode;
+
     /**
      * Whether the group and _all_ its radios are disabled.
      * Individual radios can be disabled using their `disabled` prop.
@@ -70,8 +70,12 @@ function nextName() {
     return `${RadioGroup.displayName}-${counter++}`;
 }
 
-@polyfill
-export class RadioGroup extends AbstractPureComponent2<RadioGroupProps> {
+/**
+ * Radio group component.
+ *
+ * @see https://blueprintjs.com/docs/#core/components/radio.radiogroup
+ */
+export class RadioGroup extends AbstractPureComponent<RadioGroupProps> {
     public static displayName = `${DISPLAYNAME_PREFIX}.RadioGroup`;
 
     // a unique name for this group, which can be overridden by `name` prop.

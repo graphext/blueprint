@@ -9,7 +9,7 @@
 version: '3'
 services:
   bp:
-    image: node:12
+    image: node:18
     command: 'yarn dev:docs'
     working_dir: /hostdata
     volumes:
