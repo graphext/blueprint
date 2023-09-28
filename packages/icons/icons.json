@@ -63,11 +63,25 @@
         "codepoint": 2973
     },
     {
+        "displayName": "Arrow: Down Small",
+        "iconName": "g-arrow-down-small",
+        "tags": "chevron, down, collapse, expand",
+        "group": "Graphext",
+        "codepoint": 2975
+    },
+    {
         "displayName": "Arrow: Up",
         "iconName": "g-arrow-up",
         "tags": "chevron, up, collapse, expand",
         "group": "Graphext",
         "codepoint": 4811
+    },
+    {
+        "displayName": "Arrow: Up Small",
+        "iconName": "g-arrow-up-small",
+        "tags": "chevron, up, collapse, expand",
+        "group": "Graphext",
+        "codepoint": 2976
     },
     {
         "displayName": "Download",
