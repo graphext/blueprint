@@ -3,7 +3,7 @@
 # docker-compose run bp sh -c 'yarn && yarn compile'
 #
 # You can use whatever script you want from package.json, just replace the command, for example:
-# - To get blueprint docs: `docker-compose run -p 9999:9000 bp sh -c 'yarn dev:core'`
+# - To get blueprint docs: `docker-compose run -p 9999:9001 bp sh -c 'yarn dev:core'`
 # It will be running at http://localhost:9999/
 #
 version: '3'
