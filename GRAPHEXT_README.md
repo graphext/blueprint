@@ -22,7 +22,7 @@ Once it's done, we can create de dist files with:
 ```
 docker-compose run bp sh -c 'yarn dist:libs'
 ```
-Then **change the packages names to "-graphext[NewVersion]" again** with the new version (better using the JS script explained in **How to publish the changes** steps 1 and 2) and publish the packages to our private NPM with:
+Then **change the package names to "-graphext[NewVersion]" again** with the new version (better using the JS script explained in **How to publish the changes** steps 1 and 2) and publish the packages to our private NPM with:
 ```
 docker-compose run bpsh -c 'cd packages/core && npm publish && cd ../../ && cd packages/icons && npm publish && cd ../../ && cd packages/datetime && npm publish && cd ../../ && cd packages/table && npm publish && cd ../../ && cd packages/select && npm publish'
 ```
@@ -33,7 +33,7 @@ The purpose of this repository is to adapt blueprint UI components' styles to Gr
 - Blueprint uses `!default` flag at the end of some `scss` variable declarations. Therefore, graphext developers must see if they can use `scss` variables in order to get the desired style.
 - If the first approach cannot be done, then the developer must add the `scss` styles to `_overrides.scss` files stayed in `packages/core` and `packages/select`.
 
-  Note that many Blueprint components are build using others Blueprint components. Then, it is important that styles overwriting be done by using specific classnames.
+  Note that many Blueprint components are built using other Blueprint components. Then, it is important that style overwriting be done by using specific classnames.
 
 The following packages of this monorepo have been already updated by Graphext and they are already published in graphext npm registry:
     - `core`
@@ -74,7 +74,7 @@ cd packages/core && npm publish && cd ../../ && cd packages/icons && npm publish
 
 ## How to add new icons
 
-The icons generator script is [`generate-icons-source.js`](packages/node-build-scripts/generate-icons-source.js). This script uses [`packages/icons/resources/icons/icons.json` ](packages/icons/resources/icons/icons.json) as entry, which is the file we have to modify in order to add a new icon.
+The icon generator script is [`generate-icons-source.js`](packages/node-build-scripts/generate-icons-source.js). This script uses [`packages/icons/resources/icons/icons.json` ](packages/icons/resources/icons/icons.json) as entry, which is the file we have to modify in order to add a new icon.
 - 1. Add a new object at the end of the other Graphext components:
 
 ```
@@ -88,10 +88,10 @@ The icons generator script is [`generate-icons-source.js`](packages/node-build-s
     },
     ...
 ```
-- `iconName` is the most important parameter. It has to resembles the svg filename, choose a good one because it is also the name that must be used in the code to use this icon.
+- `iconName` is the most important parameter. It has to resemble the svg filename, choose a good one because it is also the name that must be used in the code to use this icon.
 - `tags` is just useful to search icons in the documentation.
 - `group` is only used in the documentation too. We must add all icons to **Graphext** group to see all icons added by graphext together.
-- `content` must be an hexadecimal **unique** number of length 4. This number must be **unique** in the file. (Search before commit) One way of selecting a name is using https://unicode-table.com/ Search for the concept you want to add and copy the number.
+- `codepoint` must be **unique** number. This number must be **unique** in the file. (Search before commit) One way of selecting a name is using https://unicode-table.com/ Search for the concept you want to add and copy the number.
 - Add `svg` resources in the following folders
     - `resources/icons/16px`
     - `resources/icons/20px`
@@ -136,10 +136,10 @@ The [first version](https://npm.graphext.com/-/web/detail/@blueprintjs/core/v/3.
 This is how we included the changes from palantir in our repository.
 At this point, we were able to work as we used to do (PR in `graphext` and then if you want to deploy your changes, merge it into `deploy`).
 
-### About popover2 situation
-`@blueprint/popover2` package is going to replace `@blueprint/core` popover in `Blueprintjs V5`.
-The use of this package is recommended to be prepared and also because it is more efficient than the previous one.
-We must take into account that the 'custom' version of this package for graphext exists since `graphext04`, so if we try to use a previous version it will return an error because it does not exist in our private repository.
+### v5 upgrade
+I recommend checking both PRs, where we explained how it went:
+- [Blueprint](https://github.com/graphext/blueprint/pull/107)
+- [Graphext](https://github.com/graphext/graphext/pull/2745)
 
 ## Developing with Graphext, Storybook and Blueprint:
 
