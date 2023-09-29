@@ -274,7 +274,7 @@
     },
     {
         "displayName": "Check2",
-        "iconName": "g-check-dos",
+        "iconName": "g-check-two",
         "tags": "tick, accept, confirm, valid, correct, ok, circle",
         "group": "Graphext",
         "codepoint": 391
@@ -337,7 +337,7 @@
     },
     {
         "displayName": "Left",
-        "iconName": "g-arrow-left-dos",
+        "iconName": "g-arrow-left-two",
         "tags": "arrow, left, plot",
         "group": "Graphext",
         "codepoint": 3676
@@ -1282,7 +1282,7 @@
     },
     {
         "displayName": "Light mode 2",
-        "iconName": "g-light-mode-dos",
+        "iconName": "g-light-mode-two",
         "tags": "theme, light, circle, white",
         "group": "Graphext",
         "codepoint": 2946
@@ -1296,7 +1296,7 @@
     },
     {
         "displayName": "Dark mode 2",
-        "iconName": "g-dark-mode-dos",
+        "iconName": "g-dark-mode-two",
         "tags": "theme, dark, circle, black",
         "group": "Graphext",
         "codepoint": 1869
