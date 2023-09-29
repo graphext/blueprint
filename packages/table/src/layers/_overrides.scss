@@ -13,8 +13,9 @@
   background-color: rgba(25, 25, 25, 0.08);
 
   .#{$ns}-dark & {
-    background-color: rgba(255, 255, 255, 0.08);
-    border-left: 1px solid $g-white;
+    background-color: rgba(255, 255, 255, 0.08) !important;
+    border: none;
+    border-left: 1px solid $g-white !important;
   }
 
   .#{$ns}-table-column-headers & {

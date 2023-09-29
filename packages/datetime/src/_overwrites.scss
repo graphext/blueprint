@@ -3,22 +3,61 @@
 
 @import "../../core/src/common/variables";
 
-.#{$ns}-popover-wrapper.#{$ns}-datepicker {
-  background: transparent;
-  padding: 0;
-}
 // General Date Picker Colors, Paddings and Sizes
 
 .#{$ns}-datepicker {
-  padding: 16px;
-  background-color:$g-light-base3;
+  padding: 12px;
+  box-shadow: $g-shadow-light-1;
+  background-color: $g-light-base3;
+
+  .DayPicker-WeekdaysRow {
+    .DayPicker-Weekday {
+      font-weight: normal;
+    }
+
+    color: $g-light-grey2;
+  }
   .#{$ns}-dark & {
-    background-color: $g-dark-base3;
+    box-shadow: $g-shadow-dark-1;
+    background-color: $g-dark-base3 !important;
+    .DayPicker-WeekdaysRow {
+      color: $g-dark-grey2;
+    }
+  }
+
+  .DayPicker-Month {
+    margin: 0;
+  }
+
+  .DayPicker-Caption {
+    .#{$ns}-datepicker-caption {
+      .#{$ns}-html-select select {
+        @include box-shadow-as-border($g-light-base5);
+        font-weight: normal;
+        padding-left: 8px;
+
+        .#{$ns}-dark & {
+          @include box-shadow-as-border($g-dark-base5);
+        }
+      }
+      margin: 0 20px;
+    }
+
+    .#{$ns}-divider {
+      margin-top: 14px;
+      margin-bottom: 14px;
+    }
+  }
+}
+
+.#{$ns}-timepicker-input-row {
+  @include box-shadow-as-border($g-light-base5);
+  .#{$ns}-dark & {
+    @include box-shadow-as-border($g-dark-base5);
   }
 }
 
 .#{$ns}-datepicker .DayPicker {
-  margin: 0 8px;
   font-size: 12px;
 }
 
@@ -38,8 +77,9 @@
   left:0;
 }
 
-.#{$ns}-datepicker-caption {
-  margin: 0 36px 16px 36px;
+.#{$ns}-datepicker-navbar.DayPicker-NavBar {
+  left: -6px;
+  right: -6px;
 }
 
 .#{$ns}-datepicker-caption select {
@@ -119,21 +159,10 @@
   }
 }
 
-.#{$ns}-datepicker {
-  &.DayPicker-Day--selected {
-    background-color: $g-light-active;
-
-    &:hover {
-      background-color: $g-light-active-hover;
-    }
-
-    .#{$ns}-dark & {
-      background-color: $g-dark-active;
-
-      &:hover {
-        background-color: $g-dark-active-hover;
-      }
-    }
+.#{$ns}-datepicker .DayPicker-Day.DayPicker-Day--selected {
+  background-color: $g-light-active;
+  .#{$ns}-dark & {
+  background: $g-dark-active;
   }
 }
 

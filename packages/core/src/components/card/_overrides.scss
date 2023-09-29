@@ -1,21 +1,15 @@
+/*
+* Check core/src/common/_customs.scss to understand how box-shadow are used.
+* We have changed "elevation" behavior.
+*/
+
 .#{$ns}-card {
-  border: 1px solid $card-background-color;
-
-  &.#{$ns}-elevation-0 {
-    box-shadow: none;
-  }
-
-  &.#{$ns}-dark,
-  .#{$ns}-dark & {
-    border: 1px solid $dark-card-background-color;
-  }
-
   &.#{$ns}-clickable:hover {
-    border-color: $card-hover-border-color;
+    @include box-shadow-as-border($card-hover-border-color);
 
     &.#{$ns}-dark,
     .#{$ns}-dark & {
-      border-color: $dark-card-hover-border-color;
+      @include box-shadow-as-border($dark-card-hover-border-color);
     }
   }
 
@@ -32,40 +26,38 @@
         opacity: .6;
       }
     }
-
-    &.#{$ns}-interactive:hover {
-      box-shadow: none;
-      cursor: auto;
-    }
   }
 
   &.#{$ns}-kind-g-active,
   &.#{$ns}-kind-g-active.#{$ns}-clickable:hover {
-    border-color: $g-light-active-hover;
+    @include box-shadow-as-border($g-light-active-hover);
+
     .#{$ns}-dark & {
-      border-color: $g-dark-active-hover;
+      @include box-shadow-as-border($g-dark-active-hover);
     }
   }
 
   &.#{$ns}-g-opened {
-    border-color: $g-light-base5;
+    @include box-shadow-as-border($g-light-base5);
+
     &.#{$ns}-kind-g-error & {
-      border-color: $g-error-600;
+      @include box-shadow-as-border($g-error-600);
     }
     .#{$ns}-dark & {
-      border-color: $g-dark-base5;
+      @include box-shadow-as-border($g-dark-base5);
+
       &.#{$ns}-kind-g-error {
-        border-color: $g-error-600;
+        @include box-shadow-as-border($g-error-600);
       }
     }
   }
 
   &.#{$ns}-kind-g-error {
-    border-color: $g-error-600;
+    @include box-shadow-as-border($g-error-600);
   }
 
   &.#{$ns}-kind-g-error.#{$ns}-clickable:hover {
-    border-color: $g-error-500;
+    @include box-shadow-as-border($g-error-500);
   }
 
   &.#{$ns}-kind-g-dashed {
@@ -97,18 +89,20 @@
 
   &.#{$ns}-g-intent-primary {
     background-color: $g-light-active;
+    @include box-shadow-as-border($g-light-active);
+
     border-color: $g-light-active;
     .#{$ns}-dark & {
       background-color: $g-dark-active;
-      border-color: $g-dark-active;
+      @include box-shadow-as-border($g-dark-active);
     }
 
     &.#{$ns}-interactive:hover {
-      border-color: $g-primary-200 ;
+      @include box-shadow-as-border($g-primary-200);
       background-color: $g-light-active-hover;
 
       .#{$ns}-dark & {
-        border-color: $g-primary-300;
+        @include box-shadow-as-border($g-primary-300);
         background-color: $g-dark-active-hover;
       }
     }

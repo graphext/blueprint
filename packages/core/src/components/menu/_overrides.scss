@@ -1,14 +1,48 @@
 .#{$ns}-menu-item.#{$ns}-active {
   color: $g-black !important;
+  background-color: $g-light-base5 !important;
   .#{$ns}-menu-item-label {
     color: $g-black !important;
+  }
+
+  .#{$ns}-menu-item-icon {
+    color: $g-black !important;
+  }
+}
+
+.#{$ns}-menu-item {
+  &:active {
+    // BP says: "we can use the same color as light theme due to transparency"
+    // but we cannot
+    background-color: $g-light-base5 !important;
+  }
+  &:hover {
+    background-color: $g-light-base5;
+  }
+}
+
+.#{$ns}-dark {
+  .#{$ns}-menu-item {
+    &:active {
+      // BP says: "we can use the same color as light theme due to transparency"
+      // but we cannot
+      background-color: $g-dark-base5 !important;
+    }
+    &:hover {
+      background-color: $g-dark-base5 !important;
+    }
   }
 }
 
 .#{$ns}-dark {
   .#{$ns}-menu-item.#{$ns}-active {
     color: $g-white !important;
+    background-color: $g-dark-base5 !important;
     .#{$ns}-menu-item-label {
+      color: $g-white !important;
+    }
+
+    .#{$ns}-menu-item-icon {
       color: $g-white !important;
     }
   }
@@ -18,8 +52,19 @@
   border-radius: 8px;
 }
 
-/* Hack to render our arrow instead of the one that BP adds when there are sub items. */
 .#{$ns}-submenu {
+  //Needed because BP assumes that light & dark have the same bg-color
+  .#{$ns}-popover-target {
+    &.#{$ns}-popover-open > .#{$ns}-menu-item {
+      &:not([class*="#{$ns}-intent-"]) {
+        .#{$ns}-dark & {
+          background-color: $g-dark-base5 !important;
+        }
+      }
+    }
+  }
+
+  /* Hack to render our arrow instead of the one that BP adds when there are sub items. */
   .#{$ns}-icon-caret-right:last-of-type {
     background: svg-icon("16px/g-arrow-right-small.svg", (path: (fill: $g-light-active)));
     .#{$ns}-dark & {
