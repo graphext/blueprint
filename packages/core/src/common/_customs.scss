@@ -13,7 +13,7 @@ $pt-font-size-small: 12px;
 $pt-font-size-extra-small: 10px;
 
 // a little bit extra to ensure the height comes out to just over 18px (and browser rounds to 18px)
-$pt-line-height: ($pt-grid-size * 2.25) / $pt-font-size + 0.0001;
+$pt-line-height: calc(($pt-grid-size * 2.25) / $pt-font-size + 0.0001);
 
 $pt-border-radius: 16px;
 
@@ -290,7 +290,7 @@ $pt-g-dark-intent-colors: (
   "danger" : $g-error-600,
 );
 
-/* common variables used by BP: don't override them in _customs.scss files */
+/* Common variables used by BP: don't override them in _customs.scss files */
 $pt-text-color-muted: $g-light-grey1;
 $pt-text-color-disabled: $g-light-grey3;
 
@@ -300,10 +300,36 @@ $pt-dark-text-color-disabled: $g-dark-grey3;
 $pt-divider-black: $g-light-base5;
 $pt-dark-divider-black: $g-dark-base5;
 
-$pt-elevation-shadow-3: $g-shadow-light-1;
-$pt-dark-elevation-shadow-3: $g-shadow-dark-1;
+/* Elevation shadows (cards)
+(all effects are added as box-shadow)
+BP styles:
+- elevation-shadow-0: border
+- elevation-shadow-1: border + some blur effect
+- elevation-shadow-2: border + some deep blur effect
+- ...
 
-$pt-elevation-shadow-4: $g-shadow-light-3;
+Our styles:
+- elevation-shadow-0: no effect
+- elevation-shadow-1: border (as box-shadow)
+- elevation-shadow-2: border + some blur effect
+- ...
+
+Be aware that elevation-shadow-3 is used also when card is interactive
+ */
+
+$pt-elevation-shadow-0: none;
+$pt-dark-elevation-shadow-0: none;
+
+$pt-elevation-shadow-1: inset 0 0 0 1px $g-light-base5;
+$pt-dark-elevation-shadow-1: inset 0 0 0 1px $g-dark-base5;
+
+$pt-elevation-shadow-3: $pt-elevation-shadow-1, $g-shadow-light-1;
+$pt-dark-elevation-shadow-3: $pt-dark-elevation-shadow-1, $g-shadow-dark-1;
+
+$pt-elevation-shadow-4: $pt-elevation-shadow-1, $g-shadow-light-3;
+$pt-dark-elevation-shadow-4: $pt-dark-elevation-shadow-1, $g-shadow-dark-3;
+
+/* end elevation shadows */
 
 $pt-icon-color: $g-black;
 $pt-icon-color-hover: $g-black;
@@ -313,3 +339,13 @@ $pt-dark-icon-color-hover: $g-white;
 
 $pt-dark-text-color: $g-white;
 $pt-text-color: $g-black;
+
+/* End Common variables */
+
+/**
+  * BP uses box-shadow to add border without changing the size of the element.
+ *  Here we use it to add a subtle border in elements like: checkbox & radio button.
+ */
+@mixin box-shadow-as-border($color) {
+  box-shadow: inset 0 0 0 1px $color !important;
+}

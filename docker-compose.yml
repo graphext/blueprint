@@ -3,13 +3,13 @@
 # docker-compose run bp sh -c 'yarn && yarn compile'
 #
 # You can use whatever script you want from package.json, just replace the command, for example:
-# - To get blueprint docs: `docker-compose run -p 9999:9000 bp sh -c 'yarn dev:core'`
+# - To get blueprint docs: `docker-compose run -p 9999:9001 bp sh -c 'yarn dev:core'`
 # It will be running at http://localhost:9999/
 #
 version: '3'
 services:
   bp:
-    image: node:12
+    image: node:18
     command: 'yarn dev:docs'
     working_dir: /hostdata
     volumes:
@@ -17,4 +17,4 @@ services:
       - ${DEVELOPMENT_DIR}/config/npmrc:/root/.npmrc
     #   - ${DEVELOPMENT_DIR}/repositories/graphext/node_modules/@blueprintjs:/root/graphext/blueprintjs
     ports:
-      - "9999:9000"
+      - "9999:9001"

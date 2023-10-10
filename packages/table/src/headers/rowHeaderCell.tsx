@@ -15,16 +15,14 @@
  */
 
 import * as React from "react";
-import { polyfill } from "react-lifecycles-compat";
 
-import { AbstractPureComponent2, Props } from "@blueprintjs/core";
+import { AbstractPureComponent, Props } from "@blueprintjs/core";
 
 import * as Classes from "../common/classes";
 import { LoadableContent } from "../common/loadableContent";
-import { HeaderCell, IHeaderCellProps } from "./headerCell";
+import { HeaderCell, HeaderCellProps } from "./headerCell";
 
-export type RowHeaderCellProps = IRowHeaderCellProps;
-export interface IRowHeaderCellProps extends IHeaderCellProps, Props {
+export interface RowHeaderCellProps extends HeaderCellProps, Props {
     /**
      * Specifies if the row is reorderable.
      */
@@ -48,24 +46,23 @@ export interface IRowHeaderCellProps extends IHeaderCellProps, Props {
     nameRenderer?: (name: string, index?: number) => React.ReactElement<Props>;
 }
 
-@polyfill
-export class RowHeaderCell extends AbstractPureComponent2<IRowHeaderCellProps> {
+export class RowHeaderCell extends AbstractPureComponent<RowHeaderCellProps> {
     public render() {
         const {
-            // from IRowHeaderCellProps
+            // from RowHeaderCellProps
             enableRowReordering,
             isRowSelected,
             name,
             nameRenderer,
 
-            // from IHeaderProps
+            // from HeaderProps
             ...spreadableProps
         } = this.props;
         const defaultName = <div className={Classes.TABLE_ROW_NAME_TEXT}>{name}</div>;
 
         const nameComponent = (
-            <LoadableContent loading={spreadableProps.loading}>
-                {nameRenderer == null ? defaultName : nameRenderer(name, spreadableProps.index)}
+            <LoadableContent loading={spreadableProps.loading ?? false}>
+                {nameRenderer?.(name!, spreadableProps.index) ?? defaultName}
             </LoadableContent>
         );
 

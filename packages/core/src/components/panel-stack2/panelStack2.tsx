@@ -80,6 +80,9 @@ interface PanelStack2Component {
 }
 
 /**
+ * Panel stack (v2) component.
+ *
+ * @see https://blueprintjs.com/docs/#core/components/panel-stack2
  * @template T type union of all possible panels in this stack
  */
 // eslint-disable-next-line @typescript-eslint/ban-types
@@ -90,10 +93,10 @@ export const PanelStack2: PanelStack2Component = <T extends Panel<object>>(props
     const [localStack, setLocalStack] = React.useState<T[]>(
         props.initialPanel !== undefined ? [props.initialPanel] : [],
     );
-    const stack = React.useMemo(() => (propsStack != null ? propsStack.slice().reverse() : localStack), [
-        localStack,
-        propsStack,
-    ]);
+    const stack = React.useMemo(
+        () => (propsStack != null ? propsStack.slice().reverse() : localStack),
+        [localStack, propsStack],
+    );
     const stackLength = React.useRef<number>(stack.length);
     React.useEffect(() => {
         if (stack.length !== stackLength.current) {

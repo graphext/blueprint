@@ -1,11 +1,37 @@
-/*
-*  This is necessary because some BP components use this popover (instead of popover2) internally.
-*  For example: Menu when has sub-items, Select, Suggest...
-*  In the future, this should not be necessary because in major BP versions, all components will use popover2.
- */
-
 .#{$ns}-popover {
   .#{$ns}-popover-content {
     border-radius: 8px;
+  }
+}
+
+.#{$ns}-popover {
+  // To adjust arrow placement
+  $g-tooltip2-arrow-adjust: 5px;
+
+  border-radius: $pt-grid-size;
+
+  &.#{$ns}-popover-placement-top .#{$ns}-popover-arrow {
+    transform: translateY(- $g-tooltip2-arrow-adjust);
+  }
+
+  &.#{$ns}-popover-placement-left .#{$ns}-popover-arrow {
+    transform: translateX(- $g-tooltip2-arrow-adjust);
+  }
+
+  &.#{$ns}-popover-placement-bottom .#{$ns}-popover-arrow {
+    transform: translateY($g-tooltip2-arrow-adjust);
+  }
+
+  &.#{$ns}-popover-placement-right .#{$ns}-popover-arrow {
+    transform: translateX($g-tooltip2-arrow-adjust);
+  }
+
+  // Remove shadow of arrow
+  .#{$ns}-popover-arrow::before {
+    box-shadow: none;
+  }
+
+  .#{$ns}-popover-content {
+    border-radius: $pt-grid-size;
   }
 }

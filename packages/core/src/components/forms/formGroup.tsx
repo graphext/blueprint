@@ -16,15 +16,14 @@
 
 import classNames from "classnames";
 import * as React from "react";
-import { polyfill } from "react-lifecycles-compat";
 
-import { AbstractPureComponent2, Classes } from "../../common";
+import { AbstractPureComponent, Classes } from "../../common";
 import { DISPLAYNAME_PREFIX, IntentProps, Props } from "../../common/props";
 
-// eslint-disable-next-line deprecation/deprecation
-export type FormGroupProps = IFormGroupProps;
-/** @deprecated use FormGroupProps */
-export interface IFormGroupProps extends IntentProps, Props {
+export interface FormGroupProps extends IntentProps, Props {
+    /** Group contents. */
+    children?: React.ReactNode;
+
     /**
      * A space-delimited list of class names to pass along to the
      * `Classes.FORM_CONTENT` element that contains `children`.
@@ -72,8 +71,12 @@ export interface IFormGroupProps extends IntentProps, Props {
     subLabel?: React.ReactNode;
 }
 
-@polyfill
-export class FormGroup extends AbstractPureComponent2<FormGroupProps> {
+/**
+ * Form group component.
+ *
+ * @see https://blueprintjs.com/docs/#core/components/form-group
+ */
+export class FormGroup extends AbstractPureComponent<FormGroupProps> {
     public static displayName = `${DISPLAYNAME_PREFIX}.FormGroup`;
 
     public render() {

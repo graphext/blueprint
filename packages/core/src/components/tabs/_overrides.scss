@@ -17,7 +17,7 @@
 };
 
 // custom class to allow tabs to fill available width
-.#{$ns}-tabs-fill {
+.#{$ns}-g-tabs-fill-width:not(.#{$ns}-vertical) {
   .#{$ns}-tab {
     flex: 1;
     margin: 0;

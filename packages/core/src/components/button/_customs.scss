@@ -1,6 +1,6 @@
 @import "../../common/customs";
 
-$pt-button-border-radius: $pt-button-height-large / 2;
+$pt-button-border-radius: calc($pt-button-height-large / 2);
 
 $button-border-width: 0;
 

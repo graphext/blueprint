@@ -30,7 +30,7 @@ $dark-control-background-color: $g-dark-base4 !default;
 $dark-control-background-color-hover: $g-dark-base4 !default;
 $dark-control-background-color-active: $g-dark-base4 !default;
 
-$control-indicator-spacing: $pt-grid-size / 2;
+$control-indicator-spacing: calc($pt-grid-size / 2);
 
 
 /* Switch */

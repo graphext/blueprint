@@ -9,22 +9,17 @@
 
 // Add stripped background to row index cells
 .#{$ns}-table-striped {
-
-    .#{$ns}-table-row-headers {
+  .#{$ns}-table-row-headers-cells-container {
+    .#{$ns}-table-header:nth-child(odd) {
+        background-color: $g-light-base2;
+      .#{$ns}-dark & {
+        background-color: $g-dark-base2;
+      }
+    }
       color: $g-black;
       .#{$ns}-dark & {
         color: $g-white;
       }
-      .#{$ns}-table-header[class$="0"],
-      .#{$ns}-table-header[class$="2"],
-      .#{$ns}-table-header[class$="4"],
-      .#{$ns}-table-header[class$="6"],
-      .#{$ns}-table-header[class$="8"] {
-        background-color: $g-light-base2; /* should correspond to even color */
-        .#{$ns}-dark & {
-        background-color: $g-dark-base2;
-      }
-    }
   }
 }
 

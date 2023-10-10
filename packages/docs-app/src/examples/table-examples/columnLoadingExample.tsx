@@ -17,22 +17,22 @@
 import * as React from "react";
 
 import { HTMLSelect, Label } from "@blueprintjs/core";
-import { Example, handleNumberChange, IExampleProps } from "@blueprintjs/docs-theme";
+import { Example, ExampleProps, handleNumberChange } from "@blueprintjs/docs-theme";
 import { Cell, Column, ColumnLoadingOption, Table2 } from "@blueprintjs/table";
 
-interface IBigSpaceRock {
+interface BigSpaceRock {
     [key: string]: number | string;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const bigSpaceRocks: IBigSpaceRock[] = require("./potentiallyHazardousAsteroids.json");
+const bigSpaceRocks: BigSpaceRock[] = require("./potentiallyHazardousAsteroids.json");
 
-export interface IColumnLoadingExampleState {
+export interface ColumnLoadingExampleState {
     loadingColumn?: number;
 }
 
-export class ColumnLoadingExample extends React.PureComponent<IExampleProps, IColumnLoadingExampleState> {
-    public state: IColumnLoadingExampleState = {
+export class ColumnLoadingExample extends React.PureComponent<ExampleProps, ColumnLoadingExampleState> {
+    public state: ColumnLoadingExampleState = {
         loadingColumn: 1,
     };
 

@@ -1,6 +1,13 @@
 // Control group
 .#{$ns}-control-group {
 
+  &:not(.#{$ns}-vertical) {
+    > :not(:last-child) {
+      /* To avoid gap between items */
+      margin-right: -1px !important;
+    }
+  }
+
   .#{$ns}-input {
     // inherit radius since it's most likely to be zero
     border-radius: inherit;
@@ -25,12 +32,12 @@
   // round the right corners of the right-most element
   > :last-child {
     margin-right: 0;
-    border-radius: 0 $pt-button-border-radius $pt-button-border-radius 0;
+    border-radius: 0 $pt-button-border-radius $pt-button-border-radius 0 !important;
   }
 
   // round all the corners of the only child element
   > :only-child {
-    border-radius: $pt-button-border-radius;
+    border-radius: $pt-button-border-radius !important;
     margin-right: 0;
   }
 
@@ -117,9 +124,9 @@
   &.#{$ns}-checkbox.#{$ns}-disabled {
     input:checked ~ .#{$ns}-control-indicator {
       &::before {
-        background-image: svg-icon("16px/g-check.svg", (path: (fill: $g-light-active-text-disabled)));
+        background-image: svg-icon("16px/g-check.svg", (path: (fill: $g-light-active-text-disabled))) !important;
         .#{$ns}-dark & {
-          background-image: svg-icon("16px/g-check.svg", (path: (fill: $g-dark-active-text-disabled)));
+          background-image: svg-icon("16px/g-check.svg", (path: (fill: $g-dark-active-text-disabled))) !important;
         }
       }
     }
@@ -335,6 +342,14 @@
 }
 
 .#{$ns}-input-group {
+  /* To show icon with intent (e.g, search icon in select) */
+  .#{$ns}-icon.#{$ns}-intent-primary {
+    color: $g-light-active;
+    .#{$ns}-dark & {
+      color: $g-dark-active;
+    }
+  }
+
   .#{$ns}-input {
     @include box-shadow-as-border($g-light-base5);
 
@@ -343,6 +358,17 @@
     }
   }
 }
+
+.#{$ns}-input-group.#{$ns}-disabled {
+  /* To show icon with intent (e.g, search icon in select) */
+  .#{$ns}-icon.#{$ns}-intent-primary {
+    color: $g-light-active-disabled !important;
+    .#{$ns}-dark & {
+      color: $g-dark-active-disabled !important;
+    }
+  }
+}
+
 
 .#{$ns}-input.#{$ns}-intent-danger {
   @include box-shadow-as-border($g-error-500);
@@ -401,6 +427,14 @@
 // Numeric Input Control Group
 .#{$ns}-numeric-input {
   .#{$ns}-button-group.#{$ns}-vertical > .#{$ns}-button {
+    //fix numeric input buttons
+    &:first-child {
+      border-radius: 0 $pt-border-radius 0 0;
+    }
+    &:last-child {
+      border-radius: 0 0 $pt-border-radius 0;
+    }
+
     box-shadow: none;
     background-color: $g-light-base4;
 
@@ -445,6 +479,29 @@
     text-transform: uppercase; /* off / on text in uppercase */
   }
 
+
+  /* This is needed to ensure the correct colors of the inner circle (when no checked) */
+  .#{$ns}-control-indicator {
+    &::before {
+      background: $switch-indicator-background-color !important;
+      .#{$ns}-dark & {
+        background-color: $dark-switch-indicator-background-color !important;
+      }
+    }
+  }
+
+  &.#{$ns}-control.#{$ns}-disabled {
+    .#{$ns}-control-indicator {
+      &::before {
+        background: $switch-indicator-background-color-disabled !important;
+        .#{$ns}-dark & {
+          background-color: $dark-switch-indicator-background-color-disabled !important;
+        }
+      }
+    }
+  }
+  /*-----*/
+
   input:checked ~ .#{$ns}-control-indicator {
     /* border when checked */
     @include box-shadow-as-border($g-light-active);
@@ -462,9 +519,9 @@
 
     /* inner circle when checked */
     &::before {
-      background-color: $g-highlight-100;
+      background-color: $g-highlight-100 !important;
       .#{$ns}-dark & {
-        background-color: $g-highlight-300;
+        background-color: $g-highlight-300 !important;
       }
     }
   }
@@ -472,9 +529,9 @@
   /* inner circle when checked but disabled */
   &.#{$ns}-control.#{$ns}-disabled {
     input:checked ~ .#{$ns}-control-indicator::before {
-      background-color: $g-highlight-200;
+      background-color: $g-highlight-200 !important;
       .#{$ns}-dark & {
-        background-color: $g-highlight-400;
+        background-color: $g-highlight-400 !important;
       }
     }
   }

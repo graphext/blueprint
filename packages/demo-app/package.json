@@ -1,12 +1,13 @@
 {
   "name": "@blueprintjs/demo-app",
-  "version": "0.1.8",
+  "version": "5.3.0",
   "description": "Blueprint Demo App",
   "private": true,
   "scripts": {
-    "bundle": "webpack --config ./webpack.config.js",
+    "bundle": "webpack",
+    "bundle:analyze": "webpack --profile --json > dist/stats.json && webpack-bundle-analyzer dist/stats.json",
     "clean": "rm -rf dist/*",
-    "dev": "webpack-dev-server --config ./webpack.config.js --host 0.0.0.0",
+    "dev": "webpack-dev-server",
     "dist": "cross-env NODE_ENV=production yarn bundle",
     "lint": "run-p lint:scss lint:es",
     "lint:scss": "sass-lint",
@@ -16,31 +17,27 @@
     "verify": "run-p dist lint"
   },
   "dependencies": {
-    "@blueprintjs/core": "3.53.0-graphext122",
-    "@blueprintjs/datetime": "3.23.20-graphext122",
-    "@blueprintjs/icons": "3.32.0-graphext122",
-    "@blueprintjs/popover2": "0.13.0-graphext122",
-    "@blueprintjs/select": "3.18.12-graphext122",
-    "@blueprintjs/table": "3.9.14-graphext122",
-    "@blueprintjs/timezone": "^3.9.20",
-    "classnames": "^2.2",
-    "core-js": "^3.8.1",
-    "dom4": "^2.1.5",
-    "lodash-es": "^4.17.15",
-    "moment": "^2.29.1",
+    "@blueprintjs/core": "5.3.0-graphext0-beta",
+    "@blueprintjs/datetime": "5.0.10-graphext0-beta",
+    "@blueprintjs/icons": "5.1.6-graphext0-beta",
+    "@blueprintjs/select": "5.0.10-graphext0-beta",
+    "@blueprintjs/table": "5.0.10-graphext0-beta",
+    "classnames": "^2.3.1",
+    "lodash": "^4.17.21",
     "normalize.css": "^8.0.1",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
-    "react-transition-group": "^4.4.1",
-    "tslib": "~1.13.0"
+    "react-transition-group": "^4.4.5",
+    "tslib": "~2.5.0"
   },
   "devDependencies": {
-    "@blueprintjs/node-build-scripts": "^1.6.1",
-    "@blueprintjs/webpack-build-scripts": "^2.0.2",
-    "copy-webpack-plugin": "^6.4.0",
+    "@blueprintjs/node-build-scripts": "^8.0.2",
+    "@blueprintjs/webpack-build-scripts": "^5.0.2",
+    "@types/lodash": "~4.14.191",
+    "copy-webpack-plugin": "^11.0.0",
     "npm-run-all": "^4.1.5",
-    "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.11.0"
+    "webpack-cli": "^5.0.1",
+    "webpack-dev-server": "^4.15.0"
   },
   "repository": {
     "type": "git",

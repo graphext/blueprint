@@ -17,32 +17,27 @@
 import classNames from "classnames";
 import * as React from "react";
 
-import { IRef } from "@blueprintjs/core";
-
 import * as Classes from "../common/classes";
-import { IColumnIndices } from "../common/grid";
+import { ColumnIndices } from "../common/grid";
 import { Utils } from "../common/index";
-import { IClientCoordinates } from "../interactions/dragTypes";
-import { IIndexedResizeCallback } from "../interactions/resizable";
+import { ClientCoordinates } from "../interactions/dragTypes";
+import { IndexedResizeCallback } from "../interactions/resizable";
 import { Orientation } from "../interactions/resizeHandle";
 import { RegionCardinality, Regions } from "../regions";
-import { ColumnHeaderCell, IColumnHeaderCellProps } from "./columnHeaderCell";
-import { Header, IHeaderProps } from "./header";
+import { ColumnHeaderCell, ColumnHeaderCellProps } from "./columnHeaderCell";
+import { Header, HeaderProps } from "./header";
 
-/** @deprecated use ColumnHeaderRenderer */
-export type IColumnHeaderRenderer = (columnIndex: number) => React.ReactElement<IColumnHeaderCellProps>;
-// eslint-disable-next-line deprecation/deprecation
-export type ColumnHeaderRenderer = IColumnHeaderRenderer;
+export type ColumnHeaderRenderer = (columnIndex: number) => React.ReactElement<ColumnHeaderCellProps> | null;
 
-export interface IColumnWidths {
-    minColumnWidth?: number;
-    maxColumnWidth?: number;
-    defaultColumnWidth?: number;
+export interface ColumnWidths {
+    minColumnWidth: number;
+    maxColumnWidth: number;
+    defaultColumnWidth: number;
 }
 
-export interface IColumnHeaderProps extends IHeaderProps, IColumnWidths, IColumnIndices {
+export interface ColumnHeaderProps extends HeaderProps, ColumnWidths, ColumnIndices {
     /**
-     * A IColumnHeaderRenderer that, for each `<Column>`, will delegate to:
+     * A ColumnHeaderRenderer that, for each `<Column>`, will delegate to:
      * 1. The `columnHeaderCellRenderer` method from the `<Column>`
      * 2. A `<ColumnHeaderCell>` using the `name` prop from the `<Column>`
      * 3. A `<ColumnHeaderCell>` with a `name` generated from `Utils.toBase26Alpha`
@@ -53,37 +48,46 @@ export interface IColumnHeaderProps extends IHeaderProps, IColumnWidths, IColumn
      * Ref handler that receives the HTML element that should be measured to
      * indicate the fluid height of the column header.
      */
-    measurableElementRef?: IRef<HTMLDivElement>;
+    measurableElementRef?: React.Ref<HTMLDivElement>;
 
     /**
      * A callback invoked when user is done resizing the column
      */
-    onColumnWidthChanged: IIndexedResizeCallback;
+    onColumnWidthChanged: IndexedResizeCallback;
+
+    /**
+     * Called on component mount.
+     */
+    onMount?: (whichHeader: "column" | "row") => void;
 }
 
-export class ColumnHeader extends React.Component<IColumnHeaderProps> {
+export class ColumnHeader extends React.Component<ColumnHeaderProps> {
     public static defaultProps = {
         isReorderable: false,
         isResizable: true,
         loading: false,
     };
 
+    public componentDidMount() {
+        this.props.onMount?.("column");
+    }
+
     public render() {
         const {
-            // from IColumnHeaderProps
+            // from ColumnHeaderProps
             cellRenderer: renderHeaderCell,
             onColumnWidthChanged,
 
-            // from IColumnWidths
+            // from ColumnWidths
             minColumnWidth: minSize,
             maxColumnWidth: maxSize,
             defaultColumnWidth,
 
-            // from IColumnIndices
+            // from ColumnIndices
             columnIndexStart: indexStart,
             columnIndexEnd: indexEnd,
 
-            // from IHeaderProps
+            // from HeaderProps
             ...spreadableProps
         } = this.props;
 
@@ -101,8 +105,8 @@ export class ColumnHeader extends React.Component<IColumnHeaderProps> {
                 handleResizeDoubleClick={this.handleResizeDoubleClick}
                 handleResizeEnd={this.handleResizeEnd}
                 handleSizeChanged={this.handleSizeChanged}
-                headerCellIsReorderablePropName={"enableColumnReordering"}
-                headerCellIsSelectedPropName={"isColumnSelected"}
+                headerCellIsReorderablePropName="enableColumnReordering"
+                headerCellIsSelectedPropName="isColumnSelected"
                 headerCellRenderer={renderHeaderCell}
                 indexEnd={indexEnd}
                 indexStart={indexStart}
@@ -147,8 +151,7 @@ export class ColumnHeader extends React.Component<IColumnHeaderProps> {
     };
 
     private convertPointToColumn = (clientXOrY: number, useMidpoint?: boolean) => {
-        const { locator } = this.props;
-        return locator != null ? locator.convertPointToColumn(clientXOrY, useMidpoint) : null;
+        return this.props.locator.convertPointToColumn(clientXOrY, useMidpoint);
     };
 
     private getCellExtremaClasses = (index: number, indexEnd: number) => {
@@ -159,7 +162,7 @@ export class ColumnHeader extends React.Component<IColumnHeaderProps> {
         return this.props.grid.getColumnRect(index).width;
     };
 
-    private getDragCoordinate = (clientCoords: IClientCoordinates) => {
+    private getDragCoordinate = (clientCoords: ClientCoordinates) => {
         return clientCoords[0]; // x-coordinate
     };
 
@@ -188,7 +191,7 @@ export class ColumnHeader extends React.Component<IColumnHeaderProps> {
     };
 
     private isCellSelected = (index: number) => {
-        return Regions.hasFullColumn(this.props.selectedRegions, index);
+        return Regions.hasFullColumn(this.props.selectedRegions!, index);
     };
 
     private isGhostIndex = (index: number) => {
