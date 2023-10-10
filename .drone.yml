@@ -51,6 +51,6 @@ steps:
      from_secret: deploy-key
 ---
 kind: signature
-hmac: 403fa8be1d407264e972778cadf128e849d741c03dd1e60324d13dda23298ea0
+hmac: b93d907da7a25ea12533038795c4c3687f067382dda2a2f100120dcc4aa84710
 
 ...
