@@ -22,6 +22,7 @@ steps:
   depends_on:
   - build
   commands:
+  - apk add --update-cache git
   - echo -n $NPMRC | base64 -d > /root/.npmrc
   - npm publish packages/core
   - npm publish packages/icons
@@ -38,6 +39,7 @@ steps:
   depends_on:
   - build
   commands:
+  - apk add --update-cache git
   - yarn dist:apps
   - yarn site:clean
   - yarn copy:docs-app
@@ -52,6 +54,6 @@ steps:
      from_secret: deploy-key
 ---
 kind: signature
-hmac: 10e26b5e8f3138a0c5b172984657314b3b2f05cb28f689864534e05401846889
+hmac: bae1343ebdff125126136c00ccb63d695c9dd456cad815d529c00870a56312b5
 
 ...
