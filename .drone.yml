@@ -24,6 +24,7 @@ steps:
   commands:
   - apk add --update-cache git openssh
   - echo -n $NPMRC | base64 -d > /root/.npmrc
+  - npm config set registry https://npm.graphext.com/
   - npm publish packages/core
   - npm publish packages/icons
   - npm publish packages/datetime
@@ -54,6 +55,6 @@ steps:
      from_secret: deploy-key
 ---
 kind: signature
-hmac: d3e39c4153ce769cb757d1608b6b812212ec8f3ae5be4c90ba79a4aa5051eca4
+hmac: 71ddceccac61f60080469e016d35644f82ebd52af49f5097e8fb3707b8572618
 
 ...
