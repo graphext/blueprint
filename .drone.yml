@@ -27,7 +27,7 @@ steps:
   - npm publish packages/datetime
   - npm publish packages/table
   - npm publish packages/select
-  - npm publish packages/popover2
+  - npm publish packages/datetime2
   - rm /root/.npmrc
   environment:
     NPMRC:
