@@ -6,7 +6,7 @@ trigger:
   - deploy
 steps:
 - name: build
-  image: node:erbium
+  image: node:18-alpine3.18
   commands:
   - echo -n $NPMRC | base64 -d > /root/.npmrc
   - yarn
@@ -33,7 +33,7 @@ steps:
     NPMRC:
      from_secret: NPMRC
 - name: docs
-  image: node:erbium
+  image: node:18-alpine3.18
   depends_on:
   - build
   commands:
@@ -51,6 +51,6 @@ steps:
      from_secret: deploy-key
 ---
 kind: signature
-hmac: 403fa8be1d407264e972778cadf128e849d741c03dd1e60324d13dda23298ea0
+hmac: cc7c6ea833fc53ca782cc96e48d139e1e2725dc4e172547177698c1b6aff56f0
 
 ...
