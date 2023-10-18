@@ -96,6 +96,7 @@
     @include custom-lozenge-color('pacific', $g-pacific-700, $g-pacific-200);
     @include custom-lozenge-color('graphext', $g-graphext-700, $g-graphext-200);
     @include custom-lozenge-color('highlight', $g-highlight-700, $g-highlight-200);
+    @include custom-lozenge-color('contrasting-base', $g-white, $g-dark-base1);
 
     // Custom kinds dark theme:
     .#{$ns}-dark & {
@@ -115,6 +116,7 @@
       @include custom-lozenge-color('pacific', $g-white, $g-pacific-600);
       @include custom-lozenge-color('graphext', $g-white, $g-graphext-600);
       @include custom-lozenge-color('highlight', $g-white, $g-highlight-600);
+      @include custom-lozenge-color('contrasting-base', $g-black, $g-light-base1);
     }
 
     // Disabled
