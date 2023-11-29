@@ -74,8 +74,8 @@ $pt-gp-dark-icon-color: $g-white;
 
 @mixin custom-button-kind($kind, $color: transparent, $background-color: transparent, $border: $background-color) {
   &.#{$ns}-kind-g-#{$kind} {
-    color: $color;
-    background-color: $background-color;
+    color: $color !important;
+    background-color: $background-color !important;
     box-shadow: inset 0 0 0 1px $border;
 
     .#{$ns}-icon {
@@ -171,6 +171,36 @@ $pt-gp-dark-icon-color: $g-white;
     }
   }
 
+  &.#{$ns}-intent-warning {
+    @include custom-button-kind(primary, $g-white, $g-orange-500);
+    @include custom-button-kind(secondary, $g-orange-500, $g-light-base4);
+    @include custom-button-kind(stroked, $g-black, transparent, $g-orange-500);
+    @include custom-button-kind(ghost, $g-orange-500, transparent, transparent);
+
+    &:hover {
+      @include custom-button-kind(primary, $g-white, $g-orange-600);
+      @include custom-button-kind(secondary, $g-orange-600, $g-light-base3);
+      @include custom-button-kind(stroked, $g-black, $g-light-base3, $g-orange-600);
+      @include custom-button-kind(ghost, $g-orange-600, transparent, transparent);
+    }
+
+    &:active,
+    &.#{$ns}-active {
+      @include custom-button-kind(primary, $g-white, $g-orange-600, $g-orange-200);
+      @include custom-button-kind(secondary, $g-orange-600, $g-light-base3, $g-orange-200);
+      @include custom-button-kind(stroked, $g-black, $g-light-base3, $g-orange-200);
+      @include custom-button-kind(ghost, $g-orange-600, $g-light-base3, $g-orange-200);
+    }
+
+    &:disabled,
+    &.#{$ns}-disabled {
+      @include custom-button-kind(primary, $g-orange-500, $g-orange-300);
+      @include custom-button-kind(secondary, $g-orange-300, $g-light-base3);
+      @include custom-button-kind(stroked, $g-light-grey3, transparent, $g-orange-300);
+      @include custom-button-kind(ghost, $g-orange-300, transparent, transparent);
+    }
+  }
+
 
   // Dark Theme
   .#{$ns}-dark & {
@@ -256,6 +286,35 @@ $pt-gp-dark-icon-color: $g-white;
       }
     }
 
+    &.#{$ns}-intent-warning {
+      @include custom-button-kind(primary, $g-white, $g-orange-600);
+      @include custom-button-kind(secondary, $g-orange-600, $g-dark-base4);
+      @include custom-button-kind(stroked, $g-white, transparent, $g-orange-600);
+      @include custom-button-kind(ghost, $g-orange-600, transparent, transparent);
+
+      &:hover {
+        @include custom-button-kind(primary, $g-white, $g-orange-500);
+        @include custom-button-kind(secondary, $g-orange-500, $g-dark-base5);
+        @include custom-button-kind(stroked, $g-white, $g-dark-base5, $g-orange-500);
+        @include custom-button-kind(ghost, $g-orange-500, transparent, transparent);
+      }
+
+      &:active,
+      &.#{$ns}-active {
+        @include custom-button-kind(primary, $g-white, $g-orange-500, $g-orange-300);
+        @include custom-button-kind(secondary, $g-orange-500, $g-dark-base5, $g-orange-300);
+        @include custom-button-kind(stroked, $g-white, $g-dark-base5, $g-orange-300);
+        @include custom-button-kind(ghost, $g-orange-500, $g-dark-base5, $g-orange-300);
+      }
+
+      &:disabled,
+      &.#{$ns}-disabled {
+        @include custom-button-kind(primary, $g-orange-400, $g-orange-700);
+        @include custom-button-kind(secondary, $g-orange-700, $g-dark-base3);
+        @include custom-button-kind(stroked, $g-dark-grey3, transparent, $g-orange-700);
+        @include custom-button-kind(ghost, $g-orange-700, transparent, transparent);
+      }
+    }
   }
 }
 
