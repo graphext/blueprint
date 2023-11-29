@@ -147,6 +147,13 @@
         "codepoint": 5151
     },
     {
+        "displayName": "Fast",
+        "iconName": "g-fast",
+        "tags": "fast, lightning, pro",
+        "group": "Graphext",
+        "codepoint": 3088
+    },
+    {
         "displayName": "Filters",
         "iconName": "g-filters",
         "tags": "reduce, reduced, search ",
