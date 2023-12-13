@@ -840,6 +840,13 @@
         "codepoint": 880
     },
     {
+        "displayName": "Drag Drop",
+        "iconName": "g-drag-drop",
+        "tags": "dragging resize",
+        "group": "Graphext",
+        "codepoint": 881
+    },
+    {
         "displayName": "Flash",
         "iconName": "g-flash",
         "tags": "thunderbolt, gleam, light",
