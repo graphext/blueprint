@@ -6,11 +6,13 @@
   }
 }
 
+.#{$ns}-tag:not(.#{$ns}-g-lozenge) {
+  font-size: $pt-font-size-small !important;
+}
+
 .#{$ns}-tag {
   color: $g-black;
-
   padding: 4px 8px;
-  font-size: $pt-font-size;
 
   // For multiline tags
   >span>p {

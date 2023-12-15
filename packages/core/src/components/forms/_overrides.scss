@@ -601,10 +601,6 @@
 .#{$ns}-form-group {
   margin-bottom: 0; /* Reset margin-bottom */
 
-  label.#{$ns}-label {
-    margin-bottom: $pt-grid-size;
-  }
-
   &.#{$ns}-inline label.#{$ns}-label {
     /* Use padding-right instead of margin-right for inline labels,
        so it does not affect flex-basis */
