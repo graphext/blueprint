@@ -5,13 +5,6 @@
     width: 100%;
     font-size: 14px;
     line-height: 16px;
-
-    &::placeholder {
-      color: $g-light-grey2 !important;
-      .#{$ns}-dark & {
-        color: $g-dark-grey2 !important;
-      }
-    }
   }
 }
 
