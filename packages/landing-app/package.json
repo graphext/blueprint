@@ -16,8 +16,8 @@
     "verify": "run-p dist lint"
   },
   "dependencies": {
-    "@blueprintjs/core": "5.3.0-graphext8",
-    "@blueprintjs/icons": "5.1.6-graphext8",
+    "@blueprintjs/core": "5.3.0-graphext9",
+    "@blueprintjs/icons": "5.1.6-graphext9",
     "classnames": "^2.3.1",
     "react": "^16.14.0",
     "react-dom": "^16.14.0"
