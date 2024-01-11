@@ -124,6 +124,7 @@ export const CONTEXT_MENU = `${NS}-context-menu`;
 export const CONTEXT_MENU_VIRTUAL_TARGET = `${CONTEXT_MENU}-virtual-target`;
 export const CONTEXT_MENU_POPOVER = `${CONTEXT_MENU}-popover`;
 export const CONTEXT_MENU_BACKDROP = `${CONTEXT_MENU}-backdrop`;
+export const CONTEXT_MENU_HEADER = `${CONTEXT_MENU}-header`;
 
 export const CONTROL_GROUP = `${NS}-control-group`;
 
