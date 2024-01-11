@@ -1,10 +1,4 @@
 .#{$ns}-popover {
-  .#{$ns}-popover-content {
-    border-radius: 8px;
-  }
-}
-
-.#{$ns}-popover {
   // To adjust arrow placement
   $g-tooltip2-arrow-adjust: 5px;
 
@@ -33,5 +27,11 @@
 
   .#{$ns}-popover-content {
     border-radius: $pt-grid-size;
+    padding: $pt-grid-size;
+  }
+
+  // Remove padding to Menu inside a Popover
+  .#{$ns}-menu {
+    padding: 0;
   }
 }
