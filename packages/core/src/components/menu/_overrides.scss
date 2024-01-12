@@ -1,3 +1,8 @@
+.#{$ns}-menu {
+  // Use same border-radius than menu-item
+  border-radius: $menu-item-border-radius;
+}
+
 .#{$ns}-menu-item.#{$ns}-active {
   color: $g-black !important;
   background-color: $g-light-base5 !important;
@@ -46,10 +51,6 @@
       color: $g-white !important;
     }
   }
-}
-
-.#{$ns}-menu-item:hover {
-  border-radius: 4px;
 }
 
 .#{$ns}-submenu {
