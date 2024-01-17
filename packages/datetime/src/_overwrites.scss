@@ -6,8 +6,7 @@
 // General Date Picker Colors, Paddings and Sizes
 
 .#{$ns}-datepicker {
-  padding: 12px;
-  box-shadow: $g-shadow-light-1;
+  padding: 8px;
   background-color: $g-light-base3;
 
   .DayPicker-WeekdaysRow {
@@ -18,7 +17,6 @@
     color: $g-light-grey2;
   }
   .#{$ns}-dark & {
-    box-shadow: $g-shadow-dark-1;
     background-color: $g-dark-base3 !important;
     .DayPicker-WeekdaysRow {
       color: $g-dark-grey2;
