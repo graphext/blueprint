@@ -198,9 +198,16 @@
     {
         "displayName": "Delete",
         "iconName": "g-delete",
-        "tags": "trash, cancel, bin, trash can, rubish",
+        "tags": "trash, cancel, bin, trash can, rubbish",
         "group": "Graphext",
         "codepoint": 3504
+    },
+    {
+        "displayName": "Detail View",
+        "iconName": "g-detail-view",
+        "tags": "view, detail",
+        "group": "Graphext",
+        "codepoint": 3087
     },
     {
         "displayName": "Insight",
