@@ -343,6 +343,13 @@
         "codepoint": 543
     },
     {
+        "displayName": "Bucket",
+        "iconName": "g-bucket",
+        "tags": "plot, bucket, customize",
+        "group": "Graphext",
+        "codepoint": 109
+    },
+    {
         "displayName": "Build",
         "iconName": "g-build",
         "tags": "plot, build, customize",
