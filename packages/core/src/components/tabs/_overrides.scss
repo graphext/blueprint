@@ -152,7 +152,10 @@ $stroke-line-left: inset $tab-indicator-width 0;
       box-shadow: $strokeLinePosition !important;
     }
     &:not([aria-disabled="true"]):not(.#{$ns}-g-tab-disable-hover-effect):hover {
-      box-shadow: $strokeLinePosition $pt-intent-primary !important;
+      box-shadow: $strokeLinePosition $g-light-active-hover !important;
+      .#{$ns}-dark & {
+        box-shadow: $strokeLinePosition $g-dark-active-hover !important;
+      }
     }
   }
 }
