@@ -65,3 +65,5 @@ $omnibar-input-height: $pt-grid-size * 4 !default;
 .#{$ns}-omnibar-overlay .#{$ns}-overlay-backdrop {
   background-color: rgba($black, 0.2);
 }
+
+@import "overrides";
