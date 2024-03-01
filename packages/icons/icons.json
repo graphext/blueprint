@@ -938,6 +938,13 @@
         "codepoint": 4208
     },
     {
+        "displayName": "Integration",
+        "iconName": "g-integration",
+        "tags": "integration, database, connection",
+        "group": "Graphext",
+        "codepoint": 3083
+    },
+    {
         "displayName": "Linear",
         "iconName": "g-linear",
         "tags": "line, plot, axis, function, growth, chart, data",
@@ -1230,6 +1237,20 @@
         "tags": "tags, none",
         "group": "Graphext",
         "codepoint": 2482
+    },
+    {
+        "displayName": "Notification read",
+        "iconName": "g-notification-read",
+        "tags": "notification, read",
+        "group": "Graphext",
+        "codepoint": 3219
+    },
+    {
+        "displayName": "Notification unread",
+        "iconName": "g-notification-unread",
+        "tags": "notification, unread",
+        "group": "Graphext",
+        "codepoint": 3825
     },
     {
         "displayName": "Keep bottom",
