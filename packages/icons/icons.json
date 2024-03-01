@@ -1243,14 +1243,14 @@
         "iconName": "g-notification-read",
         "tags": "notification, read",
         "group": "Graphext",
-        "codepoint": 3219
+        "codepoint": 4328
     },
     {
         "displayName": "Notification unread",
         "iconName": "g-notification-unread",
         "tags": "notification, unread",
         "group": "Graphext",
-        "codepoint": 3825
+        "codepoint": 4392
     },
     {
         "displayName": "Keep bottom",
