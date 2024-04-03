@@ -476,6 +476,13 @@
         "codepoint": 2355
     },
     {
+        "displayName": "Key",
+        "iconName": "g-key",
+        "tags": "key, credentials",
+        "group": "Graphext",
+        "codepoint": 2355
+    },
+    {
         "displayName": "Logout",
         "iconName": "g-logout",
         "tags": "sign out, out, arrow, leave",
