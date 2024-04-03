@@ -480,7 +480,7 @@
         "iconName": "g-key",
         "tags": "key, credentials",
         "group": "Graphext",
-        "codepoint": 2355
+        "codepoint": 128273
     },
     {
         "displayName": "Logout",
