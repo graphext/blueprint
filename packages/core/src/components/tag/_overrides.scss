@@ -13,6 +13,7 @@
 .#{$ns}-tag {
   color: $g-black;
   padding: 4px 8px;
+  border-radius: $border-radius-custom;
 
   // For multiline tags
   >span>p {
@@ -77,7 +78,7 @@
 
   // Lozenge
   &.#{$ns}-g-lozenge {
-    border-radius: 8px;
+    border-radius: $border-radius-custom;
     font-size: $pt-font-size-extra-small;
     text-transform: uppercase;
 
@@ -249,7 +250,7 @@
 
   // CUSTOM kind for Tag component
   &.#{$ns}-g-toggle-tag {
-    border-radius: 16px;
+    border-radius: $border-radius-custom;
     background-color: transparent;
     color: $g-black;
 
@@ -300,11 +301,11 @@
   line-height: $pt-grid-size * 2;
   font-size: $pt-font-size;
   padding: 8px;
-  border-radius: 12px;
+  border-radius: $border-radius-custom;
 
   &.#{$ns}-g-toggle-tag,
   & .#{$ns}-g-toggle-tag {
-    border-radius: 16px;
+    border-radius: $border-radius-custom;
   }
 
   // This is forced because they use the 12px cross icon
@@ -318,7 +319,7 @@
 .#{$ns}-tag.#{$ns}-large.#{$ns}-g-lozenge {
   font-size: $pt-font-size-extra-small;
   padding: 8px;
-  border-radius: 8px;
+  border-radius: $border-radius-custom;
 }
 
 .#{$ns}-tag .#{$ns}-g-small,
