@@ -8,6 +8,18 @@
       }
     }
   }
+
+  .#{$ns}-breadcrumbs-collapsed {
+    background: none;
+    transform: rotate(90deg);
+    &::before {
+      background: svg-icon("16px/g-menu.svg", (path: (fill: $g-light-active)));
+
+      .#{$ns}-dark & {
+        background: svg-icon("16px/g-menu.svg", (path: (fill: $g-dark-active)));
+      }
+    }
+  }
 }
 
 .#{$ns}-breadcrumb {
@@ -23,4 +35,8 @@
   .#{$ns}-dark & {
     color: $g-dark-grey1;
   }
+}
+
+.#{$ns}-breadcrumb.#{$ns}-breadcrumb-current {
+  font-weight: normal;
 }
