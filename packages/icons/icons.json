@@ -595,6 +595,13 @@
         "codepoint": 2974
     },
     {
+        "displayName": "Vertical",
+        "iconName": "g-vertical",
+        "tags": "vertical, line, mark",
+        "group": "Graphext",
+        "codepoint": 124
+    },
+    {
         "displayName": "Visibility",
         "iconName": "g-visibility",
         "tags": "see, show, eye, visible",
@@ -887,6 +894,13 @@
         "tags": "house, building, destination, safe ",
         "group": "Graphext",
         "codepoint": 3085
+    },
+    {
+        "displayName": "Horizontal",
+        "iconName": "g-horizontal",
+        "tags": "horizontal, line, mark",
+        "group": "Graphext",
+        "codepoint": 2015
     },
     {
         "displayName": "Recent",
