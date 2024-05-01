@@ -1050,6 +1050,13 @@
         "codepoint": 4167
     },
     {
+        "displayName": "Sidebar open",
+        "iconName": "g-sidebar-open",
+        "tags": "side, sidebar, open",
+        "group": "Graphext",
+        "codepoint": 4325
+    },
+    {
         "displayName": "Talk",
         "iconName": "g-talk",
         "tags": "talk, speak",
