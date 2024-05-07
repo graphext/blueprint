@@ -34,6 +34,23 @@ steps:
   environment:
     NPMRC:
      from_secret: NPMRC
+- name: publish-gar
+  image: node:18-alpine3.19
+  depends_on:
+  - build
+  commands:
+  - apk add --update-cache git openssh
+  - echo -n $NPMRC | base64 -d > /root/.npmrc
+  - npm publish ./packages/core
+  - npm publish ./packages/icons
+  - npm publish ./packages/datetime
+  - npm publish ./packages/table
+  - npm publish ./packages/select
+  - npm publish ./packages/datetime2
+  - rm /root/.npmrc
+  environment:
+    NPMRC:
+      from_secret: NPMRC_GAR_CI
 - name: docs
   image: node:18-alpine3.18
   depends_on:
@@ -54,6 +71,6 @@ steps:
      from_secret: deploy-key
 ---
 kind: signature
-hmac: cf72849d18e779b33cfb0ca9badbb2c493211d27c3e314fb62ed68a07dd8dd06
+hmac: 851d9d3b54bc2627a0cec1542ee6a207f1d1ce3d9bdeeedcc903b462525bea0c
 
 ...
