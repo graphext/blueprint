@@ -16,7 +16,7 @@ steps:
   - rm /root/.npmrc
   environment:
     NPMRC:
-     from_secret: NPMRC
+     from_secret: NPMRC_GAR_CI
 - name: publish
   image: node:18-alpine3.18
   depends_on:
@@ -71,6 +71,6 @@ steps:
      from_secret: deploy-key
 ---
 kind: signature
-hmac: 851d9d3b54bc2627a0cec1542ee6a207f1d1ce3d9bdeeedcc903b462525bea0c
+hmac: 257d0d6452de9a22e622a72a9d375aaf68c0b2ff817e5bd721c5518287ea19d1
 
 ...
