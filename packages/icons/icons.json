@@ -1225,6 +1225,13 @@
         "codepoint": 595
     },
     {
+        "displayName": "Checkbox square ok",
+        "iconName": "g-checkbox-square-ok",
+        "tags": "tags, checkbox, ok, checked",
+        "group": "Graphext",
+        "codepoint": 959
+    },
+    {
         "displayName": "Generic tag",
         "iconName": "g-generic-tag",
         "tags": "tags, generic",
