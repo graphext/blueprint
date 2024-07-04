@@ -457,9 +457,16 @@
     {
         "displayName": "Right",
         "iconName": "g-right",
-        "tags": "arrow, left",
+        "tags": "arrow, right",
         "group": "Graphext",
         "codepoint": 853
+    },
+    {
+        "displayName": "Right solid",
+        "iconName": "g-right-solid",
+        "tags": "arrow, right",
+        "group": "Graphext",
+        "codepoint": 10145
     },
     {
         "displayName": "Data Exploration",
