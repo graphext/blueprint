@@ -231,6 +231,13 @@
         "codepoint": 126
     },
     {
+        "displayName": "More small",
+        "iconName": "g-more-sm",
+        "tags": "plus, add, plus sign, positive, small",
+        "group": "Graphext",
+        "codepoint": 621
+    },
+    {
         "displayName": "Move",
         "iconName": "g-move",
         "tags": "move, move to, send first, send last",
