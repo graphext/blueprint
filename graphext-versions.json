@@ -1,8 +1,8 @@
 {
-  "@blueprintjs/core": "5.3.0-graphext29",
-  "@blueprintjs/datetime": "5.0.10-graphext29",
-  "@blueprintjs/datetime2": "1.0.10-graphext29",
-  "@blueprintjs/icons": "5.1.6-graphext29",
-  "@blueprintjs/select": "5.0.10-graphext29",
-  "@blueprintjs/table": "5.0.10-graphext29"
+  "@blueprintjs/core": "5.3.0-graphext30",
+  "@blueprintjs/datetime": "5.0.10-graphext30",
+  "@blueprintjs/datetime2": "1.0.10-graphext30",
+  "@blueprintjs/icons": "5.1.6-graphext30",
+  "@blueprintjs/select": "5.0.10-graphext30",
+  "@blueprintjs/table": "5.0.10-graphext30"
 }
