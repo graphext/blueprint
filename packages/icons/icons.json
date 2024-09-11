@@ -147,6 +147,13 @@
         "codepoint": 5151
     },
     {
+        "displayName": "Dataset",
+        "iconName": "g-regular",
+        "tags": "dataset, regular, data",
+        "group": "Graphext",
+        "codepoint": 6211
+    },
+    {
         "displayName": "Fast",
         "iconName": "g-fast",
         "tags": "fast, lightning, pro",
