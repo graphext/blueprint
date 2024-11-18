@@ -1470,6 +1470,20 @@
         "codepoint": 1771
     },
     {
+        "displayName": "Push",
+        "iconName": "g-push-md",
+        "tags": "arrows, push",
+        "group": "Graphext",
+        "codepoint": 1772
+    },
+    {
+        "displayName": "Pull",
+        "iconName": "g-pull-md",
+        "tags": "arrows, pull",
+        "group": "Graphext",
+        "codepoint": 1773
+    },
+    {
         "displayName": "Blank",
         "iconName": "blank",
         "tags": "empty, placeholder, nothing",
