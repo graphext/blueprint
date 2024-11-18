@@ -539,6 +539,13 @@
         "codepoint": 2241
     },
     {
+        "displayName": "Number format",
+        "iconName": "g-number-format",
+        "tags": "number, format, decimals",
+        "group": "Graphext",
+        "codepoint": 4217
+    },
+    {
         "displayName": "Open",
         "iconName": "g-open",
         "tags": "new window, link",
