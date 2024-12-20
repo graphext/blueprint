@@ -2,3 +2,22 @@
   height: $pt-grid-size * 3;
   border-radius: $pt-border-radius / 4;
 }
+
+.#{$ns}-tree-node.#{$ns}-tree-node-selected > .#{$ns}-tree-node-content {
+  color: inherit;
+  background-color: $g-primary-200;
+
+  #{$icon-classes} {
+    color: $pt-icon-color;
+  }
+}
+
+.#{$ns}-dark {
+  .#{$ns}-tree-node.#{$ns}-tree-node-selected > .#{$ns}-tree-node-content {
+    background-color: $g-primary-800;
+
+    #{$icon-classes} {
+      color: $pt-icon-color;
+    }
+  }
+}
