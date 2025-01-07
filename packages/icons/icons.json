@@ -245,6 +245,13 @@
         "codepoint": 621
     },
     {
+        "displayName": "More medium",
+        "iconName": "g-more-md",
+        "tags": "plus, add, plus sign, positive, medium",
+        "group": "Graphext",
+        "codepoint": 624
+    },
+    {
         "displayName": "Move",
         "iconName": "g-move",
         "tags": "move, move to, send first, send last",
