@@ -17,11 +17,11 @@
     "verify": "run-p dist lint"
   },
   "dependencies": {
-    "@blueprintjs/core": "5.3.0-graphext38",
-    "@blueprintjs/datetime": "5.0.10-graphext38",
-    "@blueprintjs/icons": "5.1.6-graphext38",
-    "@blueprintjs/select": "5.0.10-graphext38",
-    "@blueprintjs/table": "5.0.10-graphext38",
+    "@blueprintjs/core": "5.3.0-graphext39",
+    "@blueprintjs/datetime": "5.0.10-graphext39",
+    "@blueprintjs/icons": "5.1.6-graphext39",
+    "@blueprintjs/select": "5.0.10-graphext39",
+    "@blueprintjs/table": "5.0.10-graphext39",
     "classnames": "^2.3.1",
     "lodash": "^4.17.21",
     "normalize.css": "^8.0.1",
