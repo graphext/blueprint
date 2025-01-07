@@ -55,6 +55,14 @@
       @include position-editable-text(-8px, -8px); // Should be the same as margin
     }
   }
+
+  &.#{$ns}-g-editable-text-small {
+    margin: 4px 8px; // Forcing smaller margin
+
+    &::before {
+      @include position-editable-text(-4px, -8px); // Should be the same as margin
+    }
+  }
 }
 
 .#{$ns}-editable-text.#{$ns}-disabled {
