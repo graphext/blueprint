@@ -357,6 +357,13 @@
         "codepoint": 4394
     },
     {
+        "displayName": "Pin Categories",
+        "iconName": "g-pin-categories",
+        "tags": "safety pin, attach, detach, clip, categories",
+        "group": "Graphext",
+        "codepoint": 4391
+    },
+    {
         "displayName": "Plot",
         "iconName": "g-plot",
         "tags": "plot",
