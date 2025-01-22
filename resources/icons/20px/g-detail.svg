@@ -1,9 +1,9 @@
 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M9.375 9.37512V6.04179V1.87512H1.875V9.37512H6.04167H9.375Z" stroke="#363B47" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M13.125 18.1251V17.014V15.6251H10.625V18.1251H12.0139H13.125Z" stroke="#363B47" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M13.125 13.1251V12.014V10.6251H10.625V13.1251H12.0139H13.125Z" stroke="#363B47" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M18.125 18.1251V17.014V15.6251H15.625V18.1251H17.0139H18.125Z" stroke="#363B47" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M18.125 13.1251V12.014V10.6251H15.625V13.1251H17.0139H18.125Z" stroke="#363B47" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M11.25 5.62512H14.375V8.75012" stroke="#363B47" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M8.75 14.3751H5.625V11.2501" stroke="#363B47" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M9.375 9.37512V6.04179V1.87512H1.875V9.37512H6.04167H9.375Z" stroke="#363B47" stroke-linecap="round" stroke-linejoin="round" fill="white"/>
+    <path d="M13.125 18.1251V17.014V15.6251H10.625V18.1251H12.0139H13.125Z" stroke="#363B47" stroke-linecap="round" stroke-linejoin="round" fill="white"/>
+    <path d="M13.125 13.1251V12.014V10.6251H10.625V13.1251H12.0139H13.125Z" stroke="#363B47" stroke-linecap="round" stroke-linejoin="round" fill="white"/>
+    <path d="M18.125 18.1251V17.014V15.6251H15.625V18.1251H17.0139H18.125Z" stroke="#363B47" stroke-linecap="round" stroke-linejoin="round" fill="white"/>
+    <path d="M18.125 13.1251V12.014V10.6251H15.625V13.1251H17.0139H18.125Z" stroke="#363B47" stroke-linecap="round" stroke-linejoin="round" fill="white"/>
+    <path d="M11.25 5.62512H14.375V8.75012" stroke="#363B47" stroke-linecap="round" stroke-linejoin="round" fill="white"/>
+    <path d="M8.75 14.3751H5.625V11.2501" stroke="#363B47" stroke-linecap="round" stroke-linejoin="round" fill="white"/>
 </svg>
