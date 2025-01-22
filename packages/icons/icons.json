@@ -210,6 +210,13 @@
         "codepoint": 3504
     },
     {
+        "displayName": "Detail",
+        "iconName": "g-detail",
+        "tags": "detail",
+        "group": "Graphext",
+        "codepoint": 4531
+    },
+    {
         "displayName": "Detail View",
         "iconName": "g-detail-view",
         "tags": "view, detail",
