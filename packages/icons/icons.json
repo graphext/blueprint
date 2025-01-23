@@ -1078,6 +1078,13 @@
         "codepoint": 5089
     },
     {
+        "displayName": "Models",
+        "iconName": "g-models",
+        "tags": "model",
+        "group": "Graphext",
+        "codepoint": 5647
+    },
+    {
         "displayName": "Recommended",
         "iconName": "g-recommended",
         "tags": "recommended",
