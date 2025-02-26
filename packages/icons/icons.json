@@ -1512,6 +1512,28 @@
         "codepoint": 1773
     },
     {
+        "displayName": "Vertical bar chart: descending",
+        "iconName": "g-charts-bars-plot",
+        "tags": "data, chart, graph, plot, descending, levels",
+        "group": "Graphext",
+        "codepoint": 1774
+    },
+    {
+        "displayName": "Dashboard",
+        "iconName": "g-dashboards",
+        "tags": "panel, control, gauge, instrument, meter, speedometer, speed, dial, indicator",
+        "group": "Graphext",
+        "codepoint": 1775
+    },
+    {
+        "displayName": "Function",
+        "iconName": "g-function",
+        "tags": "math, calculation, logic, fx, formula, spreadsheet",
+        "group": "Graphext",
+        "codepoint": 1776
+    },
+
+    {
         "displayName": "Blank",
         "iconName": "blank",
         "tags": "empty, placeholder, nothing",
