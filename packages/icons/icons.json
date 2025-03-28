@@ -910,6 +910,13 @@
         "codepoint": 4547
     },
     {
+        "displayName": "Deploy",
+        "iconName": "g-deploy",
+        "tags": "deploy, rocket, launch, send, start",
+        "group": "Graphext",
+        "codepoint": 3222
+    },
+    {
         "displayName": "Drag",
         "iconName": "g-drag",
         "tags": "dots, four, point, dragging ",
