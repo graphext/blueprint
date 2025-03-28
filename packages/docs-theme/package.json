@@ -36,8 +36,8 @@
   },
   "dependencies": {
     "@blueprintjs/colors": "^5.0.2",
-    "@blueprintjs/core": "5.3.0-graphext46",
-    "@blueprintjs/select": "5.0.10-graphext46",
+    "@blueprintjs/core": "5.3.0-graphext47",
+    "@blueprintjs/select": "5.0.10-graphext47",
     "@documentalist/client": "^4.0.0",
     "classnames": "^2.3.1",
     "fuzzaldrin-plus": "^0.6.0",

@@ -10,7 +10,7 @@
     "test": "exit 0"
   },
   "dependencies": {
-    "@blueprintjs/core": "5.3.0-graphext46",
+    "@blueprintjs/core": "5.3.0-graphext47",
     "@blueprintjs/docs-theme": "^5.0.10",
     "@documentalist/compiler": "^4.0.0",
     "escape-html": "^1.0.3",
