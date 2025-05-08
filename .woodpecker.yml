@@ -49,7 +49,7 @@ steps:
       - rm /root/.npmrc
     environment:
       NPMRC:
-        from_secret: NPMRC_GAR_CI
+        from_secret: NPMRC_GAR_CI_PRIVATE
     depends_on:
       - build
     <<: *default_backend_options
