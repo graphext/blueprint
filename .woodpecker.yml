@@ -12,11 +12,13 @@ variables:
       kubernetes:
         resources:
           requests:
-            memory: 1Gi
-            cpu: 2000m
-          limits:
             memory: 4Gi
+            cpu: 2000m
+            ephemeral-storage: 4Gi
+          limits:
+            memory: 8Gi
             cpu: 4000m
+            ephemeral-storage: 4Gi
 
 steps:
   - name: build
