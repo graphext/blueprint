@@ -273,6 +273,13 @@
         "codepoint": 938
     },
     {
+        "displayName": "learn",
+        "iconName": "g-learn",
+        "tags": "learn, book, study, knowledge",
+        "group": "Graphext",
+        "codepoint": 2202
+    },
+    {
         "displayName": "less",
         "iconName": "g-less",
         "tags": "substract, minus sign, negative, line, horizontal",
