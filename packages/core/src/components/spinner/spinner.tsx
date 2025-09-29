@@ -41,7 +41,7 @@ const MIN_SIZE = 10;
 const STROKE_WIDTH = 4;
 const MIN_STROKE_WIDTH = 16;
 
-export interface SpinnerProps<T extends HTMLElement = HTMLElement> extends Props, IntentProps, React.HTMLAttributes<T> {
+export interface SpinnerProps<T extends HTMLElement = HTMLElement> extends Props, IntentProps, Omit<React.HTMLAttributes<T>, "onBeforeInput"> {
     /**
      * Width and height of the spinner in pixels. The size cannot be less than
      * 10px.
