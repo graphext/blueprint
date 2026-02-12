@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-import { assert } from "chai";
+import { render, screen, waitFor } from "@testing-library/react";
+import { assert, expect } from "chai";
 import { mount, shallow } from "enzyme";
 import * as React from "react";
 import { spy } from "sinon";
@@ -40,21 +41,46 @@ describe("<Tag>", () => {
     });
 
     it("renders icons", () => {
-        const wrapper = shallow(<Tag icon="tick" rightIcon="airplane" />);
+        const wrapper = shallow(<Tag icon="tick" endIcon="airplane" />);
         assert.lengthOf(wrapper.find(Icon), 2);
     });
 
+    it("prefers endIcon to rightIcon", () => {
+        const endIcon = <Icon icon="airplane" data-testid="endIcon" />;
+        const rightIcon = <Icon icon="tick" data-testid="rightIcon" />;
+        render(
+            // eslint-disable-next-line @typescript-eslint/no-deprecated
+            <Tag endIcon={endIcon} rightIcon={rightIcon} />,
+        );
+        expect(screen.getByTestId("endIcon")).to.exist;
+        expect(screen.queryByTestId("rightIcon")).not.to.exist;
+    });
+
     it("renders close button when onRemove is a function", () => {
-        const wrapper = shallow(<Tag onRemove={spy()}>Hello</Tag>);
+        const wrapper = mount(<Tag onRemove={spy()}>Hello</Tag>);
         assert.lengthOf(wrapper.find(`.${Classes.TAG_REMOVE}`), 1);
     });
 
     it("clicking close button triggers onRemove", () => {
         const handleRemove = spy();
-        shallow(<Tag onRemove={handleRemove}>Hello</Tag>)
+        mount(<Tag onRemove={handleRemove}>Hello</Tag>)
             .find(`.${Classes.TAG_REMOVE}`)
             .simulate("click");
         assert.isTrue(handleRemove.calledOnce);
+    });
+
+    it("should be interactive when onClick is provided", () => {
+        const wrapper = mount(<Tag onClick={spy()}>Hello</Tag>);
+        assert.lengthOf(wrapper.find(`.${Classes.INTERACTIVE}`), 1);
+    });
+
+    it("should not be interactive when interactive={false}", () => {
+        const wrapper = mount(
+            <Tag onClick={spy()} interactive={false}>
+                Hello
+            </Tag>,
+        );
+        assert.lengthOf(wrapper.find(`.${Classes.INTERACTIVE}`), 0);
     });
 
     it(`passes other props onto .${Classes.TAG} element`, () => {
@@ -66,13 +92,13 @@ describe("<Tag>", () => {
         const handleRemove = spy();
         const DATA_ATTR_FOO = "data-foo";
         const tagProps = {
-            onRemove: handleRemove,
             [DATA_ATTR_FOO]: {
                 bar: "baz",
                 foo: 5,
             },
+            onRemove: handleRemove,
         };
-        shallow(<Tag {...tagProps}>Hello</Tag>)
+        mount(<Tag {...tagProps}>Hello</Tag>)
             .find(`.${Classes.TAG_REMOVE}`)
             .simulate("click");
         assert.isTrue(handleRemove.args.length > 0 && handleRemove.args[0].length === 2);
@@ -80,14 +106,13 @@ describe("<Tag>", () => {
         assert.deepEqual(handleRemove.args[0][1][DATA_ATTR_FOO], tagProps[DATA_ATTR_FOO]);
     });
 
-    it("supports ref objects", done => {
+    it("supports ref objects", async () => {
         const elementRef = React.createRef<HTMLSpanElement>();
         const wrapper = mount(<Tag ref={elementRef}>Hello</Tag>);
 
         // wait for the whole lifecycle to run
-        setTimeout(() => {
+        await waitFor(() => {
             assert.equal(elementRef.current, wrapper.find(`.${Classes.TAG}`).getDOMNode<HTMLSpanElement>());
-            done();
-        }, 0);
+        });
     });
 });

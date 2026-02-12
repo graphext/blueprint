@@ -14,12 +14,13 @@
  * limitations under the License.
  */
 
+import { waitFor } from "@testing-library/dom";
 import { assert, expect } from "chai";
-import { MountRendererProps, ReactWrapper, mount as untypedMount } from "enzyme";
+import { type MountRendererProps, type ReactWrapper, mount as untypedMount } from "enzyme";
 import * as React from "react";
 import sinon from "sinon";
 
-import { Button, Classes, Intent, Tag, TagInput, TagInputProps } from "../../src";
+import { Button, Classes, Intent, Tag, TagInput, type TagInputProps } from "../../src";
 
 /**
  * @see https://github.com/DefinitelyTyped/DefinitelyTyped/issues/26979#issuecomment-465304376
@@ -116,6 +117,13 @@ describe("<TagInput>", () => {
             assert.isTrue(onAdd.notCalled);
         });
 
+        it("is not invoked on enter when input is composing", () => {
+            const onAdd = sinon.stub();
+            const wrapper = mountTagInput(onAdd);
+            pressEnterInInputWhenComposing(wrapper, "构成");
+            assert.isTrue(onAdd.notCalled);
+        });
+
         it("is invoked on enter", () => {
             const onAdd = sinon.stub();
             const wrapper = mountTagInput(onAdd);
@@ -125,7 +133,7 @@ describe("<TagInput>", () => {
             assert.deepEqual(onAdd.args[0][1], "default");
         });
 
-        it("is invoked on blur when addOnBlur=true", done => {
+        it("is invoked on blur when addOnBlur=true", async () => {
             const onAdd = sinon.stub();
             const wrapper = mount(<TagInput values={VALUES} addOnBlur={true} onAdd={onAdd} />);
             // simulate typing input text
@@ -133,34 +141,31 @@ describe("<TagInput>", () => {
             wrapper.find("input").simulate("change", { currentTarget: { value: NEW_VALUE } });
             wrapper.simulate("blur");
 
-            // Need setTimeout here to wait for focus to change after blur event
-            setTimeout(() => {
+            // Wait for focus to change after blur event
+            await waitFor(() => {
                 assert.isTrue(onAdd.calledOnce);
                 assert.deepEqual(onAdd.args[0][0], [NEW_VALUE]);
                 assert.equal(onAdd.args[0][1], "blur");
-                done();
-            }, 50);
-        });
-
-        it("is not invoked on blur when addOnBlur=true but inputValue is empty", done => {
-            const onAdd = sinon.stub();
-            const wrapper = mount(<TagInput values={VALUES} addOnBlur={true} onAdd={onAdd} />);
-            wrapper.simulate("blur");
-            // Need setTimeout here to wait for focus to change after blur event
-            setTimeout(() => {
-                assert.isTrue(onAdd.notCalled);
-                done();
             });
         });
 
-        it("is not invoked on blur when addOnBlur=false", done => {
+        it("is not invoked on blur when addOnBlur=true but inputValue is empty", async () => {
+            const onAdd = sinon.stub();
+            const wrapper = mount(<TagInput values={VALUES} addOnBlur={true} onAdd={onAdd} />);
+            wrapper.simulate("blur");
+            // Wait for focus to change after blur event
+            await waitFor(() => {
+                assert.isTrue(onAdd.notCalled);
+            });
+        });
+
+        it("is not invoked on blur when addOnBlur=false", async () => {
             const onAdd = sinon.stub();
             const wrapper = mount(<TagInput values={VALUES} inputProps={{ value: NEW_VALUE }} onAdd={onAdd} />);
             wrapper.simulate("blur");
-            // Need setTimeout here to wait for focus to change after blur event
-            setTimeout(() => {
+            // Wait for focus to change after blur event
+            await waitFor(() => {
                 assert.isTrue(onAdd.notCalled);
-                done();
             });
         });
 
@@ -204,24 +209,30 @@ describe("<TagInput>", () => {
         it("does not clear the input if onAdd returns false", () => {
             const onAdd = sinon.stub().returns(false);
             const wrapper = mountTagInput(onAdd);
-            wrapper.setState({ inputValue: NEW_VALUE });
-            pressEnterInInput(wrapper, NEW_VALUE);
+            React.act(() => {
+                wrapper.setState({ inputValue: NEW_VALUE });
+                pressEnterInInput(wrapper, NEW_VALUE);
+            });
             assert.strictEqual(wrapper.state().inputValue, NEW_VALUE);
         });
 
         it("clears the input if onAdd returns true", () => {
             const onAdd = sinon.stub().returns(true);
             const wrapper = mountTagInput(onAdd);
-            wrapper.setState({ inputValue: NEW_VALUE });
-            pressEnterInInput(wrapper, NEW_VALUE);
+            React.act(() => {
+                wrapper.setState({ inputValue: NEW_VALUE });
+                pressEnterInInput(wrapper, NEW_VALUE);
+            });
             assert.strictEqual(wrapper.state().inputValue, "");
         });
 
         it("clears the input if onAdd returns nothing", () => {
             const onAdd = sinon.stub();
             const wrapper = mountTagInput(onAdd);
-            wrapper.setState({ inputValue: NEW_VALUE });
-            pressEnterInInput(wrapper, NEW_VALUE);
+            React.act(() => {
+                wrapper.setState({ inputValue: NEW_VALUE });
+                pressEnterInInput(wrapper, NEW_VALUE);
+            });
             assert.strictEqual(wrapper.state().inputValue, "");
         });
 
@@ -375,24 +386,30 @@ describe("<TagInput>", () => {
         it("does not clear the input if onChange returns false", () => {
             const onChange = sinon.stub().returns(false);
             const wrapper = mount(<TagInput onChange={onChange} values={VALUES} />);
-            wrapper.setState({ inputValue: NEW_VALUE });
-            pressEnterInInput(wrapper, NEW_VALUE);
+            React.act(() => {
+                wrapper.setState({ inputValue: NEW_VALUE });
+                pressEnterInInput(wrapper, NEW_VALUE);
+            });
             assert.strictEqual(wrapper.state().inputValue, NEW_VALUE);
         });
 
         it("clears the input if onChange returns true", () => {
             const onChange = sinon.stub().returns(true);
             const wrapper = mount(<TagInput onChange={onChange} values={VALUES} />);
-            wrapper.setState({ inputValue: NEW_VALUE });
-            pressEnterInInput(wrapper, NEW_VALUE);
+            React.act(() => {
+                wrapper.setState({ inputValue: NEW_VALUE });
+                pressEnterInInput(wrapper, NEW_VALUE);
+            });
             assert.strictEqual(wrapper.state().inputValue, "");
         });
 
         it("clears the input if onChange returns nothing", () => {
             const onChange = sinon.spy();
             const wrapper = mount(<TagInput onChange={onChange} values={VALUES} />);
-            wrapper.setState({ inputValue: NEW_VALUE });
-            pressEnterInInput(wrapper, NEW_VALUE);
+            React.act(() => {
+                wrapper.setState({ inputValue: NEW_VALUE });
+                pressEnterInInput(wrapper, NEW_VALUE);
+            });
             assert.strictEqual(wrapper.state().inputValue, "");
         });
 
@@ -455,7 +472,7 @@ describe("<TagInput>", () => {
         it("pressing backspace does not remove item", () => {
             const onRemove = sinon.spy();
             const wrapper = mount(<TagInput onRemove={onRemove} values={VALUES} />);
-            wrapper.find("input").simulate("keydown", createInputKeydownEventMetadata("text", "Backspace"));
+            wrapper.find("input").simulate("keydown", createInputKeydownEventMetadata("text", "Backspace", false));
             assert.isTrue(onRemove.notCalled);
         });
     });
@@ -576,13 +593,20 @@ describe("<TagInput>", () => {
     });
 
     function pressEnterInInput(wrapper: ReactWrapper<any, any>, value: string) {
-        wrapper.find("input").prop("onKeyDown")?.(createInputKeydownEventMetadata(value, "Enter") as any);
+        wrapper.find("input").prop("onKeyDown")?.(createInputKeydownEventMetadata(value, "Enter", false) as any);
     }
 
-    function createInputKeydownEventMetadata(value: string, key: string) {
+    function pressEnterInInputWhenComposing(wrapper: ReactWrapper<any, any>, value: string) {
+        wrapper.find("input").prop("onKeyDown")?.(createInputKeydownEventMetadata(value, "Enter", true) as any);
+    }
+
+    function createInputKeydownEventMetadata(value: string, key: string, isComposing: boolean) {
         return {
             currentTarget: { value },
             key,
+            nativeEvent: {
+                isComposing,
+            },
             // Enzyme throws errors if we don't mock the stopPropagation method.
             stopPropagation: () => {
                 return;
@@ -596,7 +620,9 @@ function runKeyPressTest(callbackName: "onKeyDown" | "onKeyUp", startIndex: numb
     const inputProps = { [callbackName]: sinon.spy() };
     const wrapper = mount(<TagInput values={VALUES} inputProps={inputProps} {...{ [callbackName]: callbackSpy }} />);
 
-    wrapper.setState({ activeIndex: startIndex });
+    React.act(() => {
+        wrapper.setState({ activeIndex: startIndex });
+    });
 
     const eventName = callbackName === "onKeyDown" ? "keydown" : "keyup";
     wrapper.find("input").simulate("focus").simulate(eventName, { key: "Enter" });

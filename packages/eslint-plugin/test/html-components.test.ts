@@ -14,20 +14,20 @@
  * limitations under the License.
  */
 
-import { TSESLint } from "@typescript-eslint/utils";
+import { RuleTester } from "@typescript-eslint/rule-tester";
 import dedent from "dedent";
 
 import { htmlComponentsRule } from "../src/rules/html-components";
 
-// tslint:disable object-literal-sort-keys
+/* eslint-disable sort-keys */
 
-const ruleTester = new TSESLint.RuleTester({
-    parser: require.resolve("@typescript-eslint/parser"),
-    parserOptions: {
-        ecmaFeatures: {
-            jsx: true,
+const ruleTester = new RuleTester({
+    languageOptions: {
+        parserOptions: {
+            ecmaFeatures: {
+                jsx: true,
+            },
         },
-        sourceType: "module",
     },
 });
 

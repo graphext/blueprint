@@ -24,11 +24,9 @@
   }
 }
 
-/* overrides default bp value */
+/* overrides default bp value (upstream moved from margin-right to column-gap in 5.5+) */
 .#{$ns}-tab-list {
-  > *:not(:last-child) {
-    margin-right: 0;
-  }
+  column-gap: 0;
 }
 
 .#{$ns}-tab {

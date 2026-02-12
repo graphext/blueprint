@@ -19,13 +19,13 @@
 import * as React from "react";
 
 import { Menu, MenuItem } from "@blueprintjs/core";
-import { Example, ExampleProps } from "@blueprintjs/docs-theme";
+import { Example, type ExampleProps } from "@blueprintjs/docs-theme";
 import {
     Cell,
     Column,
     ColumnHeaderCell,
     CopyCellsMenuItem,
-    MenuContext,
+    type MenuContext,
     SelectionModes,
     Table2,
     Utils,
@@ -38,11 +38,14 @@ export type CellLookup = (rowIndex: number, columnIndex: number) => any;
 export type SortCallback = (columnIndex: number, comparator: (a: any, b: any) => number) => void;
 
 export interface SortableColumn {
-    getColumn(getCellData: CellLookup, sortColumn: SortCallback): JSX.Element;
+    getColumn(getCellData: CellLookup, sortColumn: SortCallback): React.JSX.Element;
 }
 
 abstract class AbstractSortableColumn implements SortableColumn {
-    constructor(protected name: string, protected index: number) {}
+    constructor(
+        protected name: string,
+        protected index: number,
+    ) {}
 
     public getColumn(getCellData: CellLookup, sortColumn: SortCallback) {
         const cellRenderer = (rowIndex: number, columnIndex: number) => (
@@ -60,7 +63,7 @@ abstract class AbstractSortableColumn implements SortableColumn {
         );
     }
 
-    protected abstract renderMenu(sortColumn: SortCallback): JSX.Element;
+    protected abstract renderMenu(sortColumn: SortCallback): React.JSX.Element;
 }
 
 class TextSortableColumn extends AbstractSortableColumn {
@@ -155,7 +158,6 @@ class RecordSortableColumn extends AbstractSortableColumn {
                 />
             </Menu>
         );
-        // tslint:enable:jsx-no-lambda
     }
 
     private transformCompare(transform: (a: any) => any, reverse: boolean) {
@@ -214,6 +216,7 @@ export class TableSortableExample extends React.PureComponent<ExampleProps> {
                     selectionModes={SelectionModes.COLUMNS_AND_CELLS}
                     getCellClipboardData={this.getCellData}
                     cellRendererDependencies={[this.state.sortedIndexMap]}
+                    // eslint-disable-next-line @typescript-eslint/no-deprecated
                     enableFocusedCell={true}
                 >
                     {columns}

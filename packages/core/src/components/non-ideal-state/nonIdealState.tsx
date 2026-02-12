@@ -17,9 +17,9 @@
 import classNames from "classnames";
 import * as React from "react";
 
-import { IconName, IconSize } from "@blueprintjs/icons";
+import { type IconName, IconSize } from "@blueprintjs/icons";
 
-import { AbstractPureComponent, Classes, DISPLAYNAME_PREFIX, MaybeElement, Props } from "../../common";
+import { AbstractPureComponent, Classes, DISPLAYNAME_PREFIX, type MaybeElement, type Props } from "../../common";
 import { ensureElement } from "../../common/utils";
 import { H4 } from "../html/html";
 import { Icon } from "../icon/icon";
@@ -32,7 +32,7 @@ export enum NonIdealStateIconSize {
 
 export interface NonIdealStateProps extends Props {
     /** An action to resolve the non-ideal state which appears after `description`. */
-    action?: JSX.Element;
+    action?: React.JSX.Element;
 
     /**
      * Advanced usage: React `children` will appear last (after `action`).
@@ -44,9 +44,9 @@ export interface NonIdealStateProps extends Props {
      * A longer description of the non-ideal state.
      * A string or number value will be wrapped in a `<div>` to preserve margins.
      */
-    description?: React.ReactChild;
+    description?: React.ReactNode;
 
-    /** The name of a Blueprint icon or a JSX Element (such as `<Spinner/>`) to render above the title. */
+    /** The name of a Blueprint icon or a JSX element (such as `<Spinner/>`) to render above the title. */
     icon?: IconName | MaybeElement;
 
     /**
@@ -55,6 +55,13 @@ export interface NonIdealStateProps extends Props {
      * @default NonIdealStateIconSize.STANDARD
      */
     iconSize?: NonIdealStateIconSize;
+
+    /**
+     * Whether the icon should use a muted style.
+     *
+     * @default true
+     */
+    iconMuted?: boolean;
 
     /**
      * Component layout, either vertical or horizontal.
@@ -76,6 +83,7 @@ export class NonIdealState extends AbstractPureComponent<NonIdealStateProps> {
     public static displayName = `${DISPLAYNAME_PREFIX}.NonIdealState`;
 
     public static defaultProps: Partial<NonIdealStateProps> = {
+        iconMuted: true,
         iconSize: NonIdealStateIconSize.STANDARD,
         layout: "vertical",
     };
@@ -94,7 +102,7 @@ export class NonIdealState extends AbstractPureComponent<NonIdealStateProps> {
     }
 
     private maybeRenderVisual() {
-        const { icon, iconSize } = this.props;
+        const { icon, iconMuted, iconSize } = this.props;
         if (icon == null) {
             return undefined;
         } else {
@@ -103,7 +111,13 @@ export class NonIdealState extends AbstractPureComponent<NonIdealStateProps> {
                     className={Classes.NON_IDEAL_STATE_VISUAL}
                     style={{ fontSize: `${iconSize}px`, lineHeight: `${iconSize}px` }}
                 >
-                    <Icon icon={icon} size={iconSize} aria-hidden={true} tabIndex={-1} />
+                    <Icon
+                        className={classNames({ [Classes.ICON_MUTED]: iconMuted })}
+                        icon={icon}
+                        size={iconSize}
+                        aria-hidden={true}
+                        tabIndex={-1}
+                    />
                 </div>
             );
         }

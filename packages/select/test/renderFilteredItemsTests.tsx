@@ -18,7 +18,7 @@ import { assert } from "chai";
 import * as React from "react";
 import sinon from "sinon";
 
-import { ItemListRendererProps, renderFilteredItems } from "../src";
+import { type ItemListRendererProps, renderFilteredItems } from "../src";
 
 describe("renderFilteredItems()", () => {
     const PROPS: ItemListRendererProps<string> = {
@@ -44,7 +44,7 @@ describe("renderFilteredItems()", () => {
     });
 
     it("returns filteredItems mapped through renderItem", () => {
-        const elements = renderFilteredItems(PROPS) as JSX.Element[];
+        const elements = renderFilteredItems(PROPS) as React.JSX.Element[];
         assert.lengthOf(elements, PROPS.filteredItems.length);
     });
 });

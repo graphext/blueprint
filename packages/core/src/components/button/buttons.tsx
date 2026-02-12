@@ -17,12 +17,17 @@
 import classNames from "classnames";
 import * as React from "react";
 
+import {
+    useInteractiveAttributes,
+    type UseInteractiveAttributesOptions,
+} from "../../accessibility/useInteractiveAttributes";
 import { Classes, Utils } from "../../common";
 import { DISPLAYNAME_PREFIX, removeNonHTMLProps } from "../../common/props";
-import { mergeRefs } from "../../common/refs";
 import { Icon } from "../icon/icon";
 import { Spinner, SpinnerSize } from "../spinner/spinner";
-import { AnchorButtonProps, ButtonProps } from "./buttonProps";
+import { Text } from "../text/text";
+
+import type { AnchorButtonProps, ButtonProps } from "./buttonProps";
 
 /**
  * Button component.
@@ -47,16 +52,19 @@ Button.displayName = `${DISPLAYNAME_PREFIX}.Button`;
  */
 export const AnchorButton: React.FC<AnchorButtonProps> = React.forwardRef<HTMLAnchorElement, AnchorButtonProps>(
     (props, ref) => {
-        const { href, tabIndex = 0 } = props;
-        const commonProps = useSharedButtonAttributes(props, ref);
+        const { href } = props;
+        const commonProps = useSharedButtonAttributes(props, ref, {
+            defaultTabIndex: 0,
+            disabledTabIndex: -1,
+        });
 
         return (
             <a
                 role="button"
                 {...removeNonHTMLProps(props)}
                 {...commonProps}
+                aria-disabled={commonProps.disabled}
                 href={commonProps.disabled ? undefined : href}
-                tabIndex={commonProps.disabled ? -1 : tabIndex}
             >
                 {renderButtonContents(props)}
             </a>
@@ -71,78 +79,46 @@ AnchorButton.displayName = `${DISPLAYNAME_PREFIX}.AnchorButton`;
 function useSharedButtonAttributes<E extends HTMLAnchorElement | HTMLButtonElement>(
     props: E extends HTMLAnchorElement ? AnchorButtonProps : ButtonProps,
     ref: React.Ref<E>,
+    options?: UseInteractiveAttributesOptions,
 ) {
-    const { active = false, alignText, fill, large, loading = false, outlined, minimal, small, tabIndex } = props;
+    const {
+        alignText,
+        fill,
+        // eslint-disable-next-line @typescript-eslint/no-deprecated
+        large,
+        loading = false,
+        // eslint-disable-next-line @typescript-eslint/no-deprecated
+        minimal,
+        // eslint-disable-next-line @typescript-eslint/no-deprecated
+        outlined,
+        size = "medium",
+        // eslint-disable-next-line @typescript-eslint/no-deprecated
+        small,
+        variant = "solid",
+    } = props;
     const disabled = props.disabled || loading;
 
-    // the current key being pressed
-    const [currentKeyPressed, setCurrentKeyPressed] = React.useState<string | undefined>();
-    // whether the button is in "active" state
-    const [isActive, setIsActive] = React.useState(false);
-    // our local ref for the button element, merged with the consumer's own ref (if supplied) in this hook's return value
-    const buttonRef = React.useRef<E | null>(null);
-
-    const handleBlur = React.useCallback(
-        (e: React.FocusEvent<any>) => {
-            if (isActive) {
-                setIsActive(false);
-            }
-            props.onBlur?.(e);
-        },
-        [isActive, props.onBlur],
-    );
-    const handleKeyDown = React.useCallback(
-        (e: React.KeyboardEvent<any>) => {
-            if (Utils.isKeyboardClick(e)) {
-                e.preventDefault();
-                if (e.key !== currentKeyPressed) {
-                    setIsActive(true);
-                }
-            }
-            setCurrentKeyPressed(e.key);
-            props.onKeyDown?.(e);
-        },
-        [currentKeyPressed, props.onKeyDown],
-    );
-    const handleKeyUp = React.useCallback(
-        (e: React.KeyboardEvent<any>) => {
-            if (Utils.isKeyboardClick(e)) {
-                setIsActive(false);
-                buttonRef.current?.click();
-            }
-            setCurrentKeyPressed(undefined);
-            props.onKeyUp?.(e);
-        },
-        [props.onKeyUp],
-    );
+    const [active, interactiveProps] = useInteractiveAttributes(!disabled, props, ref, options);
 
     const className = classNames(
         Classes.BUTTON,
         {
-            [Classes.ACTIVE]: !disabled && (active || isActive),
+            [Classes.ACTIVE]: active,
             [Classes.DISABLED]: disabled,
             [Classes.FILL]: fill,
-            [Classes.LARGE]: large,
             [Classes.LOADING]: loading,
-            [Classes.MINIMAL]: minimal,
-            [Classes.OUTLINED]: outlined,
-            [Classes.SMALL]: small,
         },
         Classes.alignmentClass(alignText),
         Classes.intentClass(props.intent),
+        Classes.sizeClass(size, { large, small }),
+        Classes.variantClass(variant, { minimal, outlined }),
         props.className,
     );
 
     return {
+        ...interactiveProps,
         className,
         disabled,
-        onBlur: handleBlur,
-        onClick: disabled ? undefined : props.onClick,
-        onFocus: disabled ? undefined : props.onFocus,
-        onKeyDown: handleKeyDown,
-        onKeyUp: handleKeyUp,
-        ref: mergeRefs(buttonRef, ref),
-        tabIndex: disabled ? -1 : tabIndex,
     };
 }
 
@@ -152,19 +128,24 @@ function useSharedButtonAttributes<E extends HTMLAnchorElement | HTMLButtonEleme
 function renderButtonContents<E extends HTMLAnchorElement | HTMLButtonElement>(
     props: E extends HTMLAnchorElement ? AnchorButtonProps : ButtonProps,
 ) {
-    const { children, icon, loading, rightIcon, text } = props;
+    // eslint-disable-next-line @typescript-eslint/no-deprecated
+    const { children, ellipsizeText, endIcon, icon, loading, rightIcon, text, textClassName } = props;
     const hasTextContent = !Utils.isReactNodeEmpty(text) || !Utils.isReactNodeEmpty(children);
     return (
         <>
-            {loading && <Spinner key="loading" className={Classes.BUTTON_SPINNER} size={SpinnerSize.SMALL} />}
-            <Icon key="leftIcon" icon={icon} />
+            {loading && <Spinner className={Classes.BUTTON_SPINNER} size={SpinnerSize.SMALL} />}
+            <Icon icon={icon} />
             {hasTextContent && (
-                <span key="text" className={Classes.BUTTON_TEXT}>
+                <Text
+                    className={classNames(Classes.BUTTON_TEXT, textClassName)}
+                    ellipsize={ellipsizeText}
+                    tagName="span"
+                >
                     {text}
                     {children}
-                </span>
+                </Text>
             )}
-            <Icon key="rightIcon" icon={rightIcon} />
+            <Icon icon={endIcon ?? rightIcon} />
         </>
     );
 }

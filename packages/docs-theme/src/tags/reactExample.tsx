@@ -14,17 +14,17 @@
  * limitations under the License.
  */
 
-import { ITag } from "@documentalist/client";
+import type { Tag } from "@documentalist/client";
 import * as React from "react";
 
 import { AnchorButton, Intent } from "@blueprintjs/core";
 import { Code } from "@blueprintjs/icons";
 
-import { ExampleProps } from "../components/example";
+import type { ExampleProps } from "../components/example";
 
 export interface ExampleRenderInfo {
     sourceUrl: string;
-    render: (props: ExampleProps) => JSX.Element | undefined;
+    render: (props: ExampleProps) => React.JSX.Element | undefined;
 }
 
 // construct a map of package name to all examples defined in that package.
@@ -41,7 +41,7 @@ export class ReactExampleTagRenderer {
      * it to an actual example component exported by one of the packages. Also returns
      * the URL of the source code on GitHub.
      */
-    public render: React.FC<ITag> = ({ value: exampleName }) => {
+    public render: React.FC<Tag> = ({ value: exampleName }) => {
         if (exampleName == null) {
             return null;
         }
@@ -59,9 +59,9 @@ export class ReactExampleTagRenderer {
                     href={example.sourceUrl}
                     icon={<Code />}
                     intent={Intent.PRIMARY}
-                    minimal={true}
                     target="_blank"
                     text="View source on GitHub"
+                    variant="minimal"
                 />
             </>
         );

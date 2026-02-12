@@ -17,7 +17,7 @@
 import classNames from "classnames";
 import * as React from "react";
 
-import { Boundary, Classes, DISPLAYNAME_PREFIX, Props } from "../../common";
+import { Boundary, Classes, DISPLAYNAME_PREFIX, type Props } from "../../common";
 import { OVERFLOW_LIST_OBSERVE_PARENTS_CHANGED } from "../../common/errors";
 import { shallowCompareKeys } from "../../common/utils";
 import { ResizeSensor } from "../resize-sensor/resizeSensor";
@@ -93,13 +93,13 @@ export interface OverflowListProps<T> extends Props {
      *
      * @default "div"
      */
-    tagName?: keyof JSX.IntrinsicElements;
+    tagName?: keyof React.JSX.IntrinsicElements;
 
     /**
      * Callback invoked to render each visible item.
      * Remember to set a `key` on the rendered element!
      */
-    visibleItemRenderer: (item: T, index: number) => React.ReactChild;
+    visibleItemRenderer: (item: T, index: number) => React.ReactNode;
 }
 
 export interface OverflowListState<T> {

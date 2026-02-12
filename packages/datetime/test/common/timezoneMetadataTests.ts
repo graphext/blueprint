@@ -19,13 +19,13 @@ import { expect } from "chai";
 import { UTC_TIME } from "../../src/common/timezoneItems";
 import { getTimezoneMetadata } from "../../src/common/timezoneMetadata";
 import { lookupTimezoneOffset } from "../../src/common/timezoneOffsetUtils";
-import { TimezoneWithoutOffset } from "../../src/common/timezoneTypes";
+import type { TimezoneWithoutOffset } from "../../src/common/timezoneTypes";
 
 const LONDON_TZ_IANA = "Europe/London";
 const NEW_YORK_TZ_IANA = "America/New_York";
-const NEW_YORK_TIMEZONE: TimezoneWithoutOffset = { label: "New York", ianaCode: NEW_YORK_TZ_IANA };
-const TOKYO_TIMEZONE: TimezoneWithoutOffset = { label: "Tokyo", ianaCode: "Asia/Tokyo" };
-const NEPAL_TIMEZONE: TimezoneWithoutOffset = { label: "Kathmandu", ianaCode: "Asia/Kathmandu" };
+const NEW_YORK_TIMEZONE: TimezoneWithoutOffset = { ianaCode: NEW_YORK_TZ_IANA, label: "New York" };
+const TOKYO_TIMEZONE: TimezoneWithoutOffset = { ianaCode: "Asia/Tokyo", label: "Tokyo" };
+const NEPAL_TIMEZONE: TimezoneWithoutOffset = { ianaCode: "Asia/Kathmandu", label: "Kathmandu" };
 
 describe("getTimezoneMetadata", () => {
     it("Returns valid metadata for common timezones", () => {

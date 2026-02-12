@@ -15,7 +15,7 @@
  */
 
 import { assert } from "chai";
-import { mount, ReactWrapper, shallow, ShallowWrapper } from "enzyme";
+import { mount, type ReactWrapper, shallow, type ShallowWrapper } from "enzyme";
 import * as React from "react";
 import { spy } from "sinon";
 
@@ -26,8 +26,8 @@ import {
     Classes,
     Icon,
     MenuItem,
-    MenuItemProps,
-    MenuProps,
+    type MenuItemProps,
+    type MenuProps,
     Popover,
     PopoverInteractionKind,
     Text,
@@ -72,19 +72,19 @@ describe("MenuItem", () => {
     it("can set roleStructure to change role prop structure to that of a listbox or select item", () => {
         const wrapper = mount(<MenuItem text="Roles" roleStructure="listoption" />);
         assert.equal(wrapper.find("li").prop("role"), "option");
-        assert.equal(wrapper.find("a").prop("role"), undefined);
+        assert.isUndefined(wrapper.find("a").prop("role"));
     });
 
     it("can set roleStructure to change role prop structure to that of a list item", () => {
         const wrapper = mount(<MenuItem text="Roles" roleStructure="listitem" />);
-        assert.equal(wrapper.find("li").prop("role"), undefined);
-        assert.equal(wrapper.find("a").prop("role"), undefined);
+        assert.isUndefined(wrapper.find("li").prop("role"));
+        assert.isUndefined(wrapper.find("a").prop("role"));
     });
 
     it('can set roleStructure to change role prop structure to void li role (set role="none")', () => {
         const wrapper = mount(<MenuItem text="Roles" roleStructure="none" />);
         assert.equal(wrapper.find("li").prop("role"), "none");
-        assert.equal(wrapper.find("a").prop("role"), undefined);
+        assert.isUndefined(wrapper.find("a").prop("role"));
     });
 
     it("disabled MenuItem will not show its submenu", () => {
@@ -116,10 +116,10 @@ describe("MenuItem", () => {
     });
 
     it("pressing enter on MenuItem triggers onClick prop", () => {
-        const testsContainerElement = document.createElement("div");
-        document.documentElement.appendChild(testsContainerElement);
+        const containerElement = document.createElement("div");
+        document.documentElement.appendChild(containerElement);
         const onClick = spy();
-        const wrapper = mount(<MenuItem text="Graph" onClick={onClick} />, { attachTo: testsContainerElement });
+        const wrapper = mount(<MenuItem text="Graph" onClick={onClick} />, { attachTo: containerElement });
         dispatchTestKeyboardEvent(wrapper.find("a").getDOMNode(), "keydown", "Enter");
         assert.isTrue(onClick.calledOnce);
     });

@@ -6,7 +6,7 @@
 
 // @ts-check
 
-import { exec } from "node:child_process";
+import { execFile } from "node:child_process";
 import { join } from "node:path";
 import { argv } from "node:process";
 import yargs from "yargs";
@@ -14,8 +14,9 @@ import yargs from "yargs";
 const cli = yargs(argv.slice(2)).usage("$0 <commitish>").help();
 const args = await cli.argv;
 const commitish = args._[0] || "HEAD";
+const monorepoRootDir = join(import.meta.dirname, "..");
 
-exec(`git tag --points-at ${commitish}`, async (err, stdout) => {
+execFile("git", ["tag", "--points-at", `${commitish}`], async (err, stdout) => {
     if (err) {
         throw err;
     }
@@ -37,18 +38,18 @@ exec(`git tag --points-at ${commitish}`, async (err, stdout) => {
         })
         .filter(name => name != null);
 
-    const taggedPackages = taggedPackageNames
-        .map(async name => {
-            const nameParts = name.split("/");
-            const unscopedName = nameParts[nameParts.length - 1];
-            const packagePath = join("packages", unscopedName);
-            // This will throw if the package name isn't also the path, which is desirable.
-            const { default: packageJson } = await import(join("..", packagePath, "package.json"), { assert: { type: "json" }});
-            return {
-                packageJson,
-                path: packagePath,
-            };
-        });
+    const taggedPackages = taggedPackageNames.map(async name => {
+        const nameParts = name.split("/");
+        const unscopedName = nameParts[nameParts.length - 1];
+        const packagePath = join("packages", unscopedName);
+        const manifestPath = join(monorepoRootDir, packagePath, "package.json");
+        // This will throw if the package name isn't also the path, which is desirable.
+        const { default: packageJson } = await import(manifestPath, { with: { type: "json" } });
+        return {
+            packageJson,
+            path: packagePath,
+        };
+    });
 
     const publishablePackagePaths = (await Promise.all(taggedPackages))
         .filter(({ packageJson }) => !packageJson.private)

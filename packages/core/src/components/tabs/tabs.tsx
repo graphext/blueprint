@@ -17,9 +17,11 @@
 import classNames from "classnames";
 import * as React from "react";
 
-import { AbstractPureComponent, Classes, DISPLAYNAME_PREFIX, Props, Utils } from "../../common";
-import { Tab, TabId, TabProps } from "./tab";
-import { generateTabPanelId, generateTabTitleId, TabTitle } from "./tabTitle";
+import { AbstractPureComponent, Classes, DISPLAYNAME_PREFIX, type NonSmallSize, type Props, Utils } from "../../common";
+
+import { Tab, type TabId, type TabProps } from "./tab";
+import { TabPanel } from "./tabPanel";
+import { TabTitle } from "./tabTitle";
 
 /**
  * Component that may be inserted between any two children of `<Tabs>` to right-align all subsequent children.
@@ -54,7 +56,7 @@ export interface TabsProps extends Props {
 
     /**
      * Unique identifier for this `Tabs` container. This will be combined with the `id` of each
-     * `Tab` child to generate ARIA accessibility attributes. Dsare required and should be
+     * `Tab` child to generate ARIA accessibility attributes. IDs are required and should be
      * unique on the page to support server-side rendering.
      */
     id: TabId;
@@ -63,9 +65,17 @@ export interface TabsProps extends Props {
      * If set to `true`, the tab titles will display with larger styling.
      * This will apply large styles only to the tabs at this level, not to nested tabs.
      *
+     * @deprecated use `size="large"` instead
      * @default false
      */
     large?: boolean;
+
+    /**
+     * The size of the tab titles.
+     *
+     * @default "medium"
+     */
+    size?: NonSmallSize;
 
     /**
      * Whether inactive tab panels should be removed from the DOM and unmounted in React.
@@ -119,7 +129,11 @@ export interface TabsState {
  * @see https://blueprintjs.com/docs/#core/components/tabs
  */
 export class Tabs extends AbstractPureComponent<TabsProps, TabsState> {
-    /** Insert a `Tabs.Expander` between any two children to right-align all subsequent children. */
+    /**
+     * Insert a `TabsExpander` between any two children to right-align all subsequent children.
+     *
+     * @deprecated use `TabsExpander`
+     */
     public static Expander = TabsExpander;
 
     public static Tab = Tab;
@@ -129,6 +143,7 @@ export class Tabs extends AbstractPureComponent<TabsProps, TabsState> {
         fill: false,
         large: false,
         renderActiveTabPanelOnly: false,
+        size: "medium",
         vertical: false,
     };
 
@@ -155,33 +170,43 @@ export class Tabs extends AbstractPureComponent<TabsProps, TabsState> {
     }
 
     public render() {
+        const {
+            animate,
+            children,
+            className,
+            fill,
+            // eslint-disable-next-line @typescript-eslint/no-deprecated
+            large,
+            renderActiveTabPanelOnly,
+            size = "medium",
+            vertical,
+        } = this.props;
         const { indicatorWrapperStyle, selectedTabId } = this.state;
 
-        const tabTitles = React.Children.map(this.props.children, this.renderTabTitle);
+        const tabTitles = React.Children.map(children, this.renderTabTitle);
 
         const tabPanels = this.getTabChildren()
-            .filter(this.props.renderActiveTabPanelOnly ? tab => tab.props.id === selectedTabId : () => true)
+            .filter(renderActiveTabPanelOnly ? tab => tab.props.id === selectedTabId : () => true)
             .map(this.renderTabPanel);
 
-        const tabIndicator = this.props.animate ? (
+        const tabIndicator = animate ? (
             <div className={Classes.TAB_INDICATOR_WRAPPER} style={indicatorWrapperStyle}>
                 <div className={Classes.TAB_INDICATOR} />
             </div>
         ) : null;
 
-        const classes = classNames(Classes.TABS, this.props.className, {
-            [Classes.VERTICAL]: this.props.vertical,
-            [Classes.FILL]: this.props.fill,
+        const classes = classNames(Classes.TABS, className, {
+            [Classes.VERTICAL]: vertical,
+            [Classes.FILL]: fill,
         });
-        const tabListClasses = classNames(Classes.TAB_LIST, {
-            [Classes.LARGE]: this.props.large,
-        });
+        const tabListClasses = classNames(Classes.TAB_LIST, Classes.sizeClass(size, { large }));
 
         return (
             <div className={classes}>
                 <div
                     className={tabListClasses}
                     onKeyDown={this.handleKeyDown}
+                    // eslint-disable-next-line @typescript-eslint/no-deprecated
                     onKeyPress={this.handleKeyPress}
                     ref={this.refHandlers.tablist}
                     role="tablist"
@@ -229,15 +254,6 @@ export class Tabs extends AbstractPureComponent<TabsProps, TabsState> {
         }
     }
 
-    private getKeyCodeDirection(e: React.KeyboardEvent<HTMLElement>) {
-        if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
-            return -1;
-        } else if (e.key === "ArrowRight" || e.key === "ArrowDown") {
-            return 1;
-        }
-        return undefined;
-    }
-
     private getTabChildrenProps(props: TabsProps & { children?: React.ReactNode } = this.props) {
         return this.getTabChildren(props).map(child => child.props);
     }
@@ -252,28 +268,27 @@ export class Tabs extends AbstractPureComponent<TabsProps, TabsState> {
         if (this.tablistElement == null) {
             return [];
         }
-        return Array.from(this.tablistElement.querySelectorAll(TAB_SELECTOR + subselector));
+        return Array.from(this.tablistElement.querySelectorAll<HTMLElement>(TAB_SELECTOR + subselector));
     }
 
     private handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-        const focusedElement = Utils.getActiveElement(this.tablistElement)?.closest(TAB_SELECTOR);
+        const direction = Utils.getArrowKeyDirection(e, ["ArrowLeft", "ArrowUp"], ["ArrowRight", "ArrowDown"]);
+        if (direction === undefined) return;
+
+        const focusedElement = Utils.getActiveElement(this.tablistElement)?.closest<HTMLElement>(TAB_SELECTOR);
         // rest of this is potentially expensive and futile, so bail if no tab is focused
-        if (focusedElement == null) {
-            return;
-        }
+        if (!focusedElement) return;
 
-        // must rely on DOM state because we have no way of mapping `focusedElement` to a JSX.Element
-        const enabledTabElements = this.getTabElements().filter(el => el.getAttribute("aria-disabled") === "false");
+        // must rely on DOM state because we have no way of mapping `focusedElement` to a React.JSX.Element
+        const enabledTabElements = this.getTabElements('[aria-disabled="false"]');
         const focusedIndex = enabledTabElements.indexOf(focusedElement);
-        const direction = this.getKeyCodeDirection(e);
+        if (focusedIndex < 0) return;
 
-        if (focusedIndex >= 0 && direction !== undefined) {
-            e.preventDefault();
-            const { length } = enabledTabElements;
-            // auto-wrapping at 0 and `length`
-            const nextFocusedIndex = (focusedIndex + direction + length) % length;
-            (enabledTabElements[nextFocusedIndex] as HTMLElement).focus();
-        }
+        e.preventDefault();
+        const { length } = enabledTabElements;
+        // auto-wrapping at 0 and `length`
+        const nextFocusedIndex = (focusedIndex + direction + length) % length;
+        enabledTabElements[nextFocusedIndex].focus();
     };
 
     private handleKeyPress = (e: React.KeyboardEvent<HTMLDivElement>) => {
@@ -324,17 +339,15 @@ export class Tabs extends AbstractPureComponent<TabsProps, TabsState> {
         if (panel === undefined) {
             return undefined;
         }
+
         return (
-            <div
-                aria-labelledby={generateTabTitleId(this.props.id, id)}
-                aria-hidden={id !== this.state.selectedTabId}
-                className={classNames(Classes.TAB_PANEL, className, panelClassName)}
-                id={generateTabPanelId(this.props.id, id)}
+            <TabPanel
+                {...tab.props}
                 key={id}
-                role="tabpanel"
-            >
-                {panel}
-            </div>
+                className={classNames(className, panelClassName)}
+                parentId={this.props.id}
+                selectedTabId={this.state.selectedTabId}
+            />
         );
     };
 

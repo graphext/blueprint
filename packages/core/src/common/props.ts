@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-import * as React from "react";
+import type * as React from "react";
 
 import type { IconName } from "@blueprintjs/icons";
 
-import { Intent } from "./intent";
+import type { Intent } from "./intent";
 
 export const DISPLAYNAME_PREFIX = "Blueprint5";
 
@@ -35,11 +35,17 @@ export type HTMLDivProps = React.HTMLAttributes<HTMLDivElement>;
 export type HTMLInputProps = React.InputHTMLAttributes<HTMLInputElement>;
 
 /**
- * Alias for a `JSX.Element` or a value that renders nothing.
+ * Alias for all valid HTML props for `<textarea>` element.
+ * Does not include React's `ref` or `key`.
+ */
+export type HTMLTextAreaProps = React.TextareaHTMLAttributes<HTMLTextAreaElement>;
+
+/**
+ * Alias for a `React.JSX.Element` or a value that renders nothing.
  *
  * In React, `boolean`, `null`, and `undefined` do not produce any output.
  */
-export type MaybeElement = JSX.Element | false | null | undefined;
+export type MaybeElement = React.JSX.Element | false | null | undefined;
 
 /**
  * A shared base interface for all Blueprint component props.
@@ -87,17 +93,35 @@ export interface LinkProps {
 }
 
 /**
- * Interface for a controlled input.
+ * Interface for a controlled or uncontrolled component, typically a form control.
  */
-export interface ControlledProps {
-    /** Initial value of the input, for uncontrolled usage. */
-    defaultValue?: string;
+export interface ControlledValueProps<T, E extends HTMLElement = HTMLElement> {
+    /**
+     * Initial value for uncontrolled usage. Mutually exclusive with `value` prop.
+     */
+    defaultValue?: T;
 
-    /** Form value of the input, for controlled usage. */
-    value?: string;
+    /**
+     * Controlled value. Mutually exclusive with `defaultValue` prop.
+     */
+    value?: T;
+
+    /**
+     * Callback invoked when the component value changes, typically via user interaction, in both controlled and
+     * uncontrolled mode.
+     *
+     * Using this prop instead of `onChange` can help avoid common bugs in React 16 related to Event Pooling
+     * where developers forget to save the text value from a change event or call `event.persist()`.
+     *
+     * @see https://legacy.reactjs.org/docs/legacy-event-pooling.html
+     */
+    onValueChange?: (value: T, targetElement: E | null) => void;
 }
 
-export interface OptionProps extends Props {
+/** @deprecated use `ControlledValueProps` */
+export type ControlledProps = Omit<ControlledValueProps<string, HTMLInputElement>, "onChange">;
+
+export interface OptionProps<T extends string | number = string | number> extends Props {
     /** Whether this option is non-interactive. */
     disabled?: boolean;
 
@@ -105,7 +129,7 @@ export interface OptionProps extends Props {
     label?: string;
 
     /** Value of this option. */
-    value: string | number;
+    value: T;
 }
 
 /** A collection of curated prop keys used across our Components which are not valid HTMLElement props. */
@@ -116,6 +140,8 @@ const INVALID_PROPS = [
     "containerRef",
     "current",
     "elementRef", // not used anymore in Blueprint v5.x, but kept for backcompat if consumers use this naming pattern
+    "ellipsizeText", // ButtonProps
+    "endIcon",
     "fill",
     "icon",
     "iconSize",
@@ -136,10 +162,13 @@ const INVALID_PROPS = [
     "rightElement",
     "rightIcon",
     "round",
+    "selectedValue",
     "size",
     "small",
     "tagName",
     "text",
+    "textClassName", // ButtonProps
+    "variant",
 ];
 
 /**

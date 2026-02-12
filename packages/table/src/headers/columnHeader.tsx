@@ -18,14 +18,15 @@ import classNames from "classnames";
 import * as React from "react";
 
 import * as Classes from "../common/classes";
-import { ColumnIndices } from "../common/grid";
+import type { ColumnIndices } from "../common/grid";
 import { Utils } from "../common/index";
-import { ClientCoordinates } from "../interactions/dragTypes";
-import { IndexedResizeCallback } from "../interactions/resizable";
+import type { ClientCoordinates } from "../interactions/dragTypes";
+import type { IndexedResizeCallback } from "../interactions/resizable";
 import { Orientation } from "../interactions/resizeHandle";
 import { RegionCardinality, Regions } from "../regions";
-import { ColumnHeaderCell, ColumnHeaderCellProps } from "./columnHeaderCell";
-import { Header, HeaderProps } from "./header";
+
+import { ColumnHeaderCell, type ColumnHeaderCellProps } from "./columnHeaderCell";
+import { Header, type HeaderProps } from "./header";
 
 export type ColumnHeaderRenderer = (columnIndex: number) => React.ReactElement<ColumnHeaderCellProps> | null;
 
@@ -35,7 +36,7 @@ export interface ColumnWidths {
     defaultColumnWidth: number;
 }
 
-export interface ColumnHeaderProps extends HeaderProps, ColumnWidths, ColumnIndices {
+export interface ColumnHeaderProps extends React.PropsWithChildren<HeaderProps>, ColumnWidths, ColumnIndices {
     /**
      * A ColumnHeaderRenderer that, for each `<Column>`, will delegate to:
      * 1. The `columnHeaderCellRenderer` method from the `<Column>`

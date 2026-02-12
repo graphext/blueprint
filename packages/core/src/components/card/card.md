@@ -1,27 +1,50 @@
 @# Card
 
-A __Card__ is a bounded unit of UI content with a solid background color.
+A **Card** is a bounded container for grouping related content with a solid
+background color. It offers customizable padding, interactivity, and elevation.
 
-@reactExample CardExample
+@## Import
+
+```tsx
+import { Card } from "@blueprintjs/core";
+```
 
 @## Usage
 
-```tsx
-import { Button, Card, Elevation } from "@blueprintjs/core";
+A **Card** provides a structured container for text, actions, or other content.
+Use it to present a cohesive unit of information.
 
-<Card interactive={true} elevation={Elevation.TWO}>
-    <h5><a href="#">Card heading</a></h5>
-    <p>Card content</p>
-    <Button>Submit</Button>
-</Card>
-```
+@reactCodeExample CardBasicExample
+
+@## Interactive
+
+The `interactive` prop makes a **Card** appear responsive to hover and click events.
+Combine it with an `onClick` handler to perform actions when the card is clicked,
+such as navigation or selection.
+
+Additionally, the `selected` prop can be used to indicate a selection state.
+
+@reactCodeExample CardInteractiveExample
+
+@## Compact
+
+Enable the `compact` prop to reduce the padding of the **Card**, resulting in a more condensed appearance.
+
+@reactCodeExample CardCompactExample
 
 @## Elevation
 
-Apply an `elevation` value to a card to apply a drop shadow that simulates height in the UI.
-Five elevations are supported, from 0 to 4.
+The `elevation` prop controls the shadow depth of the **Card**, creating a visual
+hierarchy. Five elevations are supported, from 0 to 4. Higher elevation values
+make the **Card** appear more prominent.
 
-Note that the `Classes.ELEVATION_*` classes can be used on any element (not just a `Card`) to apply the drop shadow.
+> Note that the `Classes.ELEVATION_*` classes can be used on any element (not just a `Card`) to apply the box shadow.
+
+@reactCodeExample CardElevationExample
+
+@## Interactive Playground
+
+@reactExample CardPlaygroundExample
 
 @## Props interface
 
@@ -33,6 +56,7 @@ Note that the `Classes.ELEVATION_*` classes can be used on any element (not just
     <h5 class="@ns-heading">
 
 Deprecated API: use [`<Card>`](#core/components/card)
+
 </h5>
 
 CSS APIs for Blueprint components are considered deprecated, as they are verbose, error-prone, and they

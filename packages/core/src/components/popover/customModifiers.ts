@@ -19,9 +19,9 @@
  * @see https://popper.js.org/docs/v2/modifiers/#custom-modifiers
  */
 
-import { Modifier } from "@popperjs/core";
+import type { Modifier } from "@popperjs/core";
 
-// tslint:disable object-literal-sort-keys
+/* eslint-disable sort-keys */
 
 // adapted from https://popper.js.org/docs/v2/modifiers/community-modifiers/
 export const matchReferenceWidthModifier: Modifier<"matchReferenceWidth", any> = {

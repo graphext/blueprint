@@ -19,12 +19,22 @@
  * All changes & bugfixes should be made to PanelStack2 instead.
  */
 
-/* eslint-disable deprecation/deprecation, max-classes-per-file, @blueprintjs/no-deprecated-components */
+/* eslint-disable @typescript-eslint/no-deprecated, max-classes-per-file */
 
 import * as React from "react";
 
-import { Button, H5, Intent, IPanel, IPanelProps, NumericInput, PanelStack, Switch, UL } from "@blueprintjs/core";
-import { Example, ExampleProps, handleBooleanChange } from "@blueprintjs/docs-theme";
+import {
+    Button,
+    H5,
+    Intent,
+    type IPanel,
+    type IPanelProps,
+    NumericInput,
+    PanelStack,
+    Switch,
+    UL,
+} from "@blueprintjs/core";
+import { Example, type ExampleProps, handleBooleanChange } from "@blueprintjs/docs-theme";
 
 export interface IPanelStackExampleState {
     activePanelOnly: boolean;

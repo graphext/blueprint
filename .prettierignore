@@ -3,4 +3,5 @@ generated/
 lib/
 dist/
 /site/
-*.scss
+yarn.lock
+changelog/

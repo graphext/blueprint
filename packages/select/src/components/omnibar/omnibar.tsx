@@ -17,11 +17,11 @@
 import classNames from "classnames";
 import * as React from "react";
 
-import { DISPLAYNAME_PREFIX, InputGroup, InputGroupProps, Overlay, OverlayProps } from "@blueprintjs/core";
+import { DISPLAYNAME_PREFIX, InputGroup, type InputGroupProps, Overlay2, type OverlayProps } from "@blueprintjs/core";
 import { Search } from "@blueprintjs/icons";
 
-import { Classes, ListItemsProps } from "../../common";
-import { QueryList, QueryListRendererProps } from "../query-list/queryList";
+import { Classes, type ListItemsProps } from "../../common";
+import { QueryList, type QueryListRendererProps } from "../query-list/queryList";
 
 export interface OmnibarProps<T> extends ListItemsProps<T> {
     /**
@@ -89,7 +89,7 @@ export class Omnibar<T> extends React.PureComponent<OmnibarProps<T>> {
         const handlers = isOpen ? { onKeyDown: handleKeyDown, onKeyUp: handleKeyUp } : {};
 
         return (
-            <Overlay
+            <Overlay2
                 hasBackdrop={true}
                 {...overlayProps}
                 isOpen={isOpen}
@@ -99,16 +99,16 @@ export class Omnibar<T> extends React.PureComponent<OmnibarProps<T>> {
                 <div className={classNames(Classes.OMNIBAR, listProps.className)} {...handlers}>
                     <InputGroup
                         autoFocus={true}
-                        large={true}
                         leftIcon={<Search />}
                         placeholder="Search..."
+                        size="large"
                         {...inputProps}
                         onChange={listProps.handleQueryChange}
                         value={listProps.query}
                     />
                     {listProps.itemList}
                 </div>
-            </Overlay>
+            </Overlay2>
         );
     };
 

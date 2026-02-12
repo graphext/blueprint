@@ -17,12 +17,13 @@
 import classNames from "classnames";
 import * as React from "react";
 
-import { ChevronDown, ChevronUp, IconName } from "@blueprintjs/icons";
+import { ChevronDown, ChevronUp, type IconName } from "@blueprintjs/icons";
 
 import { Classes, Elevation, Utils } from "../../common";
-import { DISPLAYNAME_PREFIX, HTMLDivProps, MaybeElement, Props } from "../../common/props";
+import { DISPLAYNAME_PREFIX, type HTMLDivProps, type MaybeElement, type Props } from "../../common/props";
+import { clickElementOnKeyPress, uniqueId } from "../../common/utils";
 import { Card } from "../card/card";
-import { Collapse, CollapseProps } from "../collapse/collapse";
+import { Collapse, type CollapseProps } from "../collapse/collapse";
 import { H6 } from "../html/html";
 import { Icon } from "../icon/icon";
 
@@ -97,19 +98,28 @@ export interface SectionProps extends Props, Omit<HTMLDivProps, "title">, React.
      * Element to render on the right side of the section header.
      * Note that the header will only be rendered if `title` is provided.
      */
-    rightElement?: JSX.Element;
+    rightElement?: React.JSX.Element;
 
     /**
      * Sub-title of the section.
      * Note that the header will only be rendered if `title` is provided.
      */
-    subtitle?: JSX.Element | string;
+    subtitle?: React.JSX.Element | string;
 
     /**
      * Title of the section.
      * Note that the header will only be rendered if `title` is provided.
      */
-    title?: JSX.Element | string;
+    title?: React.JSX.Element | string;
+
+    /**
+     * Optional title renderer function. If provided, it is recommended to include a Blueprint `<H6>` element
+     * as part of the title. The render function is supplied with `className` and `id` attributes which you must
+     * forward to the DOM. The `title` prop is also passed along to this renderer via `props.children`.
+     *
+     * @default H6
+     */
+    titleRenderer?: React.FC<React.HTMLAttributes<HTMLElement>>;
 }
 
 /**
@@ -123,12 +133,13 @@ export const Section: React.FC<SectionProps> = React.forwardRef((props, ref) => 
         className,
         collapseProps,
         collapsible,
-        compact,
-        elevation,
+        compact = false,
+        elevation = Elevation.ZERO,
         icon,
         rightElement,
         subtitle,
         title,
+        titleRenderer = H6,
         ...htmlProps
     } = props;
     // Determine whether to use controlled or uncontrolled state.
@@ -147,8 +158,10 @@ export const Section: React.FC<SectionProps> = React.forwardRef((props, ref) => 
         }
     }, [collapseProps, isCollapsed, isControlled]);
 
-    const isHeaderLeftContainerVisible = title != null || icon != null || subtitle != null;
     const isHeaderRightContainerVisible = rightElement != null || collapsible;
+
+    const sectionId = uniqueId("section");
+    const sectionTitleId = title ? uniqueId("section-title") : undefined;
 
     return (
         <Card
@@ -158,47 +171,50 @@ export const Section: React.FC<SectionProps> = React.forwardRef((props, ref) => 
             })}
             elevation={elevation}
             ref={ref}
+            aria-labelledby={sectionTitleId}
             {...htmlProps}
+            id={sectionId}
         >
             {title && (
                 <div
-                    role={collapsible ? "button" : undefined}
-                    aria-pressed={collapsible ? isCollapsed : undefined}
                     className={classNames(Classes.SECTION_HEADER, {
                         [Classes.INTERACTIVE]: collapsible,
                     })}
-                    onClick={collapsible != null ? toggleIsCollapsed : undefined}
+                    onClick={collapsible ? toggleIsCollapsed : undefined}
                 >
-                    {isHeaderLeftContainerVisible && (
-                        <>
-                            <div className={Classes.SECTION_HEADER_LEFT}>
-                                {icon && (
-                                    <Icon icon={icon} aria-hidden={true} tabIndex={-1} className={Classes.TEXT_MUTED} />
-                                )}
-
-                                <div>
-                                    <H6 className={Classes.SECTION_HEADER_TITLE}>{title}</H6>
-                                    {subtitle && (
-                                        <div
-                                            className={classNames(Classes.TEXT_MUTED, Classes.SECTION_HEADER_SUB_TITLE)}
-                                        >
-                                            {subtitle}
-                                        </div>
-                                    )}
+                    <div className={Classes.SECTION_HEADER_LEFT}>
+                        {icon && <Icon icon={icon} aria-hidden={true} tabIndex={-1} className={Classes.TEXT_MUTED} />}
+                        <div>
+                            {React.createElement(
+                                titleRenderer,
+                                { className: Classes.SECTION_HEADER_TITLE, id: sectionTitleId },
+                                title,
+                            )}
+                            {subtitle && (
+                                <div className={classNames(Classes.TEXT_MUTED, Classes.SECTION_HEADER_SUB_TITLE)}>
+                                    {subtitle}
                                 </div>
-                            </div>
-                        </>
-                    )}
-
+                            )}
+                        </div>
+                    </div>
                     {isHeaderRightContainerVisible && (
                         <div className={Classes.SECTION_HEADER_RIGHT}>
                             {rightElement}
-                            {collapsible &&
-                                (isCollapsed ? (
-                                    <ChevronDown className={Classes.TEXT_MUTED} />
-                                ) : (
-                                    <ChevronUp className={Classes.TEXT_MUTED} />
-                                ))}
+                            {collapsible && (
+                                <span
+                                    role="button"
+                                    tabIndex={0}
+                                    aria-pressed={isCollapsed}
+                                    aria-expanded={isCollapsed}
+                                    aria-controls={sectionId}
+                                    aria-label={isCollapsed ? "expand section" : "collapse section"}
+                                    // no OnClick, click event triggers header below
+                                    onKeyDown={clickElementOnKeyPress(["Enter", " "])}
+                                    className={classNames(Classes.TEXT_MUTED, Classes.SECTION_HEADER_COLLAPSE_CARET)}
+                                >
+                                    {isCollapsed ? <ChevronDown /> : <ChevronUp />}
+                                </span>
+                            )}
                         </div>
                     )}
                 </div>
@@ -214,8 +230,4 @@ export const Section: React.FC<SectionProps> = React.forwardRef((props, ref) => 
         </Card>
     );
 });
-Section.defaultProps = {
-    compact: false,
-    elevation: Elevation.ZERO,
-};
 Section.displayName = `${DISPLAYNAME_PREFIX}.Section`;

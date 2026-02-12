@@ -16,7 +16,7 @@
 
 import { Boundary } from "@blueprintjs/core";
 
-import { DateRange } from "./dateRange";
+import type { DateRange } from "./dateRange";
 import { isSameDay } from "./dateUtils";
 
 export interface DateRangeSelectionState {
@@ -113,7 +113,7 @@ export class DateRangeSelectionStrategy {
             }
         }
 
-        return { dateRange: nextDateRange, boundary: nextBoundary };
+        return { boundary: nextBoundary, dateRange: nextDateRange };
     }
 
     private static getDefaultNextState(
@@ -148,7 +148,7 @@ export class DateRangeSelectionStrategy {
             }
         }
 
-        return { dateRange: nextDateRange, boundary: nextBoundary };
+        return { boundary: nextBoundary, dateRange: nextDateRange };
     }
 
     private static getOtherBoundary(boundary: Boundary) {

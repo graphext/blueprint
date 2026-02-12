@@ -13,8 +13,13 @@ $section-card-padding-compact: $pt-grid-size * 1.5 !default;
 
 .#{$ns}-section {
   overflow: hidden;
-  padding: 0;
   width: 100%;
+
+  &,
+  &.#{$ns}-compact {
+    // override Card compact styles here
+    padding: 0;
+  }
 
   &-header {
     align-items: center;
@@ -52,6 +57,12 @@ $section-card-padding-compact: $pt-grid-size * 1.5 !default;
       display: flex;
       gap: $pt-grid-size;
       margin-left: auto;
+    }
+
+    &-collapse-caret {
+      display: inline-flex;
+      justify-content: center;
+      vertical-align: middle;
     }
 
     &-divider {

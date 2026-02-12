@@ -2,14 +2,15 @@
  * (c) Copyright 2022 Palantir Technologies Inc. All rights reserved.
  */
 
-// tslint:disable object-literal-sort-keys
+/* eslint-disable sort-keys */
 
-import { TSESLint, TSESTree } from "@typescript-eslint/utils";
+import { type TSESLint, TSESTree } from "@typescript-eslint/utils";
 
 import { createRule } from "./utils/createRule";
 import { FixList } from "./utils/fixList";
 import { getAllIdentifiersInFile } from "./utils/getAllIdentifiersInFile";
 import { getProgram } from "./utils/getProgram";
+import { isIdentifierNode } from "./utils/isIdentifierNode";
 import { replaceImportInFile } from "./utils/replaceImportInFile";
 
 type MessageIds = "migration";
@@ -193,7 +194,7 @@ export const noDeprecatedTypeReferencesRule = createRule<[], MessageIds>({
             description:
                 "Reports on usage of deprecated Blueprint types and recommends migrating to their corresponding replacements.",
             requiresTypeChecking: false,
-            recommended: "recommended",
+            recommended: true,
         },
         fixable: "code",
         messages: {
@@ -214,7 +215,7 @@ export const noDeprecatedTypeReferencesRule = createRule<[], MessageIds>({
         > = [];
         // keep a list of already fixed imports in the file so that we do not report overlapping fixes
         const fixedImportNames: string[] = [];
-        const identifiersInFile = getAllIdentifiersInFile(context.getSourceCode());
+        const identifiersInFile = getAllIdentifiersInFile(context.sourceCode);
 
         function isDeprecatedTypeReference(name: string) {
             return (
@@ -250,7 +251,10 @@ export const noDeprecatedTypeReferencesRule = createRule<[], MessageIds>({
                             });
                             break;
                         case TSESTree.AST_NODE_TYPES.ImportSpecifier:
-                            if (deprecatedToNewType.hasOwnProperty(importClause.imported.name)) {
+                            if (
+                                isIdentifierNode(importClause.imported) &&
+                                deprecatedToNewType.hasOwnProperty(importClause.imported.name)
+                            ) {
                                 deprecatedImports.push({
                                     symbolName: importClause.imported.name,
                                     localSymbolName: importClause.local.name,

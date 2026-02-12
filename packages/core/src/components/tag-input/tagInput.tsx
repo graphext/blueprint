@@ -17,13 +17,20 @@
 import classNames from "classnames";
 import * as React from "react";
 
-import { IconName, IconSize } from "@blueprintjs/icons";
+import { type IconName, IconSize } from "@blueprintjs/icons";
 
-import { AbstractPureComponent, Classes, refHandler, setRef, Utils } from "../../common";
-import { DISPLAYNAME_PREFIX, HTMLInputProps, IntentProps, MaybeElement, Props } from "../../common/props";
+import { AbstractPureComponent, Classes, type NonSmallSize, refHandler, setRef, Utils } from "../../common";
+import {
+    DISPLAYNAME_PREFIX,
+    type HTMLInputProps,
+    type IntentProps,
+    type MaybeElement,
+    type Props,
+} from "../../common/props";
 import { getActiveElement } from "../../common/utils";
 import { Icon } from "../icon/icon";
-import { Tag, TagProps } from "../tag/tag";
+import { Tag, type TagProps } from "../tag/tag";
+
 import { ResizableInput } from "./resizableInput";
 
 /**
@@ -99,7 +106,12 @@ export interface TagInputProps extends IntentProps, Props {
     /** Controlled value of the `<input>` element. This is shorthand for `inputProps={{ value }}`. */
     inputValue?: string;
 
-    /** Whether the tag input should use a large size. */
+    /**
+     * Whether the tag input should use a large size.
+     *
+     * @deprecated use `size="large"` instead.
+     * @default false
+     */
     large?: boolean;
 
     /** Name of a Blueprint UI icon (or an icon element) to render on the left side of the input. */
@@ -170,7 +182,7 @@ export interface TagInputProps extends IntentProps, Props {
      * For best results, use a small spinner or minimal button (button height will adjust if `TagInput` uses large styles).
      * Other elements will likely require custom styles for correct positioning.
      */
-    rightElement?: JSX.Element;
+    rightElement?: React.JSX.Element;
 
     /**
      * Separator pattern used to split input text into multiple values. Default value splits on commas and newlines.
@@ -179,6 +191,13 @@ export interface TagInputProps extends IntentProps, Props {
      * @default /[,\n\r]/
      */
     separator?: string | RegExp | false;
+
+    /**
+     * The size of the tag input.
+     *
+     * @default "medium"
+     */
+    size?: NonSmallSize;
 
     /**
      * React props to pass to each `Tag`. Provide an object to pass the same props to every tag,
@@ -248,8 +267,20 @@ export class TagInput extends AbstractPureComponent<TagInputProps, TagInputState
     private handleRef: React.Ref<HTMLInputElement> = refHandler(this, "inputElement", this.props.inputRef);
 
     public render() {
-        const { autoResize, className, disabled, fill, inputProps, intent, large, leftIcon, placeholder, values } =
-            this.props;
+        const {
+            autoResize,
+            className,
+            disabled,
+            fill,
+            inputProps,
+            intent,
+            // eslint-disable-next-line @typescript-eslint/no-deprecated
+            large,
+            leftIcon,
+            placeholder,
+            size = "medium",
+            values,
+        } = this.props;
 
         const classes = classNames(
             Classes.INPUT,
@@ -258,9 +289,9 @@ export class TagInput extends AbstractPureComponent<TagInputProps, TagInputState
                 [Classes.ACTIVE]: this.state.isInputFocused,
                 [Classes.DISABLED]: disabled,
                 [Classes.FILL]: fill,
-                [Classes.LARGE]: large,
             },
             Classes.intentClass(intent),
+            Classes.sizeClass(size, { large }),
             className,
         );
         const isLarge = classes.indexOf(Classes.LARGE) > NONE;
@@ -282,7 +313,7 @@ export class TagInput extends AbstractPureComponent<TagInputProps, TagInputState
             onPaste: this.handleInputPaste,
             placeholder: resolvedPlaceholder,
             ref: this.handleRef,
-        };
+        } satisfies React.HTMLProps<HTMLElement>;
 
         return (
             <div className={classes} onBlur={this.handleContainerBlur} onClick={this.handleContainerClick}>
@@ -327,15 +358,18 @@ export class TagInput extends AbstractPureComponent<TagInputProps, TagInputState
         if (!tag) {
             return null;
         }
-        const { large, tagProps } = this.props;
+        // eslint-disable-next-line @typescript-eslint/no-deprecated
+        const { large, size, tagProps } = this.props;
         const props = Utils.isFunction(tagProps) ? tagProps(tag, index) : tagProps;
         return (
             <Tag
                 active={index === this.state.activeIndex}
                 data-tag-index={index}
                 key={tag + "__" + index}
+                // eslint-disable-next-line @typescript-eslint/no-deprecated
                 large={large}
                 onRemove={this.props.disabled ? undefined : this.handleRemoveTag}
+                size={size}
                 {...props}
             >
                 {tag}
@@ -343,7 +377,7 @@ export class TagInput extends AbstractPureComponent<TagInputProps, TagInputState
         );
     };
 
-    private getNextActiveIndex(direction: number) {
+    private getNextActiveIndex(direction: 1 | -1) {
         const { activeIndex } = this.state;
         if (activeIndex === NONE) {
             // nothing active & moving left: select last defined value. otherwise select nothing.
@@ -356,7 +390,7 @@ export class TagInput extends AbstractPureComponent<TagInputProps, TagInputState
         }
     }
 
-    private findNextIndex(startIndex: number, direction: number) {
+    private findNextIndex(startIndex: number, direction: 1 | -1) {
         const { values } = this.props;
         let index = startIndex + direction;
         while (index > 0 && index < values.length && !values[index]) {
@@ -414,13 +448,15 @@ export class TagInput extends AbstractPureComponent<TagInputProps, TagInputState
 
         let activeIndexToEmit = activeIndex;
 
-        if (event.key === "Enter" && value.length > 0) {
+        // do not add a new tag if the user is composing (e.g. for Japanese or Chinese)
+        if (event.key === "Enter" && !event.nativeEvent.isComposing && value.length > 0) {
             this.addTags(value, "default");
         } else if (selectionEnd === 0 && this.props.values.length > 0) {
             // cursor at beginning of input allows interaction with tags.
             // use selectionEnd to verify cursor position and no text selection.
-            if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
-                const nextActiveIndex = this.getNextActiveIndex(event.key === "ArrowRight" ? 1 : -1);
+            const direction = Utils.getArrowKeyDirection(event, ["ArrowLeft"], ["ArrowRight"]);
+            if (direction !== undefined) {
+                const nextActiveIndex = this.getNextActiveIndex(direction);
                 if (nextActiveIndex !== activeIndex) {
                     event.stopPropagation();
                     activeIndexToEmit = nextActiveIndex;

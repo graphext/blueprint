@@ -16,10 +16,11 @@
 
 import * as React from "react";
 
-import { AbstractPureComponent, Props } from "@blueprintjs/core";
+import { AbstractPureComponent, type Props } from "@blueprintjs/core";
 
 import { Utils } from "../common/index";
-import { LockableLayout, Orientation, ResizeHandle } from "./resizeHandle";
+
+import { type LockableLayout, Orientation, ResizeHandle } from "./resizeHandle";
 
 export type IndexedResizeCallback = (index: number, size: number) => void;
 
@@ -122,7 +123,7 @@ export class Resizable extends AbstractPureComponent<ResizableProps, ResizeableS
         }
 
         const resizeHandle = this.renderResizeHandle();
-        return React.cloneElement(child, { style, resizeHandle });
+        return React.cloneElement(child, { resizeHandle, style });
     }
 
     private renderResizeHandle() {

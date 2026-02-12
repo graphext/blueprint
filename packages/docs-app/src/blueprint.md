@@ -7,7 +7,7 @@ It is optimized for building complex data-dense interfaces for desktop applicati
 @reactDocs Welcome
 
 <div class="@ns-callout @ns-intent-primary @ns-icon-star @ns-callout-has-body-content">
-    <h5 class="@ns-heading">Blueprint v5.0 is now available</h5>
+    <h5 class="@ns-heading">Blueprint v5.x is now available</h5>
 
 Check out the [migration guides to upgrade from v4.x &rarr;](https://github.com/palantir/blueprint/wiki/Blueprint-5.0)
 
@@ -26,11 +26,12 @@ yarn add @blueprintjs/core react react-dom
 ```
 
 Additional UI components and APIs are available in:
-- [**@blueprintjs/icons**](https://www.npmjs.com/package/@blueprintjs/icons)
-- [**@blueprintjs/datetime**](https://www.npmjs.com/package/@blueprintjs/datetime)
-- [**@blueprintjs/datetime2**](https://www.npmjs.com/package/@blueprintjs/datetime2)
-- [**@blueprintjs/select**](https://www.npmjs.com/package/@blueprintjs/select)
-- [**@blueprintjs/table**](https://www.npmjs.com/package/@blueprintjs/table)
+
+-   [**@blueprintjs/icons**](https://www.npmjs.com/package/@blueprintjs/icons)
+-   [**@blueprintjs/datetime**](https://www.npmjs.com/package/@blueprintjs/datetime)
+-   [**@blueprintjs/datetime2**](https://www.npmjs.com/package/@blueprintjs/datetime2)
+-   [**@blueprintjs/select**](https://www.npmjs.com/package/@blueprintjs/select)
+-   [**@blueprintjs/table**](https://www.npmjs.com/package/@blueprintjs/table)
 
 The navigation sidebar lists all the available packages, separated by use case and significant dependencies.
 All have peer dependencies on **react** and **react-dom**.
@@ -42,7 +43,7 @@ Import React components from the appropriate package.
 ```tsx
 import { Button } from "@blueprintjs/core";
 
-<Button intent="success" text="button content" onClick={incrementCounter} />
+<Button intent="success" text="button content" onClick={incrementCounter} />;
 ```
 
 For this button to be styled correctly in the DOM, it needs its associated CSS to be loaded on the page.
@@ -51,9 +52,9 @@ The following example shows an `index.html` file; the same stylesheets should be
 
 ```html
 <link href="path/to/node_modules/normalize.css/normalize.css" rel="stylesheet" />
-<!-- blueprint-icons.css file must be included alongside blueprint.css! -->
-<link href="path/to/node_modules/@blueprintjs/icons/lib/css/blueprint-icons.css" rel="stylesheet" />
 <link href="path/to/node_modules/@blueprintjs/core/lib/css/blueprint.css" rel="stylesheet" />
+<!-- blueprint-icons.css file must be included alongside blueprint.css for icon font support -->
+<link href="path/to/node_modules/@blueprintjs/icons/lib/css/blueprint-icons.css" rel="stylesheet" />
 <!-- add other blueprint-*.css files here -->
 ```
 

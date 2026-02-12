@@ -14,13 +14,26 @@
  * limitations under the License.
  */
 
+/**
+ * @fileoverview This component is DEPRECATED, and the code is frozen.
+ * All changes & bugfixes should be made to DateRangePicker3 in the datetime2
+ * package instead.
+ */
+
+/* eslint-disable @typescript-eslint/no-deprecated */
+
 import classNames from "classnames";
 import * as React from "react";
-import DayPicker, { CaptionElementProps, DayModifiers, DayPickerProps, NavbarElementProps } from "react-day-picker";
+import DayPicker, {
+    type CaptionElementProps,
+    type DayModifiers,
+    type DayPickerProps,
+    type NavbarElementProps,
+} from "react-day-picker";
 
-import { AbstractPureComponent, Boundary, DISPLAYNAME_PREFIX, Divider, Props } from "@blueprintjs/core";
+import { AbstractPureComponent, Boundary, DISPLAYNAME_PREFIX, Divider, type Props } from "@blueprintjs/core";
 
-import { Classes, DatePickerBaseProps, DatePickerModifiers, DateRange, DateUtils } from "../../common";
+import { Classes, type DatePickerBaseProps, type DatePickerModifiers, type DateRange, DateUtils } from "../../common";
 import { DateRangeSelectionStrategy } from "../../common/dateRangeSelectionStrategy";
 import * as Errors from "../../common/errors";
 import { MonthAndYear } from "../../common/monthAndYear";
@@ -33,7 +46,7 @@ import {
     SELECTED_RANGE_MODIFIER,
 } from "../date-picker/datePickerCore";
 import { DatePickerNavbar } from "../date-picker/datePickerNavbar";
-import { DatePickerShortcutMenu, DateRangeShortcut } from "../shortcuts/shortcuts";
+import { DatePickerShortcutMenu, type DateRangeShortcut } from "../shortcuts/shortcuts";
 import { TimePicker } from "../time-picker/timePicker";
 
 export interface DateRangePickerProps extends DatePickerBaseProps, Props {
@@ -136,6 +149,7 @@ export interface DateRangePickerState {
  * Date range picker component.
  *
  * @see https://blueprintjs.com/docs/#datetime/daterangepicker
+ * @deprecated use `{ DateRangePicker3 } from "@blueprintjs/datetime2"` instead
  */
 export class DateRangePicker extends AbstractPureComponent<DateRangePickerProps, DateRangePickerState> {
     public static defaultProps: DateRangePickerProps = {
@@ -398,7 +412,7 @@ export class DateRangePicker extends AbstractPureComponent<DateRangePickerProps,
         const newTimeRange: DateRange = [time[0], time[1]];
         newTimeRange[dateIndex] = newTime;
         this.props.onChange?.(newDateRange);
-        this.setState({ value: newDateRange, time: newTimeRange });
+        this.setState({ time: newTimeRange, value: newDateRange });
     };
 
     private handleTimeChangeLeftCalendar = (time: Date) => {

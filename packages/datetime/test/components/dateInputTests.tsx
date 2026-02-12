@@ -14,10 +14,18 @@
  * limitations under the License.
  */
 
+/**
+ * @fileoverview This component is DEPRECATED, and the code is frozen.
+ * All changes & bugfixes should be made to DateInput3 in the datetime2
+ * package instead.
+ */
+
+/* eslint-disable @typescript-eslint/no-deprecated */
+
 import { assert } from "chai";
 import { intlFormat, isEqual, parseISO } from "date-fns";
 import { formatInTimeZone, zonedTimeToUtc } from "date-fns-tz";
-import { mount, ReactWrapper } from "enzyme";
+import { mount, type ReactWrapper } from "enzyme";
 import * as React from "react";
 import * as sinon from "sinon";
 
@@ -26,7 +34,7 @@ import { Classes as CoreClasses, InputGroup, Popover, Tag } from "@blueprintjs/c
 import {
     Classes,
     DateInput,
-    DateInputProps,
+    type DateInputProps,
     DatePicker,
     Months,
     TimePrecision,
@@ -36,6 +44,7 @@ import {
 import { getCurrentTimezone } from "../../src/common/getTimezone";
 import { TIMEZONE_ITEMS, UTC_TIME } from "../../src/common/timezoneItems";
 import { getTimezoneShortName } from "../../src/common/timezoneNameUtils";
+import { DATEINPUT_DEFAULT_PROPS } from "../../src/components/date-input/dateInput";
 
 const NEW_YORK_TIMEZONE = TIMEZONE_ITEMS.find(item => item.label === "New York")!;
 const PARIS_TIMEZONE = TIMEZONE_ITEMS.find(item => item.label === "Paris")!;
@@ -72,14 +81,14 @@ const DEFAULT_PROPS = {
 
 describe("<DateInput>", () => {
     const onChange = sinon.spy();
-    let containerElement: HTMLElement | undefined;
+    let containerElement: HTMLElement;
 
     beforeEach(() => {
         containerElement = document.createElement("div");
         document.body.appendChild(containerElement);
     });
     afterEach(() => {
-        containerElement?.remove();
+        containerElement.remove();
         onChange.resetHistory();
     });
 
@@ -105,7 +114,7 @@ describe("<DateInput>", () => {
             const wrapper = mount(
                 <DateInput {...DEFAULT_PROPS} inputProps={{ style: { background: "yellow" }, tabIndex: 4 }} />,
             );
-            const inputElement = wrapper.find("input").getDOMNode() as HTMLInputElement;
+            const inputElement = wrapper.find("input").getDOMNode<HTMLInputElement>();
             assert.equal(inputElement.style.background, "yellow");
             assert.equal(inputElement.tabIndex, 4);
         });
@@ -158,7 +167,7 @@ describe("<DateInput>", () => {
             focusInput(wrapper);
 
             const input = wrapper.find(InputGroup);
-            assert.strictEqual(input.prop("fill"), true);
+            assert.isTrue(input.prop("fill"));
             assert.strictEqual(input.prop("leftIcon"), "star");
             assert.isTrue(input.prop("required"));
             assert.isTrue(inputRef.called, "inputRef not invoked");
@@ -181,7 +190,7 @@ describe("<DateInput>", () => {
 
             const popover = wrapper.find(Popover).first();
             assert.strictEqual(popover.prop("placement"), "top");
-            assert.strictEqual(popover.prop("usePortal"), false);
+            assert.isFalse(popover.prop("usePortal"));
             assert.isTrue(onOpening.calledOnce);
         });
 
@@ -652,7 +661,7 @@ describe("<DateInput>", () => {
             focusInput(wrapper);
             changeInput(wrapper, "4/77/2016");
             blurInput(wrapper);
-            assert.strictEqual(wrapper.find(InputGroup).prop("value"), DateInput.defaultProps?.invalidDateMessage);
+            assert.strictEqual(wrapper.find(InputGroup).prop("value"), DATEINPUT_DEFAULT_PROPS.invalidDateMessage);
         });
 
         it("text input does not show error styling until user is done typing and blurs the input", () => {
@@ -786,7 +795,7 @@ describe("<DateInput>", () => {
             });
             changeInput(wrapper, "invalid");
             blurInput(wrapper);
-            assert.strictEqual(wrapper.find("input").prop("value"), DateInput.defaultProps?.invalidDateMessage);
+            assert.strictEqual(wrapper.find("input").prop("value"), DATEINPUT_DEFAULT_PROPS.invalidDateMessage);
         });
     });
 
@@ -853,7 +862,7 @@ describe("<DateInput>", () => {
         input.simulate("blur");
     }
 
-    function changeSelectDropdown(wrapper: ReactWrapper<DateInputProps>, className: string, value: React.ReactText) {
+    function changeSelectDropdown(wrapper: ReactWrapper<DateInputProps>, className: string, value: string | number) {
         wrapper
             .find(`.${className}`)
             .find("select")

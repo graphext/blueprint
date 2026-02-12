@@ -19,23 +19,16 @@
 
 // @ts-check
 
-import { FontAssetType, OtherAssetType, generateFonts as runFantasticon } from "fantasticon";
-import { getLogger } from "fantasticon/lib/cli/logger.js";
+import { FontAssetType, OtherAssetType, generateFonts as runFantasticon } from "@twbs/fantasticon";
+import { getLogger } from "@twbs/fantasticon/lib/cli/logger.js";
 import { mkdirSync } from "node:fs";
 import { join, resolve } from "node:path";
 
-import {
-    generatedSrcDir,
-    ICON_RASTER_SCALING_FACTOR,
-    iconResourcesDir,
-    iconsMetadata,
-    NS,
-    scriptsDir,
-} from "./common.mjs";
+import { generatedSrcDir, ICON_RASTER_SCALING_FACTOR, iconResourcesDir, iconsMetadata, NS } from "./common.mjs";
 
 const logger = getLogger();
 
-/** @type {import("fantasticon/lib/utils/codepoints").CodepointsMap} */
+/** @type {import("@twbs/fantasticon/lib/utils/codepoints").CodepointsMap} */
 const codepoints = {};
 
 for (const icon of iconsMetadata) {
@@ -71,8 +64,8 @@ async function generateFonts(size, prefix) {
         assetTypes: [OtherAssetType.CSS, OtherAssetType.SCSS, OtherAssetType.TS],
         templates: {
             // N.B. in icons-20, we don't generate CSS or the codepoints since we expect them to be the same as icons-16
-            scss: resolve(scriptsDir, `./icons-${size}.scss.hbs`),
-            css: resolve(scriptsDir, "./icons.css.hbs"),
+            scss: resolve(import.meta.dirname, `icons-${size}.scss.hbs`),
+            css: resolve(import.meta.dirname, "icons.css.hbs"),
         },
         pathOptions: {
             scss: join(generatedSrcDir, `${size}px`, "_icon-variables.scss"),
@@ -84,7 +77,7 @@ async function generateFonts(size, prefix) {
 }
 
 /**
- * @param {Promise<import("fantasticon/lib/core/runner").RunnerResults>} runner
+ * @param {Promise<import("@twbs/fantasticon/lib/core/runner").RunnerResults>} runner
  * @returns {Promise<void>}
  */
 async function connectToLogger(runner) {

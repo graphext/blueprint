@@ -20,7 +20,7 @@ import {
     Utils as CoreUtils,
     DISPLAYNAME_PREFIX,
     EditableText,
-    EditableTextProps,
+    type EditableTextProps,
     Hotkey,
     Hotkeys,
     HotkeysTarget,
@@ -28,7 +28,8 @@ import {
 
 import * as Classes from "../common/classes";
 import { Draggable } from "../interactions/draggable";
-import { Cell, CellProps } from "./cell";
+
+import { Cell, type CellProps } from "./cell";
 
 export interface EditableCellProps extends CellProps {
     /**
@@ -80,7 +81,7 @@ export interface EditableCellState {
 }
 
 // HACKHACK(adahiya): fix for Blueprint 6.0
-// eslint-disable-next-line deprecation/deprecation
+// eslint-disable-next-line @typescript-eslint/no-deprecated
 @HotkeysTarget
 export class EditableCell extends React.Component<EditableCellProps, EditableCellState> {
     public static displayName = `${DISPLAYNAME_PREFIX}.EditableCell`;
@@ -113,7 +114,7 @@ export class EditableCell extends React.Component<EditableCellProps, EditableCel
 
         const { value } = this.props;
         if (didPropsChange && value != null) {
-            this.setState({ savedValue: value, dirtyValue: value });
+            this.setState({ dirtyValue: value, savedValue: value });
         }
 
         this.checkShouldFocus();
@@ -134,7 +135,7 @@ export class EditableCell extends React.Component<EditableCellProps, EditableCel
         const { isEditing, dirtyValue, savedValue } = this.state;
         const interactive = spreadableProps.interactive || isEditing;
 
-        let cellContents: JSX.Element | undefined;
+        let cellContents: React.JSX.Element | undefined;
         if (isEditing) {
             const className = editableTextProps ? editableTextProps.className : null;
             cellContents = (
@@ -217,16 +218,16 @@ export class EditableCell extends React.Component<EditableCellProps, EditableCel
             return;
         }
         // setting dirty value to empty string because apparently the text field will pick up the key and write it in there
-        this.setState({ isEditing: true, dirtyValue: "", savedValue: this.state.savedValue });
+        this.setState({ dirtyValue: "", isEditing: true, savedValue: this.state.savedValue });
     };
 
     private handleEdit = () => {
-        this.setState({ isEditing: true, dirtyValue: this.state.savedValue });
+        this.setState({ dirtyValue: this.state.savedValue, isEditing: true });
     };
 
     private handleCancel = (value: string) => {
         // don't strictly need to clear the dirtyValue, but it's better hygiene
-        this.setState({ isEditing: false, dirtyValue: undefined });
+        this.setState({ dirtyValue: undefined, isEditing: false });
         this.invokeCallback(this.props.onCancel, value);
     };
 
@@ -236,7 +237,7 @@ export class EditableCell extends React.Component<EditableCellProps, EditableCel
     };
 
     private handleConfirm = (value: string) => {
-        this.setState({ isEditing: false, savedValue: value, dirtyValue: undefined });
+        this.setState({ dirtyValue: undefined, isEditing: false, savedValue: value });
         this.invokeCallback(this.props.onConfirm, value);
     };
 

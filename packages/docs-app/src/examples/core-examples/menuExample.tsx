@@ -16,13 +16,14 @@
 
 import * as React from "react";
 
-import { Classes, H5, Icon, Menu, MenuDivider, MenuItem } from "@blueprintjs/core";
-import { Example, ExampleProps } from "@blueprintjs/docs-theme";
+import { Classes, H5, Icon, InputGroup, Menu, MenuDivider, MenuItem, type Size } from "@blueprintjs/core";
+import { Example, type ExampleProps } from "@blueprintjs/docs-theme";
 
-import { getSizeProp, Size, SizeSelect } from "./common/sizeSelect";
+import { SizeSelect } from "./common/sizeSelect";
 
 export function MenuExample(props: ExampleProps) {
-    const [size, setSize] = React.useState<Size>("regular");
+    const [count, setCount] = React.useState(0);
+    const [size, setSize] = React.useState<Size>("medium");
 
     const options = (
         <>
@@ -30,18 +31,25 @@ export function MenuExample(props: ExampleProps) {
             <SizeSelect size={size} onChange={setSize} />
         </>
     );
+
     return (
         <Example className="docs-menu-example" options={options} {...props}>
-            <Menu className={Classes.ELEVATION_1} {...getSizeProp(size)}>
+            <Menu className={Classes.ELEVATION_1} size={size}>
                 <MenuItem icon={<PalantirLogo />} text="Custom SVG icon" />
                 <MenuDivider />
                 <MenuItem icon="new-text-box" text="New text box" />
                 <MenuItem icon="new-object" text="New object" />
                 <MenuItem icon="new-link" text="New link" />
                 <MenuDivider />
+                <MenuItem
+                    icon="calculator"
+                    labelElement={count}
+                    onClick={() => setCount(oldCount => oldCount + 1)}
+                    text="Increment"
+                />
                 <MenuItem icon="cog" labelElement={<Icon icon="share" />} text="Settings..." intent="primary" />
             </Menu>
-            <Menu className={Classes.ELEVATION_1} {...getSizeProp(size)}>
+            <Menu className={Classes.ELEVATION_1} size={size}>
                 <MenuDivider title="Edit" />
                 <MenuItem icon="cut" text="Cut" label="⌘X" />
                 <MenuItem icon="duplicate" text="Copy" label="⌘C" />
@@ -61,6 +69,12 @@ export function MenuExample(props: ExampleProps) {
                 <MenuItem icon="asterisk" text="Miscellaneous">
                     <MenuItem icon="badge" text="Badge" />
                     <MenuItem icon="book" text="Long items will truncate when they reach max-width" />
+                    <MenuItem
+                        icon="edit"
+                        text="Set name"
+                        labelElement={<InputGroup placeholder="Item name..." size="small" />}
+                        shouldDismissPopover={false}
+                    />
                     <MenuItem icon="more" text="Look in here for even more items">
                         <MenuItem icon="briefcase" text="Briefcase" />
                         <MenuItem icon="calculator" text="Calculator" />

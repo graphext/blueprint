@@ -15,13 +15,13 @@
  */
 
 import { assert } from "chai";
-import { mount, ReactWrapper } from "enzyme";
+import { mount, type ReactWrapper } from "enzyme";
 import * as React from "react";
 import { spy } from "sinon";
 
-import { Classes, NumericInput, Panel, PanelProps, PanelStack2, PanelStack2Props } from "../../src";
+import { Classes, NumericInput, type Panel, type PanelProps, PanelStack2, type PanelStack2Props } from "../../src";
 
-// eslint-disable-next-line @typescript-eslint/ban-types
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 type TestPanelInfo = {};
 type TestPanelType = Panel<TestPanelInfo>;
 
@@ -41,7 +41,7 @@ const TestPanel: React.FC<PanelProps<TestPanelInfo>> = props => {
 };
 
 describe("<PanelStack2>", () => {
-    let testsContainerElement: HTMLElement;
+    let containerElement: HTMLElement;
     let panelStackWrapper: PanelStack2Wrapper<TestPanelType>;
 
     const initialPanel: Panel<TestPanelInfo> = {
@@ -56,14 +56,14 @@ describe("<PanelStack2>", () => {
     };
 
     beforeEach(() => {
-        testsContainerElement = document.createElement("div");
-        document.body.appendChild(testsContainerElement);
+        containerElement = document.createElement("div");
+        document.body.appendChild(containerElement);
     });
 
     afterEach(() => {
         panelStackWrapper?.unmount();
         panelStackWrapper?.detach();
-        testsContainerElement.remove();
+        containerElement.remove();
     });
 
     describe("uncontrolled mode", () => {
@@ -142,12 +142,12 @@ describe("<PanelStack2>", () => {
         it("does not have the back button when only a single panel is on the stack", () => {
             panelStackWrapper = renderPanelStack({ initialPanel });
             const backButton = panelStackWrapper.findClass(Classes.PANEL_STACK2_HEADER_BACK);
-            assert.equal(backButton.length, 0);
+            assert.lengthOf(backButton, 0);
         });
 
         it("assigns the class to TransitionGroup", () => {
             const TEST_CLASS_NAME = "TEST_CLASS_NAME";
-            panelStackWrapper = renderPanelStack({ initialPanel, className: TEST_CLASS_NAME });
+            panelStackWrapper = renderPanelStack({ className: TEST_CLASS_NAME, initialPanel });
             assert.isTrue(panelStackWrapper.hasClass(TEST_CLASS_NAME));
 
             const transitionGroupClassName = panelStackWrapper.findClass(TEST_CLASS_NAME).props().className;
@@ -252,7 +252,7 @@ describe("<PanelStack2>", () => {
 
             const panelHeaders = panelStackWrapper.findClass(Classes.HEADING);
             assert.exists(panelHeaders);
-            assert.equal(panelHeaders.length, 1);
+            assert.lengthOf(panelHeaders, 1);
             assert.equal(panelHeaders.at(0).text(), stack[1].title);
         });
 
@@ -266,7 +266,7 @@ describe("<PanelStack2>", () => {
 
                 const panelHeaders = panelStackWrapper.findClass(Classes.HEADING);
                 assert.exists(panelHeaders);
-                assert.equal(panelHeaders.length, 2);
+                assert.lengthOf(panelHeaders, 2);
                 assert.equal(panelHeaders.at(0).text(), stack[0].title);
                 assert.equal(panelHeaders.at(1).text(), stack[1].title);
             });
@@ -311,14 +311,13 @@ describe("<PanelStack2>", () => {
         });
     });
 
-    // eslint-disable-next-line @typescript-eslint/ban-types
     interface PanelStack2Wrapper<T extends Panel<object>> extends ReactWrapper<PanelStack2Props<T>, any> {
         findClass(className: string): ReactWrapper<React.HTMLAttributes<HTMLElement>, any>;
     }
 
     function renderPanelStack(props: PanelStack2Props<TestPanelType>): PanelStack2Wrapper<TestPanelType> {
         panelStackWrapper = mount(<PanelStack2 {...props} />, {
-            attachTo: testsContainerElement,
+            attachTo: containerElement,
         }) as PanelStack2Wrapper<TestPanelType>;
         panelStackWrapper.findClass = (className: string) => panelStackWrapper.find(`.${className}`).hostNodes();
         return panelStackWrapper;

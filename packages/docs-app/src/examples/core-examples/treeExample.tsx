@@ -17,8 +17,19 @@
 import cloneDeep from "lodash/cloneDeep";
 import * as React from "react";
 
-import { Classes, ContextMenu, Icon, Intent, Tooltip, Tree, TreeNodeInfo } from "@blueprintjs/core";
-import { Example, ExampleProps } from "@blueprintjs/docs-theme";
+import {
+    Card,
+    Classes,
+    ContextMenu,
+    H5,
+    Icon,
+    Intent,
+    Switch,
+    Tooltip,
+    Tree,
+    type TreeNodeInfo,
+} from "@blueprintjs/core";
+import { Example, type ExampleProps, handleBooleanChange } from "@blueprintjs/docs-theme";
 
 type NodePath = number[];
 
@@ -62,6 +73,7 @@ function treeExampleReducer(state: TreeNodeInfo[], action: TreeAction) {
 }
 
 export const TreeExample: React.FC<ExampleProps> = props => {
+    const [compact, setCompact] = React.useState(false);
     const [nodes, dispatch] = React.useReducer(treeExampleReducer, INITIAL_STATE);
 
     const handleNodeClick = React.useCallback(
@@ -71,7 +83,7 @@ export const TreeExample: React.FC<ExampleProps> = props => {
                 dispatch({ type: "DESELECT_ALL" });
             }
             dispatch({
-                payload: { path: nodePath, isSelected: originallySelected == null ? true : !originallySelected },
+                payload: { isSelected: originallySelected == null ? true : !originallySelected, path: nodePath },
                 type: "SET_IS_SELECTED",
             });
         },
@@ -80,34 +92,43 @@ export const TreeExample: React.FC<ExampleProps> = props => {
 
     const handleNodeCollapse = React.useCallback((_node: TreeNodeInfo, nodePath: NodePath) => {
         dispatch({
-            payload: { path: nodePath, isExpanded: false },
+            payload: { isExpanded: false, path: nodePath },
             type: "SET_IS_EXPANDED",
         });
     }, []);
 
     const handleNodeExpand = React.useCallback((_node: TreeNodeInfo, nodePath: NodePath) => {
         dispatch({
-            payload: { path: nodePath, isExpanded: true },
+            payload: { isExpanded: true, path: nodePath },
             type: "SET_IS_EXPANDED",
         });
     }, []);
 
+    const options = (
+        <>
+            <H5>Props</H5>
+            <Switch label="Compact" checked={compact} onChange={handleBooleanChange(setCompact)} />
+        </>
+    );
+
     return (
-        <Example options={false} {...props}>
-            <Tree
-                contents={nodes}
-                onNodeClick={handleNodeClick}
-                onNodeCollapse={handleNodeCollapse}
-                onNodeExpand={handleNodeExpand}
-                className={Classes.ELEVATION_0}
-            />
+        <Example options={options} {...props}>
+            <Card>
+                <Tree
+                    compact={compact}
+                    contents={nodes}
+                    onNodeClick={handleNodeClick}
+                    onNodeCollapse={handleNodeCollapse}
+                    onNodeExpand={handleNodeExpand}
+                />
+            </Card>
         </Example>
     );
 };
 
 const contentSizing = { popoverProps: { popoverClassName: Classes.POPOVER_CONTENT_SIZING } };
 
-/* tslint:disable:object-literal-sort-keys so childNodes can come last */
+/* eslint-disable sort-keys */
 const INITIAL_STATE: TreeNodeInfo[] = [
     {
         id: 0,
@@ -186,4 +207,4 @@ const INITIAL_STATE: TreeNodeInfo[] = [
         disabled: true,
     },
 ];
-/* tslint:enable:object-literal-sort-keys */
+/* eslint-enable sort-keys */

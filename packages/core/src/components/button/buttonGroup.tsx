@@ -17,14 +17,14 @@
 import classNames from "classnames";
 import * as React from "react";
 
-import { Alignment, Classes } from "../../common";
-import { DISPLAYNAME_PREFIX, HTMLDivProps, Props } from "../../common/props";
+import { type Alignment, type ButtonVariant, Classes, type Size } from "../../common";
+import { DISPLAYNAME_PREFIX, type HTMLDivProps, type Props } from "../../common/props";
 
 export interface ButtonGroupProps extends Props, HTMLDivProps, React.RefAttributes<HTMLDivElement> {
     /**
      * Text alignment within button. By default, icons and text will be centered
-     * within the button. Passing `"left"` or `"right"` will align the button
-     * text to that side and push `icon` and `rightIcon` to either edge. Passing
+     * within the button. Passing `"start"` or `"end"` will align the button
+     * text to that side and push `icon` and `endIcon` to either edge. Passing
      * `"center"` will center the text and icons together.
      */
     alignText?: Alignment;
@@ -42,16 +42,40 @@ export interface ButtonGroupProps extends Props, HTMLDivProps, React.RefAttribut
     /**
      * Whether the child buttons should appear with minimal styling.
      *
+     * @deprecated use `variant="minimal"` instead
      * @default false
      */
     minimal?: boolean;
 
     /**
+     * Whether the child buttons should use outlined styles.
+     *
+     * @deprecated use `variant="outlined"` instead
+     * @default false
+     */
+    outlined?: boolean;
+
+    /**
+     * Visual style variant for the child buttons.
+     *
+     * @default "solid"
+     */
+    variant?: ButtonVariant;
+
+    /**
      * Whether the child buttons should appear with large styling.
      *
+     * @deprecated use `size="large"` instead.
      * @default false
      */
     large?: boolean;
+
+    /**
+     * The size of the child buttons.
+     *
+     * @default "medium"
+     */
+    size?: Size;
 
     /**
      * Whether the button group should appear with vertical styling.
@@ -70,16 +94,31 @@ export interface ButtonGroupProps extends Props, HTMLDivProps, React.RefAttribut
  */
 export const ButtonGroup: React.FC<ButtonGroupProps> = React.forwardRef<HTMLDivElement, ButtonGroupProps>(
     (props, ref) => {
-        const { alignText, className, fill, minimal, large, vertical, ...htmlProps } = props;
+        const {
+            alignText,
+            className,
+            fill,
+            // eslint-disable-next-line @typescript-eslint/no-deprecated
+            minimal,
+            // eslint-disable-next-line @typescript-eslint/no-deprecated
+            outlined,
+            // eslint-disable-next-line @typescript-eslint/no-deprecated
+            large,
+            size = "medium",
+            variant = "solid",
+            vertical,
+            ...htmlProps
+        } = props;
+
         const buttonGroupClasses = classNames(
             Classes.BUTTON_GROUP,
             {
                 [Classes.FILL]: fill,
-                [Classes.LARGE]: large,
-                [Classes.MINIMAL]: minimal,
                 [Classes.VERTICAL]: vertical,
             },
             Classes.alignmentClass(alignText),
+            Classes.sizeClass(size, { large }),
+            Classes.variantClass(variant, { minimal, outlined }),
             className,
         );
         return (

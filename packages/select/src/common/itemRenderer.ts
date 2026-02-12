@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import * as React from "react";
+import type * as React from "react";
 
 export interface ItemModifiers {
     /** Whether this is the "active" (focused) item, meaning keyboard interactions will act upon it. */
@@ -69,4 +69,4 @@ export interface ItemRendererProps<T extends HTMLElement = HTMLLIElement> {
  *
  * @template T list item data type
  */
-export type ItemRenderer<T> = (item: T, itemProps: ItemRendererProps) => JSX.Element | null;
+export type ItemRenderer<T> = (item: T, itemProps: ItemRendererProps) => React.JSX.Element | null;

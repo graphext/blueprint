@@ -16,8 +16,8 @@
 
 import * as React from "react";
 
-import { Button, Intent, Popover, PopoverProps } from "@blueprintjs/core";
-import { Example, ExampleProps } from "@blueprintjs/docs-theme";
+import { Button, Intent, Popover, type PopoverProps } from "@blueprintjs/core";
+import { Example, type ExampleProps } from "@blueprintjs/docs-theme";
 
 import { FileMenu } from "../core-examples/common/fileMenu";
 
@@ -32,14 +32,12 @@ export class PopoverMinimalExample extends React.PureComponent<ExampleProps> {
                 <Popover
                     {...baseProps}
                     minimal={true}
-                    // tslint:disable-next-line jsx-no-lambda
                     renderTarget={({ isOpen, ...p }) => (
                         <Button {...p} active={isOpen} intent={Intent.PRIMARY} text="Minimal" />
                     )}
                 />
                 <Popover
                     {...baseProps}
-                    // tslint:disable-next-line jsx-no-lambda
                     renderTarget={({ isOpen, ...p }) => <Button {...p} active={isOpen} text="Default" />}
                 />
             </Example>

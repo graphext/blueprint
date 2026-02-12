@@ -15,10 +15,11 @@
  */
 
 /* eslint-disable max-classes-per-file */
+/* eslint-disable sort-keys */
 
 import { expect } from "chai";
 
-import { KeyAllowlist, KeyDenylist } from "../../../src/common/utils";
+import type { KeyAllowlist, KeyDenylist } from "../../../src/common/utils";
 import * as CompareUtils from "../../../src/common/utils/compareUtils";
 
 describe("CompareUtils", () => {

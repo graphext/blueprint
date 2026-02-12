@@ -19,8 +19,8 @@ import * as React from "react";
 
 import { AbstractPureComponent, Classes, Utils } from "../../common";
 import { DISPLAYNAME_PREFIX } from "../../common/props";
-import { clamp } from "../../common/utils";
-import { HandleProps } from "./handleProps";
+
+import type { HandleProps } from "./handleProps";
 import { formatPercentage } from "./sliderUtils";
 
 /**
@@ -28,7 +28,7 @@ import { formatPercentage } from "./sliderUtils";
  */
 export interface InternalHandleProps extends HandleProps {
     disabled?: boolean;
-    label: JSX.Element | string | undefined;
+    label: React.JSX.Element | string | undefined;
     max: number;
     min: number;
     stepSize: number;
@@ -43,7 +43,7 @@ export interface HandleState {
 }
 
 // props that require number values, for validation
-const NUMBER_PROPS = ["max", "min", "stepSize", "tickSize", "value"];
+const NUMBER_PROPS = ["max", "min", "stepSize", "tickSize", "value"] satisfies Array<keyof InternalHandleProps>;
 
 /** Internal component for a Handle with click/drag/keyboard logic to determine a new value. */
 export class Handle extends AbstractPureComponent<InternalHandleProps, HandleState> {
@@ -84,6 +84,7 @@ export class Handle extends AbstractPureComponent<InternalHandleProps, HandleSta
                 aria-valuemin={min}
                 aria-valuemax={max}
                 aria-valuenow={value}
+                aria-disabled={disabled}
                 aria-orientation={vertical ? "vertical" : "horizontal"}
             >
                 {label == null ? null : <span className={Classes.SLIDER_LABEL}>{label}</span>}
@@ -197,13 +198,10 @@ export class Handle extends AbstractPureComponent<InternalHandleProps, HandleSta
 
     private handleKeyDown = (event: React.KeyboardEvent<HTMLSpanElement>) => {
         const { stepSize, value } = this.props;
-        const { key } = event;
-        if (key === "ArrowDown" || key === "ArrowLeft") {
-            this.changeValue(value - stepSize);
+        const direction = Utils.getArrowKeyDirection(event, ["ArrowLeft", "ArrowDown"], ["ArrowRight", "ArrowUp"]);
+        if (direction !== undefined) {
+            this.changeValue(value + stepSize * direction);
             // this key event has been handled! prevent browser scroll on up/down
-            event.preventDefault();
-        } else if (key === "ArrowUp" || key === "ArrowRight") {
-            this.changeValue(value + stepSize);
             event.preventDefault();
         }
     };
@@ -225,7 +223,7 @@ export class Handle extends AbstractPureComponent<InternalHandleProps, HandleSta
 
     /** Clamp value between min and max props */
     private clamp(value: number) {
-        return clamp(value, this.props.min, this.props.max);
+        return Utils.clamp(value, this.props.min, this.props.max);
     }
 
     private getHandleElementCenterPixel(handleElement: HTMLElement) {
@@ -253,8 +251,8 @@ export class Handle extends AbstractPureComponent<InternalHandleProps, HandleSta
                 ? "width"
                 : "height"
             : useOppositeDimension
-            ? "height"
-            : "width";
+              ? "height"
+              : "width";
 
         // "bottom" value seems to be consistently incorrect, so explicitly
         // calculate it using the window offset instead.

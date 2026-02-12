@@ -13,7 +13,7 @@ $drawer-padding: $pt-grid-size * 2 !default;
 $drawer-default-size: 50%;
 
 $drawer-background-color: $white !default;
-$dark-drawer-background-color: $dark-gray4 !default;
+$dark-drawer-background-color: $dark-gray3 !default;
 
 .#{$ns}-drawer {
   background: $drawer-background-color;
@@ -31,7 +31,12 @@ $dark-drawer-background-color: $dark-gray4 !default;
     @include react-transition-phase(
       "#{$ns}-overlay",
       "enter",
-      (transform: (translateY(-100%), translateY(0))),
+      (
+        transform: (
+          translateY(-100%),
+          translateY(0),
+        ),
+      ),
       $pt-transition-duration * 2,
       $pt-transition-ease,
       $before: "&"
@@ -39,7 +44,12 @@ $dark-drawer-background-color: $dark-gray4 !default;
     @include react-transition-phase(
       "#{$ns}-overlay",
       "exit",
-      (transform: (translateY(-100%), translateY(0))),
+      (
+        transform: (
+          translateY(-100%),
+          translateY(0),
+        ),
+      ),
       $pt-transition-duration,
       $before: "&"
     );
@@ -58,7 +68,12 @@ $dark-drawer-background-color: $dark-gray4 !default;
     @include react-transition-phase(
       "#{$ns}-overlay",
       "enter",
-      (transform: (translateY(100%), translateY(0))),
+      (
+        transform: (
+          translateY(100%),
+          translateY(0),
+        ),
+      ),
       $pt-transition-duration * 2,
       $pt-transition-ease,
       $before: "&"
@@ -66,7 +81,12 @@ $dark-drawer-background-color: $dark-gray4 !default;
     @include react-transition-phase(
       "#{$ns}-overlay",
       "exit",
-      (transform: (translateY(100%), translateY(0))),
+      (
+        transform: (
+          translateY(100%),
+          translateY(0),
+        ),
+      ),
       $pt-transition-duration,
       $before: "&"
     );
@@ -85,7 +105,12 @@ $dark-drawer-background-color: $dark-gray4 !default;
     @include react-transition-phase(
       "#{$ns}-overlay",
       "enter",
-      (transform: (translateX(-100%), translateX(0))),
+      (
+        transform: (
+          translateX(-100%),
+          translateX(0),
+        ),
+      ),
       $pt-transition-duration * 2,
       $pt-transition-ease,
       $before: "&"
@@ -93,7 +118,12 @@ $dark-drawer-background-color: $dark-gray4 !default;
     @include react-transition-phase(
       "#{$ns}-overlay",
       "exit",
-      (transform: (translateX(-100%), translateX(0))),
+      (
+        transform: (
+          translateX(-100%),
+          translateX(0),
+        ),
+      ),
       $pt-transition-duration,
       $before: "&"
     );
@@ -112,7 +142,12 @@ $dark-drawer-background-color: $dark-gray4 !default;
     @include react-transition-phase(
       "#{$ns}-overlay",
       "enter",
-      (transform: (translateX(100%), translateX(0))),
+      (
+        transform: (
+          translateX(100%),
+          translateX(0),
+        ),
+      ),
       $pt-transition-duration * 2,
       $pt-transition-ease,
       $before: "&"
@@ -120,7 +155,12 @@ $dark-drawer-background-color: $dark-gray4 !default;
     @include react-transition-phase(
       "#{$ns}-overlay",
       "exit",
-      (transform: (translateX(100%), translateX(0))),
+      (
+        transform: (
+          translateX(100%),
+          translateX(0),
+        ),
+      ),
       $pt-transition-duration,
       $before: "&"
     );
@@ -195,7 +235,7 @@ $dark-drawer-background-color: $dark-gray4 !default;
 .#{$ns}-drawer-footer {
   box-shadow: inset 0 1px 0 $pt-divider-black;
   flex: 0 0 auto;
-  padding: $drawer-padding*0.5 $drawer-padding;
+  padding: $drawer-padding * 0.5 $drawer-padding;
   position: relative;
 
   .#{$ns}-dark & {

@@ -19,14 +19,14 @@
  * All changes & bugfixes should be made to ContextMenu2 instead.
  */
 
-/* eslint-disable deprecation/deprecation */
+/* eslint-disable @typescript-eslint/no-deprecated */
 
 import classNames from "classnames";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
 import { AbstractPureComponent, Classes } from "../common";
-import { OverlayLifecycleProps } from "../components/overlay/overlay";
+import type { OverlayLifecycleProps } from "../components/overlay/overlayProps";
 import { Popover } from "../components/popover/popover";
 
 export interface Offset {
@@ -37,7 +37,7 @@ export interface Offset {
 interface ContextMenuLegacyState {
     isOpen: boolean;
     isDarkTheme: boolean;
-    menu?: JSX.Element;
+    menu?: React.JSX.Element;
     offset?: Offset;
     onClose?: () => void;
 }
@@ -90,8 +90,8 @@ class ContextMenuLegacy extends AbstractPureComponent<ContextMenuLegacyProps, Co
         );
     }
 
-    public show(menu: JSX.Element, offset: Offset, onClose?: () => void, isDarkTheme = false) {
-        this.setState({ isOpen: true, menu, offset, onClose, isDarkTheme });
+    public show(menu: React.JSX.Element, offset: Offset, onClose?: () => void, isDarkTheme = false) {
+        this.setState({ isDarkTheme, isOpen: true, menu, offset, onClose });
     }
 
     public hide() {
@@ -136,7 +136,7 @@ let contextMenu: ContextMenuLegacy | undefined;
  *
  * @deprecated use ContextMenu2
  */
-export function show(menu: JSX.Element, offset: Offset, onClose?: () => void, isDarkTheme?: boolean) {
+export function show(menu: React.JSX.Element, offset: Offset, onClose?: () => void, isDarkTheme?: boolean) {
     if (contextMenuElement === undefined) {
         contextMenuElement = document.createElement("div");
         contextMenuElement.classList.add(Classes.CONTEXT_MENU);

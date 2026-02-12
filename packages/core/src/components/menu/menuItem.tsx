@@ -20,12 +20,13 @@ import * as React from "react";
 import { CaretRight, SmallTick } from "@blueprintjs/icons";
 
 import { Classes } from "../../common";
-import { ActionProps, DISPLAYNAME_PREFIX, removeNonHTMLProps } from "../../common/props";
+import { type ActionProps, DISPLAYNAME_PREFIX, removeNonHTMLProps } from "../../common/props";
 import { clickElementOnKeyPress } from "../../common/utils";
 import { Icon } from "../icon/icon";
-import { Popover, PopoverProps } from "../popover/popover";
+import { Popover, type PopoverProps } from "../popover/popover";
 import { Text } from "../text/text";
-import { Menu, MenuProps } from "./menu";
+
+import { Menu, type MenuProps } from "./menu";
 
 /**
  * Note that the HTML attributes supported by this component are spread to the nested `<a>` element, while the
@@ -126,10 +127,9 @@ export interface MenuItemProps
     popoverProps?: Partial<Omit<PopoverProps, "content" | "minimal">>;
 
     /**
-     * Whether this item should appear selected.
-     * Defining this  will set the `aria-selected` attribute and apply a
-     * "check" or "blank" icon on the item (unless the `icon` prop is set,
-     * which always takes precedence).
+     * Whether this item should appear selected - `roleStructure` must be `"listoption"` for this to be
+     * applied. Defining this will set the `aria-selected` attribute and apply a small tick icon if `true`,
+     * and empty space for a small tick icon if `false` or `undefined`.
      *
      * @default undefined
      */
@@ -152,7 +152,7 @@ export interface MenuItemProps
      *
      * @default "a"
      */
-    tagName?: keyof JSX.IntrinsicElements;
+    tagName?: keyof React.JSX.IntrinsicElements;
 
     /**
      * A space-delimited list of class names to pass along to the text wrapper element.
@@ -172,21 +172,21 @@ export interface MenuItemProps
  */
 export const MenuItem: React.FC<MenuItemProps> = React.forwardRef<HTMLLIElement, MenuItemProps>((props, ref) => {
     const {
-        active,
+        active = false,
         className,
         children,
-        disabled,
+        disabled = false,
         icon,
         intent,
         labelClassName,
         labelElement,
-        multiline,
-        popoverProps,
+        multiline = false,
+        popoverProps = {},
         roleStructure = "menuitem",
         selected,
-        shouldDismissPopover,
+        shouldDismissPopover = true,
         submenuProps,
-        text,
+        text = "",
         textClassName,
         tagName = "a",
         htmlTitle,
@@ -201,23 +201,23 @@ export const MenuItem: React.FC<MenuItemProps> = React.forwardRef<HTMLLIElement,
                   Boolean(selected), // aria-selected prop
               ]
             : roleStructure === "menuitem" // "menuitem": parent has menu role
-            ? [
-                  "none",
-                  "menuitem",
-                  undefined, // don't set aria-selected prop
-              ]
-            : roleStructure === "none" // "none": allows wrapping MenuItem in custom <li>
-            ? [
-                  "none",
-                  undefined, // target should have no role
-                  undefined, // don't set aria-selected prop
-              ]
-            : // roleStructure === "listitem"
-              [
-                  undefined, // needs no role prop, li is listitem by default
-                  undefined,
-                  undefined, // don't set aria-selected prop
-              ];
+              ? [
+                    "none",
+                    "menuitem",
+                    undefined, // don't set aria-selected prop
+                ]
+              : roleStructure === "none" // "none": allows wrapping MenuItem in custom <li>
+                ? [
+                      "none",
+                      undefined, // target should have no role
+                      undefined, // don't set aria-selected prop
+                  ]
+                : // roleStructure === "listitem"
+                  [
+                      undefined, // needs no role prop, li is listitem by default
+                      undefined,
+                      undefined, // don't set aria-selected prop
+                  ];
 
     const isSelectable = roleStructure === "listoption";
     const isSelected = isSelectable && selected;
@@ -302,27 +302,19 @@ export const MenuItem: React.FC<MenuItemProps> = React.forwardRef<HTMLLIElement,
         </li>
     );
 });
-MenuItem.defaultProps = {
-    active: false,
-    disabled: false,
-    multiline: false,
-    popoverProps: {},
-    selected: undefined,
-    shouldDismissPopover: true,
-    text: "",
-};
 MenuItem.displayName = `${DISPLAYNAME_PREFIX}.MenuItem`;
 
 const SUBMENU_POPOVER_MODIFIERS: PopoverProps["modifiers"] = {
     // 20px padding - scrollbar width + a bit
-    flip: { options: { rootBoundary: "viewport", padding: 20 }, enabled: true },
+    flip: { enabled: true, options: { padding: 20, rootBoundary: "viewport" } },
     // shift popover up 5px so MenuItems align
-    offset: { options: { offset: [-5, 0] }, enabled: true },
-    preventOverflow: { options: { rootBoundary: "viewport", padding: 20 }, enabled: true },
+    offset: { enabled: true, options: { offset: [-5, 0] } },
+    preventOverflow: { enabled: true, options: { padding: 20, rootBoundary: "viewport" } },
 };
 
 // props to ignore when disabled
 const DISABLED_PROPS: React.AnchorHTMLAttributes<HTMLAnchorElement> = {
+    "aria-disabled": true,
     href: undefined,
     onClick: undefined,
     onMouseDown: undefined,

@@ -17,7 +17,7 @@
 import type { MaybeElement } from "../../common/props";
 import type { IconName } from "../icon/icon";
 
-// eslint-disable-next-line @typescript-eslint/ban-types
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface TreeNodeInfo<T = {}> {
     /**
      * A space-delimited list of class names for this tree node element.
@@ -65,7 +65,7 @@ export interface TreeNodeInfo<T = {}> {
     /**
      * The main label for the node.
      */
-    label: string | JSX.Element;
+    label: string | React.JSX.Element;
 
     /**
      * A secondary label/component that is displayed at the right side of the node.
@@ -80,7 +80,7 @@ export interface TreeNodeInfo<T = {}> {
     nodeData?: T;
 }
 
-// eslint-disable-next-line @typescript-eslint/ban-types
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export type TreeEventHandler<T = {}> = (
     node: TreeNodeInfo<T>,
     nodePath: number[],

@@ -15,18 +15,26 @@
  */
 
 import { assert } from "chai";
-import { mount, ReactWrapper } from "enzyme";
+import { mount, type ReactWrapper } from "enzyme";
 import * as React from "react";
 import * as sinon from "sinon";
 
-import { Button, ButtonProps, InputGroup, InputGroupProps, MenuItem, Popover, PopoverProps } from "@blueprintjs/core";
+import {
+    Button,
+    type ButtonProps,
+    InputGroup,
+    type InputGroupProps,
+    MenuItem,
+    Popover,
+    type PopoverProps,
+} from "@blueprintjs/core";
 import { QueryList, Select } from "@blueprintjs/select";
 
-import { TimezoneSelect, TimezoneSelectProps } from "../../src";
+import { TimezoneSelect, type TimezoneSelectProps } from "../../src";
 import { getCurrentTimezone } from "../../src/common/getTimezone";
 import { TIMEZONE_ITEMS } from "../../src/common/timezoneItems";
 import { getInitialTimezoneItems, mapTimezonesWithNames } from "../../src/common/timezoneNameUtils";
-import { TimezoneWithNames } from "../../src/common/timezoneTypes";
+import type { TimezoneWithNames } from "../../src/common/timezoneTypes";
 
 const LOS_ANGELES_TZ = "America/Los_Angeles";
 let CURRENT_TZ = getCurrentTimezone();
@@ -70,7 +78,9 @@ describe("<TimezoneSelect>", () => {
 
     it("if query is not empty, shows all items", () => {
         const timezoneSelect = mountTS();
-        timezoneSelect.setState({ query: "not empty" });
+        React.act(() => {
+            timezoneSelect.setState({ query: "not empty" });
+        });
         timezoneSelect.update();
         const items = timezoneSelect.find(Select).prop("items");
         assert.lengthOf(items, TIMEZONE_ITEMS.length);
@@ -127,7 +137,7 @@ describe("<TimezoneSelect>", () => {
     it("if value is non-empty, the selected timezone will stay in sync with that value", () => {
         const value = "Europe/Oslo";
         const valueLabel = TIMEZONE_ITEMS.find(tz => tz.ianaCode === value)?.label;
-        const timezoneSelect = mountTS({ value, onChange });
+        const timezoneSelect = mountTS({ onChange, value });
         clickFirstMenuItem(timezoneSelect);
         const buttonText = timezoneSelect.find(Button).prop("text")?.toString();
         assert.isTrue(buttonText?.includes(valueLabel!), `Expected '${buttonText}' to contain '${valueLabel}'`);
@@ -161,7 +171,7 @@ describe("<TimezoneSelect>", () => {
     it("button can be controlled with button props", () => {
         const buttonProps: ButtonProps = {
             disabled: true,
-            rightIcon: "airplane",
+            endIcon: "airplane",
         };
         const timezoneSelect = mountTS({ buttonProps });
         const button = timezoneSelect.find(Button);

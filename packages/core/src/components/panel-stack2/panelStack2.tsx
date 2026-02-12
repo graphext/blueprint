@@ -18,14 +18,15 @@ import classNames from "classnames";
 import * as React from "react";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 
-import { Classes, DISPLAYNAME_PREFIX, Props } from "../../common";
-import { Panel } from "./panelTypes";
+import { Classes, DISPLAYNAME_PREFIX, type Props } from "../../common";
+import { usePrevious } from "../../hooks";
+
+import type { Panel } from "./panelTypes";
 import { PanelView2 } from "./panelView2";
 
 /**
  * @template T type union of all possible panels in this stack
  */
-// eslint-disable-next-line @typescript-eslint/ban-types
 export interface PanelStack2Props<T extends Panel<object>> extends Props {
     /**
      * The initial panel to show on mount. This panel cannot be removed from the
@@ -74,8 +75,7 @@ interface PanelStack2Component {
     /**
      * @template T type union of all possible panels in this stack
      */
-    // eslint-disable-next-line @typescript-eslint/ban-types
-    <T extends Panel<object>>(props: PanelStack2Props<T>): JSX.Element | null;
+    <T extends Panel<object>>(props: PanelStack2Props<T>): React.JSX.Element | null;
     displayName: string;
 }
 
@@ -85,48 +85,42 @@ interface PanelStack2Component {
  * @see https://blueprintjs.com/docs/#core/components/panel-stack2
  * @template T type union of all possible panels in this stack
  */
-// eslint-disable-next-line @typescript-eslint/ban-types
 export const PanelStack2: PanelStack2Component = <T extends Panel<object>>(props: PanelStack2Props<T>) => {
-    const { renderActivePanelOnly = true, showPanelHeader = true, stack: propsStack } = props;
-    const [direction, setDirection] = React.useState("push");
+    const {
+        initialPanel,
+        onClose,
+        onOpen,
+        renderActivePanelOnly = true,
+        showPanelHeader = true,
+        stack: propsStack,
+    } = props;
+    const isControlled = propsStack != null;
 
-    const [localStack, setLocalStack] = React.useState<T[]>(
-        props.initialPanel !== undefined ? [props.initialPanel] : [],
-    );
+    const [localStack, setLocalStack] = React.useState<T[]>(initialPanel !== undefined ? [initialPanel] : []);
     const stack = React.useMemo(
-        () => (propsStack != null ? propsStack.slice().reverse() : localStack),
-        [localStack, propsStack],
+        () => (isControlled ? propsStack.slice().reverse() : localStack),
+        [localStack, isControlled, propsStack],
     );
-    const stackLength = React.useRef<number>(stack.length);
-    React.useEffect(() => {
-        if (stack.length !== stackLength.current) {
-            // Adjust the direction in case the stack size has changed, controlled or uncontrolled
-            setDirection(stack.length - stackLength.current < 0 ? "pop" : "push");
-        }
-        stackLength.current = stack.length;
-    }, [stack]);
+    const prevStackLength = usePrevious(stack.length) ?? stack.length;
+    const direction = stack.length - prevStackLength < 0 ? "pop" : "push";
 
     const handlePanelOpen = React.useCallback(
         (panel: T) => {
-            props.onOpen?.(panel);
-            if (props.stack == null) {
+            onOpen?.(panel);
+            if (!isControlled) {
                 setLocalStack(prevStack => [panel, ...prevStack]);
             }
         },
-        [props.onOpen],
+        [onOpen, isControlled],
     );
     const handlePanelClose = React.useCallback(
         (panel: T) => {
-            // only remove this panel if it is at the top and not the only one.
-            if (stack[0] !== panel || stack.length <= 1) {
-                return;
-            }
-            props.onClose?.(panel);
-            if (props.stack == null) {
+            onClose?.(panel);
+            if (!isControlled) {
                 setLocalStack(prevStack => prevStack.slice(1));
             }
         },
-        [stack, props.onClose],
+        [onClose, isControlled],
     );
 
     // early return, after all hooks are called

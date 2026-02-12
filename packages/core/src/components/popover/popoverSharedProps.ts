@@ -14,23 +14,16 @@
  * limitations under the License.
  */
 
-import { Boundary, Modifier, Placement, placements, RootBoundary, StrictModifiers } from "@popperjs/core";
-import * as React from "react";
-import { StrictModifier } from "react-popper";
+import type { Boundary, Modifier, Placement, RootBoundary, StrictModifiers } from "@popperjs/core";
+import type * as React from "react";
+import type { StrictModifier } from "react-popper";
 
-import { Position, Props } from "../../common";
-import { OverlayableProps } from "../overlay/overlay";
+import type { Props } from "../../common";
+import type { OverlayableProps } from "../overlay/overlayProps";
 
-export const PopoverPosition = {
-    ...Position,
-    AUTO: "auto" as "auto",
-    AUTO_END: "auto-end" as "auto-end",
-    AUTO_START: "auto-start" as "auto-start",
-};
-// eslint-disable-next-line @typescript-eslint/no-redeclare
-export type PopoverPosition = (typeof PopoverPosition)[keyof typeof PopoverPosition];
+import type { PopoverPosition } from "./popoverPosition";
 
-export { Boundary as PopperBoundary, Placement, placements as PopperPlacements };
+export type { Boundary as PopperBoundary, Placement };
 // copied from @popperjs/core, where it is not exported as public
 export type StrictModifierNames = NonNullable<StrictModifiers["name"]>;
 
@@ -67,7 +60,7 @@ export type DefaultPopoverTargetHTMLProps = React.HTMLProps<HTMLElement>;
  * @see https://blueprintjs.com/docs/#core/components/popover.structure
  */
 export interface PopoverTargetProps
-    extends Pick<React.HTMLAttributes<HTMLElement>, "aria-haspopup" | "className" | "tabIndex"> {
+    extends Pick<React.HTMLAttributes<HTMLElement>, "aria-haspopup" | "aria-expanded" | "className" | "tabIndex"> {
     /** Target ref. */
     ref: React.Ref<any>;
 
@@ -96,6 +89,11 @@ export type PopoverClickTargetHandlers<TProps extends DefaultPopoverTargetHTMLPr
 export interface PopoverSharedProps<TProps extends DefaultPopoverTargetHTMLProps> extends OverlayableProps, Props {
     /** Interactive element which will trigger the popover. */
     children?: React.ReactNode;
+
+    /**
+     * The content displayed inside the popover.
+     */
+    content?: string | React.JSX.Element;
 
     /**
      * A boundary element supplied to the "flip" and "preventOverflow" modifiers.
@@ -228,7 +226,7 @@ export interface PopoverSharedProps<TProps extends DefaultPopoverTargetHTMLProps
     openOnTargetFocus?: boolean;
 
     /**
-     * Ref supplied to the `Classes.POPOVER` element.
+     * DOM ref attached to the `Classes.POPOVER` element.
      */
     popoverRef?: React.Ref<HTMLElement>;
 
@@ -246,7 +244,7 @@ export interface PopoverSharedProps<TProps extends DefaultPopoverTargetHTMLProps
         // Popover<TProps, "click" | "hover">. Instead of discriminating, we union the different possible event handlers
         // that may be passed (they are all optional properties anyway).
         props: PopoverTargetProps & PopoverHoverTargetHandlers<TProps> & PopoverClickTargetHandlers<TProps>,
-    ) => JSX.Element;
+    ) => React.JSX.Element;
 
     /**
      * A root boundary element supplied to the "flip" and "preventOverflow" modifiers.
@@ -304,7 +302,7 @@ export interface PopoverSharedProps<TProps extends DefaultPopoverTargetHTMLProps
      *
      * @default "span" ("div" if `fill={true}`)
      */
-    targetTagName?: keyof JSX.IntrinsicElements;
+    targetTagName?: keyof React.JSX.IntrinsicElements;
 
     /**
      * HTML props for the target element. This is useful in some cases where you

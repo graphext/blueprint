@@ -19,14 +19,14 @@
  * All changes & bugfixes should be made to PanelStack2 instead.
  */
 
-/* eslint-disable deprecation/deprecation */
+/* eslint-disable @typescript-eslint/no-deprecated */
 
 import { assert } from "chai";
-import { mount, ReactWrapper } from "enzyme";
+import { mount, type ReactWrapper } from "enzyme";
 import * as React from "react";
 import { spy } from "sinon";
 
-import { Classes, IPanel, IPanelProps, PanelStack, PanelStackProps } from "../../src";
+import { Classes, type IPanel, type IPanelProps, PanelStack, type PanelStackProps } from "../../src";
 
 export class TestPanel extends React.Component<IPanelProps> {
     public render() {
@@ -42,7 +42,7 @@ export class TestPanel extends React.Component<IPanelProps> {
 }
 
 describe("<PanelStack>", () => {
-    let testsContainerElement: HTMLElement;
+    let containerElement: HTMLElement;
     let panelStackWrapper: PanelStackWrapper;
 
     const initialPanel: IPanel = {
@@ -57,14 +57,14 @@ describe("<PanelStack>", () => {
     };
 
     beforeEach(() => {
-        testsContainerElement = document.createElement("div");
-        document.body.appendChild(testsContainerElement);
+        containerElement = document.createElement("div");
+        document.body.appendChild(containerElement);
     });
 
     afterEach(() => {
         panelStackWrapper?.unmount();
         panelStackWrapper?.detach();
-        testsContainerElement.remove();
+        containerElement.remove();
     });
 
     it("renders a basic panel and allows opening and closing", () => {
@@ -142,12 +142,12 @@ describe("<PanelStack>", () => {
     it("does not have the back button when only a single panel is on the stack", () => {
         panelStackWrapper = renderPanelStack({ initialPanel });
         const backButton = panelStackWrapper.findClass(Classes.PANEL_STACK_HEADER_BACK);
-        assert.equal(backButton.length, 0);
+        assert.lengthOf(backButton, 0);
     });
 
     it("assigns the class to TransitionGroup", () => {
         const TEST_CLASS_NAME = "TEST_CLASS_NAME";
-        panelStackWrapper = renderPanelStack({ initialPanel, className: TEST_CLASS_NAME });
+        panelStackWrapper = renderPanelStack({ className: TEST_CLASS_NAME, initialPanel });
         assert.isTrue(panelStackWrapper.hasClass(TEST_CLASS_NAME));
 
         const transitionGroupClassName = panelStackWrapper.findClass(TEST_CLASS_NAME).props().className;
@@ -252,7 +252,7 @@ describe("<PanelStack>", () => {
 
         const panelHeaders = panelStackWrapper.findClass(Classes.HEADING);
         assert.exists(panelHeaders);
-        assert.equal(panelHeaders.length, 1);
+        assert.lengthOf(panelHeaders, 1);
         assert.equal(panelHeaders.at(0).text(), stack[1].title);
     });
 
@@ -265,7 +265,7 @@ describe("<PanelStack>", () => {
 
         const panelHeaders = panelStackWrapper.findClass(Classes.HEADING);
         assert.exists(panelHeaders);
-        assert.equal(panelHeaders.length, 2);
+        assert.lengthOf(panelHeaders, 2);
         assert.equal(panelHeaders.at(0).text(), stack[0].title);
         assert.equal(panelHeaders.at(1).text(), stack[1].title);
     });
@@ -276,7 +276,7 @@ describe("<PanelStack>", () => {
 
     function renderPanelStack(props: PanelStackProps): PanelStackWrapper {
         panelStackWrapper = mount(<PanelStack {...props} />, {
-            attachTo: testsContainerElement,
+            attachTo: containerElement,
         }) as PanelStackWrapper;
         panelStackWrapper.findClass = (className: string) => panelStackWrapper.find(`.${className}`).hostNodes();
         return panelStackWrapper;

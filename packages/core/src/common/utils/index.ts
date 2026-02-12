@@ -20,6 +20,7 @@ export {
     elementIsOrContains,
     elementIsTextInput,
     getActiveElement,
+    getFocusableElements,
     throttle,
     throttleEvent,
     throttleReactEventCallback,
@@ -27,8 +28,8 @@ export {
 export { isFunction } from "./functionUtils";
 export * from "./jsUtils";
 export * from "./reactUtils";
-export { isArrowKey, isKeyboardClick } from "./keyboardUtils";
-export { Extends } from "./typeUtils";
+export * from "./keyboardUtils";
+export type { Extends } from "./typeUtils";
 export { isDarkTheme } from "./isDarkTheme";
 
 // ref utils used to live in this folder, but got refactored and moved elsewhere.

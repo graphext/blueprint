@@ -14,25 +14,35 @@
  * limitations under the License.
  */
 
+/**
+ * @fileoverview This component is DEPRECATED, and the code is frozen.
+ * All changes & bugfixes should be made to DateInput3 in the datetime2
+ * package instead.
+ */
+
+/* eslint-disable @typescript-eslint/no-deprecated, react-hooks/exhaustive-deps */
+
 import classNames from "classnames";
 import * as React from "react";
 import type { DayPickerProps } from "react-day-picker";
 
 import {
-    ButtonProps,
+    type ButtonProps,
     DISPLAYNAME_PREFIX,
     InputGroup,
-    InputGroupProps,
+    type InputGroupProps,
+    Intent,
     mergeRefs,
     Popover,
-    PopoverClickTargetHandlers,
-    PopoverTargetProps,
-    Props,
+    type PopoverClickTargetHandlers,
+    type PopoverTargetProps,
+    type Props,
     Tag,
     Utils,
 } from "@blueprintjs/core";
 
-import { Classes, DateFormatProps, DatePickerBaseProps } from "../../common";
+import { Classes, type DateFormatProps, type DatePickerBaseProps } from "../../common";
+import { getFormattedDateString } from "../../common/dateFormatProps";
 import type { DatetimePopoverProps } from "../../common/datetimePopoverProps";
 import { hasMonthChanged, hasTimeChanged, isDateValid, isDayInRange } from "../../common/dateUtils";
 import * as Errors from "../../common/errors";
@@ -46,7 +56,7 @@ import {
 } from "../../common/timezoneUtils";
 import { DatePicker } from "../date-picker/datePicker";
 import { DatePickerUtils } from "../date-picker/datePickerUtils";
-import { DatePickerShortcut } from "../shortcuts/shortcuts";
+import type { DatePickerShortcut } from "../shortcuts/shortcuts";
 import { TimezoneSelect } from "../timezone-select/timezoneSelect";
 
 export interface DateInputProps extends DatePickerBaseProps, DateFormatProps, DatetimePopoverProps, Props {
@@ -144,7 +154,7 @@ export interface DateInputProps extends DatePickerBaseProps, DateFormatProps, Da
     /**
      * Element to render on right side of input.
      */
-    rightElement?: JSX.Element;
+    rightElement?: React.JSX.Element;
 
     /**
      * Whether the bottom bar displaying "Today" and "Clear" buttons should be shown below the calendar.
@@ -179,7 +189,7 @@ export interface DateInputProps extends DatePickerBaseProps, DateFormatProps, Da
      *
      * Mutually exclusive with `defaultTimezone` prop.
      *
-     * @see https://www.iana.org/time-zones
+     * See [IANA Time Zones](https://www.iana.org/time-zones).
      */
     timezone?: string;
 
@@ -205,12 +215,23 @@ const INVALID_DATE = new Date(undefined!);
 const DEFAULT_MAX_DATE = DatePickerUtils.getDefaultMaxDate();
 const DEFAULT_MIN_DATE = DatePickerUtils.getDefaultMinDate();
 
+export const DATEINPUT_DEFAULT_PROPS = {
+    closeOnSelection: true,
+    disabled: false,
+    invalidDateMessage: "Invalid date",
+    maxDate: DEFAULT_MAX_DATE,
+    minDate: DEFAULT_MIN_DATE,
+    outOfRangeMessage: "Out of range",
+    reverseMonthAndYearMenus: false,
+};
+
 /**
  * Date input component.
  *
  * @see https://blueprintjs.com/docs/#datetime/date-input
+ * @deprecated use `{ DateInput3 } from "@blueprintjs/datetime2"` instead
  */
-export const DateInput: React.FC<DateInputProps> = React.memo(function _DateInput(props) {
+export const DateInput: React.FC<DateInputProps> = React.memo(function DateInput(props) {
     const {
         defaultTimezone,
         defaultValue,
@@ -235,6 +256,7 @@ export const DateInput: React.FC<DateInputProps> = React.memo(function _DateInpu
 
     const inputRef = React.useRef<HTMLInputElement | null>(null);
     const popoverContentRef = React.useRef<HTMLDivElement | null>(null);
+    const popoverId = Utils.uniqueId("date-picker");
 
     // State
     // ------------------------------------------------------------------------
@@ -257,7 +279,7 @@ export const DateInput: React.FC<DateInputProps> = React.memo(function _DateInpu
 
     // rendered as the text input's value
     const formattedDateString = React.useMemo(() => {
-        return valueAsDate === null ? undefined : DatePickerUtils.getFormattedDateString(valueAsDate, props);
+        return valueAsDate === null ? undefined : getFormattedDateString(valueAsDate, props);
     }, [
         valueAsDate,
         minDate,
@@ -345,7 +367,7 @@ export const DateInput: React.FC<DateInputProps> = React.memo(function _DateInpu
                 setIsInputFocused(newIsInputFocused);
                 setIsOpen(newIsOpen);
             } else {
-                const newFormattedDateString = DatePickerUtils.getFormattedDateString(newDate, props);
+                const newFormattedDateString = getFormattedDateString(newDate, props);
                 setIsInputFocused(newIsInputFocused);
                 setIsOpen(newIsOpen);
                 setValue(newDate);
@@ -395,7 +417,7 @@ export const DateInput: React.FC<DateInputProps> = React.memo(function _DateInpu
     // provide it the focusIn event handlers instead of using a ref and manually adding the
     // event listeners ourselves.
     const popoverContent = (
-        <div ref={popoverContentRef}>
+        <div ref={popoverContentRef} role="dialog" aria-label="date picker" id={popoverId}>
             <div onFocus={handleStartFocusBoundaryFocusIn} tabIndex={0} />
             <DatePicker
                 {...datePickerProps}
@@ -456,9 +478,9 @@ export const DateInput: React.FC<DateInputProps> = React.memo(function _DateInpu
             value={timezoneValue}
         >
             <Tag
+                endIcon={isTimezoneSelectDisabled ? undefined : "caret-down"}
                 interactive={!isTimezoneSelectDisabled}
                 minimal={true}
-                rightIcon={isTimezoneSelectDisabled ? undefined : "caret-down"}
             >
                 {getTimezoneShortName(timezoneValue, tzSelectDate)}
             </Tag>
@@ -618,7 +640,7 @@ export const DateInput: React.FC<DateInputProps> = React.memo(function _DateInpu
                 <InputGroup
                     autoComplete="off"
                     className={classNames(targetProps.className, inputProps.className)}
-                    intent={shouldShowErrorStyling && isErrorState ? "danger" : "none"}
+                    intent={shouldShowErrorStyling && isErrorState ? Intent.DANGER : Intent.NONE}
                     placeholder={placeholder}
                     rightElement={
                         <>
@@ -628,12 +650,14 @@ export const DateInput: React.FC<DateInputProps> = React.memo(function _DateInpu
                     }
                     tagName={popoverProps.targetTagName}
                     type="text"
+                    role="combobox"
                     {...targetProps}
                     {...inputProps}
+                    aria-controls={popoverId}
                     aria-expanded={targetIsOpen}
                     disabled={props.disabled}
                     fill={fill}
-                    inputRef={mergeRefs(ref, inputRef, props.inputProps?.inputRef ?? null)}
+                    inputRef={mergeRefs(ref, inputRef, props.inputProps?.inputRef)}
                     onBlur={handleInputBlur}
                     onChange={handleInputChange}
                     onClick={handleInputClick}
@@ -676,15 +700,7 @@ export const DateInput: React.FC<DateInputProps> = React.memo(function _DateInpu
     );
 });
 DateInput.displayName = `${DISPLAYNAME_PREFIX}.DateInput`;
-DateInput.defaultProps = {
-    closeOnSelection: true,
-    disabled: false,
-    invalidDateMessage: "Invalid date",
-    maxDate: DEFAULT_MAX_DATE,
-    minDate: DEFAULT_MIN_DATE,
-    outOfRangeMessage: "Out of range",
-    reverseMonthAndYearMenus: false,
-};
+DateInput.defaultProps = DATEINPUT_DEFAULT_PROPS;
 
 function getInitialTimezoneValue({ defaultTimezone, timezone }: DateInputProps) {
     if (timezone !== undefined) {
@@ -710,7 +726,7 @@ function getInitialTimezoneValue({ defaultTimezone, timezone }: DateInputProps) 
 }
 
 function getRelatedTargetWithFallback(e: React.FocusEvent<HTMLElement>) {
-    return (e.relatedTarget ?? Utils.getActiveElement(e.currentTarget)) as HTMLElement;
+    return e.relatedTarget ?? Utils.getActiveElement(e.currentTarget);
 }
 
 function getKeyboardFocusableElements(popoverContentRef: React.MutableRefObject<HTMLDivElement | null>) {
@@ -718,9 +734,7 @@ function getKeyboardFocusableElements(popoverContentRef: React.MutableRefObject<
         return [];
     }
 
-    const elements: HTMLElement[] = Array.from(
-        popoverContentRef.current.querySelectorAll("button:not([disabled]),input,[tabindex]:not([tabindex='-1'])"),
-    );
+    const elements = Utils.getFocusableElements(popoverContentRef.current);
     // Remove focus boundary div elements
     elements.pop();
     elements.shift();

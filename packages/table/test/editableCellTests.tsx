@@ -26,10 +26,9 @@ import sinon from "sinon";
 
 import { Classes } from "@blueprintjs/core";
 
-/* eslint-disable deprecation/deprecation */
-
 import { Cell, EditableCell } from "../src";
 import * as TableClasses from "../src/common/classes";
+
 import { CellType, expectCellLoading } from "./cellTestUtils";
 
 describe("<EditableCell>", () => {
@@ -80,9 +79,11 @@ describe("<EditableCell>", () => {
         );
 
         // start editing
-        elem.setState({ isEditing: true, dirtyValue: "test-value-5000" });
+        React.act(() => {
+            elem.setState({ dirtyValue: "test-value-5000", isEditing: true });
+        });
         const input = elem.find("input");
-        expect(input.length).to.equal(1);
+        expect(input).to.have.lengthOf(1);
 
         // make changes
         input.simulate("change", { target: { value: "new-text" } });
@@ -107,9 +108,11 @@ describe("<EditableCell>", () => {
         );
 
         // start editing
-        elem.setState({ isEditing: true, dirtyValue: "test-value-5000" });
+        React.act(() => {
+            elem.setState({ dirtyValue: "test-value-5000", isEditing: true });
+        });
         const input = elem.find(`.${TableClasses.TABLE_EDITABLE_TEXT} input`);
-        expect(input.length).to.equal(1);
+        expect(input).to.have.lengthOf(1);
 
         // make changes
         input.simulate("change", { target: { value: "new-text" } });
@@ -151,7 +154,9 @@ describe("<EditableCell>", () => {
         );
 
         // start editing
-        elem.setState({ isEditing: true, dirtyValue: "" });
+        React.act(() => {
+            elem.setState({ dirtyValue: "", isEditing: true });
+        });
 
         // change value
         elem.find("input").simulate("change", { target: { value: CHANGED_VALUE } });
@@ -192,7 +197,9 @@ describe("<EditableCell>", () => {
         );
 
         // start editing
-        elem.setState({ isEditing: true, dirtyValue: "test-value-5000" });
+        React.act(() => {
+            elem.setState({ dirtyValue: "test-value-5000", isEditing: true });
+        });
         const input = elem.find("input");
         // input props that EditableCell does not care about should pass through unchanged
         expect(input.prop("maxLength")).to.equal(345);

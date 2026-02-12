@@ -17,7 +17,7 @@
 import classNames from "classnames";
 import * as React from "react";
 
-import { HTMLDivProps, Props, removeNonHTMLProps } from "@blueprintjs/core";
+import { type HTMLDivProps, type Props, removeNonHTMLProps } from "@blueprintjs/core";
 import { createKeyEventHandler } from "@blueprintjs/docs-theme";
 
 export interface ClickToCopyProps extends Props, React.RefAttributes<any>, HTMLDivProps {
@@ -45,7 +45,15 @@ export interface ClickToCopyProps extends Props, React.RefAttributes<any>, HTMLD
  * The message is reset to default when the user mouses off the element after copying it.
  */
 export const ClickToCopy: React.FC<ClickToCopyProps> = React.forwardRef<any, ClickToCopyProps>((props, ref) => {
-    const { className, children, copiedClassName, value } = props;
+    const {
+        className,
+        children,
+        copiedClassName = "docs-clipboard-copied",
+        onClick,
+        onMouseLeave,
+        onKeyDown,
+        value = "",
+    } = props;
     const [hasCopied, setHasCopied] = React.useState(false);
     const inputRef = React.useRef<HTMLInputElement>();
 
@@ -58,33 +66,34 @@ export const ClickToCopy: React.FC<ClickToCopyProps> = React.forwardRef<any, Cli
     const handleClick = React.useCallback(
         async (e: React.MouseEvent<HTMLDivElement>) => {
             await copy();
-            props.onClick?.(e);
+            onClick?.(e);
         },
-        [copy, props.onClick],
+        [copy, onClick],
     );
 
     const handleMouseLeave = React.useCallback(
         (e: React.MouseEvent<HTMLDivElement>) => {
             setHasCopied(false);
-            props.onMouseLeave?.(e);
+            onMouseLeave?.(e);
         },
-        [props.onMouseLeave],
+        [onMouseLeave],
     );
 
     const handleInputBlur = React.useCallback(() => {
         setHasCopied(false);
     }, []);
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const handleKeyDown = React.useCallback(
         createKeyEventHandler(
             {
                 Enter: copy,
                 Space: copy,
-                all: props.onKeyDown,
+                all: onKeyDown,
             },
             true,
         ),
-        [copy, props.onKeyDown],
+        [copy, onKeyDown],
     );
 
     return (
@@ -103,7 +112,3 @@ export const ClickToCopy: React.FC<ClickToCopyProps> = React.forwardRef<any, Cli
     );
 });
 ClickToCopy.displayName = "ClickToCopy";
-ClickToCopy.defaultProps = {
-    copiedClassName: "docs-clipboard-copied",
-    value: "",
-};

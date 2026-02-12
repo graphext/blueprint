@@ -14,25 +14,25 @@
  * limitations under the License.
  */
 
+import { waitFor } from "@testing-library/dom";
 import { assert } from "chai";
-import { mount, ReactWrapper } from "enzyme";
+import { mount, type ReactWrapper } from "enzyme";
 import * as React from "react";
-import * as ReactDOM from "react-dom";
 import { spy } from "sinon";
 
-import { Classes, Tree, TreeNodeInfo, TreeProps } from "../../src";
+import { Classes, Tree, type TreeNodeInfo, type TreeProps } from "../../src";
 
 describe("<Tree>", () => {
-    let testsContainerElement: Element;
+    let containerElement: HTMLElement;
 
-    before(() => {
+    beforeEach(() => {
         // this is essentially what TestUtils.renderIntoDocument does
-        testsContainerElement = document.createElement("div");
-        document.documentElement.appendChild(testsContainerElement);
+        containerElement = document.createElement("div");
+        document.documentElement.appendChild(containerElement);
     });
 
     afterEach(() => {
-        ReactDOM.unmountComponentAtNode(testsContainerElement);
+        containerElement.remove();
     });
 
     it("renders its contents", () => {
@@ -80,8 +80,8 @@ describe("<Tree>", () => {
                 isExpanded: false,
                 label: "c0",
             },
-            { id: 0, className: "c1", hasCaret: true, isExpanded: true, label: "c1" },
-            { id: 2, className: "c2", hasCaret: true, isExpanded: false, label: "c2" },
+            { className: "c1", hasCaret: true, id: 0, isExpanded: true, label: "c1" },
+            { className: "c2", hasCaret: true, id: 2, isExpanded: false, label: "c2" },
             {
                 childNodes: [{ id: 5, label: "c4" }],
                 className: "c3",
@@ -211,7 +211,7 @@ describe("<Tree>", () => {
         const tree = renderTree({ contents });
         const disabledTreeNode = tree.find(`.${Classes.TREE_NODE}.c0.${Classes.DISABLED}`);
 
-        assert.equal(disabledTreeNode.length, 1);
+        assert.lengthOf(disabledTreeNode, 1);
     });
 
     it("icons are rendered correctly if present", () => {
@@ -261,7 +261,7 @@ describe("<Tree>", () => {
         assert.strictEqual(findNodeClass(tree, "c2", Classes.TREE_NODE_SECONDARY_LABEL).text(), "Paragraph");
     });
 
-    it("getNodeContentElement returns references to underlying node elements", done => {
+    it("getNodeContentElement returns references to underlying node elements", async () => {
         const contents = createDefaultContents();
         contents[1].isExpanded = true;
 
@@ -277,10 +277,9 @@ describe("<Tree>", () => {
         contents[1].isExpanded = false;
         wrapper.setProps({ contents });
         // wait for animation to finish
-        setTimeout(() => {
+        await waitFor(() => {
             assert.isUndefined(tree.getNodeContentElement(5));
-            done();
-        }, 300);
+        });
     });
 
     it("allows nodes to be removed without throwing", () => {
@@ -307,7 +306,7 @@ describe("<Tree>", () => {
         return mount(<Tree contents={createDefaultContents()} {...props} />);
     }
 
-    // tslint:disable object-literal-sort-keys
+    /* eslint-disable sort-keys */
     function createDefaultContents(): TreeNodeInfo[] {
         return [
             { id: 0, className: "c0", label: "Item 0" },

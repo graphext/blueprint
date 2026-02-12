@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import * as React from "react";
+import type * as React from "react";
 
 export function isRefObject<T>(value: React.Ref<T> | undefined): value is React.RefObject<T> {
     return value != null && typeof value !== "function";
@@ -30,7 +30,7 @@ export function isRefCallback<T>(value: React.Ref<T> | undefined): value is Reac
 export function setRef<T>(refTarget: React.Ref<T> | undefined, ref: T | null): void {
     if (isRefObject<T>(refTarget)) {
         // HACKHACK: .current property is readonly
-        (refTarget.current as any) = ref;
+        (refTarget.current as T | null) = ref;
     } else if (isRefCallback(refTarget)) {
         refTarget(ref);
     }
@@ -40,7 +40,7 @@ export function setRef<T>(refTarget: React.Ref<T> | undefined, ref: T | null): v
  * Utility for merging refs into one singular callback ref.
  * If using in a functional component, would recomend using `useMemo` to preserve function identity.
  */
-export function mergeRefs<T>(...refs: Array<React.Ref<T>>): React.RefCallback<T> {
+export function mergeRefs<T>(...refs: Array<React.Ref<T> | undefined>): React.RefCallback<T> {
     return value => {
         refs.forEach(ref => {
             setRef(ref, value);
@@ -53,7 +53,11 @@ export function getRef<T>(ref: T | React.RefObject<T> | null): T | null {
         return null;
     }
 
-    return (ref as React.RefObject<T>).current ?? (ref as T);
+    if (typeof (ref as React.RefObject<T>).current === "undefined") {
+        return ref as T;
+    }
+
+    return (ref as React.RefObject<T>).current;
 }
 
 /**

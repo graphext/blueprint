@@ -40,7 +40,7 @@ const textEditorMenu = (
     </Menu>
 );
 
-const PopoverExample = function () {
+export const PopoverExample = React.memo(() => {
     return (
         <div className="example-row">
             <ExampleCard label="Popover" subLabel="Text content" width={200}>
@@ -55,17 +55,16 @@ const PopoverExample = function () {
                     placement="right"
                     popoverClassName={Classes.POPOVER_CONTENT_SIZING}
                 >
-                    <Button fill={true} text="Always open" rightIcon="caret-right" />
+                    <Button fill={true} text="Always open" endIcon="caret-right" />
                 </Popover>
             </ExampleCard>
             <ExampleCard label="Popover" subLabel="Dropdown menu" width={200}>
                 <Popover content={textEditorMenu} fill={true} placement="bottom-start" minimal={true}>
-                    <Button fill={true} text="Click to open" rightIcon="caret-down" />
+                    <Button fill={true} text="Click to open" endIcon="caret-down" />
                 </Popover>
             </ExampleCard>
         </div>
     );
-};
-PopoverExample.displayName = "DemoApp.PopoverExample";
+});
 
-export { PopoverExample };
+PopoverExample.displayName = "DemoApp.PopoverExample";

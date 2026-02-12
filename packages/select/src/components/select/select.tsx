@@ -23,10 +23,10 @@ import {
     Classes as CoreClasses,
     DISPLAYNAME_PREFIX,
     InputGroup,
-    InputGroupProps,
+    type InputGroupProps,
     Popover,
-    PopoverClickTargetHandlers,
-    PopoverTargetProps,
+    type PopoverClickTargetHandlers,
+    type PopoverTargetProps,
     PopupKind,
     refHandler,
     setRef,
@@ -34,8 +34,8 @@ import {
 } from "@blueprintjs/core";
 import { Cross, Search } from "@blueprintjs/icons";
 
-import { Classes, ListItemsProps, SelectPopoverProps } from "../../common";
-import { QueryList, QueryListRendererProps } from "../query-list/queryList";
+import { Classes, type ListItemsProps, type SelectPopoverProps } from "../../common";
+import { QueryList, type QueryListRendererProps } from "../query-list/queryList";
 
 export interface SelectProps<T> extends ListItemsProps<T>, SelectPopoverProps {
     /**
@@ -80,6 +80,14 @@ export interface SelectProps<T> extends ListItemsProps<T>, SelectPopoverProps {
      * HTML attributes to add to the `Menu` listbox containing the selectable options.
      */
     menuProps?: React.HTMLAttributes<HTMLUListElement>;
+
+    /**
+     * A placeholder string passed to the filter text input.
+     * Applicable only when `filterable` is `true`.
+     *
+     * @default "Filter..."
+     */
+    placeholder?: string;
 
     /**
      * Whether the active item should be reset to the first matching item _when
@@ -159,6 +167,7 @@ export class Select<T> extends AbstractPureComponent<SelectProps<T>, SelectState
             filterable = true,
             disabled = false,
             inputProps = {},
+            placeholder = "Filter...",
             popoverContentProps = {},
             popoverProps = {},
             popoverRef,
@@ -168,7 +177,7 @@ export class Select<T> extends AbstractPureComponent<SelectProps<T>, SelectState
             <InputGroup
                 aria-autocomplete="list"
                 leftIcon={<Search />}
-                placeholder="Filter..."
+                placeholder={placeholder}
                 rightElement={this.maybeRenderClearButton(listProps.query)}
                 {...inputProps}
                 inputRef={this.handleInputRef}
@@ -251,9 +260,9 @@ export class Select<T> extends AbstractPureComponent<SelectProps<T>, SelectState
             <Button
                 aria-label="Clear filter query"
                 icon={<Cross />}
-                minimal={true}
                 onClick={this.resetQuery}
                 title="Clear filter query"
+                variant="minimal"
             />
         ) : undefined;
     }
@@ -306,7 +315,7 @@ export class Select<T> extends AbstractPureComponent<SelectProps<T>, SelectState
 
     private handlePopoverOpening = (node: HTMLElement) => {
         // save currently focused element before popover steals focus, so we can restore it when closing.
-        this.previousFocusedElement = (Utils.getActiveElement(this.inputElement) as HTMLElement | null) ?? undefined;
+        this.previousFocusedElement = Utils.getActiveElement(this.inputElement) ?? undefined;
 
         if (this.props.resetOnClose) {
             this.resetQuery();

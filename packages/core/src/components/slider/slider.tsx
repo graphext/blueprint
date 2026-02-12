@@ -18,8 +18,9 @@ import * as React from "react";
 
 import { AbstractPureComponent, Intent } from "../../common";
 import { DISPLAYNAME_PREFIX } from "../../common/props";
-import { HandleHtmlProps } from "./handleProps";
-import { MultiSlider, SliderBaseProps } from "./multiSlider";
+
+import type { HandleHtmlProps } from "./handleProps";
+import { MultiSlider, type SliderBaseProps } from "./multiSlider";
 
 export interface SliderProps extends SliderBaseProps {
     /**
@@ -69,7 +70,7 @@ export class Slider extends AbstractPureComponent<SliderProps> {
                 <MultiSlider.Handle
                     value={value!}
                     intentAfter={value! < initialValue! ? intent : undefined}
-                    intentBefore={value! >= initialValue! ? intent : undefined}
+                    intentBefore={value! > initialValue! ? intent : undefined}
                     onChange={onChange}
                     onRelease={onRelease}
                     htmlProps={handleHtmlProps}

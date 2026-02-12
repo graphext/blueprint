@@ -16,7 +16,7 @@
 import * as React from "react";
 
 import { RadioGroup } from "@blueprintjs/core";
-import { Example, ExampleProps, handleStringChange } from "@blueprintjs/docs-theme";
+import { Example, type ExampleProps, handleStringChange } from "@blueprintjs/docs-theme";
 import { Cell, Column, ColumnHeaderCell, RowHeaderCell, Table2 } from "@blueprintjs/table";
 
 interface BigSpaceRock {
@@ -26,15 +26,14 @@ interface BigSpaceRock {
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const bigSpaceRocks: BigSpaceRock[] = require("./potentiallyHazardousAsteroids.json");
 
-export type CellsLoadingConfiguration = "all" | "first-column" | "first-row" | "none" | "random";
-// eslint-disable-next-line @typescript-eslint/no-redeclare
 export const CellsLoadingConfiguration = {
-    ALL: "all" as CellsLoadingConfiguration,
-    FIRST_COLUMN: "first-column" as CellsLoadingConfiguration,
-    FIRST_ROW: "first-row" as CellsLoadingConfiguration,
-    NONE: "none" as CellsLoadingConfiguration,
-    RANDOM: "random" as CellsLoadingConfiguration,
+    ALL: "all" as const,
+    FIRST_COLUMN: "first-column" as const,
+    FIRST_ROW: "first-row" as const,
+    NONE: "none" as const,
+    RANDOM: "random" as const,
 };
+export type CellsLoadingConfiguration = (typeof CellsLoadingConfiguration)[keyof typeof CellsLoadingConfiguration];
 
 const CONFIGURATIONS = [
     { label: "All cells", value: CellsLoadingConfiguration.ALL },
@@ -90,7 +89,7 @@ export class CellLoadingExample extends React.PureComponent<ExampleProps, CellLo
     }
 
     private renderColumns() {
-        const columns: JSX.Element[] = [];
+        const columns: React.JSX.Element[] = [];
 
         Object.keys(bigSpaceRocks[0]).forEach(columnName => {
             const formattedColumnName = columnName

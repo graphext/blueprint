@@ -17,13 +17,13 @@
 import classNames from "classnames";
 import * as React from "react";
 
-import { AbstractPureComponent, DISPLAYNAME_PREFIX, IntentProps } from "../../common";
+import { AbstractPureComponent, DISPLAYNAME_PREFIX, type IntentProps } from "../../common";
 import * as Classes from "../../common/classes";
 // eslint-disable-next-line import/no-cycle
-import { Popover, PopoverInteractionKind } from "../popover/popover";
+import { Popover, type PopoverInteractionKind } from "../popover/popover";
 import { TOOLTIP_ARROW_SVG_SIZE } from "../popover/popoverArrow";
-import { DefaultPopoverTargetHTMLProps, PopoverSharedProps } from "../popover/popoverSharedProps";
-import { TooltipContext, TooltipContextState, TooltipProvider } from "../popover/tooltipContext";
+import type { DefaultPopoverTargetHTMLProps, PopoverSharedProps } from "../popover/popoverSharedProps";
+import { TooltipContext, type TooltipContextState, TooltipProvider } from "../popover/tooltipContext";
 
 export interface TooltipProps<TProps extends DefaultPopoverTargetHTMLProps = DefaultPopoverTargetHTMLProps>
     extends Omit<PopoverSharedProps<TProps>, "shouldReturnFocusOnClose">,
@@ -31,7 +31,7 @@ export interface TooltipProps<TProps extends DefaultPopoverTargetHTMLProps = Def
     /**
      * The content that will be displayed inside of the tooltip.
      */
-    content: JSX.Element | string;
+    content: React.JSX.Element | string;
 
     /**
      * Whether to use a compact appearance, which reduces the visual padding around

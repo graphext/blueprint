@@ -14,21 +14,34 @@
  * limitations under the License.
  */
 
-import { IHeadingNode, IPageData, IPageNode, isPageNode, ITsDocBase, linkify } from "@documentalist/client";
+import {
+    type HeadingNode,
+    isPageNode,
+    linkify,
+    type PageData,
+    type PageNode,
+    type TsDocBase,
+} from "@documentalist/client";
 import classNames from "classnames";
 import * as React from "react";
 
-import { Classes, Drawer, FocusStyleManager, HotkeysTarget2, Props } from "@blueprintjs/core";
+import { Classes, Drawer, FocusStyleManager, HotkeysTarget2, type Props } from "@blueprintjs/core";
 import { Search } from "@blueprintjs/icons";
 
-import { DocsData, DocumentationContext, DocumentationContextApi, hasTypescriptData } from "../common/context";
+import {
+    type DocsData,
+    DocumentationContext,
+    type DocumentationContextApi,
+    hasTypescriptData,
+} from "../common/context";
 import { eachLayoutNode } from "../common/documentalistUtils";
-import { TagRendererMap, TypescriptExample } from "../tags";
+import { type TagRendererMap, TypescriptExample } from "../tags";
+
 import { renderBlock } from "./block";
 import { NavButton } from "./navButton";
 import { Navigator } from "./navigator";
 import { NavMenu } from "./navMenu";
-import { NavMenuItemProps } from "./navMenuItem";
+import type { NavMenuItemProps } from "./navMenuItem";
 import { Page } from "./page";
 import { addScrollbarStyle } from "./scrollbar";
 import { ApiLink } from "./typescript/apiLink";
@@ -38,7 +51,7 @@ export interface DocumentationProps extends Props {
      * An element to place above the documentation, along the top of the viewport.
      * For best results, use a `Banner` from this package.
      */
-    banner?: JSX.Element;
+    banner?: React.JSX.Element;
 
     /**
      * Default page to render in the absence of a hash route.
@@ -69,7 +82,7 @@ export interface DocumentationProps extends Props {
      * searchable in the navigator. Returning `true` will exclude the item from
      * the navigator search results.
      */
-    navigatorExclude?: (node: IPageNode | IHeadingNode) => boolean;
+    navigatorExclude?: (node: PageNode | HeadingNode) => boolean;
 
     /**
      * Callback invoked whenever the component props or state change (specifically,
@@ -84,19 +97,19 @@ export interface DocumentationProps extends Props {
      *
      * @default "View source"
      */
-    renderViewSourceLinkText?: (entry: ITsDocBase) => React.ReactNode;
+    renderViewSourceLinkText?: (entry: TsDocBase) => React.ReactNode;
 
     /**
      * Callback invoked to render the clickable nav menu items. (Nested menu structure is handled by the library.)
      * The default implementation renders a `NavMenuItem` element, which is exported from this package.
      */
-    renderNavMenuItem?: (props: NavMenuItemProps) => JSX.Element;
+    renderNavMenuItem?: (props: NavMenuItemProps) => React.JSX.Element;
 
     /**
      * Callback invoked to render actions for a documentation page.
      * Actions appear in an element in the upper-right corner of the page.
      */
-    renderPageActions?: (page: IPageData) => React.ReactNode;
+    renderPageActions?: (page: PageData) => React.ReactNode;
 
     /**
      * HTML element to use as the scroll parent. By default `document.documentElement` is assumed to be the scroll container.
@@ -143,8 +156,16 @@ export class Documentation extends React.PureComponent<DocumentationProps, Docum
         // build up static map of all references to their page, for navigation / routing
         this.routeToPage = {};
         eachLayoutNode(this.props.docs.nav, (node, parents) => {
-            const { reference } = isPageNode(node) ? node : parents[0]!;
-            this.routeToPage[node.route] = reference;
+            if (isPageNode(node)) {
+                if (this.props.navigatorExclude?.(node)) {
+                    // if node is excluded from navigation, don't store it in the route to page map
+                    // to ensure the user cannnot navigate to it with hotkeys or through the URL
+                    return;
+                }
+                this.routeToPage[node.route] = node.reference;
+            } else if (parents[0] != null) {
+                this.routeToPage[node.route] = parents[0].reference;
+            }
         });
     }
 
@@ -157,6 +178,8 @@ export class Documentation extends React.PureComponent<DocumentationProps, Docum
             this.props.className,
         );
         const apiClasses = classNames("docs-api-drawer", this.props.className);
+        const isDarkTheme = rootClasses.includes(Classes.DARK);
+
         return (
             <DocumentationContext.Provider value={this.getDocumentationContextApi()}>
                 <HotkeysTarget2
@@ -188,7 +211,7 @@ export class Documentation extends React.PureComponent<DocumentationProps, Docum
                     <div className={rootClasses}>
                         {this.props.banner}
                         <div className="docs-app">
-                            <div className="docs-nav-wrapper">
+                            <div className="docs-nav-wrapper" role="navigation">
                                 <div className="docs-nav" ref={this.refHandlers.nav}>
                                     {this.props.header}
                                     <div className="docs-nav-divider" />
@@ -233,6 +256,7 @@ export class Documentation extends React.PureComponent<DocumentationProps, Docum
                                 items={nav}
                                 itemExclude={this.props.navigatorExclude}
                                 onClose={this.handleCloseNavigator}
+                                useDarkTheme={isDarkTheme}
                             />
                         </div>
                     </div>
@@ -276,9 +300,10 @@ export class Documentation extends React.PureComponent<DocumentationProps, Docum
             getDocsData: () => docs,
             renderBlock: block => renderBlock(block, this.props.tagRenderers),
             renderType: hasTypescriptData(docs)
-                ? type =>
-                      linkify(type, docs.typescript, (name, _d, idx) => <ApiLink key={`${name}-${idx}`} name={name} />)
-                : type => type,
+                ? omitEmptyTypeParamsList(type =>
+                      linkify(type, docs.typescript, (name, _d, idx) => <ApiLink key={`${name}-${idx}`} name={name} />),
+                  )
+                : omitEmptyTypeParamsList(type => type),
             renderViewSourceLinkText: renderViewSourceLinkText ?? (() => "View source"),
             showApiDocs: this.handleApiBrowserOpen,
         };
@@ -335,7 +360,11 @@ export class Documentation extends React.PureComponent<DocumentationProps, Docum
         const { activeSectionId } = this.state;
         // only scroll nav menu if active item is not visible in viewport.
         // using activeSectionId so you can see the page title in nav (may not be visible in document).
-        const navItemElement = this.navElement.querySelector<HTMLElement>(`a[href="#${activeSectionId}"]`)!;
+        const navItemElement = this.navElement.querySelector<HTMLElement>(`a[href="#${activeSectionId}"]`);
+        if (navItemElement == null) {
+            return;
+        }
+
         const scrollOffset = navItemElement.offsetTop - this.navElement.scrollTop;
         if (scrollOffset < 0 || scrollOffset > this.navElement.offsetHeight) {
             // reveal two items above this item in list
@@ -369,19 +398,19 @@ export class Documentation extends React.PureComponent<DocumentationProps, Docum
 
 /** Shorthand for element.querySelector() + cast to HTMLElement */
 function queryHTMLElement(parent: Element, selector: string) {
-    return parent.querySelector(selector) as HTMLElement;
+    return parent.querySelector<HTMLElement>(selector);
 }
 
 /**
  * Returns the reference of the closest section within `offset` pixels of the top of the viewport.
  */
 function getScrolledReference(offset: number, scrollContainer: HTMLElement = document.documentElement) {
-    const headings = Array.from(scrollContainer.querySelectorAll(".docs-title"));
+    const headings = Array.from(scrollContainer.querySelectorAll<HTMLElement>(".docs-title"));
     while (headings.length > 0) {
         // iterating in reverse order (popping from end / bottom of page)
         // so the first element below the threshold is the one we want.
-        const element = headings.pop() as HTMLElement;
-        if (element.offsetTop < scrollContainer.scrollTop + offset) {
+        const element = headings.pop();
+        if (element && element.offsetTop < scrollContainer.scrollTop + offset) {
             // relying on DOM structure to get reference
             return element.querySelector("[data-route]")?.getAttribute("data-route");
         }
@@ -402,4 +431,13 @@ function scrollToReference(reference: string, scrollContainer: HTMLElement = doc
             scrollContainer.scrollTop = scrollOffset;
         }
     });
+}
+
+type TypeRenderer = (type: string) => React.ReactNode;
+
+/**
+ * HACKHACK: workaround for https://github.com/palantir/documentalist/issues/246
+ */
+function omitEmptyTypeParamsList(typeRenderer: TypeRenderer): TypeRenderer {
+    return (type: string) => typeRenderer(type.replace("<>", ""));
 }

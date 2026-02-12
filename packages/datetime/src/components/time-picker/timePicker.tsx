@@ -26,7 +26,7 @@ import {
     Intent,
 } from "@blueprintjs/core";
 
-import { Classes, DateUtils, TimePickerProps, TimePrecision } from "../../common";
+import { Classes, DateUtils, type TimePickerProps, TimePrecision } from "../../common";
 import {
     getDefaultMaxTime,
     getDefaultMinTime,
@@ -180,23 +180,21 @@ export class TimePicker extends React.Component<TimePickerProps, TimePickerState
         return (
             <input
                 aria-label={getTimeUnitPrintStr(unit)}
-                // we use a type="text" input here, so we must set these a11y attributes
-                // which we would otherwise get for free with a type="number" input
-                aria-valuemin={0}
-                aria-valuenow={valueNumber}
-                aria-valuemax={getTimeUnitMax(unit)}
                 className={classNames(
                     Classes.TIMEPICKER_INPUT,
                     { [CoreClasses.intentClass(Intent.DANGER)]: !isValid },
                     className,
                 )}
                 id={this.timeInputIds[unit]}
+                min={0}
+                max={getTimeUnitMax(unit)}
                 onBlur={this.getInputBlurHandler(unit)}
                 onChange={this.getInputChangeHandler(unit)}
                 onFocus={this.getInputFocusHandler(unit)}
                 onKeyDown={this.getInputKeyDownHandler(unit)}
                 onKeyUp={this.getInputKeyUpHandler(unit)}
                 role={this.props.showArrowButtons ? "spinbutton" : undefined}
+                type="number"
                 value={value}
                 disabled={this.props.disabled}
                 autoFocus={isHour && this.props.autoFocus}
@@ -260,7 +258,7 @@ export class TimePicker extends React.Component<TimePickerProps, TimePickerState
             ArrowDown: () => this.decrementTime(unit),
             ArrowUp: () => this.incrementTime(unit),
             Enter: () => {
-                (e.currentTarget as HTMLInputElement).blur();
+                e.currentTarget.blur();
             },
         });
         this.props.onKeyDown?.(e, unit);
@@ -286,7 +284,7 @@ export class TimePicker extends React.Component<TimePickerProps, TimePickerState
     private getFullStateFromValue(value: Date, useAmPm: boolean): TimePickerState {
         const timeInRange = DateUtils.getTimeInRange(value, this.props.minTime, this.props.maxTime);
         const hourUnit = useAmPm ? TimeUnit.HOUR_12 : TimeUnit.HOUR_24;
-        /* tslint:disable:object-literal-sort-keys */
+        /* eslint-disable sort-keys */
         return {
             hourText: formatTime(timeInRange.getHours(), hourUnit),
             minuteText: formatTime(timeInRange.getMinutes(), TimeUnit.MINUTE),
@@ -295,7 +293,7 @@ export class TimePicker extends React.Component<TimePickerProps, TimePickerState
             value: timeInRange,
             isPm: DateUtils.getIsPmFrom24Hour(timeInRange.getHours()),
         };
-        /* tslint:enable:object-literal-sort-keys */
+        /* eslint-enable sort-keys */
     }
 
     private incrementTime = (unit: TimeUnit) => this.shiftTime(unit, 1);

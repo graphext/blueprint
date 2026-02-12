@@ -9,7 +9,7 @@ updates:
     schedule:
       interval: "weekly"
     reviewers:
-      - "adidahiya"
+      - "palantir/blueprint"
     groups:
       eslint:
         patterns:
@@ -38,7 +38,6 @@ updates:
           - "@types/enzyme-*"
           - "jest"
           - "@jest/*"
-          - "ts-jest"
           - "karma"
           - "karma-*"
           - "mocha"
@@ -83,13 +82,8 @@ updates:
       - dependency-name: "@types/svgo"
       # lodash hasn't released for >2 years
       - dependency-name: "lodash"
-      # we are stuck on fantasticon v1 for now
-      # see https://github.com/tancredi/fantasticon/issues/470
-      - dependency-name: "fantasticon"
-        update-types:
-        - "version-update:semver-major"
       # we rarely bump Node.js versions, and it requires additional code changes to do so
       - dependency-name: "@types/node"
         update-types:
-        - "version-update:semver-major"
-        - "version-update:semver-minor"
+          - "version-update:semver-major"
+          - "version-update:semver-minor"

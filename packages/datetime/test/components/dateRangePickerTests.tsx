@@ -14,8 +14,16 @@
  * limitations under the License.
  */
 
+/**
+ * @fileoverview This component is DEPRECATED, and the code is frozen.
+ * All changes & bugfixes should be made to DateRangePicker3 in the datetime2
+ * package instead.
+ */
+
+/* eslint-disable @typescript-eslint/no-deprecated, sort-keys */
+
 import { assert } from "chai";
-import { mount, ReactWrapper } from "enzyme";
+import { mount, type ReactWrapper } from "enzyme";
 import * as React from "react";
 import ReactDayPicker from "react-day-picker";
 import sinon from "sinon";
@@ -24,19 +32,19 @@ import { Button, Classes, Menu, MenuItem } from "@blueprintjs/core";
 
 import {
     Classes as DateClasses,
-    DatePickerModifiers,
-    DateRange,
+    type DatePickerModifiers,
+    type DateRange,
     DateRangePicker,
-    DateRangePickerProps,
+    type DateRangePickerProps,
     TimePicker,
-    TimePrecision,
+    type TimePrecision,
 } from "../../src";
 import * as DateUtils from "../../src/common/dateUtils";
 import * as Errors from "../../src/common/errors";
 import { Months } from "../../src/common/months";
 import { DatePickerNavbar } from "../../src/components/date-picker/datePickerNavbar";
-import { DateRangePickerState } from "../../src/components/date-range-picker/dateRangePicker";
-import { DatePickerShortcutMenu, DateRangeShortcut } from "../../src/components/shortcuts/shortcuts";
+import type { DateRangePickerState } from "../../src/components/date-range-picker/dateRangePicker";
+import { DatePickerShortcutMenu, type DateRangeShortcut } from "../../src/components/shortcuts/shortcuts";
 import { assertDayDisabled } from "../common/dayPickerTestUtils";
 
 describe("<DateRangePicker>", () => {
@@ -1301,7 +1309,7 @@ describe("<DateRangePicker>", () => {
         return wrapper;
     }
 
-    function wrap(datepicker: JSX.Element) {
+    function wrap(datepicker: React.JSX.Element) {
         const wrapper = mount<DateRangePickerProps, DateRangePickerState>(datepicker);
 
         const findTimeInput = (precision: TimePrecision | "hour", which: "left" | "right") =>

@@ -18,7 +18,9 @@ import classNames from "classnames";
 import * as React from "react";
 
 import { AbstractPureComponent, Classes, refHandler, setRef } from "../../common";
-import { DISPLAYNAME_PREFIX, IntentProps, Props } from "../../common/props";
+import { DISPLAYNAME_PREFIX, type IntentProps, type Props } from "../../common/props";
+import type { Size } from "../../common/size";
+
 import { AsyncControllableTextArea } from "./asyncControllableTextArea";
 
 export interface TextAreaProps extends IntentProps, Props, React.TextareaHTMLAttributes<HTMLTextAreaElement> {
@@ -61,6 +63,7 @@ export interface TextAreaProps extends IntentProps, Props, React.TextareaHTMLAtt
     /**
      * Whether the text area should appear with large styling.
      *
+     * @deprecated use `size="large"` instead.
      * @default false
      */
     large?: boolean;
@@ -68,9 +71,17 @@ export interface TextAreaProps extends IntentProps, Props, React.TextareaHTMLAtt
     /**
      * Whether the text area should appear with small styling.
      *
+     * @deprecated use `size="small"` instead.
      * @default false
      */
     small?: boolean;
+
+    /**
+     * The size styling of the text area.
+     *
+     * @default "medium"
+     */
+    size?: Size;
 }
 
 export interface TextAreaState {
@@ -89,6 +100,7 @@ export class TextArea extends AbstractPureComponent<TextAreaProps, TextAreaState
         autoResize: false,
         fill: false,
         large: false,
+        size: "medium",
         small: false,
     };
 
@@ -106,7 +118,7 @@ export class TextArea extends AbstractPureComponent<TextAreaProps, TextAreaState
     );
 
     private maybeSyncHeightToScrollHeight = () => {
-        // eslint-disable-next-line deprecation/deprecation
+        // eslint-disable-next-line @typescript-eslint/no-deprecated
         const { autoResize, growVertically } = this.props;
 
         if (this.textareaElement != null) {
@@ -157,11 +169,14 @@ export class TextArea extends AbstractPureComponent<TextAreaProps, TextAreaState
             autoResize,
             className,
             fill,
-            // eslint-disable-next-line deprecation/deprecation
+            // eslint-disable-next-line @typescript-eslint/no-deprecated
             growVertically,
             inputRef,
             intent,
+            // eslint-disable-next-line @typescript-eslint/no-deprecated
             large,
+            size = "medium",
+            // eslint-disable-next-line @typescript-eslint/no-deprecated
             small,
             ...htmlProps
         } = this.props;
@@ -170,10 +185,9 @@ export class TextArea extends AbstractPureComponent<TextAreaProps, TextAreaState
             Classes.INPUT,
             Classes.TEXT_AREA,
             Classes.intentClass(intent),
+            Classes.sizeClass(size, { large, small }),
             {
                 [Classes.FILL]: fill,
-                [Classes.LARGE]: large,
-                [Classes.SMALL]: small,
                 [Classes.TEXT_AREA_AUTO_RESIZE]: autoResize,
             },
             className,

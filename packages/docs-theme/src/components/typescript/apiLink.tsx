@@ -16,7 +16,7 @@
 
 import * as React from "react";
 
-import { Props } from "@blueprintjs/core";
+import type { Props } from "@blueprintjs/core";
 
 import { COMPONENT_DISPLAY_NAMESPACE } from "../../common";
 import { DocumentationContext } from "../../common/context";
@@ -31,10 +31,13 @@ export interface ApiLinkProps extends Props {
  */
 export const ApiLink: React.FC<ApiLinkProps> = ({ className, name }) => {
     const { showApiDocs } = React.useContext(DocumentationContext);
-    const handleClick = React.useCallback((evt: React.MouseEvent<HTMLAnchorElement>) => {
-        evt.preventDefault();
-        showApiDocs(name);
-    }, []);
+    const handleClick = React.useCallback(
+        (evt: React.MouseEvent<HTMLAnchorElement>) => {
+            evt.preventDefault();
+            showApiDocs(name);
+        },
+        [name, showApiDocs],
+    );
 
     return (
         <a className={className} href={`#api/${name}`} onClick={handleClick}>

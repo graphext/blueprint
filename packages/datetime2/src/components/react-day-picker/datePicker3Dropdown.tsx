@@ -15,7 +15,7 @@
  */
 
 import * as React from "react";
-import { DropdownProps } from "react-day-picker";
+import type { DropdownProps } from "react-day-picker";
 
 import { HTMLSelect } from "@blueprintjs/core";
 
@@ -25,7 +25,7 @@ import { useMonthSelectRightOffset } from "../../common/useMonthSelectRightOffse
  * Custom react-day-picker dropdown component which implements Blueprint's datepicker design
  * for month and year dropdowns.
  *
- * @see https://react-day-picker.js.org/guides/custom-components
+ * @see https://daypicker.dev/guides/custom-components
  */
 export function DatePicker3Dropdown({ caption, children, ...props }: DropdownProps) {
     const containerElement = React.useRef<HTMLDivElement>(null);

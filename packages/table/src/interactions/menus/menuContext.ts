@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-import { CellCoordinate, Region, Regions } from "../../regions";
+import { type CellCoordinate, type Region, Regions } from "../../regions";
 
-export type ContextMenuRenderer = (context: MenuContext) => JSX.Element;
+export type ContextMenuRenderer = (context: MenuContext) => React.JSX.Element;
 
 export interface MenuContext {
     /**

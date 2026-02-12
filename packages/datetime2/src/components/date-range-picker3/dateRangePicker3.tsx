@@ -15,33 +15,35 @@
  */
 
 import classNames from "classnames";
-import { format } from "date-fns";
+import { addDays, format } from "date-fns";
 import * as React from "react";
-import { DateFormatter, DayModifiers, DayMouseEventHandler, ModifiersClassNames } from "react-day-picker";
+import type { DateFormatter, DayModifiers, DayMouseEventHandler, ModifiersClassNames } from "react-day-picker";
 
-import { AbstractPureComponent, Boundary, DISPLAYNAME_PREFIX, Divider } from "@blueprintjs/core";
+import { Boundary, DISPLAYNAME_PREFIX, Divider } from "@blueprintjs/core";
 import {
     DatePickerShortcutMenu,
     DatePickerUtils,
-    DateRange,
+    type DateRange,
     DateRangeSelectionStrategy,
-    DateRangeShortcut,
+    type DateRangeShortcut,
     DateUtils,
     Errors,
     MonthAndYear,
     TimePicker,
+    TimePrecision,
 } from "@blueprintjs/datetime";
 
 import { Classes, dayPickerClassNameOverrides } from "../../classes";
-import { loadDateFnsLocale } from "../../common/dateFnsLocaleUtils";
 import { combineModifiers, HOVERED_RANGE_MODIFIER } from "../../common/dayPickerModifiers";
 import { DatePicker3Provider } from "../date-picker3/datePicker3Context";
+import { DateFnsLocalizedComponent } from "../dateFnsLocalizedComponent";
+
 import { ContiguousDayRangePicker } from "./contiguousDayRangePicker";
-import { DateRangePicker3Props } from "./dateRangePicker3Props";
-import { DateRangePicker3State } from "./dateRangePicker3State";
+import type { DateRangePicker3DefaultProps, DateRangePicker3Props } from "./dateRangePicker3Props";
+import type { DateRangePicker3State } from "./dateRangePicker3State";
 import { NonContiguousDayRangePicker } from "./nonContiguousDayRangePicker";
 
-export { DateRangePicker3Props };
+export type { DateRangePicker3Props };
 
 const NULL_RANGE: DateRange = [null, null];
 
@@ -50,8 +52,8 @@ const NULL_RANGE: DateRange = [null, null];
  *
  * @see https://blueprintjs.com/docs/#datetime2/date-range-picker3
  */
-export class DateRangePicker3 extends AbstractPureComponent<DateRangePicker3Props, DateRangePicker3State> {
-    public static defaultProps: DateRangePicker3Props = {
+export class DateRangePicker3 extends DateFnsLocalizedComponent<DateRangePicker3Props, DateRangePicker3State> {
+    public static defaultProps: DateRangePicker3DefaultProps = {
         allowSingleDayRange: false,
         contiguousCalendarMonths: true,
         dayPickerProps: {},
@@ -149,10 +151,12 @@ export class DateRangePicker3 extends AbstractPureComponent<DateRangePicker3Prop
     }
 
     public async componentDidMount() {
-        await this.loadLocale(this.props.locale);
+        await super.componentDidMount();
     }
 
     public async componentDidUpdate(prevProps: DateRangePicker3Props) {
+        super.componentDidUpdate(prevProps);
+
         const isControlled = prevProps.value !== undefined && this.props.value !== undefined;
 
         if (prevProps.contiguousCalendarMonths !== this.props.contiguousCalendarMonths) {
@@ -169,29 +173,6 @@ export class DateRangePicker3 extends AbstractPureComponent<DateRangePicker3Prop
 
         if (this.props.selectedShortcutIndex !== prevProps.selectedShortcutIndex) {
             this.setState({ selectedShortcutIndex: this.props.selectedShortcutIndex });
-        }
-
-        if (this.props.locale !== prevProps.locale) {
-            await this.loadLocale(this.props.locale);
-        }
-    }
-
-    // HACKHACK: type fix for setState which does not accept partial state objects in our outdated version of
-    // @types/react (v16.14.32)
-    public setState<K extends keyof DateRangePicker3State>(
-        nextStateOrAction:
-            | Partial<DateRangePicker3State>
-            | null
-            | ((
-                  prevState: DateRangePicker3State,
-                  prevProps: DateRangePicker3Props,
-              ) => Pick<DateRangePicker3State, K> | null),
-        callback?: () => void,
-    ) {
-        if (typeof nextStateOrAction === "function") {
-            super.setState(nextStateOrAction, callback);
-        } else {
-            super.setState(nextStateOrAction as DateRangePicker3State);
         }
     }
 
@@ -220,17 +201,6 @@ export class DateRangePicker3 extends AbstractPureComponent<DateRangePicker3Prop
         }
     }
 
-    private async loadLocale(localeCode: string | undefined) {
-        if (localeCode === undefined) {
-            return;
-        } else if (this.state.locale?.code === localeCode) {
-            return;
-        }
-
-        const locale = await loadDateFnsLocale(localeCode);
-        this.setState({ locale });
-    }
-
     private maybeRenderShortcuts() {
         const { shortcuts } = this.props;
         if (shortcuts == null || shortcuts === false) {
@@ -257,38 +227,37 @@ export class DateRangePicker3 extends AbstractPureComponent<DateRangePicker3Prop
     }
 
     private maybeRenderTimePickers(isShowingOneMonth: boolean) {
-        const { timePrecision, timePickerProps } = this.props;
+        // timePrecision may be set as a root prop or as a property inside timePickerProps, so we need to check both
+        const { timePickerProps, timePrecision = timePickerProps?.precision } = this.props;
         if (timePrecision == null && timePickerProps === DateRangePicker3.defaultProps.timePickerProps) {
             return null;
         }
 
-        if (isShowingOneMonth) {
-            return (
+        const isLongTimePicker =
+            timePickerProps?.useAmPm ||
+            timePrecision === TimePrecision.SECOND ||
+            timePrecision === TimePrecision.MILLISECOND;
+
+        return (
+            <div
+                className={classNames(Classes.DATERANGEPICKER_TIMEPICKERS, {
+                    [Classes.DATERANGEPICKER3_TIMEPICKERS_STACKED]: isShowingOneMonth && isLongTimePicker,
+                })}
+            >
                 <TimePicker
                     precision={timePrecision}
                     {...timePickerProps}
                     onChange={this.handleTimeChangeLeftCalendar}
                     value={this.state.time[0]}
                 />
-            );
-        } else {
-            return (
-                <div className={Classes.DATERANGEPICKER_TIMEPICKERS}>
-                    <TimePicker
-                        precision={timePrecision}
-                        {...timePickerProps}
-                        onChange={this.handleTimeChangeLeftCalendar}
-                        value={this.state.time[0]}
-                    />
-                    <TimePicker
-                        precision={timePrecision}
-                        {...timePickerProps}
-                        onChange={this.handleTimeChangeRightCalendar}
-                        value={this.state.time[1]}
-                    />
-                </div>
-            );
-        }
+                <TimePicker
+                    precision={timePrecision}
+                    {...timePickerProps}
+                    onChange={this.handleTimeChangeRightCalendar}
+                    value={this.state.time[1]}
+                />
+            </div>
+        );
     }
 
     private handleTimeChange = (newTime: Date, dateIndex: number) => {
@@ -296,15 +265,36 @@ export class DateRangePicker3 extends AbstractPureComponent<DateRangePicker3Prop
 
         const { value, time } = this.state;
         const newValue = DateUtils.getDateTime(
-            value[dateIndex] != null ? DateUtils.clone(value[dateIndex]!) : new Date(),
+            value[dateIndex] != null ? DateUtils.clone(value[dateIndex]!) : this.getDefaultDate(dateIndex),
             newTime,
         );
         const newDateRange: DateRange = [value[0], value[1]];
         newDateRange[dateIndex] = newValue;
         const newTimeRange: DateRange = [time[0], time[1]];
         newTimeRange[dateIndex] = newTime;
+
         this.props.onChange?.(newDateRange);
-        this.setState({ value: newDateRange, time: newTimeRange });
+        this.setState({ time: newTimeRange, value: newDateRange });
+    };
+
+    // When a user sets the time value before choosing a date, we need to pick a date for them
+    // The default depends on the value of the other date since there's an invariant
+    // that the left/0 date is always less than the right/1 date
+    private getDefaultDate = (dateIndex: number) => {
+        const { value } = this.state;
+        const otherIndex = dateIndex === 0 ? 1 : 0;
+        const otherDate = value[otherIndex];
+        if (otherDate == null) {
+            return new Date();
+        }
+
+        const { allowSingleDayRange } = this.props;
+        if (!allowSingleDayRange) {
+            const dateDiff = dateIndex === 0 ? -1 : 1;
+            return addDays(otherDate, dateDiff);
+        }
+
+        return otherDate;
     };
 
     private handleTimeChangeLeftCalendar = (time: Date) => {
@@ -484,8 +474,17 @@ function getInitialMonth(props: DateRangePicker3Props, value: DateRange): Date {
         }
         return month;
     } else if (DateUtils.isDayInRange(today, [props.minDate!, props.maxDate!])) {
+        if (!isSingleMonthOnly && DateUtils.isSameMonth(today, props.maxDate!)) {
+            // special case: if today is in the maxDate month, display it on the right calendar
+            today.setMonth(today.getMonth() - 1);
+        }
         return today;
     } else {
-        return DateUtils.getDateBetween([props.minDate!, props.maxDate!]);
+        const betweenDate = DateUtils.getDateBetween([props.minDate!, props.maxDate!]);
+        if (!isSingleMonthOnly && DateUtils.isSameMonth(betweenDate, props.maxDate!)) {
+            // special case: if betweenDate is in the maxDate month, display it on the right calendar
+            betweenDate.setMonth(betweenDate.getMonth() - 1);
+        }
+        return betweenDate;
     }
 }

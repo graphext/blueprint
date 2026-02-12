@@ -17,7 +17,7 @@
 import * as React from "react";
 
 import { Button, Popover } from "@blueprintjs/core";
-import { Example, ExampleProps } from "@blueprintjs/docs-theme";
+import { Example, type ExampleProps } from "@blueprintjs/docs-theme";
 
 import { FileMenu } from "./common/fileMenu";
 
@@ -30,7 +30,6 @@ export class PopoverSizingExample extends React.PureComponent<ExampleProps> {
                 <Popover
                     content={<FileMenu className="docs-popover-sizing-example" />}
                     placement="bottom-end"
-                    // tslint:disable-next-line jsx-no-lambda
                     renderTarget={({ isOpen, ...p }) => <Button {...p} active={isOpen} text="Open..." />}
                 />
             </Example>

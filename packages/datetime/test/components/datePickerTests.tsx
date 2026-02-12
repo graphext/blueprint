@@ -14,6 +14,14 @@
  * limitations under the License.
  */
 
+/**
+ * @fileoverview This component is DEPRECATED, and the code is frozen.
+ * All changes & bugfixes should be made to DatePicker3 in the datetime2
+ * package instead.
+ */
+
+/* eslint-disable @typescript-eslint/no-deprecated */
+
 import { assert } from "chai";
 import { mount } from "enzyme";
 import * as React from "react";
@@ -23,11 +31,18 @@ import sinon from "sinon";
 import { Button, Classes as CoreClasses, HTMLSelect, Menu, MenuItem } from "@blueprintjs/core";
 import { assertDatesEqual } from "@blueprintjs/test-commons";
 
-import { Classes, DatePicker, DatePickerModifiers, DatePickerProps, TimePicker, TimePrecision } from "../../src";
+import {
+    Classes,
+    DatePicker,
+    type DatePickerModifiers,
+    type DatePickerProps,
+    TimePicker,
+    TimePrecision,
+} from "../../src";
 import { DateUtils, Months } from "../../src/common";
 import * as Errors from "../../src/common/errors";
-import { DatePickerState } from "../../src/components/date-picker/datePicker";
-import { DatePickerShortcut, DatePickerShortcutMenu } from "../../src/components/shortcuts/shortcuts";
+import type { DatePickerState } from "../../src/components/date-picker/datePicker";
+import { type DatePickerShortcut, DatePickerShortcutMenu } from "../../src/components/shortcuts/shortcuts";
 import { assertDayDisabled, assertDayHidden } from "../common/dayPickerTestUtils";
 
 describe("<DatePicker>", () => {
@@ -519,7 +534,7 @@ describe("<DatePicker>", () => {
             const date = new Date(2015, Months.JANUARY, 1);
             const onChangeSpy = sinon.spy();
             const { clickShortcut, assertSelectedDays } = wrap(
-                <DatePicker onChange={onChangeSpy} shortcuts={[{ label: "custom shortcut", date }]} />,
+                <DatePicker onChange={onChangeSpy} shortcuts={[{ date, label: "custom shortcut" }]} />,
             );
             clickShortcut();
             assert.isTrue(onChangeSpy.calledOnce);
@@ -626,7 +641,7 @@ describe("<DatePicker>", () => {
         it("custom shortcuts select the correct values", () => {
             const date = new Date(2010, Months.JANUARY, 10);
             const { clickShortcut, assertSelectedDays } = wrap(
-                <DatePicker shortcuts={[{ label: "custom shortcut", date }]} />,
+                <DatePicker shortcuts={[{ date, label: "custom shortcut" }]} />,
             );
             clickShortcut();
             assertSelectedDays(date.getDate());
@@ -760,7 +775,7 @@ describe("<DatePicker>", () => {
         assert.isNull(root.state("value"));
     });
 
-    function wrap(datepicker: JSX.Element) {
+    function wrap(datepicker: React.JSX.Element) {
         const wrapper = mount<DatePickerProps, DatePickerState>(datepicker);
         return {
             /** Asserts that the given days are selected. No arguments asserts that selection is empty. */

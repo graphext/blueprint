@@ -16,17 +16,17 @@
 
 import * as React from "react";
 
-import { AbstractComponent, DISPLAYNAME_PREFIX, Menu, Props, Utils } from "@blueprintjs/core";
+import { AbstractComponent, DISPLAYNAME_PREFIX, Menu, type Props, Utils } from "@blueprintjs/core";
 
 import {
-    CreateNewItem,
+    type CreateNewItem,
     executeItemsEqual,
     getActiveItem,
     getCreateNewItem,
     isCreateNewItem,
-    ItemListRendererProps,
-    ItemModifiers,
-    ListItemsProps,
+    type ItemListRendererProps,
+    type ItemModifiers,
+    type ListItemsProps,
     renderFilteredItems,
 } from "../../common";
 
@@ -60,7 +60,7 @@ export interface QueryListProps<T> extends ListItemsProps<T> {
      * Customize rendering of the component.
      * Receives an object with props that should be applied to elements as necessary.
      */
-    renderer: (listProps: QueryListRendererProps<T>) => JSX.Element;
+    renderer: (listProps: QueryListRendererProps<T>) => React.JSX.Element;
 
     /**
      * Whether the list is disabled.
@@ -519,15 +519,18 @@ export class QueryList<T> extends AbstractComponent<QueryListProps<T>, QueryList
     };
 
     private handleKeyDown = (event: React.KeyboardEvent<HTMLElement>) => {
-        const { key } = event;
-        if (key === "ArrowUp" || key === "ArrowDown") {
-            event.preventDefault();
-            const nextActiveItem = this.getNextActiveItem(key === "ArrowUp" ? -1 : 1);
-            if (nextActiveItem != null) {
-                this.setActiveItem(nextActiveItem);
+        if (!event.nativeEvent.isComposing) {
+            const { key } = event;
+            const direction = Utils.getArrowKeyDirection(event, ["ArrowUp"], ["ArrowDown"]);
+            if (direction !== undefined) {
+                event.preventDefault();
+                const nextActiveItem = this.getNextActiveItem(direction);
+                if (nextActiveItem != null) {
+                    this.setActiveItem(nextActiveItem);
+                }
+            } else if (key === "Enter") {
+                this.isEnterKeyPressed = true;
             }
-        } else if (key === "Enter") {
-            this.isEnterKeyPressed = true;
         }
 
         this.props.onKeyDown?.(event);
@@ -567,7 +570,7 @@ export class QueryList<T> extends AbstractComponent<QueryListProps<T>, QueryList
      * @param direction amount to move in each iteration, typically +/-1
      * @param startIndex item to start iteration
      */
-    private getNextActiveItem(direction: number, startIndex = this.getActiveIndex()): T | CreateNewItem | null {
+    private getNextActiveItem(direction: 1 | -1, startIndex = this.getActiveIndex()): T | CreateNewItem | null {
         if (this.isCreateItemRendered(this.state.createNewItem)) {
             const reachedCreate =
                 (startIndex === 0 && direction === -1) ||

@@ -31,6 +31,7 @@
   }
 
   .#{$ns}-dark & {
+    background-color: $dark-tag-default-color;
     color: $g-white;
 
     // For multiline tags

@@ -24,6 +24,7 @@
     /* stylelint-enable */
   }
 
+  // TOOD: move to SVGIconContainer styles in @blueprintjs/icons in v6.0
   > svg {
     // prevent extra vertical whitespace
     display: block;
@@ -33,12 +34,33 @@
       fill: currentcolor;
     }
   }
+
+  // muted icon style used by NonIdealState
+  &.#{$ns}-icon-muted svg {
+    fill-opacity: 0.15;
+    // need to show overflow for some strokes on paths that reach the edge of the icon bounding box
+    overflow: visible;
+
+    path {
+      stroke: $gray3;
+      stroke-opacity: 0.5;
+      stroke-width: 0.5px;
+    }
+  }
+
+  .#{$ns}-dark & {
+    .#{$ns}-icon-muted svg {
+      fill-opacity: 0.2;
+    }
+  }
 }
 
 // intent colors for both SVG and font icons are set in _typography-colors.scss
 
 //
 // Icon font styles
+//
+// TOOD: move to @blueprintjs/icons in v6.0
 //
 
 span.#{$ns}-icon-standard {
@@ -61,6 +83,14 @@ span.#{$ns}-icon:empty {
 
   &::before {
     @include pt-icon-font-smoothing();
+  }
+
+  &.#{$ns}-icon-standard {
+    font-size: $pt-icon-size-standard;
+  }
+
+  &.#{$ns}-icon-large {
+    font-size: $pt-icon-size-large;
   }
 }
 
