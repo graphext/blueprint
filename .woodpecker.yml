@@ -29,7 +29,7 @@ steps:
       - echo -n $NPMRC | base64 -d > /root/.npmrc
       - yarn
       - yarn compile
-      - yarn dist:libs
+      - yarn dist
       - rm /root/.npmrc
     environment:
       NPMRC:
@@ -60,7 +60,6 @@ steps:
     commands:
       - apk add --update-cache git openssh
       - corepack enable
-      - yarn dist:apps
       - yarn site:clean
       - yarn copy:docs-app
       - mkdir /root/.ssh && echo "$DEPLOY_KEY" > /root/.ssh/id_rsa && chmod 0600 /root/.ssh/id_rsa
