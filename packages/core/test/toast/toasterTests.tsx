@@ -14,26 +14,24 @@
  * limitations under the License.
  */
 
-import * as ReactDOM from "react-dom";
-
 import { Toaster } from "../../src";
 
 describe("Toaster", () => {
-    let testsContainerElement: HTMLElement;
+    let containerElement: HTMLElement;
 
     before(() => {
-        testsContainerElement = document.createElement("div");
-        document.documentElement.appendChild(testsContainerElement);
+        containerElement = document.createElement("div");
+        document.documentElement.appendChild(containerElement);
     });
 
-    afterEach(() => {
-        ReactDOM.unmountComponentAtNode(testsContainerElement);
+    after(() => {
+        containerElement.remove();
     });
 
     describe("(v4.x backwards-compatibility)", () => {
         it("supports Toaster.create() method", () => {
-            // eslint-disable-next-line deprecation/deprecation
-            const toaster = Toaster.create({}, testsContainerElement);
+            // eslint-disable-next-line @typescript-eslint/no-deprecated
+            const toaster = Toaster.create({}, containerElement);
             toaster.clear();
         });
     });

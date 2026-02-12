@@ -17,11 +17,11 @@
 import * as React from "react";
 
 import { Switch } from "@blueprintjs/core";
-import { Example, ExampleProps, handleBooleanChange } from "@blueprintjs/docs-theme";
+import { Example, type ExampleProps, handleBooleanChange } from "@blueprintjs/docs-theme";
 import { Cell, Column, Table2, Utils } from "@blueprintjs/table";
 
 export interface TableReorderableExampleState {
-    columns?: JSX.Element[];
+    columns?: React.JSX.Element[];
     data?: any[];
     enableColumnInteractionBar?: boolean;
 }
@@ -32,7 +32,7 @@ const REORDERABLE_TABLE_DATA = [
     ["C", "Cranberry", "Cougar", "Croatia", "Chicago"],
     ["D", "Dragonfruit", "Deer", "Denmark", "Denver"],
     ["E", "Eggplant", "Elk", "Eritrea", "El Paso"],
-].map(([letter, fruit, animal, country, city]) => ({ letter, fruit, animal, country, city }));
+].map(([letter, fruit, animal, country, city]) => ({ animal, city, country, fruit, letter }));
 
 export class TableReorderableExample extends React.PureComponent<ExampleProps, TableReorderableExampleState> {
     public state: TableReorderableExampleState = {
@@ -55,7 +55,7 @@ export class TableReorderableExample extends React.PureComponent<ExampleProps, T
     public componentDidUpdate(_nextProps: ExampleProps, nextState: TableReorderableExampleState) {
         const { enableColumnInteractionBar } = this.state;
         if (nextState.enableColumnInteractionBar !== enableColumnInteractionBar) {
-            const nextColumns = React.Children.map(this.state.columns, (column: JSX.Element) => {
+            const nextColumns = React.Children.map(this.state.columns, (column: React.JSX.Element) => {
                 return React.cloneElement(column, { enableColumnInteractionBar });
             });
             this.setState({ columns: nextColumns });
@@ -74,6 +74,7 @@ export class TableReorderableExample extends React.PureComponent<ExampleProps, T
         return (
             <Example options={options} showOptionsBelowExample={true} {...this.props}>
                 <Table2
+                    cellRendererDependencies={[this.state]}
                     enableColumnReordering={true}
                     enableColumnResizing={false}
                     enableRowReordering={true}

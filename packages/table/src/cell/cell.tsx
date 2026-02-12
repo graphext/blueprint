@@ -16,10 +16,17 @@
 import classNames from "classnames";
 import * as React from "react";
 
-import { Classes as CoreClasses, Utils as CoreUtils, DISPLAYNAME_PREFIX, IntentProps, Props } from "@blueprintjs/core";
+import {
+    Classes as CoreClasses,
+    Utils as CoreUtils,
+    DISPLAYNAME_PREFIX,
+    type IntentProps,
+    type Props,
+} from "@blueprintjs/core";
 
 import * as Classes from "../common/classes";
 import { LoadableContent } from "../common/loadableContent";
+
 import { JSONFormat } from "./formats/jsonFormat";
 import { TruncatedFormat } from "./formats/truncatedFormat";
 
@@ -184,7 +191,7 @@ export class Cell extends React.Component<CellProps> {
                 className={classes}
                 title={tooltip}
                 ref={cellRef}
-                {...{ style, tabIndex, onKeyDown, onKeyUp, onKeyPress }}
+                {...{ onKeyDown, onKeyPress, onKeyUp, style, tabIndex }}
             >
                 <LoadableContent loading={loading ?? false} variableLength={true}>
                     {content}

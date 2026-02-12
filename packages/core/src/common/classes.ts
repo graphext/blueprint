@@ -15,9 +15,12 @@
  */
 
 import { Alignment } from "./alignment";
+import type { ButtonVariant } from "./buttonVariant";
 import { Elevation } from "./elevation";
 import { Intent } from "./intent";
 import { Position } from "./position";
+import type { HTMLInputProps } from "./props";
+import type { Size } from "./size";
 
 // injected by webpack.DefinePlugin
 declare let BLUEPRINT_NAMESPACE: string | undefined;
@@ -113,6 +116,11 @@ export const CALLOUT_HAS_BODY_CONTENT = `${CALLOUT}-has-body-content`;
 export const CALLOUT_ICON = `${CALLOUT}-icon`;
 
 export const CARD = `${NS}-card`;
+export const CONTROL_CARD = `${NS}-control-card`;
+export const CONTROL_CARD_LABEL = `${CONTROL_CARD}-label`;
+export const SWITCH_CONTROL_CARD = `${NS}-switch-control-card`;
+export const CHECKBOX_CONTROL_CARD = `${NS}-checkbox-control-card`;
+export const RADIO_CONTROL_CARD = `${NS}-radio-control-card`;
 
 export const CARD_LIST = `${NS}-card-list`;
 export const CARD_LIST_BORDERED = `${CARD_LIST}-bordered`;
@@ -158,6 +166,16 @@ export const EDITABLE_TEXT_EDITING = `${EDITABLE_TEXT}-editing`;
 export const EDITABLE_TEXT_INPUT = `${EDITABLE_TEXT}-input`;
 export const EDITABLE_TEXT_PLACEHOLDER = `${EDITABLE_TEXT}-placeholder`;
 
+export const ENTITY_TITLE = `${NS}-entity-title`;
+export const ENTITY_TITLE_ELLIPSIZE = `${NS}-entity-title-ellipsize`;
+export const ENTITY_TITLE_HAS_SUBTITLE = `${ENTITY_TITLE}-has-subtitle`;
+export const ENTITY_TITLE_ICON_CONTAINER = `${ENTITY_TITLE}-icon-container`;
+export const ENTITY_TITLE_SUBTITLE = `${ENTITY_TITLE}-subtitle`;
+export const ENTITY_TITLE_TAGS_CONTAINER = `${ENTITY_TITLE}-tags-container`;
+export const ENTITY_TITLE_TEXT = `${ENTITY_TITLE}-text`;
+export const ENTITY_TITLE_TITLE = `${ENTITY_TITLE}-title`;
+export const ENTITY_TITLE_TITLE_AND_TAGS = `${ENTITY_TITLE}-title-and-tags`;
+
 export const FLEX_EXPANDER = `${NS}-flex-expander`;
 
 export const HTML_SELECT = `${NS}-html-select`;
@@ -184,6 +202,7 @@ export const CONTROL_INDICATOR = `${CONTROL}-indicator`;
 export const CONTROL_INDICATOR_CHILD = `${CONTROL_INDICATOR}-child`;
 export const CHECKBOX = `${NS}-checkbox`;
 export const RADIO = `${NS}-radio`;
+export const RADIO_GROUP = `${NS}-radio-group`;
 export const SWITCH = `${NS}-switch`;
 export const SWITCH_INNER_TEXT = `${SWITCH}-inner-text`;
 export const FILE_INPUT = `${NS}-file-input`;
@@ -233,6 +252,7 @@ export const SECTION_HEADER_SUB_TITLE = `${SECTION_HEADER}-sub-title`;
 export const SECTION_HEADER_DIVIDER = `${SECTION_HEADER}-divider`;
 export const SECTION_HEADER_TABS = `${SECTION_HEADER}-tabs`;
 export const SECTION_HEADER_RIGHT = `${SECTION_HEADER}-right`;
+export const SECTION_HEADER_COLLAPSE_CARET = `${SECTION_HEADER}-collapse-caret`;
 export const SECTION_CARD = `${SECTION}-card`;
 
 export const NAVBAR = `${NS}-navbar`;
@@ -265,9 +285,9 @@ export const PANEL_STACK_HEADER_BACK = `${PANEL_STACK}-header-back`;
 export const PANEL_STACK_VIEW = `${PANEL_STACK}-view`;
 
 export const PANEL_STACK2 = `${NS}-panel-stack2`;
-export const PANEL_STACK2_HEADER = `${PANEL_STACK}-header`;
-export const PANEL_STACK2_HEADER_BACK = `${PANEL_STACK}-header-back`;
-export const PANEL_STACK2_VIEW = `${PANEL_STACK}-view`;
+export const PANEL_STACK2_HEADER = `${PANEL_STACK2}-header`;
+export const PANEL_STACK2_HEADER_BACK = `${PANEL_STACK2}-header-back`;
+export const PANEL_STACK2_VIEW = `${PANEL_STACK2}-view`;
 
 export const POPOVER = `${NS}-popover`;
 export const POPOVER_ARROW = `${POPOVER}-arrow`;
@@ -312,6 +332,8 @@ export const SPINNER_HEAD = `${SPINNER}-head`;
 export const SPINNER_NO_SPIN = `${NS}-no-spin`;
 export const SPINNER_TRACK = `${SPINNER}-track`;
 
+export const SEGMENTED_CONTROL = `${NS}-segmented-control`;
+
 export const TAB = `${NS}-tab`;
 export const TAB_ICON = `${TAB}-icon`;
 export const TAB_TAG = `${TAB}-tag`;
@@ -323,6 +345,11 @@ export const TABS = `${TAB}s`;
 
 export const TAG = `${NS}-tag`;
 export const TAG_REMOVE = `${TAG}-remove`;
+export const COMPOUND_TAG = `${NS}-compound-tag`;
+export const COMPOUND_TAG_LEFT = `${COMPOUND_TAG}-left`;
+export const COMPOUND_TAG_LEFT_CONTENT = `${COMPOUND_TAG}-left-content`;
+export const COMPOUND_TAG_RIGHT = `${COMPOUND_TAG}-right`;
+export const COMPOUND_TAG_RIGHT_CONTENT = `${COMPOUND_TAG}-right-content`;
 
 export const TAG_INPUT = `${NS}-tag-input`;
 export const TAG_INPUT_ICON = `${TAG_INPUT}-icon`;
@@ -353,6 +380,7 @@ export const TREE_ROOT = `${NS}-tree-root`;
 export const ICON = `${NS}-icon`;
 export const ICON_STANDARD = `${ICON}-standard`;
 export const ICON_LARGE = `${ICON}-large`;
+export const ICON_MUTED = `${ICON}-muted`;
 
 /**
  * Returns the namespace prefix for all Blueprint CSS classes.
@@ -365,9 +393,13 @@ export function getClassNamespace() {
 /** Return CSS class for alignment. */
 export function alignmentClass(alignment: Alignment | undefined) {
     switch (alignment) {
+        // eslint-disable-next-line @typescript-eslint/no-deprecated
         case Alignment.LEFT:
+        case Alignment.START:
             return ALIGN_LEFT;
+        // eslint-disable-next-line @typescript-eslint/no-deprecated
         case Alignment.RIGHT:
+        case Alignment.END:
             return ALIGN_RIGHT;
         default:
             return undefined;
@@ -416,6 +448,41 @@ export function positionClass(position: Position | undefined) {
         return undefined;
     }
     return `${NS}-position-${position}`;
+}
+
+export function sizeClass(
+    size: Size | HTMLInputProps["size"],
+    legacyProps: Partial<Record<"large" | "small", boolean>>,
+): string | Record<string, boolean> {
+    if (size === "small") {
+        return SMALL;
+    }
+    if (size === "large") {
+        return LARGE;
+    }
+    const { large = false, small = false } = legacyProps;
+    return {
+        [LARGE]: large,
+        [SMALL]: small,
+    };
+}
+
+export function variantClass(
+    variant: ButtonVariant,
+    legacyProps: Record<"minimal" | "outlined", boolean | undefined>,
+): string | Record<string, boolean> {
+    // variant takes precedence over minimal and outlined
+    if (variant === "outlined") {
+        return OUTLINED;
+    }
+    if (variant === "minimal") {
+        return MINIMAL;
+    }
+    const { minimal = false, outlined = false } = legacyProps;
+    return {
+        [MINIMAL]: minimal,
+        [OUTLINED]: outlined,
+    };
 }
 
 /* CUSTOM GRAPHEXT CLASSES */

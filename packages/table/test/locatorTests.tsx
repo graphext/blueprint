@@ -15,12 +15,12 @@
  */
 
 import { expect } from "chai";
+import { mount } from "enzyme";
 import * as React from "react";
-import * as ReactDOM from "react-dom";
 
 import { Utils } from "../src";
 import { Grid } from "../src/common/grid";
-import { Locator, LocatorImpl } from "../src/locator";
+import { type Locator, LocatorImpl } from "../src/locator";
 
 const N_ROWS = 10;
 const N_COLS = 10;
@@ -55,7 +55,7 @@ describe("Locator", () => {
         // ".body" will be the scrollable region.
         containerElement = document.createElement("div");
         document.body.appendChild(containerElement);
-        ReactDOM.render(
+        mount(
             <div className="table-wrapper" style={style}>
                 <div className="body" style={style}>
                     <div className="body-client" style={style}>
@@ -63,7 +63,7 @@ describe("Locator", () => {
                     </div>
                 </div>
             </div>,
-            containerElement,
+            { attachTo: containerElement },
         );
 
         locator = new LocatorImpl(
@@ -75,7 +75,7 @@ describe("Locator", () => {
     });
 
     afterEach(() => {
-        ReactDOM.unmountComponentAtNode(containerElement);
+        containerElement.remove();
     });
 
     it("constructs", () => {
@@ -293,7 +293,7 @@ describe("Locator", () => {
 
     function assertCellLocatedProperly(clientX: number, clientY: number, expectedRow: number, expectedCol: number) {
         const cell = locator.convertPointToCell(clientX, clientY);
-        expect(cell).to.deep.equal({ row: expectedRow, col: expectedCol });
+        expect(cell).to.deep.equal({ col: expectedCol, row: expectedRow });
     }
 
     function getUnscrolledCellCoords(row: number, col: number) {

@@ -19,7 +19,7 @@ import * as React from "react";
 import { Classes, H3, InputGroup, NonIdealState } from "@blueprintjs/core";
 import { smartSearch } from "@blueprintjs/docs-theme";
 
-import { DocsIcon, DocsIconProps as Icon } from "./docsIcon";
+import { DocsIcon, type DocsIconProps as Icon } from "./docsIcon";
 
 const ICONS_PER_ROW = 5;
 
@@ -29,7 +29,7 @@ export interface IconsState {
 
 export interface IconsProps {
     iconFilter?: (query: string, icon: Icon) => boolean;
-    iconRenderer?: (icon: Icon, index: number) => JSX.Element;
+    iconRenderer?: (icon: Icon, index: number) => React.JSX.Element;
     icons?: Icon[];
 }
 
@@ -56,10 +56,10 @@ export class Icons extends React.PureComponent<IconsProps, IconsState> {
                 <InputGroup
                     autoFocus={true}
                     className={Classes.FILL}
-                    large={true}
                     leftIcon="search"
                     onValueChange={this.handleFilterChange}
                     placeholder="Search for icons..."
+                    size="large"
                     type="search"
                     value={this.state.filter}
                 />

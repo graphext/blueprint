@@ -15,8 +15,8 @@
 
 import type { ColumnProps } from "./column";
 import type { Rect } from "./common";
-import type { FocusedCellCoordinates } from "./common/cellTypes";
-import { ScrollDirection } from "./common/scrollDirection";
+import type { FocusedRegion } from "./common/cellTypes";
+import type { ScrollDirection } from "./common/scrollDirection";
 import type { Region } from "./regions";
 
 export interface TableState {
@@ -27,9 +27,9 @@ export interface TableState {
     columnWidths: number[];
 
     /**
-     * The coordinates of the currently focused table cell
+     * The coordinates of the currenly focused table region
      */
-    focusedCell: FocusedCellCoordinates | undefined;
+    focusedRegion: FocusedRegion | undefined;
 
     /**
      * An array of pixel offsets for resize guides, which are drawn over the

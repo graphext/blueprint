@@ -17,12 +17,18 @@
 import classNames from "classnames";
 import * as React from "react";
 
-import { Classes, DISPLAYNAME_PREFIX, Props } from "../../common";
-import { TreeNode } from "./treeNode";
-import { TreeEventHandler, TreeNodeInfo } from "./treeTypes";
+import { Classes, DISPLAYNAME_PREFIX, type Props } from "../../common";
 
-// eslint-disable-next-line @typescript-eslint/ban-types
+import { TreeNode } from "./treeNode";
+import type { TreeEventHandler, TreeNodeInfo } from "./treeTypes";
+
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface TreeProps<T = {}> extends Props {
+    /**
+     * Whether to use a compact appearance which reduces the visual padding around node content.
+     */
+    compact?: boolean;
+
     /**
      * The data specifying the contents and appearance of the tree.
      */
@@ -71,7 +77,7 @@ export interface TreeProps<T = {}> extends Props {
  *
  * @see https://blueprintjs.com/docs/#core/components/tree
  */
-// eslint-disable-next-line @typescript-eslint/ban-types
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export class Tree<T = {}> extends React.Component<TreeProps<T>> {
     public static displayName = `${DISPLAYNAME_PREFIX}.Tree`;
 
@@ -94,7 +100,11 @@ export class Tree<T = {}> extends React.Component<TreeProps<T>> {
 
     public render() {
         return (
-            <div className={classNames(Classes.TREE, this.props.className)}>
+            <div
+                className={classNames(Classes.TREE, this.props.className, {
+                    [Classes.COMPACT]: this.props.compact,
+                })}
+            >
                 {this.renderNodes(this.props.contents, [], Classes.TREE_ROOT)}
             </div>
         );

@@ -8,13 +8,28 @@ module.exports = async function (config) {
         createKarmaConfig({
             dirname: __dirname,
             coverageExcludes: [
+                // don't check barrel files
+                "src/**/index.ts",
+
                 // no need to test legacy APIs
                 "src/legacy/*",
+                "src/common/keyCodes.ts",
+                "src/deprecatedTypeAliases.ts",
 
                 // not worth full coverage
                 "src/accessibility/*",
                 "src/common/abstractComponent*",
                 "src/common/abstractPureComponent*",
+                "src/common/alignment.ts",      
+                "src/common/buttonVariant.ts",     
+                "src/common/size.ts",
+                "src/common/errors.ts",
+                "src/components/html/html.tsx",
+                // focus mangement is difficult to test, and this function may no longer be required
+                // if we use the react-focus-lock library in Overlay2.
+                "src/components/overlay/overlayUtils.ts",
+                // simple wrapper component
+                "src/context/blueprintProvider.tsx",
 
                 // HACKHACK: for karma upgrade only
                 "src/common/refs.ts",

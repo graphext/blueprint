@@ -14,12 +14,13 @@
  * limitations under the License.
  */
 
+import { waitFor } from "@testing-library/dom";
 import { assert } from "chai";
 import { mount } from "enzyme";
 import * as React from "react";
 import { spy } from "sinon";
 
-import { Button, Classes, Dialog, DialogBody, DialogFooter, DialogProps } from "../../src";
+import { Button, Classes, Dialog, DialogBody, DialogFooter, type DialogProps } from "../../src";
 
 const COMMON_PROPS: Partial<DialogProps> = {
     icon: "inbox",
@@ -185,21 +186,20 @@ describe("<Dialog>", () => {
             assert.notExists(dialog.find(".no-default-if-no-title").hostNodes().prop("aria-labelledby"));
         });
 
-        it("supports ref objects attached to container", done => {
+        it("supports ref objects attached to container", async () => {
             const containerRef = React.createRef<HTMLDivElement>();
             mountDialog({ containerRef });
 
             // wait for the whole lifecycle to run
-            setTimeout(() => {
+            await waitFor(() => {
                 assert.isTrue(containerRef.current?.classList.contains(Classes.DIALOG_CONTAINER));
-                done();
-            }, 0);
+            });
         });
     });
 
-    // N.B. everything else about Dialog is tested by Overlay
+    // N.B. everything else about Dialog is tested by Overlay2
 
-    function renderDialogBodyAndFooter(): JSX.Element[] {
+    function renderDialogBodyAndFooter(): React.JSX.Element[] {
         return [
             <DialogBody key="body">
                 <p id="dialog-description">

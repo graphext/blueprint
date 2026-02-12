@@ -16,7 +16,7 @@
 
 import { OverlayToaster } from "./overlayToaster";
 import type { OverlayToasterProps } from "./overlayToasterProps";
-import type { ToastProps } from "./toast";
+import type { ToastProps } from "./toastProps";
 
 export type ToastOptions = ToastProps & { key: string };
 /** Instance methods available on a toaster component instance. */
@@ -41,9 +41,8 @@ export interface Toaster {
 export type ToasterInstance = Toaster;
 // merges with declaration of `Toaster` type in `toasterTypes.ts`
 // kept for backwards-compatibility with v4.x
-// eslint-disable-next-line @typescript-eslint/no-redeclare
 export const Toaster = {
-    // eslint-disable-next-line deprecation/deprecation
+    // eslint-disable-next-line @typescript-eslint/no-deprecated
     create: deprecatedToasterCreate,
 };
 

@@ -20,9 +20,9 @@ import * as React from "react";
 import { spy, stub } from "sinon";
 
 import { Classes } from "../../src/common";
-import { Button, Overlay } from "../../src/components";
+import { Button, Overlay2 } from "../../src/components";
 import { Popover } from "../../src/components/popover/popover";
-import { Tooltip, TooltipProps } from "../../src/components/tooltip/tooltip";
+import { Tooltip, type TooltipProps } from "../../src/components/tooltip/tooltip";
 
 const TARGET_SELECTOR = `.${Classes.POPOVER_TARGET}`;
 const TOOLTIP_SELECTOR = `.${Classes.TOOLTIP}`;
@@ -102,11 +102,11 @@ describe("<Tooltip>", () => {
 
         it("empty content disables Popover and warns", () => {
             const warnSpy = stub(console, "warn");
-            const tooltip = renderTooltip({ isOpen: true, content: "" });
+            const tooltip = renderTooltip({ content: "", isOpen: true });
 
             function assertDisabledPopover(content: string) {
                 tooltip.setProps({ content });
-                assert.isFalse(tooltip.find(Overlay).exists(), `"${content}"`);
+                assert.isFalse(tooltip.find(Overlay2).exists(), `"${content}"`);
                 assert.isTrue(warnSpy.called, "spy not called");
                 warnSpy.resetHistory();
             }
@@ -139,7 +139,7 @@ describe("<Tooltip>", () => {
         it("empty content disables Popover and warns", () => {
             const warnSpy = stub(console, "warn");
             const tooltip = renderTooltip({ content: "", isOpen: true });
-            assert.isFalse(tooltip.find(Overlay).exists());
+            assert.isFalse(tooltip.find(Overlay2).exists());
             assert.isTrue(warnSpy.called);
             warnSpy.restore();
         });

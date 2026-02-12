@@ -18,15 +18,24 @@ import classNames from "classnames";
 import * as React from "react";
 
 import { AbstractPureComponent, Classes } from "../../common";
-import * as Errors from "../../common/errors";
-import { ControlledProps, DISPLAYNAME_PREFIX, HTMLInputProps, removeNonHTMLProps } from "../../common/props";
+import { INPUT_WARN_LEFT_ELEMENT_LEFT_ICON_MUTEX } from "../../common/errors";
+import {
+    type ControlledValueProps,
+    DISPLAYNAME_PREFIX,
+    type HTMLInputProps,
+    removeNonHTMLProps,
+} from "../../common/props";
+import type { Size } from "../../common/size";
 import { Icon } from "../icon/icon";
+
 import { AsyncControllableInput } from "./asyncControllableInput";
 import type { InputSharedProps } from "./inputSharedProps";
 
+type ControlledInputValueProps = ControlledValueProps<string, HTMLInputElement>;
+
 export interface InputGroupProps
-    extends Omit<HTMLInputProps, keyof ControlledProps>,
-        ControlledProps,
+    extends Omit<HTMLInputProps, keyof ControlledInputValueProps | "size">,
+        ControlledInputValueProps,
         InputSharedProps {
     /**
      * Set this to `true` if you will be controlling the `value` of this input with asynchronous updates.
@@ -37,21 +46,36 @@ export interface InputGroupProps
      */
     asyncControl?: boolean;
 
-    /** Whether this input should use large styles. */
+    /**
+     * Whether this input should use large styles.
+     *
+     * @deprecated use `size="large"` instead.
+     * @default false
+     */
     large?: boolean;
 
     /**
-     * Callback invoked when the input value changes, typically via keyboard interactions.
+     * Whether this input should use small styles.
      *
-     * Using this prop instead of `onChange` can help avoid common bugs in React 16 related to Event Pooling
-     * where developers forget to save the text value from a change event or call `event.persist()`.
-     *
-     * @see https://legacy.reactjs.org/docs/legacy-event-pooling.html
+     * @deprecated use `size="small"` instead.
+     * @default false
      */
-    onValueChange?(value: string, targetElement: HTMLInputElement | null): void;
-
-    /** Whether this input should use small styles. */
     small?: boolean;
+
+    /**
+     * Size of the input. If given a numeric value, and `inputSize` is not defined, then this will be provided as the
+     * `size` attribute for the underyling native HTML input element. Passing a numeric value this way is deprecated,
+     * use the `inputSize` prop instead.
+     *
+     * @default "medium"
+     */
+    size?: Size | HTMLInputProps["size"];
+
+    /**
+     * Alias for the native HTML input `size` attribute.
+     * see: https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/size
+     */
+    inputSize?: HTMLInputProps["size"];
 
     /** Whether the input (and any buttons) should appear with rounded caps. */
     round?: boolean;
@@ -61,7 +85,7 @@ export interface InputGroupProps
      *
      * @default "div"
      */
-    tagName?: keyof JSX.IntrinsicElements;
+    tagName?: keyof React.JSX.IntrinsicElements;
 
     /**
      * HTML `input` type attribute.
@@ -76,7 +100,7 @@ export interface InputGroupState {
     rightElementWidth?: number;
 }
 
-const NON_HTML_PROPS: Array<keyof InputGroupProps> = ["onValueChange"];
+const NON_HTML_PROPS: Array<keyof InputGroupProps> = ["inputSize", "onValueChange"];
 
 /**
  * Input group component.
@@ -105,10 +129,14 @@ export class InputGroup extends AbstractPureComponent<InputGroupProps, InputGrou
             fill,
             inputClassName,
             inputRef,
+            inputSize,
             intent,
+            // eslint-disable-next-line @typescript-eslint/no-deprecated
             large,
             readOnly,
             round,
+            size = "medium",
+            // eslint-disable-next-line @typescript-eslint/no-deprecated
             small,
             tagName = "div",
         } = this.props;
@@ -119,10 +147,9 @@ export class InputGroup extends AbstractPureComponent<InputGroupProps, InputGrou
                 [Classes.DISABLED]: disabled,
                 [Classes.READ_ONLY]: readOnly,
                 [Classes.FILL]: fill,
-                [Classes.LARGE]: large,
-                [Classes.SMALL]: small,
                 [Classes.ROUND]: round,
             },
+            Classes.sizeClass(size, { large, small }),
             className,
         );
         const style: React.CSSProperties = {
@@ -133,10 +160,12 @@ export class InputGroup extends AbstractPureComponent<InputGroupProps, InputGrou
         const inputProps = {
             type: "text",
             ...removeNonHTMLProps(this.props, NON_HTML_PROPS, true),
+            "aria-disabled": disabled,
             className: classNames(Classes.INPUT, inputClassName),
             onChange: this.handleInputChange,
+            size: inputSize ?? (typeof size === "number" ? size : undefined),
             style,
-        };
+        } satisfies React.HTMLProps<HTMLInputElement>;
         const inputElement = asyncControl ? (
             <AsyncControllableInput {...inputProps} inputRef={inputRef} />
         ) : (
@@ -165,7 +194,7 @@ export class InputGroup extends AbstractPureComponent<InputGroupProps, InputGrou
 
     protected validateProps(props: InputGroupProps) {
         if (props.leftElement != null && props.leftIcon != null) {
-            console.warn(Errors.INPUT_WARN_LEFT_ELEMENT_LEFT_ICON_MUTEX);
+            console.warn(INPUT_WARN_LEFT_ELEMENT_LEFT_ICON_MUTEX);
         }
     }
 

@@ -18,7 +18,8 @@ import classNames from "classnames";
 import * as React from "react";
 
 import { Classes, mergeRefs } from "../../common";
-import { DISPLAYNAME_PREFIX, Props } from "../../common/props";
+import { DISPLAYNAME_PREFIX, type Props } from "../../common/props";
+import { useIsomorphicLayoutEffect } from "../../hooks/useIsomorphicLayoutEffect";
 
 export interface TextProps
     extends Props,
@@ -39,7 +40,7 @@ export interface TextProps
      *
      * @default "div"
      */
-    tagName?: keyof JSX.IntrinsicElements;
+    tagName?: keyof React.JSX.IntrinsicElements;
 
     /**
      * HTML title of the element
@@ -53,7 +54,7 @@ export interface TextProps
  * @see https://blueprintjs.com/docs/#core/components/text
  */
 export const Text: React.FC<TextProps> = React.forwardRef<HTMLElement, TextProps>(
-    ({ children, tagName = "div", title, className, ellipsize, ...htmlProps }, forwardedRef) => {
+    ({ children, tagName = "div", title, className, ellipsize = false, ...htmlProps }, forwardedRef) => {
         const contentMeasuringRef = React.useRef<HTMLElement>();
         const textRef = React.useMemo(() => mergeRefs(contentMeasuringRef, forwardedRef), [forwardedRef]);
         const [textContent, setTextContent] = React.useState<string>("");
@@ -61,7 +62,7 @@ export const Text: React.FC<TextProps> = React.forwardRef<HTMLElement, TextProps
 
         // try to be conservative about running this effect, since querying scrollWidth causes the browser to reflow / recalculate styles,
         // which can be very expensive for long lists (for example, in long Menus)
-        React.useLayoutEffect(() => {
+        useIsomorphicLayoutEffect(() => {
             if (contentMeasuringRef.current?.textContent != null) {
                 setIsContentOverflowing(
                     ellipsize! && contentMeasuringRef.current.scrollWidth > contentMeasuringRef.current.clientWidth,
@@ -87,7 +88,4 @@ export const Text: React.FC<TextProps> = React.forwardRef<HTMLElement, TextProps
         );
     },
 );
-Text.defaultProps = {
-    ellipsize: false,
-};
 Text.displayName = `${DISPLAYNAME_PREFIX}.Text`;

@@ -1,40 +1,37 @@
 version: 2.1
 
 orbs:
-  browser-tools: circleci/browser-tools@1.4.1
+  browser-tools: circleci/browser-tools@2.1.0
 
 aliases:
   - &docker-node-image
-    - image: cimg/node:18.17
+    - image: cimg/node:20.11
 
   - &docker-node-browsers-image
-    - image: cimg/node:18.17-browsers
+    - image: cimg/node:20.11-browsers
       environment:
         CHROME_BIN: "/usr/bin/google-chrome"
 
   - &restore-node-modules-cache
     name: Restore node_modules cache
-    key: v7-yarn-deps-{{ checksum "yarn.lock" }}
+    key: v1-node-modules-{{ checksum "yarn.lock" }}
 
   - &restore-yarn-cache
-    name: Restore yarnpkg cache
-    key: v7-yarn-cache
+    name: Restore Yarn global cache
+    key: v1-yarn-global
 
   - &save-node-modules-cache
     name: Save node_modules cache
     paths:
       - node_modules
-    key: v7-yarn-deps-{{ checksum "yarn.lock" }}
+    key: v1-node-modules-{{ checksum "yarn.lock" }}
 
   - &save-yarn-cache
-    name: Save yarnpkg cache
+    name: Save Yarn global cache
     paths:
-      - ~/.cache/yarn
-    key: v7-yarn-cache
-
-references:
-  reports_path: &reports_path
-    path: ./reports
+      # see https://yarnpkg.com/configuration/yarnrc#globalFolder
+      - /.yarn/berry/global
+    key: v1-yarn-global
 
 jobs:
   checkout-code:
@@ -44,10 +41,8 @@ jobs:
       - restore_cache: *restore-yarn-cache
       - restore_cache: *restore-node-modules-cache
       - run: sudo corepack enable
-      - run: yarn install --non-interactive --cache-folder ~/.cache/yarn
-      - run:
-          name: Check if yarn.lock changed during install
-          command: git diff --exit-code
+      - run: yarn install --immutable
+      - run: yarn constraints
       - save_cache: *save-node-modules-cache
       - save_cache: *save-yarn-cache
       - persist_to_workspace:
@@ -59,7 +54,8 @@ jobs:
     steps:
       - checkout
       - restore_cache: *restore-node-modules-cache
-      - run: ./scripts/verifyCleanLockfile.sh
+      - run: sudo corepack enable
+      - run: yarn dedupe --check
 
   compile:
     docker: *docker-node-image
@@ -69,7 +65,7 @@ jobs:
       - restore_cache: *restore-node-modules-cache
       - attach_workspace: { at: "." }
       - run: sudo corepack enable
-      - run: yarn compile
+      - run: yarn compile --parallel=7
       - persist_to_workspace:
           root: "."
           paths:
@@ -115,7 +111,7 @@ jobs:
       - restore_cache: *restore-node-modules-cache
       - attach_workspace: { at: "." }
       - run: sudo corepack enable
-      - run: yarn dist
+      - run: yarn dist --parallel=7
       - persist_to_workspace:
           root: "."
           paths: [packages/*/lib, packages/*/dist]
@@ -134,14 +130,14 @@ jobs:
       - run:
           command: |
             case $CIRCLE_NODE_INDEX in \
-            0) yarn lerna run --scope "@blueprintjs/eslint-plugin" test ;; \
-            1) yarn lerna run --scope "@blueprintjs/stylelint-plugin" test ;; \
+            0) yarn nx test @blueprintjs/eslint-plugin ;; \
+            1) yarn nx test @blueprintjs/stylelint-plugin ;; \
             esac
           when: always
       - store_test_results: { path: ./reports }
       - store_artifacts: { path: ./reports }
 
-  test-react-16: &test-react
+  test-react-18: &test-react
     docker: *docker-node-browsers-image
     resource_class: xlarge
     environment:
@@ -152,13 +148,12 @@ jobs:
       - restore_cache: *restore-node-modules-cache
       - attach_workspace: { at: "." }
       - run: sudo corepack enable
-      # HACKHACK: pin Chrome version to work around bug in v115
-      # see https://github.com/CircleCI-Public/browser-tools-orb/issues/75
+      # Use an explicit version of Chrome for better test reproducibility.
       - run: sudo apt-get update
-      - browser-tools/install-chrome:
-          chrome-version: "114.0.5735.90"
-      - browser-tools/install-chrome
-      - browser-tools/install-chromedriver
+      - browser-tools/install_chrome:
+          chrome_version: "137.0.7151.68"
+      - browser-tools/install_chrome
+      - browser-tools/install_chromedriver
       - run:
           name: Verify Chrome browser installed
           command: |
@@ -171,18 +166,18 @@ jobs:
           # see https://github.com/palantir/blueprint/issues/3616
           command: |
             case $CIRCLE_NODE_INDEX in \
-            0) yarn lerna run test:typeCheck ;; \
-            1) yarn lerna run --scope "@blueprintjs/core" test:karma ;; \
-            2) yarn lerna run --scope "@blueprintjs/datetime" test:karma ;; \
-            3) yarn lerna run --scope "@blueprintjs/datetime2" test:karma ;; \
-            4) yarn lerna run --scope "@blueprintjs/select" test:karma ;; \
-            5) yarn lerna run --scope "@blueprintjs/table" test:karma
+            0) yarn nx run-many -t test:typeCheck ;; \
+            1) yarn nx test:karma @blueprintjs/core ;; \
+            2) yarn nx test:karma @blueprintjs/datetime ;; \
+            3) yarn nx test:karma @blueprintjs/datetime2 ;; \
+            4) yarn nx test:karma @blueprintjs/select ;; \
+            5) yarn nx test:karma @blueprintjs/table
             esac
           when: always
       - store_test_results: { path: ./reports }
       - store_artifacts: { path: ./reports }
 
-  test-iso-react-16: &test-iso
+  test-iso-react-18: &test-iso
     docker: *docker-node-image
     environment:
       JUNIT_REPORT_PATH: reports
@@ -192,7 +187,7 @@ jobs:
       - attach_workspace: { at: "." }
       - run: sudo corepack enable
       - run: mkdir ./reports
-      - run: yarn lerna run test:iso
+      - run: yarn nx run-many -t test:iso
       - store_test_results: { path: ./reports }
       - store_artifacts: { path: ./reports }
 
@@ -208,16 +203,27 @@ jobs:
       - store_artifacts: { path: packages/demo-app/dist }
       - run: ./scripts/submit-preview-comment.sh
 
+  store-packages:
+    docker: *docker-node-image
+    steps:
+      - checkout
+      - restore_cache: *restore-node-modules-cache
+      - attach_workspace: { at: "." }
+      - run: sudo corepack enable
+      - run: mkdir ./artifacts
+      - run: ./scripts/pack-npm
+      - store_artifacts: { path: ./artifacts }
+
   deploy-npm:
     docker: *docker-node-image
     steps:
       - checkout
       - restore_cache: *restore-node-modules-cache
       - attach_workspace: { at: "." }
+      - run: sudo corepack enable
       - run: ./scripts/publish-npm-semver-tagged
 
 workflows:
-  version: 2
   compile_lint_test_dist_deploy:
     jobs:
       - checkout-code
@@ -233,21 +239,16 @@ workflows:
           requires: [compile]
       - test-node-libs:
           requires: [compile]
-      - test-react-16:
+      - test-react-18:
           requires: [compile]
-      - test-iso-react-16:
+      - test-iso-react-18:
           requires: [compile]
       - deploy-preview:
           requires: [dist]
+      - store-packages:
+          requires: [dist]
       - deploy-npm:
-          requires:
-            [
-              dist,
-              lint,
-              test-node-libs,
-              test-react-16,
-              test-iso-react-16,
-            ]
+          requires: [dist, lint, test-node-libs, test-react-18, test-iso-react-18]
           filters:
             branches:
               only:

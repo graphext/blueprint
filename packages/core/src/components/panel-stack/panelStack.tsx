@@ -20,11 +20,12 @@ import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 import { AbstractPureComponent, Classes } from "../../common";
 import * as Errors from "../../common/errors";
-import { Props } from "../../common/props";
-import { IPanel } from "./panelProps";
+import type { Props } from "../../common/props";
+
+import type { IPanel } from "./panelProps";
 import { PanelView } from "./panelView";
 
-/* eslint-disable deprecation/deprecation */
+/* eslint-disable @typescript-eslint/no-deprecated */
 
 export interface PanelStackProps extends Props {
     /**
@@ -92,8 +93,8 @@ export class PanelStack extends AbstractPureComponent<PanelStackProps, PanelStac
             this.props.stack != null
                 ? this.props.stack.slice().reverse()
                 : this.props.initialPanel !== undefined
-                ? [this.props.initialPanel]
-                : [],
+                  ? [this.props.initialPanel]
+                  : [],
     };
 
     public componentDidUpdate(prevProps: PanelStackProps, prevState: PanelStackState) {

@@ -18,9 +18,10 @@ import * as React from "react";
 
 import { HOTKEYS_PROVIDER_NOT_FOUND } from "../../common/errors";
 import { elementIsTextInput } from "../../common/utils/domUtils";
-import { comboMatches, getKeyCombo, KeyCombo, parseKeyCombo } from "../../components/hotkeys/hotkeyParser";
+import { comboMatches, getKeyCombo, type KeyCombo, parseKeyCombo } from "../../components/hotkeys/hotkeyParser";
 import { HotkeysContext } from "../../context";
-import { HotkeyConfig } from "./hotkeyConfig";
+
+import type { HotkeyConfig } from "./hotkeyConfig";
 
 export interface UseHotkeysOptions {
     /**
@@ -86,8 +87,8 @@ export function useHotkeys(keys: readonly HotkeyConfig[], options: UseHotkeysOpt
     // we can still bind the hotkeys if there is no HotkeysProvider, they just won't show up in the dialog
     React.useEffect(() => {
         const payload = [...globalKeys.map(k => k.config), ...localKeys.map(k => k.config)];
-        dispatch({ type: "ADD_HOTKEYS", payload });
-        return () => dispatch({ type: "REMOVE_HOTKEYS", payload });
+        dispatch({ payload, type: "ADD_HOTKEYS" });
+        return () => dispatch({ payload, type: "REMOVE_HOTKEYS" });
     }, [dispatch, globalKeys, localKeys]);
 
     const invokeNamedCallbackIfComboRecognized = React.useCallback(
@@ -154,7 +155,7 @@ export function useHotkeys(keys: readonly HotkeyConfig[], options: UseHotkeysOpt
             document!.removeEventListener("keydown", handleGlobalKeyDown);
             document!.removeEventListener("keyup", handleGlobalKeyUp);
         };
-    }, [handleGlobalKeyDown, handleGlobalKeyUp]);
+    }, [document, handleGlobalKeyDown, handleGlobalKeyUp]);
 
     return { handleKeyDown: handleLocalKeyDown, handleKeyUp: handleLocalKeyUp };
 }

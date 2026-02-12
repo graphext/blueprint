@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-/* eslint-disable deprecation/deprecation, @blueprintjs/no-deprecated-components */
+/* eslint-disable @typescript-eslint/no-deprecated, @blueprintjs/no-deprecated-components */
 
 import classNames from "classnames";
 import * as React from "react";
 
-import { Classes, DefaultPopoverTargetHTMLProps, mergeRefs, Popover, PopoverProps } from "@blueprintjs/core";
+import { Classes, type DefaultPopoverTargetHTMLProps, mergeRefs, Popover, type PopoverProps } from "@blueprintjs/core";
 
 // Legacy classes from @blueprintjs/popover2 v1.x. Note that these are distinct from the `Classes` aliases in
 // "./classes.ts" - those strings will continue to work with Popover in Blueprint v5.x, while these values are
@@ -49,7 +49,7 @@ export class Popover2<
             <Popover
                 className={classNames(POPOVER2_TARGET, className)}
                 popoverClassName={classNames(POPOVER2, popoverClassName)}
-                ref={ref === undefined ? this.ref : mergeRefs(ref as React.Ref<Popover<T>>, this.ref)}
+                ref={mergeRefs(ref as React.Ref<Popover<T>>, this.ref)}
                 {...props}
             />
         );

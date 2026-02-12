@@ -24,24 +24,19 @@ import {
     Divider,
     Drawer,
     DrawerSize,
+    FormGroup,
     H5,
     HTMLSelect,
-    Label,
     Menu,
     MenuItem,
-    OptionProps,
+    type OptionProps,
     Position,
+    SegmentedControl,
     Switch,
 } from "@blueprintjs/core";
-import {
-    Example,
-    ExampleProps,
-    handleBooleanChange,
-    handleStringChange,
-    handleValueChange,
-} from "@blueprintjs/docs-theme";
+import { Example, type ExampleProps, handleBooleanChange, handleStringChange } from "@blueprintjs/docs-theme";
 
-import { BlueprintExampleData } from "../../tags/types";
+import type { BlueprintExampleData } from "../../tags/types";
 
 export interface DrawerExampleState {
     autoFocus: boolean;
@@ -77,13 +72,15 @@ export class DrawerExample extends React.PureComponent<ExampleProps<BlueprintExa
 
     private handleUsePortalChange = handleBooleanChange(usePortal => this.setState({ usePortal }));
 
-    private handlePositionChange = handleValueChange((position: Position) => this.setState({ position }));
+    private handlePositionChange = (position: string) => this.setState({ position: position as Position });
 
     private handleOutsideClickChange = handleBooleanChange(val => this.setState({ canOutsideClickClose: val }));
 
     private handleSizeChange = handleStringChange(size => this.setState({ size }));
 
     public render() {
+        const { size, ...drawerProps } = this.state;
+
         return (
             <Example options={this.renderOptions()} {...this.props}>
                 <Button onClick={this.handleOpen}>Show Drawer</Button>
@@ -92,7 +89,8 @@ export class DrawerExample extends React.PureComponent<ExampleProps<BlueprintExa
                     icon="info-sign"
                     onClose={this.handleClose}
                     title="Palantir Foundry"
-                    {...this.state}
+                    size={size === "default" ? undefined : size}
+                    {...drawerProps}
                 >
                     <div className={Classes.DRAWER_BODY}>
                         {/* HACKHACK: strange use of unrelated dialog class, should be refactored */}
@@ -143,22 +141,28 @@ export class DrawerExample extends React.PureComponent<ExampleProps<BlueprintExa
     }
 
     private renderOptions() {
-        const { autoFocus, enforceFocus, canEscapeKeyClose, canOutsideClickClose, hasBackdrop, usePortal } = this.state;
+        const { autoFocus, enforceFocus, canEscapeKeyClose, canOutsideClickClose, hasBackdrop, position, usePortal } =
+            this.state;
         return (
             <>
                 <H5>Props</H5>
-                <Label>
-                    Position
-                    <HTMLSelect
-                        value={this.state.position}
-                        onChange={this.handlePositionChange}
-                        options={VALID_POSITIONS}
+                <FormGroup label="Position">
+                    <SegmentedControl
+                        fill={true}
+                        options={[
+                            { value: Position.TOP },
+                            { value: Position.RIGHT },
+                            { value: Position.BOTTOM },
+                            { value: Position.LEFT },
+                        ]}
+                        onValueChange={this.handlePositionChange}
+                        size="small"
+                        value={position}
                     />
-                </Label>
-                <Label>
-                    Size
+                </FormGroup>
+                <FormGroup label="Size">
                     <HTMLSelect options={SIZES} onChange={this.handleSizeChange} />
-                </Label>
+                </FormGroup>
                 <Divider />
                 <Switch checked={autoFocus} label="Auto focus" onChange={this.handleAutoFocusChange} />
                 <Switch checked={enforceFocus} label="Enforce focus" onChange={this.handleEnforceFocusChange} />
@@ -182,12 +186,10 @@ export class DrawerExample extends React.PureComponent<ExampleProps<BlueprintExa
 }
 
 const SIZES: Array<string | OptionProps> = [
-    { label: "Default", value: undefined },
+    { label: "Default", value: "default" },
     { label: "Small", value: DrawerSize.SMALL },
     { label: "Standard", value: DrawerSize.STANDARD },
     { label: "Large", value: DrawerSize.LARGE },
     "72%",
     "560px",
 ];
-
-const VALID_POSITIONS: Position[] = [Position.TOP, Position.RIGHT, Position.BOTTOM, Position.LEFT];

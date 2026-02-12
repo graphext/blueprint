@@ -17,13 +17,25 @@
 import classNames from "classnames";
 import * as React from "react";
 
-import { IconName } from "@blueprintjs/icons";
+import type { IconName } from "@blueprintjs/icons";
 
 import { AbstractPureComponent, Classes } from "../../common";
-import { DISPLAYNAME_PREFIX, HTMLDivProps, MaybeElement, Props } from "../../common/props";
-import { TagProps } from "../tag/tag";
+import { DISPLAYNAME_PREFIX, type HTMLDivProps, type MaybeElement, type Props } from "../../common/props";
+import { isFunction } from "../../common/utils";
+import type { TagProps } from "../tag/tag";
 
 export type TabId = string | number;
+
+export interface TabIdProps {
+    /**
+     * `id` prop of the tab title, and the `aria-labelledby` of the `TabPanel`.
+     */
+    tabTitleId: string;
+    /**
+     * `id` prop of the `tabpanel`, and the `aria-controls` of the tab title.
+     */
+    tabPanelId: string;
+}
 
 export interface TabProps extends Props, Omit<HTMLDivProps, "id" | "title" | "onClick"> {
     /**
@@ -48,8 +60,9 @@ export interface TabProps extends Props, Omit<HTMLDivProps, "id" | "title" | "on
     /**
      * Panel content, rendered by the parent `Tabs` when this tab is active.
      * If omitted, no panel will be rendered for this tab.
+     * Can either be an element or a renderer.
      */
-    panel?: JSX.Element;
+    panel?: React.JSX.Element | ((props: TabIdProps) => React.JSX.Element);
 
     /**
      * Space-delimited string of class names applied to tab panel container.
@@ -96,7 +109,7 @@ export class Tab extends AbstractPureComponent<TabProps> {
         const { className, panel } = this.props;
         return (
             <div className={classNames(Classes.TAB_PANEL, className)} role="tablist">
-                {panel}
+                {isFunction(panel) ? panel({ tabPanelId: "", tabTitleId: "" }) : panel}
             </div>
         );
     }

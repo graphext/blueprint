@@ -17,12 +17,13 @@
 import * as React from "react";
 
 import { Callout, Classes, H5, Switch } from "@blueprintjs/core";
-import { DatePicker3, TimePrecision } from "@blueprintjs/datetime2";
-import { Example, ExampleProps, handleBooleanChange, handleValueChange } from "@blueprintjs/docs-theme";
+import { DatePicker3, type TimePrecision } from "@blueprintjs/datetime2";
+import { Example, type ExampleProps, handleBooleanChange, handleValueChange } from "@blueprintjs/docs-theme";
 
 import { FormattedDateTag } from "../../common/formattedDateTag";
 import { PropCodeTooltip } from "../../common/propCodeTooltip";
 import { PrecisionSelect } from "../datetime-examples/common/precisionSelect";
+
 import { MaxDateSelect, MinDateSelect } from "./common/minMaxDateSelect";
 
 const exampleFooterElement = <Callout>This additional footer component can be displayed below the date picker</Callout>;
@@ -39,6 +40,7 @@ interface DatePicker3ExampleState {
     showOutsideDays: boolean;
     showTimeArrowButtons: boolean;
     showWeekNumber: boolean;
+    // eslint-disable-next-line @typescript-eslint/no-deprecated
     timePrecision: TimePrecision | undefined;
     useAmPm?: boolean;
 }
@@ -78,6 +80,7 @@ export class DatePicker3Example extends React.PureComponent<ExampleProps, DatePi
 
     private handleMinDateChange = (minDate: Date) => this.setState({ minDate });
 
+    // eslint-disable-next-line @typescript-eslint/no-deprecated
     private handlePrecisionChange = handleValueChange((p: TimePrecision | "none") =>
         this.setState({ timePrecision: p === "none" ? undefined : p }),
     );

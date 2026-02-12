@@ -14,11 +14,59 @@
  * limitations under the License.
  */
 
-import { DateRangeInputProps } from "@blueprintjs/datetime";
+import type { DateFormatProps, DateRangeInputProps } from "@blueprintjs/datetime";
 
-import { DateRangePicker3Props } from "../date-range-picker3/dateRangePicker3Props";
+import type { DateFnsLocaleProps } from "../../common/dateFnsLocaleProps";
+import type { ReactDayPickerRangeProps } from "../../common/reactDayPickerProps";
 
-/** Props shared between DateRangeInput v1 and v3 */
-type DateRangeInputSharedProps = Omit<DateRangeInputProps, "dayPickerProps" | "locale" | "localeUtils" | "modifiers">;
+/**
+ * Props shared between DateRangeInput v1 and v
+ *
+ * Note that we exclude formatDate and parseDate so that we can make those optional in DateInput3 and provide a default
+ * implementation for those functions using date-fns.
+ */
+type DateRangeInputSharedProps = Omit<
+    DateRangeInputProps,
+    "dayPickerProps" | "formatDate" | "locale" | "localeUtils" | "modifiers" | "parseDate"
+>;
 
-export type DateRangeInput3Props = DateRangeInputSharedProps & Pick<DateRangePicker3Props, "dayPickerProps" | "locale">;
+export interface DateRangeInput3Props
+    extends DateRangeInputSharedProps,
+        ReactDayPickerRangeProps,
+        DateFnsLocaleProps,
+        Partial<Omit<DateFormatProps, "locale">> {
+    /**
+     * [date-fns format](https://date-fns.org/docs/format) string used to format & parse date strings.
+     *
+     * Mutually exclusive with the `formatDate` and `parseDate` props.
+     *
+     * See date-fns [format](https://date-fns.org/docs/format).
+     */
+    dateFnsFormat?: string;
+}
+
+export type DateRangeInput3DefaultProps = Required<
+    Pick<
+        DateRangeInput3Props,
+        | "allowSingleDayRange"
+        | "closeOnSelection"
+        | "contiguousCalendarMonths"
+        | "dayPickerProps"
+        | "disabled"
+        | "endInputProps"
+        | "invalidDateMessage"
+        | "locale"
+        | "maxDate"
+        | "minDate"
+        | "outOfRangeMessage"
+        | "overlappingDatesMessage"
+        | "popoverProps"
+        | "selectAllOnFocus"
+        | "shortcuts"
+        | "singleMonthOnly"
+        | "startInputProps"
+    >
+>;
+
+export type DateRangeInput3PropsWithDefaults = Omit<DateRangeInput3Props, keyof DateRangeInput3DefaultProps> &
+    DateRangeInput3DefaultProps;

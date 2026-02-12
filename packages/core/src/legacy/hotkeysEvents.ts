@@ -19,13 +19,14 @@
  * All changes & bugfixes should be made to HotkeysDialog2 instead.
  */
 
-/* eslint-disable deprecation/deprecation */
+/* eslint-disable @typescript-eslint/no-deprecated */
 
-import { Children, ReactNode } from "react";
+import { Children, type ReactNode } from "react";
 
 import { isElementOfType } from "../common/utils";
-import { Hotkey, HotkeyProps, HotkeysProps } from "../components/hotkeys";
-import { comboMatches, getKeyCombo, KeyCombo, parseKeyCombo } from "../components/hotkeys/hotkeyParser";
+import { Hotkey, type HotkeyProps, type HotkeysProps } from "../components/hotkeys";
+import { comboMatches, getKeyCombo, type KeyCombo, parseKeyCombo } from "../components/hotkeys/hotkeyParser";
+
 import { hideHotkeysDialogAfterDelay, isHotkeysDialogShowing, showHotkeysDialog } from "./hotkeysDialogLegacy";
 
 const SHOW_DIALOG_KEY = "?";
@@ -125,7 +126,7 @@ export class HotkeysEvents {
             return false;
         }
 
-        const editable = elem.closest("input, textarea, [contenteditable=true]");
+        const editable = elem.closest<HTMLInputElement>("input, textarea, [contenteditable=true]");
 
         if (editable == null) {
             return false;
@@ -133,14 +134,14 @@ export class HotkeysEvents {
 
         // don't let checkboxes, switches, and radio buttons prevent hotkey behavior
         if (editable.tagName.toLowerCase() === "input") {
-            const inputType = (editable as HTMLInputElement).type;
+            const inputType = editable.type;
             if (inputType === "checkbox" || inputType === "radio") {
                 return false;
             }
         }
 
         // don't let read-only fields prevent hotkey behavior
-        if ((editable as HTMLInputElement).readOnly) {
+        if (editable.readOnly) {
             return false;
         }
 

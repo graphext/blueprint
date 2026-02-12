@@ -17,7 +17,7 @@
 import * as React from "react";
 
 import { Button, Callout, Classes, Popover, Switch } from "@blueprintjs/core";
-import { Example, ExampleProps } from "@blueprintjs/docs-theme";
+import { Example, type ExampleProps } from "@blueprintjs/docs-theme";
 
 export class PopoverDismissExample extends React.PureComponent<
     ExampleProps,
@@ -64,15 +64,13 @@ export class PopoverDismissExample extends React.PureComponent<
                                     content={POPOVER_CONTENTS}
                                     placement="right"
                                     usePortal={false}
-                                    // tslint:disable-next-line jsx-no-lambda
                                     renderTarget={({ isOpen, ...p }) => (
-                                        <Button {...p} active={isOpen} text="Nested" rightIcon="caret-right" />
+                                        <Button {...p} active={isOpen} text="Nested" endIcon="caret-right" />
                                     )}
                                 />
                             </div>
                         </>
                     }
-                    // tslint:disable-next-line jsx-no-lambda
                     renderTarget={({ isOpen, ...p }) => (
                         <Button {...p} active={isOpen} intent="primary" text="Try it out" />
                     )}

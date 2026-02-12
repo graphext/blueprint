@@ -17,28 +17,32 @@
 import classNames from "classnames";
 import * as React from "react";
 
-import { Classes, Code, H5, Icon, Switch } from "@blueprintjs/core";
-import { DateFormatProps, DateInput3, TimePrecision } from "@blueprintjs/datetime2";
-import { Example, ExampleProps, handleBooleanChange, handleValueChange } from "@blueprintjs/docs-theme";
+import { Classes, Code, FormGroup, H5, Icon, Switch } from "@blueprintjs/core";
+import { DateInput3, TimePrecision } from "@blueprintjs/datetime2";
+import { Example, type ExampleProps, handleBooleanChange, handleValueChange } from "@blueprintjs/docs-theme";
 
+import { type CommonDateFnsLocale, DateFnsLocaleSelect } from "../../common/dateFnsLocaleSelect";
 import { FormattedDateTag } from "../../common/formattedDateTag";
 import { PropCodeTooltip } from "../../common/propCodeTooltip";
-import { DATE_FNS_FORMATS, DateFnsFormatSelector } from "../datetime-examples/common/dateFnsFormatSelector";
 import { PrecisionSelect } from "../datetime-examples/common/precisionSelect";
+
+import { DATE_FNS_FORMAT_OPTIONS, DateFnsFormatSelect } from "./common/dateFnsFormatSelect";
 
 interface DateInput3ExampleState {
     closeOnSelection: boolean;
     date: string | null;
+    dateFnsFormat: string;
     disabled: boolean;
     disableTimezoneSelect: boolean;
     fill: boolean;
-    format: DateFormatProps;
+    localeCode: CommonDateFnsLocale;
     reverseMonthAndYearMenus: boolean;
     shortcuts: boolean;
     showActionsBar: boolean;
     showRightElement: boolean;
     showTimePickerArrows: boolean;
     showTimezoneSelect: boolean;
+    // eslint-disable-next-line @typescript-eslint/no-deprecated
     timePrecision: TimePrecision | undefined;
     useAmPm: boolean;
 }
@@ -47,16 +51,18 @@ export class DateInput3Example extends React.PureComponent<ExampleProps, DateInp
     public state: DateInput3ExampleState = {
         closeOnSelection: true,
         date: null,
+        dateFnsFormat: DATE_FNS_FORMAT_OPTIONS[0],
         disableTimezoneSelect: false,
         disabled: false,
         fill: false,
-        format: DATE_FNS_FORMATS[0],
+        localeCode: "en-US" as CommonDateFnsLocale,
         reverseMonthAndYearMenus: false,
         shortcuts: false,
         showActionsBar: false,
         showRightElement: false,
         showTimePickerArrows: false,
         showTimezoneSelect: true,
+        // eslint-disable-next-line @typescript-eslint/no-deprecated
         timePrecision: TimePrecision.MINUTE,
         useAmPm: false,
     };
@@ -87,18 +93,25 @@ export class DateInput3Example extends React.PureComponent<ExampleProps, DateInp
 
     private toggleUseAmPm = handleBooleanChange(useAmPm => this.setState({ useAmPm }));
 
+    private handleDateChange = (date: string | null) => this.setState({ date });
+
+    private handleFormatChange = (dateFnsFormat: string) => this.setState({ dateFnsFormat });
+
+    private handleLocaleCodeChange = (localeCode: CommonDateFnsLocale) => this.setState({ localeCode });
+
+    // eslint-disable-next-line @typescript-eslint/no-deprecated
     private handleTimePrecisionChange = handleValueChange((timePrecision: TimePrecision | "none") =>
         this.setState({ timePrecision: timePrecision === "none" ? undefined : timePrecision }),
     );
 
     public render() {
-        const { date, format, showRightElement, showTimePickerArrows, useAmPm, ...spreadProps } = this.state;
+        const { date, localeCode, showRightElement, showTimePickerArrows, useAmPm, ...spreadProps } = this.state;
 
         return (
             <Example options={this.renderOptions()} {...this.props}>
                 <DateInput3
                     {...spreadProps}
-                    {...format}
+                    locale={localeCode}
                     onChange={this.handleDateChange}
                     popoverProps={{ placement: "bottom" }}
                     rightElement={
@@ -122,7 +135,7 @@ export class DateInput3Example extends React.PureComponent<ExampleProps, DateInp
             disabled,
             disableTimezoneSelect,
             fill,
-            format,
+            dateFnsFormat,
             reverseMonthAndYearMenus: reverse,
             shortcuts,
             showActionsBar,
@@ -162,6 +175,13 @@ export class DateInput3Example extends React.PureComponent<ExampleProps, DateInp
                 <PropCodeTooltip snippet={`reverseMonthAndYearMenus={${reverse.toString()}}`}>
                     <Switch label="Reverse month and year menus" checked={reverse} onChange={this.toggleReverseMenus} />
                 </PropCodeTooltip>
+                <FormGroup inline={true} label="Locale">
+                    <DateFnsLocaleSelect
+                        value={this.state.localeCode}
+                        onChange={this.handleLocaleCodeChange}
+                        popoverProps={{ placement: "bottom-start" }}
+                    />
+                </FormGroup>
 
                 <H5>Input appearance props</H5>
                 <PropCodeTooltip snippet={`disabled={${disabled.toString()}}`}>
@@ -179,7 +199,7 @@ export class DateInput3Example extends React.PureComponent<ExampleProps, DateInp
                 >
                     <Switch label="Show right element" checked={showRightElement} onChange={this.toggleRightElement} />
                 </PropCodeTooltip>
-                <DateFnsFormatSelector format={format} onChange={this.handleFormatChange} />
+                <DateFnsFormatSelect value={dateFnsFormat} onChange={this.handleFormatChange} />
 
                 <H5>Time picker props</H5>
                 <PrecisionSelect
@@ -239,12 +259,4 @@ export class DateInput3Example extends React.PureComponent<ExampleProps, DateInp
             </>
         );
     }
-
-    private handleDateChange = (date: string | null) => {
-        this.setState({ date });
-    };
-
-    private handleFormatChange = (format: DateFormatProps) => {
-        this.setState({ format });
-    };
 }

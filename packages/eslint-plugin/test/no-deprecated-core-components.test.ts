@@ -14,21 +14,20 @@
  * limitations under the License.
  */
 
-// tslint:disable object-literal-sort-keys
-/* eslint-disable no-template-curly-in-string */
+/* eslint-disable no-template-curly-in-string, sort-keys */
 
-import { TSESLint } from "@typescript-eslint/utils";
+import { RuleTester } from "@typescript-eslint/rule-tester";
 import dedent from "dedent";
 
 import { noDeprecatedCoreComponentsRule } from "../src/rules/no-deprecated-components";
 
-const ruleTester = new TSESLint.RuleTester({
-    parser: require.resolve("@typescript-eslint/parser"),
-    parserOptions: {
-        ecmaFeatures: {
-            jsx: true,
+const ruleTester = new RuleTester({
+    languageOptions: {
+        parserOptions: {
+            ecmaFeatures: {
+                jsx: true,
+            },
         },
-        sourceType: "module",
     },
 });
 

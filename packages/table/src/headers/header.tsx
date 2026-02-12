@@ -20,27 +20,33 @@ import * as React from "react";
 import { Utils as CoreUtils } from "@blueprintjs/core";
 import { DragHandleVertical } from "@blueprintjs/icons";
 
-import { Grid } from "../common";
-import type { FocusedCellCoordinates } from "../common/cellTypes";
+import type { Grid } from "../common";
+import type { FocusedRegion, FocusMode } from "../common/cellTypes";
 import * as Classes from "../common/classes";
 import { CLASSNAME_EXCLUDED_FROM_TEXT_MEASUREMENT } from "../common/utils";
 import { DragEvents } from "../interactions/dragEvents";
-import { ClientCoordinates, CoordinateData } from "../interactions/dragTypes";
-import { DragReorderable, ReorderableProps } from "../interactions/reorderable";
+import type { ClientCoordinates, CoordinateData } from "../interactions/dragTypes";
+import { DragReorderable, type ReorderableProps } from "../interactions/reorderable";
 import { Resizable } from "../interactions/resizable";
-import { LockableLayout, Orientation } from "../interactions/resizeHandle";
-import { DragSelectable, SelectableProps } from "../interactions/selectable";
-import { Locator } from "../locator";
-import { Region, RegionCardinality, Regions } from "../regions";
-import { HeaderCellProps } from "./headerCell";
+import type { LockableLayout, Orientation } from "../interactions/resizeHandle";
+import { DragSelectable, type SelectableProps } from "../interactions/selectable";
+import type { Locator } from "../locator";
+import { type Region, RegionCardinality, Regions } from "../regions";
+
+import type { HeaderCellProps } from "./headerCell";
 
 export type HeaderCellRenderer = (index: number) => React.ReactElement<HeaderCellProps>;
 
 export interface HeaderProps extends LockableLayout, ReorderableProps, SelectableProps {
     /**
-     * The currently focused cell.
+     * The the type shape allowed for focus areas. Can be cell, row, or none.
      */
-    focusedCell?: FocusedCellCoordinates;
+    focusMode: FocusMode | undefined;
+
+    /**
+     * The currently focused region.
+     */
+    focusedRegion?: FocusedRegion;
 
     /**
      * The grid computes sizes of cells, rows, or columns from the
@@ -77,12 +83,23 @@ export interface HeaderProps extends LockableLayout, ReorderableProps, Selectabl
     loading?: boolean;
 
     /**
+     * When the user reorders something, this callback is called with the new
+     * focus region for the newly selected set of regions.
+     */
+    onFocusedRegion: (focusedRegion: FocusedRegion) => void;
+
+    /**
      * This callback is called while the user is resizing a header cell. The guides
      * array contains pixel offsets for where to display the resize guides in
      * the table body's overlay layer. `guides` will be null if this is the end
      * or cancellation of a resize interaction.
      */
     onResizeGuide: (guides: number[] | null) => void;
+
+    /**
+     * The content to be rendered inside the header.
+     */
+    children?: React.ReactNode;
 }
 
 /**
@@ -207,12 +224,12 @@ export interface InternalHeaderProps extends HeaderProps {
     /**
      * A callback that renders a ghost cell for the provided index.
      */
-    ghostCellRenderer: (index: number, extremaClasses: string[]) => JSX.Element;
+    ghostCellRenderer: (index: number, extremaClasses: string[]) => React.JSX.Element;
 
     /**
      * A callback that renders a regular header cell at the provided index.
      */
-    headerCellRenderer: (index: number) => JSX.Element | null;
+    headerCellRenderer: (index: number) => React.JSX.Element | null;
 
     /**
      * Converts a range to a region. This should be Regions.column for column headers and
@@ -223,7 +240,7 @@ export interface InternalHeaderProps extends HeaderProps {
     /**
      * A callback that wraps the rendered cell components in additional parent elements as needed.
      */
-    wrapCells: (cells: Array<React.ReactElement<any>>) => JSX.Element;
+    wrapCells: (cells: Array<React.ReactElement<any>>) => React.JSX.Element;
 }
 
 export interface HeaderState {
@@ -236,7 +253,7 @@ export interface HeaderState {
     hasValidSelection: boolean;
 }
 
-const SHALLOW_COMPARE_PROP_KEYS_DENYLIST: Array<keyof InternalHeaderProps> = ["focusedCell", "selectedRegions"];
+const SHALLOW_COMPARE_PROP_KEYS_DENYLIST: Array<keyof InternalHeaderProps> = ["focusedRegion", "selectedRegions"];
 
 export class Header extends React.Component<InternalHeaderProps, HeaderState> {
     protected activationIndex: number | null = null;
@@ -313,7 +330,7 @@ export class Header extends React.Component<InternalHeaderProps, HeaderState> {
     private renderCells = () => {
         const { indexStart, indexEnd } = this.props;
 
-        const cells: JSX.Element[] = [];
+        const cells: React.JSX.Element[] = [];
         for (let index = indexStart; index <= indexEnd; index++) {
             const cell = this.renderNewCell(index);
             if (cell != null) {
@@ -370,12 +387,13 @@ export class Header extends React.Component<InternalHeaderProps, HeaderState> {
             <DragSelectable
                 enableMultipleSelection={this.props.enableMultipleSelection}
                 disabled={this.isDragSelectableDisabled}
-                focusedCell={this.props.focusedCell}
+                focusedRegion={this.props.focusedRegion}
+                focusMode={this.props.focusMode}
                 ignoredSelectors={[`.${Classes.TABLE_REORDER_HANDLE_TARGET}`]}
                 key={getIndexClass(index)}
                 locateClick={this.locateClick}
                 locateDrag={this.locateDragForSelection}
-                onFocusedCell={this.props.onFocusedCell}
+                onFocusedRegion={this.props.onFocusedRegion}
                 onSelection={this.handleDragSelectableSelection}
                 onSelectionEnd={this.handleDragSelectableSelectionEnd}
                 selectedRegions={selectedRegions}
@@ -435,20 +453,21 @@ export class Header extends React.Component<InternalHeaderProps, HeaderState> {
 
     private wrapInDragReorderable(
         index: number,
-        children: JSX.Element,
+        children: React.JSX.Element,
         disabled: boolean | ((event: MouseEvent) => boolean),
         targetRef: React.RefObject<HTMLElement>,
     ) {
         return (
             <DragReorderable
                 disabled={disabled}
+                focusMode={this.props.focusMode}
                 key={this.props.getIndexClass(index)}
                 locateClick={this.locateClick}
                 locateDrag={this.locateDragForReordering}
                 onReordered={this.props.onReordered}
                 onReordering={this.props.onReordering}
                 onSelection={this.props.onSelection}
-                onFocusedCell={this.props.onFocusedCell}
+                onFocusedRegion={this.props.onFocusedRegion}
                 selectedRegions={this.props.selectedRegions}
                 targetRef={targetRef}
                 toRegion={this.props.toRegion}

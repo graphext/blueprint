@@ -17,11 +17,12 @@
 import classNames from "classnames";
 import * as React from "react";
 
-import { AbstractPureComponent, Classes, DISPLAYNAME_PREFIX, Props } from "../../common";
+import { AbstractPureComponent, Classes, DISPLAYNAME_PREFIX, type Props } from "../../common";
 import { HOTKEYS_HOTKEY_CHILDREN } from "../../common/errors";
 import { isElementOfType, isReactChildrenElementOrElements } from "../../common/utils";
 import { H4 } from "../html/html";
-import { Hotkey, HotkeyProps } from "./hotkey";
+
+import { Hotkey, type HotkeyProps } from "./hotkey";
 
 export interface HotkeysProps extends Props {
     /**
@@ -33,6 +34,11 @@ export interface HotkeysProps extends Props {
      * the `tabIndex` from the component decorated by `HotkeysTarget`.
      */
     tabIndex?: number;
+
+    /**
+     * An array of `Hotkey` components that define the hotkeys to be used.
+     */
+    children?: React.ReactNode;
 }
 
 /**
@@ -65,7 +71,7 @@ export class Hotkeys extends AbstractPureComponent<HotkeysProps> {
         });
 
         let lastGroup: string | undefined;
-        const elems = [] as JSX.Element[];
+        const elems = [] as React.JSX.Element[];
         for (const hotkey of hotkeys) {
             const groupLabel = hotkey.group;
             if (groupLabel !== lastGroup) {
@@ -83,7 +89,7 @@ export class Hotkeys extends AbstractPureComponent<HotkeysProps> {
             return;
         }
 
-        React.Children.forEach(props.children, (child: JSX.Element) => {
+        React.Children.forEach(props.children, (child: React.JSX.Element) => {
             if (!isElementOfType(child, Hotkey)) {
                 throw new Error(HOTKEYS_HOTKEY_CHILDREN);
             }

@@ -17,7 +17,7 @@
 import classNames from "classnames";
 import * as React from "react";
 
-import { Classes, DISPLAYNAME_PREFIX, Elevation, HTMLDivProps, Props } from "../../common";
+import { Classes, DISPLAYNAME_PREFIX, Elevation, type HTMLDivProps, type Props } from "../../common";
 import { Card } from "../card/card";
 
 export interface CardListProps extends Props, HTMLDivProps, React.RefAttributes<HTMLDivElement> {
@@ -36,13 +36,16 @@ export interface CardListProps extends Props, HTMLDivProps, React.RefAttributes<
     /**
      * Whether this component should use compact styles with reduced visual padding.
      *
+     * Note that this prop affects styling for all Cards within this CardList and you do not need to set the
+     * `compact` prop individually on those child Cards.
+     *
      * @default false
      */
     compact?: boolean;
 }
 
 export const CardList: React.FC<CardListProps> = React.forwardRef((props, ref) => {
-    const { bordered, className, children, compact, ...htmlProps } = props;
+    const { bordered = true, className, children, compact = false, ...htmlProps } = props;
 
     const classes = classNames(className, Classes.CARD_LIST, {
         [Classes.CARD_LIST_BORDERED]: bordered,
@@ -55,7 +58,4 @@ export const CardList: React.FC<CardListProps> = React.forwardRef((props, ref) =
         </Card>
     );
 });
-CardList.defaultProps = {
-    compact: false,
-};
 CardList.displayName = `${DISPLAYNAME_PREFIX}.CardList`;

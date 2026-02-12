@@ -15,7 +15,7 @@
  */
 
 import { assert } from "chai";
-import { mount, ReactWrapper, shallow } from "enzyme";
+import { mount, type ReactWrapper, shallow } from "enzyme";
 import * as React from "react";
 import { spy } from "sinon";
 
@@ -228,15 +228,21 @@ describe("<EditableText>", () => {
             const confirmSpy = spy();
             const wrapper = mount(<EditableText isEditing={true} onConfirm={confirmSpy} multiline={true} />);
             simulateHelper(wrapper, "control", { ctrlKey: true, key: "Enter" });
-            wrapper.setState({ isEditing: true });
-            simulateHelper(wrapper, "meta", { metaKey: true, key: "Enter" });
-            wrapper.setState({ isEditing: true });
+            React.act(() => {
+                wrapper.setState({ isEditing: true });
+            });
+            simulateHelper(wrapper, "meta", { key: "Enter", metaKey: true });
+            React.act(() => {
+                wrapper.setState({ isEditing: true });
+            });
             simulateHelper(wrapper, "shift", {
                 key: "Enter",
                 preventDefault: (): void => undefined,
                 shiftKey: true,
             });
-            wrapper.setState({ isEditing: true });
+            React.act(() => {
+                wrapper.setState({ isEditing: true });
+            });
             simulateHelper(wrapper, "alt", {
                 altKey: true,
                 key: "Enter",
@@ -267,9 +273,9 @@ describe("<EditableText>", () => {
                 <EditableText isEditing={true} onConfirm={confirmSpy} multiline={true} confirmOnEnterKey={true} />,
             );
             const textarea = wrapper.getDOMNode().querySelector<HTMLTextAreaElement>("textarea")!;
-            simulateHelper(wrapper, "", { ctrlKey: true, target: textarea, key: "Enter" });
+            simulateHelper(wrapper, "", { ctrlKey: true, key: "Enter", target: textarea });
             assert.strictEqual(textarea.value, "\n");
-            simulateHelper(wrapper, "", { metaKey: true, target: textarea, key: "Enter" });
+            simulateHelper(wrapper, "", { key: "Enter", metaKey: true, target: textarea });
             assert.strictEqual(textarea.value, "\n");
             simulateHelper(wrapper, "", {
                 key: "Enter",
@@ -303,5 +309,31 @@ describe("<EditableText>", () => {
         function simulateHelper(wrapper: ReactWrapper<any>, value: string, e: FakeKeyboardEvent) {
             wrapper.find("textarea").simulate("change", { target: { value } }).simulate("keydown", e);
         }
+    });
+
+    describe("custom attributes", () => {
+        const customProps = {
+            "aria-label": "Edit description",
+            "data-gramm": "false",
+            spellcheck: "false",
+        };
+
+        it("passes custom attributes to textarea when multiline is true", () => {
+            const wrapper = mount(
+                <EditableText isEditing={true} multiline={true} customInputAttributes={customProps} />,
+            ).find("textarea");
+            assert.strictEqual(wrapper.prop("data-gramm"), "false");
+            assert.strictEqual(wrapper.prop("spellcheck"), "false");
+            assert.strictEqual(wrapper.prop("aria-label"), "Edit description");
+        });
+
+        it("passes custom attributes to input when multiline is false", () => {
+            const wrapper = mount(
+                <EditableText isEditing={true} multiline={false} customInputAttributes={customProps} />,
+            ).find("input");
+            assert.strictEqual(wrapper.prop("data-gramm"), "false");
+            assert.strictEqual(wrapper.prop("spellcheck"), "false");
+            assert.strictEqual(wrapper.prop("aria-label"), "Edit description");
+        });
     });
 });

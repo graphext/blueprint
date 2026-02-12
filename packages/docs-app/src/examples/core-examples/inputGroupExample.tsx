@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 Palantir Technologies, Inc. All rights reserved.
+ * Copyright 2025 Palantir Technologies, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,74 +18,121 @@ import * as React from "react";
 
 import {
     Button,
+    Divider,
     H5,
     Icon,
     InputGroup,
+    type InputGroupProps,
     Intent,
     Menu,
     MenuItem,
     Popover,
+    type Size,
     Spinner,
     Switch,
     Tag,
     Tooltip,
 } from "@blueprintjs/core";
-import { Example, ExampleProps, handleBooleanChange, handleStringChange } from "@blueprintjs/docs-theme";
-import { IconSize } from "@blueprintjs/icons";
+import { Example, type ExampleProps, handleBooleanChange, handleStringChange } from "@blueprintjs/docs-theme";
+import { IconNames, IconSize } from "@blueprintjs/icons";
 
-export interface InputGroupExampleState {
-    disabled: boolean;
-    readOnly: boolean;
-    filterValue: string;
-    large: boolean;
-    small: boolean;
-    showPassword: boolean;
-    tagValue: string;
-}
+import { IntentSelect } from "./common/intentSelect";
+import { SizeSelect } from "./common/sizeSelect";
 
-export class InputGroupExample extends React.PureComponent<ExampleProps, InputGroupExampleState> {
-    public state: InputGroupExampleState = {
-        disabled: false,
-        filterValue: "",
-        large: false,
-        readOnly: false,
-        showPassword: false,
-        small: false,
-        tagValue: "",
-    };
+export const InputGroupExample: React.FC<ExampleProps> = props => {
+    const [disabled, setDisabled] = React.useState(false);
+    const [intent, setIntent] = React.useState<Intent>(Intent.NONE);
+    const [readOnly, setReadOnly] = React.useState(false);
+    const [size, setSize] = React.useState<Size>("medium");
 
-    private handleDisabledChange = handleBooleanChange(disabled => this.setState({ disabled }));
-
-    private handleReadOnlyChange = handleBooleanChange(readOnly => this.setState({ readOnly }));
-
-    private handleLargeChange = handleBooleanChange(large => this.setState({ large, ...(large && { small: false }) }));
-
-    private handleSmallChange = handleBooleanChange(small => this.setState({ small, ...(small && { large: false }) }));
-
-    private handleFilterChange = handleStringChange(filterValue =>
-        window.setTimeout(() => this.setState({ filterValue }), 10),
+    const options = (
+        <>
+            <H5>Props</H5>
+            <Switch checked={disabled} label="Disabled" onChange={handleBooleanChange(setDisabled)} />
+            <Switch checked={readOnly} label="Read-only" onChange={handleBooleanChange(setReadOnly)} />
+            <Divider />
+            <SizeSelect onChange={setSize} size={size} />
+            <IntentSelect intent={intent} onChange={setIntent} />
+        </>
     );
 
-    private handleTagChange = handleStringChange(tagValue => this.setState({ tagValue }));
+    const inputGroupProps: InputGroupProps = { disabled, intent, readOnly, size };
 
-    public render() {
-        const { disabled, filterValue, large, readOnly, small, showPassword, tagValue } = this.state;
+    return (
+        <Example options={options} {...props}>
+            <AsyncInputGroup {...inputGroupProps} />
+            <PasswordInputGroup {...inputGroupProps} />
+            <TagInputGroup {...inputGroupProps} />
+            <PopoverInputGroup {...inputGroupProps} />
+        </Example>
+    );
+};
 
-        const maybeSpinner = filterValue ? <Spinner size={IconSize.STANDARD} /> : undefined;
+const AsyncInputGroup: React.FC<InputGroupProps> = props => {
+    const [filterValue, setFilterValue] = React.useState("");
 
-        const lockButton = (
-            <Tooltip content={`${showPassword ? "Hide" : "Show"} Password`} disabled={disabled}>
-                <Button
-                    disabled={disabled}
-                    icon={showPassword ? "unlock" : "lock"}
-                    intent={Intent.WARNING}
-                    minimal={true}
-                    onClick={this.handleLockClick}
-                />
-            </Tooltip>
-        );
+    const handleFilterChange = handleStringChange(value => window.setTimeout(() => setFilterValue(value), 10));
 
-        const permissionsMenu = (
+    return (
+        <Tooltip content="My input value state is updated asynchronously with a 10ms delay">
+            <InputGroup
+                {...props}
+                asyncControl={true}
+                leftIcon={IconNames.FILTER}
+                onChange={handleFilterChange}
+                placeholder="Filter histogram..."
+                rightElement={filterValue && <Spinner size={IconSize.STANDARD} />}
+                value={filterValue}
+            />
+        </Tooltip>
+    );
+};
+
+const PasswordInputGroup: React.FC<InputGroupProps> = props => {
+    const [showPassword, setShowPassword] = React.useState(false);
+
+    const handleLockClick = React.useCallback(() => setShowPassword(value => !value), []);
+
+    return (
+        <InputGroup
+            {...props}
+            placeholder="Enter your password..."
+            rightElement={
+                <Tooltip content={`${showPassword ? "Hide" : "Show"} Password`} disabled={props.disabled}>
+                    <Button
+                        disabled={props.disabled}
+                        icon={showPassword ? "unlock" : "lock"}
+                        intent={Intent.WARNING}
+                        onClick={handleLockClick}
+                        variant="minimal"
+                    />
+                </Tooltip>
+            }
+            type={showPassword ? "text" : "password"}
+        />
+    );
+};
+
+const TagInputGroup: React.FC<InputGroupProps> = props => {
+    const [tagValue, setTagValue] = React.useState("");
+
+    return (
+        <InputGroup
+            {...props}
+            leftElement={<Icon icon="tag" />}
+            onChange={handleStringChange(setTagValue)}
+            placeholder="Find tags"
+            rightElement={<Tag minimal={true}>{Math.floor(10000 / Math.max(1, Math.pow(tagValue.length, 2)))}</Tag>}
+            value={tagValue}
+        />
+    );
+};
+
+const PopoverInputGroup: React.FC<InputGroupProps> = props => (
+    <InputGroup
+        {...props}
+        placeholder="Add people or groups..."
+        rightElement={
             <Popover
                 content={
                     <Menu>
@@ -93,77 +140,13 @@ export class InputGroupExample extends React.PureComponent<ExampleProps, InputGr
                         <MenuItem text="can view" />
                     </Menu>
                 }
-                disabled={disabled}
+                disabled={props.disabled}
                 placement="bottom-end"
             >
-                <Button disabled={disabled} minimal={true} rightIcon="caret-down">
+                <Button disabled={props.disabled} endIcon={IconNames.CARET_DOWN} variant="minimal">
                     can edit
                 </Button>
             </Popover>
-        );
-
-        const resultsTag = <Tag minimal={true}>{Math.floor(10000 / Math.max(1, Math.pow(tagValue.length, 2)))}</Tag>;
-
-        return (
-            <Example options={this.renderOptions()} {...this.props}>
-                <Tooltip content="My input value state is updated asynchronously with a 10ms delay">
-                    <InputGroup
-                        asyncControl={true}
-                        disabled={disabled}
-                        large={large}
-                        leftIcon="filter"
-                        onChange={this.handleFilterChange}
-                        placeholder="Filter histogram..."
-                        readOnly={readOnly}
-                        rightElement={maybeSpinner}
-                        small={small}
-                        value={filterValue}
-                    />
-                </Tooltip>
-                <InputGroup
-                    disabled={disabled}
-                    large={large}
-                    placeholder="Enter your password..."
-                    readOnly={readOnly}
-                    rightElement={lockButton}
-                    small={small}
-                    type={showPassword ? "text" : "password"}
-                />
-                <InputGroup
-                    disabled={disabled}
-                    large={large}
-                    leftElement={<Icon icon="tag" />}
-                    onChange={this.handleTagChange}
-                    placeholder="Find tags"
-                    readOnly={readOnly}
-                    rightElement={resultsTag}
-                    small={small}
-                    value={tagValue}
-                />
-                <InputGroup
-                    disabled={disabled}
-                    large={large}
-                    placeholder="Add people or groups..."
-                    readOnly={readOnly}
-                    rightElement={permissionsMenu}
-                    small={small}
-                />
-            </Example>
-        );
-    }
-
-    private renderOptions() {
-        const { disabled, readOnly, large, small } = this.state;
-        return (
-            <>
-                <H5>Props</H5>
-                <Switch label="Disabled" onChange={this.handleDisabledChange} checked={disabled} />
-                <Switch label="Read-only" onChange={this.handleReadOnlyChange} checked={readOnly} />
-                <Switch label="Large" onChange={this.handleLargeChange} checked={large} />
-                <Switch label="Small" onChange={this.handleSmallChange} checked={small} />
-            </>
-        );
-    }
-
-    private handleLockClick = () => this.setState({ showPassword: !this.state.showPassword });
-}
+        }
+    />
+);

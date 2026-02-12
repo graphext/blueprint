@@ -21,23 +21,24 @@ import sinon from "sinon";
 
 import { Classes, Slider } from "../../src";
 import { Handle } from "../../src/components/slider/handle";
+
 import { simulateMovement } from "./sliderTestUtils";
 
 const STEP_SIZE = 20;
 const TRACK_SELECTOR = `.${Classes.SLIDER_TRACK}`;
 
 describe("<Slider>", () => {
-    let testsContainerElement: HTMLElement;
+    let containerElement: HTMLElement;
 
     beforeEach(() => {
         // need an element in the document for tickSize to be a real number
-        testsContainerElement = document.createElement("div");
+        containerElement = document.createElement("div");
         // default min-max is 0-10 so there are 10 steps
-        testsContainerElement.style.width = `${STEP_SIZE * 10}px`;
-        document.body.appendChild(testsContainerElement);
+        containerElement.style.width = `${STEP_SIZE * 10}px`;
+        document.body.appendChild(containerElement);
     });
 
-    afterEach(() => testsContainerElement.remove());
+    afterEach(() => containerElement.remove());
 
     it("renders one interactive <Handle>", () => {
         const handles = renderSlider(<Slider />).find(Handle);
@@ -50,6 +51,21 @@ describe("<Slider>", () => {
         );
         assert.lengthOf(tracks, 1);
         assert.equal(tracks.getDOMNode().getBoundingClientRect().width, STEP_SIZE * 3);
+    });
+
+    it("renders primary track segment between initialValue and value when value is less than initial value", () => {
+        const tracks = renderSlider(<Slider showTrackFill={true} initialValue={5} value={2} />).find(
+            `.${Classes.SLIDER_PROGRESS}.${Classes.INTENT_PRIMARY}`,
+        );
+        assert.lengthOf(tracks, 1);
+        assert.equal(tracks.getDOMNode().getBoundingClientRect().width, STEP_SIZE * 3);
+    });
+
+    it("renders no primary track segment when value equals initial value", () => {
+        const tracks = renderSlider(<Slider showTrackFill={true} initialValue={2} value={2} min={0} max={5} />).find(
+            `.${Classes.SLIDER_PROGRESS}.${Classes.INTENT_PRIMARY}`,
+        );
+        assert.lengthOf(tracks, 0);
     });
 
     it("renders result of labelRenderer() in each label and differently in handle", () => {
@@ -90,13 +106,11 @@ describe("<Slider>", () => {
         simulateMovement(slider, { dragTimes: 3 });
         slider.simulate("keydown", { key: "ArrowUp" });
         // track click
-        slider
-            .find(TRACK_SELECTOR)
-            .simulate("mousedown", { target: testsContainerElement.querySelector(TRACK_SELECTOR) });
+        slider.find(TRACK_SELECTOR).simulate("mousedown", { target: containerElement.querySelector(TRACK_SELECTOR) });
         assert.isTrue(eventSpy.notCalled);
     });
 
-    function renderSlider(slider: JSX.Element) {
-        return mount(slider, { attachTo: testsContainerElement });
+    function renderSlider(slider: React.JSX.Element) {
+        return mount(slider, { attachTo: containerElement });
     }
 });

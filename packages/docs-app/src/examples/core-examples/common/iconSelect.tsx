@@ -18,10 +18,10 @@ import classNames from "classnames";
 import * as React from "react";
 
 import { Alignment, Button, Classes, MenuItem } from "@blueprintjs/core";
-import { IconName } from "@blueprintjs/icons";
-import { ItemRenderer, Select } from "@blueprintjs/select";
+import type { IconName } from "@blueprintjs/icons";
+import { type ItemRenderer, Select } from "@blueprintjs/select";
 
-import { getIconNames, IconNameOrNone, NONE } from "./iconNames";
+import { getIconNames } from "./iconNames";
 
 const ICON_NAMES = getIconNames();
 
@@ -35,39 +35,42 @@ export class IconSelect extends React.PureComponent<IconSelectProps> {
     public render() {
         const { disabled, iconName } = this.props;
         return (
-            <label className={classNames(Classes.LABEL, { [Classes.DISABLED]: disabled })}>
+            <label className={classNames("icon-select", Classes.LABEL, { [Classes.DISABLED]: disabled })}>
                 Icon
-                <Select<IconNameOrNone>
+                <Select<IconName>
                     disabled={disabled}
                     items={ICON_NAMES}
                     itemPredicate={this.filterIconName}
                     itemRenderer={this.renderIconItem}
                     noResults={<MenuItem disabled={true} text="No results" />}
+                    placeholder="Start typing to search…"
                     onItemSelect={this.handleIconChange}
                     popoverProps={{ minimal: true }}
                 >
                     <Button
-                        alignText={Alignment.LEFT}
-                        className={Classes.TEXT_OVERFLOW_ELLIPSIS}
+                        alignText={Alignment.START}
+                        textClassName={Classes.TEXT_OVERFLOW_ELLIPSIS}
                         disabled={disabled}
                         fill={true}
                         icon={iconName}
-                        text={iconName || NONE}
-                        rightIcon="caret-down"
+                        text={iconName || "None"}
+                        endIcon="caret-down"
                     />
                 </Select>
             </label>
         );
     }
 
-    private renderIconItem: ItemRenderer<IconName | typeof NONE> = (icon, { handleClick, handleFocus, modifiers }) => {
+    private renderIconItem: ItemRenderer<IconName | undefined> = (icon, { handleClick, handleFocus, modifiers }) => {
         if (!modifiers.matchesPredicate) {
             return null;
         }
         return (
             <MenuItem
-                selected={modifiers.active}
-                icon={icon === NONE ? undefined : icon}
+                roleStructure="listoption"
+                active={modifiers.active}
+                selected={this.props.iconName === icon}
+                icon={icon}
                 key={icon}
                 onClick={handleClick}
                 onFocus={handleFocus}
@@ -76,15 +79,14 @@ export class IconSelect extends React.PureComponent<IconSelectProps> {
         );
     };
 
-    private filterIconName = (query: string, iconName: IconName | typeof NONE) => {
-        if (iconName === NONE) {
-            return true;
-        }
+    private filterIconName = (query: string, iconName: IconName | undefined) => {
         if (query === "") {
             return iconName === this.props.iconName;
         }
         return iconName.toLowerCase().indexOf(query.toLowerCase()) >= 0;
     };
 
-    private handleIconChange = (icon: IconNameOrNone) => this.props.onChange(icon === NONE ? undefined : icon);
+    private handleIconChange = (icon: IconName) => {
+        this.props.onChange(icon === this.props.iconName ? undefined : icon);
+    };
 }

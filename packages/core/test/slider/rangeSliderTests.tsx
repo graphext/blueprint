@@ -27,17 +27,17 @@ import { Handle } from "../../src/components/slider/handle";
 const STEP_SIZE = 20;
 
 describe("<RangeSlider>", () => {
-    let testsContainerElement: HTMLElement;
+    let containerElement: HTMLElement;
 
     beforeEach(() => {
         // need an element in the document for tickSize to be a real number
-        testsContainerElement = document.createElement("div");
+        containerElement = document.createElement("div");
         // default min-max is 0-10 so there are 10 steps
-        testsContainerElement.style.width = `${STEP_SIZE * 10}px`;
-        document.body.appendChild(testsContainerElement);
+        containerElement.style.width = `${STEP_SIZE * 10}px`;
+        document.body.appendChild(containerElement);
     });
 
-    afterEach(() => testsContainerElement.remove());
+    afterEach(() => containerElement.remove());
 
     it("renders two interactive <Handle>s", () => {
         const handles = renderSlider(<RangeSlider />).find(Handle);
@@ -71,7 +71,7 @@ describe("<RangeSlider>", () => {
         assert.isTrue(changeSpy.notCalled, "onChange was called when disabled");
     });
 
-    function renderSlider(slider: JSX.Element) {
-        return mount(slider, { attachTo: testsContainerElement });
+    function renderSlider(slider: React.JSX.Element) {
+        return mount(slider, { attachTo: containerElement });
     }
 });

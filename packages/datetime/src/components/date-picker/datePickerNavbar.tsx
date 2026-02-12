@@ -16,7 +16,7 @@
 
 import classNames from "classnames";
 import * as React from "react";
-import { NavbarElementProps } from "react-day-picker";
+import type { NavbarElementProps } from "react-day-picker";
 
 import { Button } from "@blueprintjs/core";
 import { ChevronLeft, ChevronRight } from "@blueprintjs/icons";
@@ -43,8 +43,8 @@ export class DatePickerNavbar extends React.PureComponent<DatePickerNavbarProps>
                         className={classes.navButtonPrev}
                         disabled={DateUtils.isSameMonth(month, minDate)}
                         icon={<ChevronLeft />}
-                        minimal={true}
                         onClick={this.handlePreviousClick}
+                        variant="minimal"
                     />
                 )}
                 {this.props.hideRightNavButton || (
@@ -53,8 +53,8 @@ export class DatePickerNavbar extends React.PureComponent<DatePickerNavbarProps>
                         className={classes.navButtonNext}
                         disabled={DateUtils.isSameMonth(month, maxDate)}
                         icon={<ChevronRight />}
-                        minimal={true}
                         onClick={this.handleNextClick}
+                        variant="minimal"
                     />
                 )}
             </div>

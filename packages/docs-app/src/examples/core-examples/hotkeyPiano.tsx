@@ -17,7 +17,7 @@
 import * as React from "react";
 
 import { Hotkey, Hotkeys, HotkeysTarget, NonIdealState } from "@blueprintjs/core";
-import { Example, ExampleProps } from "@blueprintjs/docs-theme";
+import { Example, type ExampleProps } from "@blueprintjs/docs-theme";
 
 import { PianoKey } from "./audio";
 
@@ -26,7 +26,7 @@ export interface HotkeyPianoState {
     keys: boolean[];
 }
 
-// eslint-disable-next-line deprecation/deprecation
+// eslint-disable-next-line @typescript-eslint/no-deprecated
 @HotkeysTarget
 export class HotkeyPiano extends React.PureComponent<ExampleProps, HotkeyPianoState> {
     public state: HotkeyPianoState = {

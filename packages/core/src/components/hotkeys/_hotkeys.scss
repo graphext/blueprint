@@ -4,8 +4,15 @@
 @import "../../common/mixins";
 
 .#{$ns}-key-combo {
-  @include pt-flex-container(row, $pt-grid-size * 0.5);
   align-items: center;
+
+  &:not(.#{$ns}-minimal) {
+    @include pt-flex-container(row, $pt-grid-size * 0.5);
+  }
+
+  &.#{$ns}-minimal {
+    @include pt-flex-container(row);
+  }
 }
 
 .#{$ns}-hotkey-dialog {
@@ -24,8 +31,6 @@
 
 .#{$ns}-hotkey-column {
   margin: auto;
-  max-height: 80vh;
-  overflow-y: auto;
   padding: $pt-grid-size * 3;
 
   .#{$ns}-heading {

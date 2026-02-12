@@ -18,7 +18,7 @@ import classNames from "classnames";
 import * as React from "react";
 
 import { AbstractPureComponent, Classes } from "../../common";
-import { DISPLAYNAME_PREFIX, Props } from "../../common/props";
+import { DISPLAYNAME_PREFIX, type Props } from "../../common/props";
 
 export interface CollapseProps extends Props {
     /** Contents to collapse. */
@@ -215,13 +215,11 @@ export class Collapse extends AbstractPureComponent<CollapseProps, CollapseState
     public componentDidMount() {
         this.forceUpdate();
         // HACKHACK: this should probably be done in getSnapshotBeforeUpdate
-        /* eslint-disable react/no-did-mount-set-state */
         if (this.props.isOpen) {
             this.setState({ animationState: AnimationStates.OPEN, height: "auto" });
         } else {
             this.setState({ animationState: AnimationStates.CLOSED, height: "0px" });
         }
-        /* eslint-disable react/no-did-mount-set-state */
     }
 
     public componentDidUpdate() {

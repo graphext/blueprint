@@ -8,9 +8,11 @@
 @page callout
 @page card
 @page card-list
+@page control-card
 @page collapse
 @page divider
 @page editable-text
+@page entity-title
 @page html
 @page html-table
 @page hotkeys-target2
@@ -28,6 +30,7 @@
 @page spinner
 @page tabs
 @page tag
+@page compound-tag
 @page text
 @page tree
 
@@ -39,6 +42,7 @@
 @page checkbox
 @page radio
 @page html-select
+@page segmented-control
 @page sliders
 @page switch
 
@@ -53,6 +57,7 @@
 @## Overlays
 
 @page overlay
+@page overlay2
 @page portal
 @page alert
 @page context-menu

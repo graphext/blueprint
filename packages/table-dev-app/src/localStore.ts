@@ -20,20 +20,23 @@ import defaults from "lodash/defaults";
  * Simple typed storage API for a JSON serializable object in web local storage
  * or session storage.
  */
-// eslint-disable-next-line @typescript-eslint/ban-types
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export class LocalStore<T extends {}> {
     private storage: Storage;
 
-    constructor(private key: string, session = false) {
+    constructor(
+        private key: string,
+        session = false,
+    ) {
         this.storage = session ? sessionStorage : localStorage;
     }
 
-    // eslint-disable-next-line @typescript-eslint/ban-types
+    // eslint-disable-next-line @typescript-eslint/no-empty-object-type
     public getWithDefaults(defaultValue?: T): T | {} {
         return defaults(this.get(), defaultValue);
     }
 
-    // eslint-disable-next-line @typescript-eslint/ban-types
+    // eslint-disable-next-line @typescript-eslint/no-empty-object-type
     public get(): T | {} {
         const domString = this.storage.getItem(this.key);
         if (domString == null || domString === "") {

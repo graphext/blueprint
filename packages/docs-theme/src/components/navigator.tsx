@@ -14,13 +14,14 @@
  * limitations under the License.
  */
 
-import { IHeadingNode, IPageNode } from "@documentalist/client";
+import type { HeadingNode, PageNode } from "@documentalist/client";
+import classNames from "classnames";
 import { filter } from "fuzzaldrin-plus";
 import * as React from "react";
 
 import { Classes, MenuItem } from "@blueprintjs/core";
 import { CaretRight } from "@blueprintjs/icons";
-import { ItemListPredicate, ItemRenderer, Omnibar } from "@blueprintjs/select";
+import { type ItemListPredicate, type ItemRenderer, Omnibar } from "@blueprintjs/select";
 
 import { eachLayoutNode } from "../common/documentalistUtils";
 
@@ -29,16 +30,21 @@ export interface NavigatorProps {
     isOpen: boolean;
 
     /** All potentially navigable items. */
-    items: Array<IPageNode | IHeadingNode>;
+    items: Array<PageNode | HeadingNode>;
 
     /** Callback to determine if a given item should be excluded. */
-    itemExclude?: (node: IPageNode | IHeadingNode) => boolean;
+    itemExclude?: (node: PageNode | HeadingNode) => boolean;
 
     /**
      * Callback invoked when the navigator is closed. Navigation is performed by
      * updating browser `location` directly.
      */
     onClose: () => void;
+
+    /**
+     * Whether to use dark theme.
+     */
+    useDarkTheme?: boolean;
 }
 
 export interface NavigationSection {
@@ -70,7 +76,7 @@ export class Navigator extends React.PureComponent<NavigatorProps> {
 
         return (
             <Omnibar<NavigationSection>
-                className="docs-navigator-menu"
+                className={classNames("docs-navigator-menu", { [Classes.DARK]: this.props.useDarkTheme })}
                 inputProps={{ placeholder: "Search documentation pages and sections..." }}
                 itemListPredicate={this.filterMatches}
                 isOpen={this.props.isOpen}
@@ -98,7 +104,7 @@ export class Navigator extends React.PureComponent<NavigatorProps> {
         }
 
         // insert caret-right between each path element
-        const pathElements = section.path.reduce<React.ReactChild[]>((elems, el) => {
+        const pathElements = section.path.reduce<React.ReactNode[]>((elems, el) => {
             elems.push(el, <CaretRight key={el} />);
             return elems;
         }, []);

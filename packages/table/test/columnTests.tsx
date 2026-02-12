@@ -19,8 +19,9 @@ import * as React from "react";
 
 import { Cell, Column, ColumnLoadingOption, Table2 } from "../src";
 import * as Classes from "../src/common/classes";
+
 import { CellType, expectCellLoading } from "./cellTestUtils";
-import { ElementHarness, ReactHarness } from "./harness";
+import { type ElementHarness, ReactHarness } from "./harness";
 
 describe("Column", () => {
     const harness = new ReactHarness();
@@ -115,6 +116,6 @@ describe("Column", () => {
         }`;
         const cells = Array.from(table.element!.querySelectorAll(cellsSelector));
         cells.forEach(cell => expectCellLoading(cell, CellType.BODY_CELL, isCellLoading));
-        expect(cells.length).to.equal(expectedLength);
+        expect(cells).to.have.lengthOf(expectedLength);
     }
 });

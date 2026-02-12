@@ -19,7 +19,7 @@ on the wiki.
 </div>
 
 **DatePicker3** has the same functionality as [DatePicker](#datetime/datepicker) but uses
-[react-day-picker v8](https://react-day-picker.js.org/) instead of [v7](https://react-day-picker-v7.netlify.app/)
+[react-day-picker v8](https://daypicker.dev/v8) instead of [v7](https://react-day-picker-v7.netlify.app/)
 to render its calendar. It renders a UI to choose a single date and (optionally) a time of day. Time selection
 is enabled by the [TimePicker](#datetime/timepicker) component.
 
@@ -35,7 +35,7 @@ prop to listen for changes to the selected day.
 
 In addition to top-level **DatePicker3** props, you may forward some props to `<DayPicker mode="single">` to customize
 react-day-picker's behavior via `dayPickerProps` (the full list is
-[documented here](https://react-day-picker.js.org/api/interfaces/DayPickerSingleProps)).
+[documented here](https://daypicker.dev/v8/api/interfaces/DayPickerSingleProps)).
 
 @interface DatePicker3Props
 
@@ -63,23 +63,76 @@ The built-in **preset shortcuts** can be seen in the example above. They are as 
 
 @## Modifiers
 
-**DatePicker3** utilizes react-day-picker's built-in [modifiers](https://react-day-picker.js.org/basics/modifiers) for
+**DatePicker3** utilizes react-day-picker's built-in [modifiers](https://daypicker.dev/guides/custom-modifiers#built-in-modifiers) for
 various functionality (highlighting the current day, showing selected days, etc.).
 
 You may extend and customize the default modifiers by specifying various properties in the `dayPickerProps` prop object.
 In the example below, we add a custom class name to every odd-numbered day in the calendar using a simple
-[Matcher](https://react-day-picker.js.org/api/types/matcher).
+[Matcher](https://daypicker.dev/api/type-aliases/Matcher).
 
 @reactExample DatePicker3ModifierExample
 
-See [react-day-picker's "Custom modifiers" documentation](https://react-day-picker.js.org/basics/modifiers#custom-modifiers)
+See [react-day-picker's "Custom modifiers" documentation](https://daypicker.dev/guides/custom-modifiers)
 for more info.
 
 @## Localization
 
-**DatePicker3** supports calendar localization using date-fns [Locale](https://date-fns.org/docs/Locale).
-Use the `locale` prop to specify a locale code (ISO 639-1 + optional country code) and the component will
-load the corresponding date-fns locale. For example, `locale="fr"` is used below by default.
+**DatePicker3**, **DateInput3**, **DateRangePicker3**, and **DateRangeInput3** support calendar
+localization using date-fns's [Locale](https://date-fns.org/v2.28.0/docs/Locale) features. The `locale` prop on each
+of these components accepts two types of values, either a `Locale` object or a locale code `string`.
+
+### Using a locale code
+
+Use the `locale: string` type to interpret the prop as a locale code (ISO 639-1 + optional country code).
+The component will attempt to dynamically import the corresponding date-fns locale module.
+
+```ts
+import { DatePicker3 } from "@blueprintjs/datetime2";
+
+function Example() {
+    return <DatePicker3 locale="en-US" />;
+}
+```
+
+At runtime, this will trigger a dynamic import like the following statement:
+
+```ts
+await import(/* webpackChunkName: "date-fns-en-US" */ "date-fns/locale/en-US");
+```
+
+#### Loading `date-fns` locales
+
+By default, `date-fns` locales are loaded using an async `import("date-fns/*")` of the corresponding locale submodule.
+If you need to customize this loader function, you may do so with the `dateFnsLocaleLoader` prop; this is sometimes
+necessary for bundlers like Vite. For example:
+
+```tsx
+import { Locale } from "date-fns";
+import React from "react";
+import { DatePicker3 } from "@blueprintjs/datetime2";
+
+const loadDateFnsLocale: (localeCode: string) => Promise<Locale> = async localeCode => {
+    const localeModule = await import(`../node_modules/date-fns/esm/locale/${localeCode}/index.js`);
+    return localeModule.default;
+};
+
+export const Example: React.FC = () => {
+    return <DatePicker3 dateFnsLocaleLoader={loadDateFnsLocale} />;
+};
+```
+
+### Using a `Locale` object
+
+Use the `locale: Locale` type if you wish to statically load date-fns locale modules:
+
+```ts
+import { DatePicker3 } from "@blueprintjs/datetime2";
+import enUS from "date-fns/locale/en-US";
+
+function Example() {
+    return <DatePicker3 locale={enUS} />;
+}
+```
 
 <div class="@ns-callout @ns-intent-warning @ns-icon-warning-sign @ns-callout-has-body-content">
     <h5 class="@ns-heading">

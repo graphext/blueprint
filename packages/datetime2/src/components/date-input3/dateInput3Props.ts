@@ -14,11 +14,49 @@
  * limitations under the License.
  */
 
-import { DateInputProps } from "@blueprintjs/datetime";
+import type { DateFormatProps, DateInputProps } from "@blueprintjs/datetime";
 
-import { DatePicker3Props } from "../date-picker3/datePicker3Props";
+import type { DateFnsLocaleProps } from "../../common/dateFnsLocaleProps";
+import type { ReactDayPickerSingleProps } from "../../common/reactDayPickerProps";
 
-/** Props shared between DateInput v1 and v3 */
-type DateInputSharedProps = Omit<DateInputProps, "dayPickerProps" | "locale" | "localeUtils" | "modifiers">;
+/**
+ * Props shared between DateInput v1 and v3.
+ *
+ * Note that we exclude formatDate and parseDate so that we can make those optional in DateInput3 and provide a default
+ * implementation for those functions using date-fns.
+ */
+type DateInputSharedProps = Omit<
+    DateInputProps,
+    "dayPickerProps" | "formatDate" | "locale" | "localeUtils" | "modifiers" | "parseDate"
+>;
 
-export type DateInput3Props = DateInputSharedProps & Pick<DatePicker3Props, "dayPickerProps" | "locale">;
+export interface DateInput3Props
+    extends DateInputSharedProps,
+        ReactDayPickerSingleProps,
+        DateFnsLocaleProps,
+        Partial<Omit<DateFormatProps, "locale">> {
+    /**
+     * [date-fns format](https://date-fns.org/docs/format) string used to format & parse date strings.
+     *
+     * Mutually exclusive with the `formatDate` and `parseDate` props.
+     *
+     * See date-fns [format](https://date-fns.org/docs/format).
+     */
+    dateFnsFormat?: string;
+}
+
+export type DateInput3DefaultProps = Required<
+    Pick<
+        DateInput3Props,
+        | "closeOnSelection"
+        | "disabled"
+        | "invalidDateMessage"
+        | "locale"
+        | "maxDate"
+        | "minDate"
+        | "outOfRangeMessage"
+        | "reverseMonthAndYearMenus"
+    >
+>;
+
+export type DateInput3PropsWithDefaults = Omit<DateInput3Props, keyof DateInput3DefaultProps> & DateInput3DefaultProps;

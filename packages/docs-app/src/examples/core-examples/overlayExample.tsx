@@ -13,13 +13,20 @@
  * limitations under the License.
  */
 
+/**
+ * @fileoverview This component is DEPRECATED, and the code is frozen.
+ * All changes & bugfixes should be made to Overlay2 instead.
+ */
+
+/* eslint-disable @typescript-eslint/no-deprecated */
+
 import classNames from "classnames";
 import * as React from "react";
 
 import { Button, Classes, Code, H3, H5, Intent, Overlay, Switch } from "@blueprintjs/core";
-import { Example, ExampleProps, handleBooleanChange } from "@blueprintjs/docs-theme";
+import { Example, type ExampleProps, handleBooleanChange } from "@blueprintjs/docs-theme";
 
-import { BlueprintExampleData } from "../../tags/types";
+import type { BlueprintExampleData } from "../../tags/types";
 
 const OVERLAY_EXAMPLE_CLASS = "docs-overlay-example-transition";
 const OVERLAY_TALL_CLASS = "docs-overlay-example-tall";
@@ -106,7 +113,7 @@ export class OverlayExample extends React.PureComponent<ExampleProps<BlueprintEx
                             <Button
                                 onClick={this.toggleScrollButton}
                                 icon="double-chevron-down"
-                                rightIcon="double-chevron-down"
+                                endIcon="double-chevron-down"
                                 active={this.state.useTallContent}
                                 style={{ margin: "" }}
                             >

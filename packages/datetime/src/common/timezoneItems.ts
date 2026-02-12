@@ -14,8 +14,10 @@
  * limitations under the License.
  */
 
+/* eslint-disable sort-keys */
+
 import { lookupTimezoneOffset } from "./timezoneOffsetUtils";
-import { Timezone, TimezoneWithoutOffset } from "./timezoneTypes";
+import type { Timezone, TimezoneWithoutOffset } from "./timezoneTypes";
 
 const utcWithoutOffset: TimezoneWithoutOffset = { label: "UTC", ianaCode: "Etc/UTC" };
 

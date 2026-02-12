@@ -15,15 +15,15 @@
  */
 
 import { assert } from "chai";
-import { mount, ReactWrapper } from "enzyme";
+import { mount, type ReactWrapper } from "enzyme";
 import * as React from "react";
 
 import { IconNames } from "@blueprintjs/icons";
 
-import { Classes, H6, Section, SectionCard } from "../../src";
+import { Classes, H5, H6, Section, SectionCard } from "../../src";
 
 describe("<Section>", () => {
-    let containerElement: HTMLElement | undefined;
+    let containerElement: HTMLElement;
 
     const isOpenSelector = `[data-icon="${IconNames.CHEVRON_UP}"]`;
     const isClosedSelector = `[data-icon="${IconNames.CHEVRON_DOWN}"]`;
@@ -40,8 +40,9 @@ describe("<Section>", () => {
         containerElement = document.createElement("div");
         document.body.appendChild(containerElement);
     });
+
     afterEach(() => {
-        containerElement?.remove();
+        containerElement.remove();
     });
 
     it("supports className", () => {
@@ -71,6 +72,13 @@ describe("<Section>", () => {
             attachTo: containerElement,
         });
         assert.isTrue(wrapper.find(`.${Classes.SECTION_HEADER_SUB_TITLE}`).hostNodes().exists());
+    });
+
+    it("renders custom title element with titleRenderer", () => {
+        const wrapper = mount(<Section title="title" titleRenderer={H5} />, {
+            attachTo: containerElement,
+        });
+        assert.isTrue(wrapper.find(H5).exists());
     });
 
     describe("uncontrolled collapse mode", () => {

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { AST_NODE_TYPES, TSESLint, TSESTree } from "@typescript-eslint/utils";
+import { AST_NODE_TYPES, type TSESLint, type TSESTree } from "@typescript-eslint/utils";
 
 import { createRule } from "./utils/createRule";
 
@@ -24,13 +24,13 @@ export const OPTION_LITERAL = "literal";
 type Options = ["component" | "literal"];
 type MessageIds = "component" | "literal";
 
-// tslint:disable object-literal-sort-keys
+/* eslint-disable sort-keys */
 export const iconComponentsRule = createRule<Options, MessageIds>({
     name: "icon-components",
     meta: {
         docs: {
             description: "Enforce usage of JSX Icon components over IconName string literals (or vice-versa)",
-            recommended: "recommended",
+            recommended: true,
             requiresTypeChecking: false,
         },
         fixable: "code",
@@ -51,11 +51,11 @@ export const iconComponentsRule = createRule<Options, MessageIds>({
         JSXAttribute: node => create(context, node),
     }),
 });
-// tslint:enable object-literal-sort-keys
+/* eslint-enable sort-keys */
 
 function create(context: TSESLint.RuleContext<MessageIds, Options>, node: TSESTree.JSXAttribute): void {
     const option = context.options[0] || OPTION_COMPONENT;
-    const sourceCode = context.getSourceCode();
+    const sourceCode = context.sourceCode;
 
     if (node.name.name !== "icon") {
         return;

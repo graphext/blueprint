@@ -13,6 +13,8 @@
  * limitations under the License.
  */
 
+import "../lib/css/blueprint.css";
+
 import "@blueprintjs/test-commons/bootstrap";
 
 // common
@@ -33,11 +35,13 @@ import "./context-menu/contextMenuSingletonTests";
 import "./context-menu/contextMenuTests";
 import "./controls/controlsTests";
 import "./controls/inputGroupTests";
+import "./control-card/controlCardTests";
 import "./controls/numericInputTests";
 import "./controls/radioGroupTests";
 import "./dialog/dialogTests";
 import "./drawer/drawerTests";
 import "./editable-text/editableTextTests";
+import "./entity-title/entityTitleTests";
 import "./forms/asyncControllableInputTests";
 import "./forms/fileInputTests";
 import "./forms/formGroupTests";
@@ -54,6 +58,7 @@ import "./multistep-dialog/multistepDialogTests";
 import "./non-ideal-state/nonIdealStateTests";
 import "./overflow-list/overflowListTests";
 import "./overlay/overlayTests";
+import "./overlay2/overlay2Tests";
 import "./panel-stack/panelStackTests";
 import "./panel-stack2/panelStack2Tests";
 import "./popover/popoverTests";
@@ -62,6 +67,7 @@ import "./portal/portalTests";
 import "./progress/progressBarTests";
 import "./resize-sensor/resizeSensorTests";
 import "./section/sectionTests";
+import "./segmented-control/segmentedControlTests";
 import "./slider/handleTests";
 import "./slider/multiSliderTests";
 import "./slider/rangeSliderTests";
@@ -69,13 +75,17 @@ import "./slider/sliderTests";
 import "./spinner/spinnerTests";
 import "./tabs/tabsTests";
 import "./tag-input/tagInputTests";
+import "./tag/compoundTagTests";
 import "./tag/tagTests";
 import "./text/textTests";
 import "./toast/overlayToasterTests";
 import "./toast/toastTests";
+import "./toast/toast2Tests";
 import "./toast/toasterTests";
 import "./tooltip/tooltipTests";
 import "./tree/treeTests";
 
 // hooks
 import "./hooks/useHotkeysTests";
+import "./hooks/useOverlayStackTests";
+import "./hooks/useValidatePropsTests";

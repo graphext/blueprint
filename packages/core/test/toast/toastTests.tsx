@@ -14,12 +14,20 @@
  * limitations under the License.
  */
 
+/**
+ * @fileoverview This component is DEPRECATED, and the code is frozen.
+ * All changes & bugfixes should be made to Toast2 instead.
+ */
+
+/* eslint-disable @typescript-eslint/no-deprecated */
+
 import { assert } from "chai";
 import { mount, shallow } from "enzyme";
 import * as React from "react";
-import { SinonSpy, spy } from "sinon";
+import { type SinonSpy, spy } from "sinon";
 
 import { AnchorButton, Button, Toast } from "../../src";
+import { sleep } from "../utils";
 
 describe("<Toast>", () => {
     it("renders only dismiss button by default", () => {
@@ -55,7 +63,7 @@ describe("<Toast>", () => {
         assert.isTrue(handleDismiss.calledWith(false), "onDismiss not called with false");
     });
 
-    function wrap(toast: JSX.Element) {
+    function wrap(toast: React.JSX.Element) {
         const root = shallow(toast);
         return {
             action: root.find(AnchorButton),
@@ -68,35 +76,31 @@ describe("<Toast>", () => {
         let handleDismiss: SinonSpy;
         beforeEach(() => (handleDismiss = spy()));
 
-        it("calls onDismiss automatically after timeout expires with `true`", done => {
+        it("calls onDismiss automatically after timeout expires with `true`", async () => {
             // mounting for lifecycle methods to start timeout
             mount(<Toast message="Hello" onDismiss={handleDismiss} timeout={20} />);
-            setTimeout(() => {
-                assert.isTrue(handleDismiss.calledOnce, "onDismiss not called once");
-                assert.isTrue(handleDismiss.firstCall.args[0], "onDismiss not called with `true`");
-                done();
-            }, 20);
+            await sleep(20);
+
+            assert.isTrue(handleDismiss.calledOnce, "onDismiss not called once");
+            assert.isTrue(handleDismiss.firstCall.args[0], "onDismiss not called with `true`");
         });
 
-        it("updating with timeout={0} cancels timeout", done => {
+        it("updating with timeout={0} cancels timeout", async () => {
             mount(<Toast message="Hello" onDismiss={handleDismiss} timeout={20} />).setProps({
                 timeout: 0,
             });
-            setTimeout(() => {
-                assert.isTrue(handleDismiss.notCalled, "onDismiss was called");
-                done();
-            }, 20);
+            await sleep(20);
+            assert.isTrue(handleDismiss.notCalled, "onDismiss was called");
         });
 
-        it("updating timeout={0} with timeout={X} starts timeout", done => {
+        it("updating timeout={0} with timeout={X} starts timeout", async () => {
             mount(<Toast message="Hello" onDismiss={handleDismiss} timeout={0} />).setProps({
                 timeout: 20,
             });
-            setTimeout(() => {
-                assert.isTrue(handleDismiss.calledOnce, "onDismiss not called once");
-                assert.isTrue(handleDismiss.firstCall.args[0], "onDismiss not called with `true`");
-                done();
-            }, 20);
+            await sleep(20);
+
+            assert.isTrue(handleDismiss.calledOnce, "onDismiss not called once");
+            assert.isTrue(handleDismiss.firstCall.args[0], "onDismiss not called with `true`");
         });
     });
 });

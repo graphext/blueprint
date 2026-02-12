@@ -21,17 +21,18 @@ import {
     Utils as CoreUtils,
     DISPLAYNAME_PREFIX,
     Icon,
-    IconName,
-    OverlayLifecycleProps,
+    type IconName,
+    type OverlayLifecycleProps,
     Popover,
-    PopoverProps,
-    Props,
+    type PopoverProps,
+    type Props,
 } from "@blueprintjs/core";
 
 import * as Classes from "../common/classes";
 import { LoadableContent } from "../common/loadableContent";
 import { CLASSNAME_EXCLUDED_FROM_TEXT_MEASUREMENT } from "../common/utils";
-import { HeaderCell, HeaderCellProps } from "./headerCell";
+
+import { HeaderCell, type HeaderCellProps } from "./headerCell";
 import { HorizontalCellDivider } from "./horizontalCellDivider";
 
 export interface ColumnNameProps {
@@ -80,7 +81,7 @@ export interface ColumnHeaderCellProps extends HeaderCellProps, ColumnNameProps 
      *
      * @default "chevron-down"
      */
-    menuIcon?: IconName | JSX.Element;
+    menuIcon?: IconName | React.JSX.Element;
 
     /**
      * Optional props to forward to the dropdown menu popover.

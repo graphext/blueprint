@@ -19,14 +19,14 @@
  * All changes & bugfixes should be made to HotkeysDialog2 instead.
  */
 
-/* eslint-disable deprecation/deprecation */
+/* eslint-disable @typescript-eslint/no-deprecated */
 
 import classNames from "classnames";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
 import { Classes } from "../common";
-import { Dialog, DialogProps, Hotkey, HotkeyProps, Hotkeys } from "../components";
+import { Dialog, DialogBody, type DialogProps, Hotkey, type HotkeyProps, Hotkeys } from "../components";
 
 interface HotkeysDialogProps extends DialogProps {
     /**
@@ -46,7 +46,7 @@ const DELAY_IN_MS = 10;
 class HotkeysDialogLegacy {
     public componentProps = {
         globalHotkeysGroup: "Global hotkeys",
-    } as any as HotkeysDialogProps;
+    } as HotkeysDialogProps;
 
     private container: HTMLElement | null = null;
 
@@ -125,7 +125,7 @@ class HotkeysDialogLegacy {
                 isOpen={this.isDialogShowing}
                 onClose={this.hide}
             >
-                <div className={Classes.DIALOG_BODY}>{this.renderHotkeys()}</div>
+                <DialogBody>{this.renderHotkeys()}</DialogBody>
             </Dialog>
         );
     }

@@ -15,15 +15,16 @@
  */
 
 import * as React from "react";
-import { DayPicker, MonthChangeEventHandler, SelectRangeEventHandler } from "react-day-picker";
+import { DayPicker, type MonthChangeEventHandler, type SelectRangeEventHandler } from "react-day-picker";
 
 import { DISPLAYNAME_PREFIX } from "@blueprintjs/core";
-import { DateRange, DateRangeSelectionStrategy, MonthAndYear } from "@blueprintjs/datetime";
+import { type DateRange, DateRangeSelectionStrategy, MonthAndYear } from "@blueprintjs/datetime";
 
 import { dateRangeToDayPickerRange } from "../../common/reactDayPickerUtils";
 import { DatePicker3Dropdown } from "../react-day-picker/datePicker3Dropdown";
 import { IconLeft, IconRight } from "../react-day-picker/datePickerNavIcons";
-import { DayRangePickerProps } from "./dayRangePickerProps";
+
+import type { DayRangePickerProps } from "./dayRangePickerProps";
 
 /**
  * Render a standard day range picker where props.contiguousCalendarMonths is expected to be `true`.
@@ -146,6 +147,7 @@ function useContiguousCalendarViews(
 
             const nextRangeStart = MonthAndYear.fromDate(selectedRange[0]);
             const nextRangeEnd = MonthAndYear.fromDate(selectedRange[1]);
+            const hasSelectionEndChanged = prevSelectedRange.current[0]?.valueOf() === selectedRange[0]?.valueOf();
 
             if (nextRangeStart == null && nextRangeEnd != null) {
                 // Only end date selected.
@@ -174,8 +176,11 @@ function useContiguousCalendarViews(
                     } else {
                         newDisplayMonth = nextRangeStart;
                     }
+                } else if (hasSelectionEndChanged) {
+                    // If the selection end has changed, adjust the view to show the new end date
+                    newDisplayMonth = singleMonthOnly ? nextRangeEnd : nextRangeEnd.getPreviousMonth();
                 } else {
-                    // Different start and end date months, adjust display months.
+                    // Otherwise, the selection start must have changed, show that
                     newDisplayMonth = nextRangeStart;
                 }
             }

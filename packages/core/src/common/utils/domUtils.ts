@@ -14,6 +14,11 @@
  * limitations under the License.
  */
 
+/** @returns true if React is running in a client environment, and false if it's in a server */
+export function hasDOMEnvironment(): boolean {
+    return typeof window !== "undefined" && window.document != null;
+}
+
 export function elementIsOrContains(element: HTMLElement, testElement: HTMLElement) {
     return element === testElement || element.contains(testElement);
 }
@@ -32,7 +37,7 @@ export function elementIsTextInput(elem: HTMLElement) {
         return false;
     }
 
-    const editable = elem.closest("input, textarea, [contenteditable=true]");
+    const editable = elem.closest<HTMLInputElement>("input, textarea, [contenteditable=true]");
 
     if (editable == null) {
         return false;
@@ -40,14 +45,14 @@ export function elementIsTextInput(elem: HTMLElement) {
 
     // don't let checkboxes, switches, and radio buttons prevent hotkey behavior
     if (editable.tagName.toLowerCase() === "input") {
-        const inputType = (editable as HTMLInputElement).type;
+        const inputType = editable.type;
         if (inputType === "checkbox" || inputType === "radio") {
             return false;
         }
     }
 
     // don't let read-only fields prevent hotkey behavior
-    if ((editable as HTMLInputElement).readOnly) {
+    if (editable.readOnly) {
         return false;
     }
 
@@ -58,12 +63,9 @@ export function elementIsTextInput(elem: HTMLElement) {
  * Gets the active element in the document or shadow root (if an element is provided, and it's in the shadow DOM).
  */
 export function getActiveElement(element?: HTMLElement | null, options?: GetRootNodeOptions) {
-    if (element == null) {
-        return document.activeElement;
-    }
-
-    const rootNode = (element.getRootNode(options) ?? document) as DocumentOrShadowRoot & Node;
-    return rootNode.activeElement;
+    const rootNode = (element?.getRootNode(options) ?? document) as unknown as DocumentOrShadowRoot;
+    const activeElement = rootNode.activeElement;
+    return activeElement instanceof HTMLElement ? activeElement : null;
 }
 
 /**
@@ -113,12 +115,13 @@ export function throttleReactEventCallback<E extends React.SyntheticEvent = Reac
  * Throttle a method by wrapping it in a `requestAnimationFrame` call. Returns
  * the throttled function.
  */
-// eslint-disable-next-line @typescript-eslint/ban-types
+/* istanbul ignore next */
+// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
 export function throttle<T extends Function>(method: T): T {
     return throttleImpl(method);
 }
 
-// eslint-disable-next-line @typescript-eslint/ban-types
+// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
 function throttleImpl<T extends Function>(
     onAnimationFrameRequested: T,
     onBeforeIsRunningCheck?: T,
@@ -144,6 +147,45 @@ function throttleImpl<T extends Function>(
 }
 
 export function clickElementOnKeyPress(keys: string[]) {
-    return (e: React.KeyboardEvent) =>
-        keys.some(key => e.key === key) && e.target.dispatchEvent(new MouseEvent("click", { ...e, view: undefined }));
+    return (e: React.KeyboardEvent) => {
+        if (keys.some(key => e.key === key)) {
+            // Prevent spacebar from scrolling the page unless we're in a text field
+            if (!elementIsTextInput(e.target as HTMLElement)) {
+                e.preventDefault();
+            }
+
+            e.target.dispatchEvent(new MouseEvent("click", { ...e, view: undefined }));
+        }
+    };
+}
+
+/**
+ * Selector for all possible focusable items.
+ *
+ * Derived from this SO question: {@link https://stackoverflow.com/questions/1599660/which-html-elements-can-receive-focus}
+ *
+ * Note: Order may not be correct if children elements use tabindex values > 0.
+ */
+const SELECTOR_FOCUSABLE = [
+    'a[href]:not([tabindex="-1"])',
+    'button:not([disabled]):not([tabindex="-1"])',
+    'details:not([tabindex="-1"])',
+    'input:not([disabled]):not([tabindex="-1"])',
+    'select:not([disabled]):not([tabindex="-1"])',
+    'textarea:not([disabled]):not([tabindex="-1"])',
+    '[tabindex]:not([tabindex="-1"])',
+].join(",");
+
+/**
+ * Gets all focusable elements within the given element.
+ *
+ * Selector derived from this SO question: {@link https://stackoverflow.com/questions/1599660/which-html-elements-can-receive-focus}
+ *
+ * Note: Order may not be correct if children elements use tabindex values > 0.
+ *
+ * @param {HTMLElement} element - The element to search within.
+ * @returns {HTMLElement[]} An array of focusable elements.
+ */
+export function getFocusableElements(element: HTMLElement): HTMLElement[] {
+    return Array.from(element.querySelectorAll(SELECTOR_FOCUSABLE));
 }

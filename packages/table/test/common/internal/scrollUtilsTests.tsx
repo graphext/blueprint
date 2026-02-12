@@ -15,11 +15,11 @@
  */
 
 import { expect } from "chai";
+import { mount } from "enzyme";
 import * as React from "react";
-import * as ReactDOM from "react-dom";
 
 import * as ScrollUtils from "../../../src/common/internal/scrollUtils";
-import { Region, Regions } from "../../../src/regions";
+import { type Region, Regions } from "../../../src/regions";
 
 describe("scrollUtils", () => {
     describe("getScrollPositionForRegion", () => {
@@ -284,7 +284,7 @@ describe("scrollUtils", () => {
         const PARENT_WIDTH = 100;
         const PARENT_HEIGHT = 100;
 
-        let containerElement: HTMLElement | undefined;
+        let containerElement: HTMLElement;
 
         const baseStyles = { display: "block" };
         const parentStyle: React.CSSProperties = {
@@ -306,8 +306,7 @@ describe("scrollUtils", () => {
         });
 
         afterEach(() => {
-            document.body.removeChild(containerElement!);
-            containerElement = undefined;
+            document.body.removeChild(containerElement);
         });
 
         // NOTE: these tests will fail locally on OS X if you have your scrollbars set to "When scrolling"
@@ -338,13 +337,13 @@ describe("scrollUtils", () => {
         });
 
         function mountElementsWithContentSize(contentWidth: number, contentHeight: number) {
-            // HACKHACK: `as unknown as HTMLElement` cast is sketchy
-            return ReactDOM.render<React.HTMLProps<HTMLDivElement>>(
+            const wrapper = mount(
                 <div style={parentStyle}>
-                    <div style={{ ...baseStyles, width: contentWidth, height: contentHeight }} />
+                    <div style={{ ...baseStyles, height: contentHeight, width: contentWidth }} />
                 </div>,
-                containerElement!,
-            ) as unknown as HTMLElement;
+                { attachTo: containerElement },
+            );
+            return wrapper.getDOMNode<HTMLDivElement>();
         }
     });
 });

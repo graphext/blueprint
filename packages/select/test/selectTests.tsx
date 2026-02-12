@@ -15,15 +15,16 @@
  */
 
 import { assert } from "chai";
-import { HTMLAttributes, mount, ReactWrapper } from "enzyme";
+import { type HTMLAttributes, mount, type ReactWrapper } from "enzyme";
 import * as React from "react";
 import * as sinon from "sinon";
 
 import { Button, Classes, InputGroup, MenuItem, Popover } from "@blueprintjs/core";
 
-import { ItemRendererProps, Select, SelectProps } from "../src";
-import { Film, renderFilm, TOP_100_FILMS } from "../src/__examples__";
+import { type ItemRendererProps, Select, type SelectProps } from "../src";
+import { type Film, renderFilm, TOP_100_FILMS } from "../src/__examples__";
 import type { SelectState } from "../src/components/select/select";
+
 import { selectComponentSuite } from "./selectComponentSuite";
 import { selectPopoverTestSuite } from "./selectPopoverTestSuite";
 
@@ -35,10 +36,10 @@ describe("<Select>", () => {
     };
     let handlers: {
         itemPredicate: sinon.SinonSpy<[string, Film], boolean>;
-        itemRenderer: sinon.SinonSpy<[Film, ItemRendererProps], JSX.Element | null>;
+        itemRenderer: sinon.SinonSpy<[Film, ItemRendererProps], React.JSX.Element | null>;
         onItemSelect: sinon.SinonSpy;
     };
-    let testsContainerElement: HTMLElement | undefined;
+    let containerElement: HTMLElement;
 
     beforeEach(() => {
         handlers = {
@@ -46,15 +47,15 @@ describe("<Select>", () => {
             itemRenderer: sinon.spy(renderFilm),
             onItemSelect: sinon.spy(),
         };
-        testsContainerElement = document.createElement("div");
-        document.body.appendChild(testsContainerElement);
+        containerElement = document.createElement("div");
+        document.body.appendChild(containerElement);
     });
 
     afterEach(() => {
         for (const spy of Object.values(handlers)) {
             spy.resetHistory();
         }
-        testsContainerElement?.remove();
+        containerElement.remove();
     });
 
     selectComponentSuite<SelectProps<Film>, SelectState>(props =>
@@ -62,7 +63,7 @@ describe("<Select>", () => {
     );
 
     selectPopoverTestSuite<SelectProps<Film>, SelectState>(props =>
-        mount(<Select {...props} />, { attachTo: testsContainerElement }),
+        mount(<Select {...props} />, { attachTo: containerElement }),
     );
 
     it("renders a Popover around children that contains InputGroup and items", () => {
@@ -79,7 +80,7 @@ describe("<Select>", () => {
 
     it("disabled=true disables Popover", () => {
         const wrapper = select({ disabled: true });
-        assert.strictEqual(wrapper.find(Popover).prop("disabled"), true);
+        assert.isTrue(wrapper.find(Popover).prop("disabled"));
     });
 
     it("disabled=true doesn't call itemRenderer", () => {
@@ -93,7 +94,7 @@ describe("<Select>", () => {
     });
 
     it("inputProps value and onChange are ignored", () => {
-        const inputProps = { value: "nailed it", onChange: sinon.spy() };
+        const inputProps = { onChange: sinon.spy(), value: "nailed it" };
         // @ts-expect-error - value and onChange are now omitted from the props type
         const input = select({ inputProps }).find("input");
         assert.notEqual(input.prop("onChange"), inputProps.onChange);
@@ -104,7 +105,7 @@ describe("<Select>", () => {
         // Select defines its own onOpening so this ensures that the passthrough happens
         const onOpening = sinon.spy();
         const modifiers = {}; // our own instance
-        const wrapper = select({ popoverProps: { onOpening, modifiers } });
+        const wrapper = select({ popoverProps: { modifiers, onOpening } });
         findTargetButton(wrapper).simulate("click");
         assert.strictEqual(wrapper.find(Popover).prop("modifiers"), modifiers);
         assert.isTrue(onOpening.calledOnce);
@@ -115,10 +116,10 @@ describe("<Select>", () => {
         // override isOpen in defaultProps
         const wrapper = select({ popoverProps: { usePortal: false } });
         // should be closed to start
-        assert.strictEqual(wrapper.find(Popover).prop("isOpen"), false);
+        assert.isFalse(wrapper.find(Popover).prop("isOpen"));
         findTargetButton(wrapper).simulate("keydown", { key: "ArrowDown" });
         // ...then open after key down
-        assert.strictEqual(wrapper.find(Popover).prop("isOpen"), true);
+        assert.isTrue(wrapper.find(Popover).prop("isOpen"));
     });
 
     it("invokes onItemSelect when clicking first MenuItem", () => {
@@ -136,7 +137,7 @@ describe("<Select>", () => {
         findTargetButton(wrapper).simulate("click");
         wrapper.find("input").simulate("keydown", { key: "Enter" });
         wrapper.find("input").simulate("keyup", { key: "Enter" });
-        assert.strictEqual(wrapper.find(Popover).prop("isOpen"), false);
+        assert.isFalse(wrapper.find(Popover).prop("isOpen"));
     });
 
     // N.B. it's not worth refactoring these tests to be DRY since there will soon
@@ -149,15 +150,15 @@ describe("<Select>", () => {
         const wrapper = select({ itemRenderer, popoverProps: { usePortal: false } });
 
         // popover should start close
-        assert.strictEqual(wrapper.find(Popover).prop("isOpen"), false);
+        assert.isFalse(wrapper.find(Popover).prop("isOpen"));
 
         // popover should open after clicking the button
         findTargetButton(wrapper).simulate("click");
-        assert.strictEqual(wrapper.find(Popover).prop("isOpen"), true);
+        assert.isTrue(wrapper.find(Popover).prop("isOpen"));
 
         // and should close after the a menu item is clicked
         wrapper.find(Popover).find(`.${Classes.MENU_ITEM}`).first().simulate("click");
-        assert.strictEqual(wrapper.find(Popover).prop("isOpen"), false);
+        assert.isFalse(wrapper.find(Popover).prop("isOpen"));
     });
 
     it("does not close the popover when selecting a MenuItem with shouldDismissPopover", () => {
@@ -167,15 +168,15 @@ describe("<Select>", () => {
         const wrapper = select({ itemRenderer, popoverProps: { usePortal: false } });
 
         // popover should start closed
-        assert.strictEqual(wrapper.find(Popover).prop("isOpen"), false);
+        assert.isFalse(wrapper.find(Popover).prop("isOpen"));
 
         // popover should open after clicking the button
         findTargetButton(wrapper).simulate("click");
-        assert.strictEqual(wrapper.find(Popover).prop("isOpen"), true);
+        assert.isTrue(wrapper.find(Popover).prop("isOpen"));
 
         // and should not close after the a menu item is clicked
         wrapper.find(Popover).find(`.${Classes.MENU_ITEM}`).first().simulate("click");
-        assert.strictEqual(wrapper.find(Popover).prop("isOpen"), true);
+        assert.isTrue(wrapper.find(Popover).prop("isOpen"));
     });
 
     function select(props: Partial<SelectProps<Film>> = {}, query?: string) {
@@ -183,10 +184,12 @@ describe("<Select>", () => {
             <Select<Film> {...defaultProps} {...handlers} {...props}>
                 <Button data-testid="target-button" text="Target" />
             </Select>,
-            { attachTo: testsContainerElement },
+            { attachTo: containerElement },
         );
         if (query !== undefined) {
-            wrapper.setState({ query });
+            React.act(() => {
+                wrapper.setState({ query });
+            });
         }
         return wrapper;
     }

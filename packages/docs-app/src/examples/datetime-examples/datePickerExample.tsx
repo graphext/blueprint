@@ -14,11 +14,18 @@
  * limitations under the License.
  */
 
+/**
+ * @fileoverview This component is DEPRECATED, and the code is frozen.
+ * All changes & bugfixes should be made to DatePicker3 instead.
+ */
+
+/* eslint-disable @typescript-eslint/no-deprecated, @blueprintjs/no-deprecated-components */
+
 import * as React from "react";
 
 import { Callout, Classes, H5, Switch } from "@blueprintjs/core";
-import { DatePicker, TimePrecision } from "@blueprintjs/datetime";
-import { Example, ExampleProps, handleBooleanChange, handleValueChange } from "@blueprintjs/docs-theme";
+import { DatePicker, type TimePrecision } from "@blueprintjs/datetime";
+import { Example, type ExampleProps, handleBooleanChange, handleValueChange } from "@blueprintjs/docs-theme";
 
 import { MomentDate } from "./common/momentDate";
 import { PrecisionSelect } from "./common/precisionSelect";

@@ -63,21 +63,21 @@ describe("<Text>", () => {
         });
 
         describe("title behavior", () => {
-            let testsContainerElement: HTMLElement;
+            let containerElement: HTMLElement;
 
             beforeEach(() => {
-                testsContainerElement = document.createElement("div");
-                document.documentElement.appendChild(testsContainerElement);
+                containerElement = document.createElement("div");
+                document.documentElement.appendChild(containerElement);
             });
 
             afterEach(() => {
-                testsContainerElement.remove();
+                containerElement.remove();
             });
 
             it("adds the title attribute when text overflows", () => {
                 const textContent = new Array(100).join("this will overflow ");
                 const wrapper = mount(<Text ellipsize={true}>{textContent}</Text>, {
-                    attachTo: testsContainerElement,
+                    attachTo: containerElement,
                 });
                 const actualTitle = wrapper.find(`.${Classes.TEXT_OVERFLOW_ELLIPSIS}`).prop("title");
                 assert.strictEqual(actualTitle, textContent, "title should equal full text content");
@@ -86,11 +86,11 @@ describe("<Text>", () => {
             it("does not add the title attribute when text does not overflow", () => {
                 const textContent = "no overflow";
                 let wrapper = mount(<Text ellipsize={true}>{textContent}</Text>, {
-                    attachTo: testsContainerElement,
+                    attachTo: containerElement,
                 });
                 wrapper = wrapper.update();
                 const actualTitle = wrapper.find(`.${Classes.TEXT_OVERFLOW_ELLIPSIS}`).prop("title");
-                assert.strictEqual(actualTitle, undefined, "title should be undefined");
+                assert.isUndefined(actualTitle, "title should be undefined");
             });
 
             it("uses given title even if text overflows", () => {
@@ -101,7 +101,7 @@ describe("<Text>", () => {
                         {textContent}
                     </Text>,
                     {
-                        attachTo: testsContainerElement,
+                        attachTo: containerElement,
                     },
                 );
                 const actualTitle = wrapper.find(`.${Classes.TEXT_OVERFLOW_ELLIPSIS}`).prop("title");

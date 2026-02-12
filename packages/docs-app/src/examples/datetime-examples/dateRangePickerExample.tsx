@@ -14,14 +14,21 @@
  * limitations under the License.
  */
 
+/**
+ * @fileoverview This component is DEPRECATED, and the code is frozen.
+ * All changes & bugfixes should be made to DateRangePicker3 instead.
+ */
+
+/* eslint-disable @typescript-eslint/no-deprecated, @blueprintjs/no-deprecated-components */
+
 import moment from "moment";
 import * as React from "react";
 
-import { Classes, H5, HTMLSelect, Label, Switch } from "@blueprintjs/core";
-import { DateRange, DateRangePicker, TimePrecision } from "@blueprintjs/datetime";
+import { Classes, FormGroup, H5, HTMLSelect, Switch } from "@blueprintjs/core";
+import { type DateRange, DateRangePicker, type TimePrecision } from "@blueprintjs/datetime";
 import {
     Example,
-    ExampleProps,
+    type ExampleProps,
     handleBooleanChange,
     handleNumberChange,
     handleValueChange,
@@ -197,14 +204,13 @@ export class DateRangePickerExample extends React.PureComponent<ExampleProps, Da
         onChange: React.FormEventHandler<HTMLElement>,
     ) {
         return (
-            <Label>
-                {label}
+            <FormGroup label={label}>
                 <HTMLSelect value={selectedValue} onChange={onChange}>
                     {options.map((opt, i) => (
                         <option key={i} value={i} label={opt.label} />
                     ))}
                 </HTMLSelect>
-            </Label>
+            </FormGroup>
         );
     }
 }

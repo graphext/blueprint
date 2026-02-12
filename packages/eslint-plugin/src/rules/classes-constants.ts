@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { AST_NODE_TYPES, TSESLint, TSESTree } from "@typescript-eslint/utils";
+import { AST_NODE_TYPES, type TSESLint, type TSESTree } from "@typescript-eslint/utils";
 
 import { addImportToFile } from "./utils/addImportToFile";
 import { createRule } from "./utils/createRule";
@@ -27,13 +27,13 @@ const BLUEPRINT_CLASSNAME_PATTERN = /(?<![\w])((?:pt|bp3|bp4|bp5)-(?!icon)[\w-]+
 
 type MessageIds = "useBlueprintClasses";
 
-// tslint:disable object-literal-sort-keys
+/* eslint-disable sort-keys */
 export const classesConstantsRule = createRule<[], MessageIds>({
     name: "classes-constants",
     meta: {
         docs: {
             description: "Enforce usage of Classes constants over namespaced string literals.",
-            recommended: "recommended",
+            recommended: true,
             requiresTypeChecking: false,
         },
         fixable: "code",

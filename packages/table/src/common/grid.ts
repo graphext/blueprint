@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-import { CSSProperties } from "react";
+import type { CSSProperties } from "react";
 
-import { Region, RegionCardinality, Regions } from "../regions";
+import { type Region, RegionCardinality, Regions } from "../regions";
+
 import * as Classes from "./classes";
 import { Rect } from "./rect";
 import { Utils } from "./utils";
@@ -467,6 +468,6 @@ export class Grid {
         } else {
             end = Math.min(count - 1, end);
         }
-        return { start, end };
+        return { end, start };
     }
 }

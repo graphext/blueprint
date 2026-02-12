@@ -18,19 +18,26 @@ import classNames from "classnames";
 import * as React from "react";
 
 import {
-    DefaultSVGIconProps,
-    IconName,
-    IconPaths,
+    type DefaultSVGIconProps,
+    type IconName,
+    type IconPaths,
     Icons,
     IconSize,
     SVGIconContainer,
-    SVGIconProps,
+    type SVGIconProps,
 } from "@blueprintjs/icons";
 
-import { Classes, DISPLAYNAME_PREFIX, IntentProps, MaybeElement, Props, removeNonHTMLProps } from "../../common";
+import {
+    Classes,
+    DISPLAYNAME_PREFIX,
+    type IntentProps,
+    type MaybeElement,
+    type Props,
+    removeNonHTMLProps,
+} from "../../common";
 
 // re-export for convenience, since some users won't be importing from or have a direct dependency on the icons package
-export { IconName, IconSize };
+export { type IconName, IconSize };
 
 export interface IconOwnProps {
     /**
@@ -49,7 +56,7 @@ export interface IconOwnProps {
      * - If given an `IconName` (a string literal union of all icon names), that
      *   icon will be rendered as an `<svg>` with `<path>` tags. Unknown strings
      *   will render a blank icon to occupy space.
-     * - If given a `JSX.Element`, that element will be rendered and _all other
+     * - If given a `React.JSX.Element`, that element will be rendered and _all other
      *   props on this component are ignored._ This type is supported to
      *   simplify icon support in other Blueprint components. As a consumer, you
      *   should avoid using `<Icon icon={<Element />}` directly; simply render
@@ -94,7 +101,12 @@ export interface DefaultIconProps extends IntentProps, Props, DefaultSVGIconProp
  * @see https://stackoverflow.com/a/73795494/7406866
  */
 export interface IconComponent extends React.FC<IconProps<Element>> {
-    <T extends Element = Element>(props: IconProps<T>): React.ReactElement | null;
+    /**
+     * ReturnType here preserves type compatability with React 16 while we migrate to React 18.
+     * see: https://github.com/palantir/blueprint/pull/7142/files#r1915691062
+     */
+    // TODO(React 18): Replace return type with `React.ReactNode` once we drop support for React 16.
+    <T extends Element = Element>(props: IconProps<T>): ReturnType<React.FC<IconProps<Element>>> | null;
 }
 
 /**
@@ -107,10 +119,21 @@ export const Icon: IconComponent = React.forwardRef(function <T extends Element>
     props: IconProps<T>,
     ref: React.Ref<T>,
 ) {
-    const { autoLoad, className, color, icon, intent, tagName, svgProps, title, htmlTitle, ...htmlProps } = props;
+    const {
+        autoLoad = true,
+        className,
+        color,
+        icon,
+        intent,
+        tagName = "span",
+        svgProps,
+        title,
+        htmlTitle,
+        ...htmlProps
+    } = props;
 
     // Preserve Blueprint v4.x behavior: iconSize prop takes predecence, then size prop, then fall back to default value
-    // eslint-disable-next-line deprecation/deprecation
+    // eslint-disable-next-line @typescript-eslint/no-deprecated
     const size = props.iconSize ?? props.size ?? IconSize.STANDARD;
 
     const [iconPaths, setIconPaths] = React.useState<IconPaths | undefined>(() =>
@@ -162,11 +185,11 @@ export const Icon: IconComponent = React.forwardRef(function <T extends Element>
             size === IconSize.STANDARD
                 ? Classes.ICON_STANDARD
                 : size === IconSize.LARGE
-                ? Classes.ICON_LARGE
-                : undefined;
-        return React.createElement(tagName!, {
-            ...removeNonHTMLProps(htmlProps),
+                  ? Classes.ICON_LARGE
+                  : undefined;
+        return React.createElement(tagName || "span", {
             "aria-hidden": title ? undefined : true,
+            ...removeNonHTMLProps(htmlProps),
             className: classNames(
                 Classes.ICON,
                 sizeClass,
@@ -186,7 +209,7 @@ export const Icon: IconComponent = React.forwardRef(function <T extends Element>
         return (
             <SVGIconContainer<any>
                 children={pathElements}
-                // don't forward Classes.iconClass(icon) here, since the container will render that class
+                // don't forward `Classes.ICON` or `Classes.iconClass(icon)` here, since the container will render those classes
                 className={classNames(Classes.intentClass(intent), className)}
                 color={color}
                 htmlTitle={htmlTitle}
@@ -201,8 +224,4 @@ export const Icon: IconComponent = React.forwardRef(function <T extends Element>
         );
     }
 });
-Icon.defaultProps = {
-    autoLoad: true,
-    tagName: "span",
-};
 Icon.displayName = `${DISPLAYNAME_PREFIX}.Icon`;

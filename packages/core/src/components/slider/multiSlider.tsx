@@ -17,10 +17,19 @@
 import classNames from "classnames";
 import * as React from "react";
 
-import { AbstractPureComponent, Classes, DISPLAYNAME_PREFIX, Intent, IntentProps, Props, Utils } from "../../common";
+import {
+    AbstractPureComponent,
+    Classes,
+    DISPLAYNAME_PREFIX,
+    Intent,
+    type IntentProps,
+    type Props,
+    Utils,
+} from "../../common";
 import * as Errors from "../../common/errors";
+
 import { Handle } from "./handle";
-import { HandleInteractionKind, HandleProps, HandleType } from "./handleProps";
+import { HandleInteractionKind, type HandleProps, HandleType } from "./handleProps";
 import { argMin, fillValues, formatPercentage } from "./sliderUtils";
 
 /**
@@ -101,7 +110,7 @@ export interface SliderBaseProps extends Props, IntentProps {
      *
      * @default true
      */
-    labelRenderer?: boolean | ((value: number, opts?: { isHandleTooltip: boolean }) => string | JSX.Element);
+    labelRenderer?: boolean | ((value: number, opts?: { isHandleTooltip: boolean }) => string | React.JSX.Element);
 
     /**
      * Whether to show the slider in a vertical orientation.
@@ -279,7 +288,7 @@ export class MultiSlider extends AbstractPureComponent<MultiSliderProps, SliderS
 
         // render from current to previous, then increment previous
         let previous: HandleProps = { value: this.props.min! };
-        const handles: JSX.Element[] = [];
+        const handles: React.JSX.Element[] = [];
         for (let index = 0; index < trackStops.length; index++) {
             const current = trackStops[index];
             handles.push(this.renderTrackFill(index, previous, current));
@@ -296,7 +305,7 @@ export class MultiSlider extends AbstractPureComponent<MultiSliderProps, SliderS
         const startOffset = formatPercentage(startRatio);
         const endOffset = formatPercentage(1 - endRatio);
         const orientationStyle: React.CSSProperties = this.props.vertical
-            ? { bottom: startOffset, top: endOffset, left: 0 }
+            ? { bottom: startOffset, left: 0, top: endOffset }
             : { left: startOffset, right: endOffset, top: 0 };
 
         const style: React.CSSProperties = {

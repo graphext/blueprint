@@ -17,13 +17,13 @@
 import classNames from "classnames";
 import * as React from "react";
 
-import { AbstractComponent, Utils as CoreUtils, Props } from "@blueprintjs/core";
+import { AbstractComponent, Utils as CoreUtils, type Props } from "@blueprintjs/core";
 
-import { CellRenderer, emptyCellRenderer } from "./cell/cell";
+import { type CellRenderer, emptyCellRenderer } from "./cell/cell";
 import { Batcher } from "./common/batcher";
-import type { FocusedCellCoordinates } from "./common/cellTypes";
+import { type FocusedRegion, FocusMode } from "./common/cellTypes";
 import * as Classes from "./common/classes";
-import { ColumnIndices, Grid, RowIndices } from "./common/grid";
+import type { ColumnIndices, Grid, RowIndices } from "./common/grid";
 import { Rect } from "./common/rect";
 import { RenderMode } from "./common/renderMode";
 
@@ -34,9 +34,9 @@ export interface TableBodyCellsProps extends RowIndices, ColumnIndices, Props {
     cellRenderer: CellRenderer;
 
     /**
-     * The coordinates of the currently focused cell, for setting the "isFocused" prop on cells.
+     * The coordinates of the currently focused region, for setting the "isFocused" prop on cells.
      */
-    focusedCell?: FocusedCellCoordinates;
+    focusedRegion?: FocusedRegion;
 
     /**
      * The grid computes sizes of cells, rows, or columns from the
@@ -95,7 +95,7 @@ export class TableBodyCells extends AbstractComponent<TableBodyCellsProps> {
         return `cell-${rowIndex}-${columnIndex}`;
     }
 
-    private batcher = new Batcher<JSX.Element>();
+    private batcher = new Batcher<React.JSX.Element>();
 
     /**
      * Set this flag to true in componentDidUpdate() when we call forceUpdate() to avoid an extra
@@ -202,7 +202,7 @@ export class TableBodyCells extends AbstractComponent<TableBodyCellsProps> {
     };
 
     private renderCell = (rowIndex: number, columnIndex: number, extremaClasses: string[], isGhost: boolean) => {
-        const { cellRenderer, focusedCell, loading, grid } = this.props;
+        const { cellRenderer, loading, grid } = this.props;
         let baseCell = isGhost ? emptyCellRenderer() : cellRenderer(rowIndex, columnIndex);
         // cellRenderer still may return null
         baseCell = baseCell == null ? emptyCellRenderer() : baseCell;
@@ -222,7 +222,7 @@ export class TableBodyCells extends AbstractComponent<TableBodyCellsProps> {
         const cellLoading = baseCell.props.loading != null ? baseCell.props.loading : loading;
 
         const style = { ...baseCell.props.style, ...Rect.style(rect) };
-        const isFocused = focusedCell != null && focusedCell.row === rowIndex && focusedCell.col === columnIndex;
+        const isFocused = this.isCellFocused(rowIndex, columnIndex);
         return React.cloneElement(baseCell, {
             className,
             isFocused,
@@ -231,6 +231,18 @@ export class TableBodyCells extends AbstractComponent<TableBodyCellsProps> {
             style,
         });
     };
+
+    private isCellFocused(rowIndex: number, columnIndex: number): boolean {
+        const { focusedRegion } = this.props;
+        switch (focusedRegion?.type) {
+            case FocusMode.CELL:
+                return focusedRegion.row === rowIndex && focusedRegion.col === columnIndex;
+            case FocusMode.ROW:
+                return focusedRegion.row === rowIndex;
+            case undefined:
+                return false;
+        }
+    }
 
     // Callbacks
     // =========

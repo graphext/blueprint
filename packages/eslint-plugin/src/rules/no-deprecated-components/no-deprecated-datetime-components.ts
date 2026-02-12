@@ -2,13 +2,15 @@
  * (c) Copyright 2022 Palantir Technologies Inc. All rights reserved.
  */
 
-import { TSESLint } from "@typescript-eslint/utils";
+import type { TSESLint } from "@typescript-eslint/utils";
 
 import { createNoDeprecatedComponentsRule } from "./createNoDeprecatedComponentsRule";
 
 export const datetimeComponentsMigrationMapping = {
-    // TODO(@adidahiya): Blueprint v6
-    // DateTimePicker: "DatePicker",
+    DateInput: "DateInput3",
+    DatePicker: "DatePicker3",
+    DateRangeInput: "DateRangeInput3",
+    DateRangePicker: "DateRangePicker3",
 };
 
 /**

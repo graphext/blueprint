@@ -14,10 +14,17 @@
  * limitations under the License.
  */
 
+export { BlueprintProvider, type BlueprintProviderProps } from "./blueprintProvider";
 export {
     HotkeysContext,
-    HotkeysContextInstance,
+    type HotkeysContextInstance,
     HotkeysProvider,
-    HotkeysProviderProps,
+    type HotkeysProviderProps,
 } from "./hotkeys/hotkeysProvider";
-export { PortalContext, PortalContextOptions, PortalProvider } from "./portal/portalProvider";
+export {
+    OverlaysContext,
+    OverlaysProvider,
+    type OverlaysContextState,
+    type OverlaysProviderProps,
+} from "./overlays/overlaysProvider";
+export { PortalContext, type PortalContextOptions, PortalProvider } from "./portal/portalProvider";

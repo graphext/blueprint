@@ -23,16 +23,33 @@
 
 import { pascalCase } from "change-case";
 import Handlebars from "handlebars";
-import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { parse } from "svg-parser";
 
-import { generatedSrcDir, ICON_RASTER_SCALING_FACTOR, ICON_SIZES, scriptsDir } from "./common.mjs";
+import { generatedComponentsDir, generatedSrcDir, ICON_RASTER_SCALING_FACTOR, ICON_SIZES } from "./common.mjs";
 
 Handlebars.registerHelper("pascalCase", iconName => pascalCase(iconName));
-const iconComponentTemplate = Handlebars.compile(readFileSync(resolve(scriptsDir, "iconComponent.tsx.hbs"), "utf8"));
-const componentsIndexTemplate = Handlebars.compile(readFileSync(resolve(scriptsDir, "componentsIndex.ts.hbs"), "utf8"));
-const indexTemplate = Handlebars.compile(readFileSync(resolve(scriptsDir, "index.ts.hbs"), "utf8"));
+
+/**
+ * Notes on icon component template implementation:
+ *
+ * The components rendered by this template (`<AddClip>`, `<Calendar>`, etc.) rely on a centered scale `transform` to
+ * display their SVG paths correctly.
+ *
+ * In this template, the `<path>` element applies `transform-origin` using the `style` attribute rather than
+ * `transformOrigin`. Although `trasformOrigin` was added as a supported SVG attribute to React in 2023,
+ * it is still difficult to use without compile-time and/or runtime errors, see:
+ *  - https://github.com/facebook/react/pull/26130
+ *  - https://github.com/palantir/blueprint/issues/6591
+ */
+const iconComponentTemplate = Handlebars.compile(
+    readFileSync(resolve(import.meta.dirname, "iconComponent.tsx.hbs"), "utf8"),
+);
+const componentsIndexTemplate = Handlebars.compile(
+    readFileSync(resolve(import.meta.dirname, "componentsIndex.ts.hbs"), "utf8"),
+);
+const indexTemplate = Handlebars.compile(readFileSync(resolve(import.meta.dirname, "index.ts.hbs"), "utf8"));
 
 /** @type { { 16: {[iconName: string]: string}; 20: {[iconName: string]: string} } } */
 const iconPaths = {
@@ -54,9 +71,13 @@ for (const iconSize of ICON_SIZES) {
     console.info(`Parsed ${Object.keys(iconPaths[iconSize]).length} ${iconSize}px icons.`);
 }
 
+// clear existing icon components
+console.info("Clearing existing icon modules...");
+rmSync(generatedComponentsDir, { recursive: true, force: true });
+
 // generate an ES module for each icon
-console.info(`Generating ES modules for each icon...`);
-mkdirSync(join(generatedSrcDir, `components`), { recursive: true });
+console.info("Generating ES modules for each icon...");
+mkdirSync(generatedComponentsDir, { recursive: true });
 
 for (const [iconName, icon16pxPath] of Object.entries(iconPaths[16])) {
     const icon20pxPath = iconPaths[20][iconName];
@@ -65,7 +86,7 @@ for (const [iconName, icon16pxPath] of Object.entries(iconPaths[16])) {
         continue;
     }
     writeFileSync(
-        join(generatedSrcDir, `components/${iconName}.tsx`),
+        join(generatedComponentsDir, `${iconName}.tsx`),
         // Notes on icon component template implementation:
         //  - path "translation" transform must use "viewbox" dimensions, not "size", in order to avoid issues
         //    like https://github.com/palantir/blueprint/issues/6220
@@ -80,7 +101,7 @@ for (const [iconName, icon16pxPath] of Object.entries(iconPaths[16])) {
 
 console.info(`Writing index file for all icon modules...`);
 writeFileSync(
-    join(generatedSrcDir, `components/index.ts`),
+    join(generatedComponentsDir, "index.ts"),
     componentsIndexTemplate({
         iconNames: Object.keys(iconPaths[16]),
     }),
@@ -88,7 +109,7 @@ writeFileSync(
 
 console.info(`Writing index file for package...`);
 writeFileSync(
-    join(generatedSrcDir, `index.ts`),
+    join(generatedSrcDir, "index.ts"),
     indexTemplate({
         iconNames: Object.keys(iconPaths[16]),
     }),

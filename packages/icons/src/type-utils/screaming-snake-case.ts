@@ -1,15 +1,16 @@
-import { SplitIncludingDelimiters } from "./delimiter-case";
-import { SnakeCase } from "./snake-case";
-import { Includes } from "./includes";
+import type { SplitIncludingDelimiters } from "./delimiter-case";
+import type { SnakeCase } from "./snake-case";
+import type { Includes } from "./includes";
 
 /**
 Returns a boolean for whether the string is screaming snake case.
 */
-type IsScreamingSnakeCase<Value extends string> = Value extends Uppercase<Value>
-    ? Includes<SplitIncludingDelimiters<Lowercase<Value>, "_">, "_"> extends true
-        ? true
-        : false
-    : false;
+type IsScreamingSnakeCase<Value extends string> =
+    Value extends Uppercase<Value>
+        ? Includes<SplitIncludingDelimiters<Lowercase<Value>, "_">, "_"> extends true
+            ? true
+            : false
+        : false;
 
 /**
 Convert a string literal to screaming-snake-case.

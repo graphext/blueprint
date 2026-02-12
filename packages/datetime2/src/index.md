@@ -7,27 +7,27 @@ reference: datetime2
 The [**@blueprintjs/datetime2** package](https://www.npmjs.com/package/@blueprintjs/datetime2)
 provides next-generation components for interacting with dates & times:
 
--   [DatePicker3](#datetime2/date-picker3)
--   [DateInput3](#datetime2/date-input3)
--   [DateRangePicker3](#datetime2/date-range-picker3)
--   [DateRangeInput3](#datetime2/date-range-input3)
+-   [**DatePicker3**](#datetime2/date-picker3)
+-   [**DateInput3**](#datetime2/date-input3)
+-   [**DateRangePicker3**](#datetime2/date-range-picker3)
+-   [**DateRangeInput3**](#datetime2/date-range-input3)
 
 There are also legacy APIs which are re-exported aliases for components from [**@blueprintjs/datetime**](#datetime).
 These "V2" names are backwards-compatible with the previous major version of @blueprintjs/datetime2:
 
--   DateInput2 (alias for [DateInput](#datetime/date-input))
--   DateRangeInput2 (alias for [DateRangeInput](#datetime/date-range-input))
+-   **DateInput2** (alias for [**DateInput**](#datetime/date-input)) (DEPRECATED)
+-   **DateRangeInput2** (alias for [**DateRangeInput**](#datetime/date-range-input)) (DEPRECATED)
 
 ### Motivation
 
 **DatePicker3** and its related "V3" components are next-generation variants of components currently available in the
-[**@blueprintjs/datetime**](#datetime) package. They will become the standard date & time components in a
+[**@blueprintjs/datetime2**](#datetime2) package. They will become the standard date & time components in a
 future major version of Blueprint. You are encouraged to try out the new APIs, provide feedback, and set yourself
 up for forward compatibility in the Blueprint ecosystem.
 
 Compared to their "V1" and "V2" counterparts, these components:
 
--   use [react-day-picker](https://react-day-picker.js.org/) v8 instead of v7 (this unblocks React 18 compatibility)
+-   use [react-day-picker](https://daypicker.dev/v8) v8 instead of v7 (this unblocks React 18 compatibility)
 -   are easier to internationalize & localize since date-fns is now a dependency (instead of `localeUtils`, you can specify a locale code and we'll automatically load the date-fns locale object)
 
 ### Installation

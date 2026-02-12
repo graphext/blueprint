@@ -19,8 +19,6 @@ export * from "./common";
 export * from "./components";
 export * from "./context";
 export * from "./hooks";
-
-/* eslint-disable deprecation/deprecation */
 export * from "./deprecatedTypeAliases";
 
 export {
@@ -34,4 +32,4 @@ export {
     hideHotkeysDialog,
     hideHotkeysDialogAfterDelay,
 } from "./legacy/hotkeysDialogLegacy";
-export { ContextMenuTargetLegacy, ContextMenuTargetLegacyComponent } from "./legacy/contextMenuTargetLegacy";
+export { ContextMenuTargetLegacy, type ContextMenuTargetLegacyComponent } from "./legacy/contextMenuTargetLegacy";

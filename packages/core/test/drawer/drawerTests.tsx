@@ -15,24 +15,24 @@
  */
 
 import { assert } from "chai";
-import { mount, ReactWrapper } from "enzyme";
+import { mount, type ReactWrapper } from "enzyme";
 import * as React from "react";
 import { spy } from "sinon";
 
-import { Button, Classes, Drawer, DrawerProps, Position } from "../../src";
+import { Button, Classes, Drawer, type DrawerProps, Position } from "../../src";
 
 describe("<Drawer>", () => {
     let drawer: ReactWrapper<DrawerProps, any>;
     let isMounted = false;
-    const testsContainerElement = document.createElement("div");
-    document.documentElement.appendChild(testsContainerElement);
+    const containerElement = document.createElement("div");
+    document.documentElement.appendChild(containerElement);
 
     /**
-     * Mount the `content` into `testsContainerElement` and assign to local `wrapper` variable.
+     * Mount the `content` into `containerElement` and assign to local `wrapper` variable.
      * Use this method in this suite instead of Enzyme's `mount` method.
      */
-    function mountDrawer(content: JSX.Element) {
-        drawer = mount(content, { attachTo: testsContainerElement });
+    function mountDrawer(content: React.JSX.Element) {
+        drawer = mount(content, { attachTo: containerElement });
         isMounted = true;
         return drawer;
     }
@@ -260,7 +260,7 @@ describe("<Drawer>", () => {
 
     // everything else about Drawer is tested by Overlay
 
-    function createDrawerContents(): JSX.Element[] {
+    function createDrawerContents(): React.JSX.Element[] {
         return [
             <div className={Classes.DRAWER_BODY} key={1}>
                 <p>
@@ -270,7 +270,7 @@ describe("<Drawer>", () => {
                 </p>
             </div>,
             <div className={Classes.DRAWER_FOOTER} key={2}>
-                <div style={{ display: "flex", justifyContent: "flex-end", gap: "10px" }}>
+                <div style={{ display: "flex", gap: "10px", justifyContent: "flex-end" }}>
                     <Button text="Secondary" />
                     <Button className={Classes.INTENT_PRIMARY} type="submit" text="Primary" />
                 </div>

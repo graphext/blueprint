@@ -18,7 +18,7 @@ import { assert } from "chai";
 import { mount } from "enzyme";
 import * as React from "react";
 
-import { HTMLSelect, OptionProps } from "../../src";
+import { HTMLSelect, type OptionProps } from "../../src";
 
 describe("<HtmlSelect>", () => {
     const emptyHandler = () => true;
@@ -32,9 +32,9 @@ describe("<HtmlSelect>", () => {
     it("renders options props", () => {
         const OPTIONS: OptionProps[] = [
             { value: "a" },
-            { value: "b", className: "foo" },
-            { value: "c", disabled: true },
-            { value: "d", label: "Dog" },
+            { className: "foo", value: "b" },
+            { disabled: true, value: "c" },
+            { label: "Dog", value: "d" },
         ];
         const options = mount(<HTMLSelect onChange={emptyHandler} options={OPTIONS} />).find("option");
         assert.equal(options.at(0).text(), "a", "value");

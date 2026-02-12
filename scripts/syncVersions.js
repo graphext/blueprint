@@ -36,7 +36,7 @@ for (const name of packagesNames) {
         if (pined === name) {
             packages[name].version = masterVersions[pined];
         }
-        if (pined in dependencies) {
+        if (pined in dependencies && !dependencies[pined].startsWith('workspace:')) {
             dependencies[pined] = masterVersions[pined];
             if (name in masterVersions) {
                 dependants[pined] = Object.assign(dependants[pined] || {}, {[name]: true});

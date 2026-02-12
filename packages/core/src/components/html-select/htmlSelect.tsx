@@ -17,11 +17,11 @@
 import classNames from "classnames";
 import * as React from "react";
 
-import { CaretDown, DoubleCaretVertical, IconName, SVGIconProps } from "@blueprintjs/icons";
+import { CaretDown, DoubleCaretVertical, type IconName, type SVGIconProps } from "@blueprintjs/icons";
 
 import { DISABLED, FILL, HTML_SELECT, LARGE, MINIMAL } from "../../common/classes";
-import { DISPLAYNAME_PREFIX, OptionProps } from "../../common/props";
-import { Extends } from "../../common/utils";
+import { DISPLAYNAME_PREFIX, type OptionProps } from "../../common/props";
+import type { Extends } from "../../common/utils";
 
 export type HTMLSelectIconName = Extends<IconName, "double-caret-vertical" | "caret-down">;
 
@@ -69,6 +69,9 @@ export interface HTMLSelectProps
 
     /** Controlled value of this component. */
     value?: string | number;
+
+    /** Placeholder text to display when no option is selected. */
+    placeholder?: string;
 }
 
 // this component is simple enough that tests would be purely tautological.
@@ -104,7 +107,7 @@ export const HTMLSelect: React.FC<HTMLSelectProps> = React.forwardRef((props, re
     );
 
     const iconTitle = "Open dropdown";
-    const rightIcon =
+    const endIcon =
         iconName === "double-caret-vertical" ? (
             <DoubleCaretVertical title={iconTitle} {...iconProps} />
         ) : (
@@ -122,7 +125,7 @@ export const HTMLSelect: React.FC<HTMLSelectProps> = React.forwardRef((props, re
                 {optionChildren}
                 {children}
             </select>
-            {rightIcon}
+            {endIcon}
         </div>
     );
 });

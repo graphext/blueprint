@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-import { INpmPackage } from "@documentalist/client";
+import type { NpmPackageInfo } from "@documentalist/client";
 import * as React from "react";
 
-import { Classes, HotkeysTarget2, Intent, Menu, MenuItem, NavbarHeading, Popover, Tag } from "@blueprintjs/core";
+import { Classes, HotkeysTarget2, type Intent, Menu, MenuItem, NavbarHeading, Popover, Tag } from "@blueprintjs/core";
 import { NavButton } from "@blueprintjs/docs-theme";
 
 import { Logo } from "./logo";
@@ -26,7 +26,7 @@ export interface NavHeaderProps {
     onToggleDark: (useDark: boolean) => void;
     useDarkTheme: boolean;
     useNextVersion: boolean;
-    packageData: INpmPackage;
+    packageInfo: NpmPackageInfo;
 }
 
 export class NavHeader extends React.PureComponent<NavHeaderProps> {
@@ -45,7 +45,7 @@ export class NavHeader extends React.PureComponent<NavHeaderProps> {
             >
                 <>
                     <div className="docs-nav-title">
-                        <a className="docs-logo" href="/">
+                        <a className="docs-logo" href="/" aria-label="docs home">
                             <Logo />
                         </a>
                         <div>
@@ -74,8 +74,9 @@ export class NavHeader extends React.PureComponent<NavHeaderProps> {
     }
 
     private renderVersionsMenu() {
+        const VERSION_MENU_ID = "version-menu";
         const { useNextVersion } = this.props;
-        const { version, nextVersion, versions } = this.props.packageData;
+        const { version, nextVersion, versions } = this.props.packageInfo;
         if (versions.length === 1) {
             return <div className={Classes.TEXT_MUTED}>v{versions[0]}</div>;
         }
@@ -101,8 +102,23 @@ export class NavHeader extends React.PureComponent<NavHeaderProps> {
                 return <MenuItem href={href} intent={intent} key={v} text={v} />;
             });
         return (
-            <Popover content={<Menu className="docs-version-list">{releaseItems}</Menu>} placement="bottom">
-                <Tag interactive={true} minimal={true} round={true} rightIcon="caret-down">
+            <Popover
+                content={
+                    <Menu aria-label="docs version" className="docs-version-list" id={VERSION_MENU_ID}>
+                        {releaseItems}
+                    </Menu>
+                }
+                placement="bottom"
+            >
+                <Tag
+                    endIcon="caret-down"
+                    interactive={true}
+                    minimal={true}
+                    round={true}
+                    role="button"
+                    aria-label={`Version ${major(currentVersion)}`}
+                    aria-controls={VERSION_MENU_ID}
+                >
                     v{major(currentVersion)}
                 </Tag>
             </Popover>

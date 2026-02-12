@@ -17,10 +17,9 @@
 import classNames from "classnames";
 import * as React from "react";
 
-import { ContextMenu, Classes as CoreClasses, Utils as CoreUtils, Props } from "@blueprintjs/core";
+import { ContextMenu, Classes as CoreClasses, Utils as CoreUtils, type Props } from "@blueprintjs/core";
 
 import * as Classes from "../common/classes";
-import type { ResizeHandle } from "../interactions/resizeHandle";
 
 export interface HeaderCellProps extends Props {
     children?: React.ReactNode;
@@ -56,17 +55,17 @@ export interface HeaderCellProps extends Props {
      * anywhere in the header. The callback will receive the cell index if it was provided via
      * props.
      */
-    menuRenderer?: (index?: number) => JSX.Element;
+    menuRenderer?: (index?: number) => React.JSX.Element;
 
     /**
      * A `ReorderHandle` React component that allows users to drag-reorder the column header.
      */
-    reorderHandle?: JSX.Element;
+    reorderHandle?: React.JSX.Element;
 
     /**
      * A `ResizeHandle` React component that allows users to drag-resize the header.
      */
-    resizeHandle?: ResizeHandle;
+    resizeHandle?: React.JSX.Element;
 
     /**
      * CSS styles for the top level element.
