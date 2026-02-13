@@ -1,43 +1,43 @@
 {
-  "name": "@blueprintjs/test-commons",
-  "version": "3.0.8",
-  "description": "Common utilities for tests in @blueprintjs packages",
-  "type": "module",
-  "types": "./lib/index.d.ts",
-  "exports": {
-    ".": "./lib/index.js",
-    "./bootstrap": "./bootstrap.mjs"
-  },
-  "scripts": {
-    "compile": "tsc -p ./src",
-    "clean": "rm -rf lib/* || true",
-    "dev": "yarn compile --watch",
-    "lint": "run-p lint:es",
-    "lint:es": "es-lint",
-    "lint-fix": "es-lint --fix",
-    "test": "exit 0"
-  },
-  "dependencies": {
-    "@cfaester/enzyme-adapter-react-18": "^0.8.0",
-    "chai": "^5.0.0",
-    "enzyme": "^3.11.0"
-  },
-  "peerDependencies": {
-    "react": ">=16.8",
-    "react-dom": ">=16.8"
-  },
-  "devDependencies": {
-    "@blueprintjs/node-build-scripts": "workspace:^",
-    "npm-run-all": "^4.1.5",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "typescript": "~5.3.3"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:palantir/blueprint.git",
-    "directory": "packages/test-commons"
-  },
-  "author": "Palantir Technologies",
-  "license": "Apache-2.0"
+    "name": "@blueprintjs/test-commons",
+    "version": "3.0.8",
+    "description": "Common utilities for tests in @blueprintjs packages",
+    "type": "module",
+    "types": "./lib/index.d.ts",
+    "exports": {
+        ".": "./lib/index.js",
+        "./bootstrap": "./bootstrap.mjs"
+    },
+    "scripts": {
+        "compile": "tsc -p ./src",
+        "clean": "rm -rf lib/* || true",
+        "dev": "yarn compile --watch",
+        "lint": "run-p lint:es",
+        "lint:es": "es-lint",
+        "lint-fix": "es-lint --fix",
+        "test": "exit 0"
+    },
+    "dependencies": {
+        "@cfaester/enzyme-adapter-react-18": "^0.8.0",
+        "chai": "^5.0.0",
+        "enzyme": "^3.11.0"
+    },
+    "peerDependencies": {
+        "react": ">=16.8",
+        "react-dom": ">=16.8"
+    },
+    "devDependencies": {
+        "@blueprintjs/node-build-scripts": "workspace:^",
+        "npm-run-all": "^4.1.5",
+        "react": "^18.3.1",
+        "react-dom": "^18.3.1",
+        "typescript": "~5.3.3"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:palantir/blueprint.git",
+        "directory": "packages/test-commons"
+    },
+    "author": "Palantir Technologies",
+    "license": "Apache-2.0"
 }
