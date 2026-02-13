@@ -60,8 +60,8 @@ yarn format-check          # Check formatting without fixing
 # 1. Edit version in each packages/*/package.json (use -graphextNN suffix)
 # 2. Compile and create distribution:
 docker-compose run bp sh -c 'yarn compile && yarn dist:libs'
-# 3. Publish (yarn npm publish resolves workspace:^ automatically):
-docker-compose run bp sh -c 'corepack enable && yarn workspace @blueprintjs/icons npm publish && yarn workspace @blueprintjs/core npm publish && yarn workspace @blueprintjs/select npm publish && yarn workspace @blueprintjs/datetime npm publish && yarn workspace @blueprintjs/datetime2 npm publish && yarn workspace @blueprintjs/table npm publish'
+# 3. Publish (yarn pack resolves workspace:^ deps, npm publish handles auth):
+docker-compose run bp sh -c 'for pkg in icons core select datetime datetime2 table; do cd packages/$pkg && yarn pack -o /tmp/$pkg.tgz && npm publish /tmp/$pkg.tgz && cd ../..; done'
 ```
 
 CI (Woodpecker) auto-publishes on push to `deploy` branch: build → publish to Graphext npm → deploy docs to GitHub Pages.
