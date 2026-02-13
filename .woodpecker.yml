@@ -40,9 +40,9 @@ steps:
     image: *node_image
     commands:
       - apk add --update-cache git openssh
-      - corepack enable
       - echo -n $NPMRC | base64 -d > /root/.npmrc
-      - for pkg in icons core select datetime datetime2 table; do cd packages/$pkg && yarn pack -o /tmp/$pkg.tgz && npm publish /tmp/$pkg.tgz && cd ../..; done
+      - node scripts/resolveWorkspaceRefs.js
+      - for pkg in icons core select datetime datetime2 table; do npm publish ./packages/$pkg; done
       - rm /root/.npmrc
     environment:
       NPMRC:
