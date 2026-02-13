@@ -22,10 +22,7 @@ Once it's done, we can create de dist files with:
 ```
 docker-compose run bp sh -c 'yarn dist:libs'
 ```
-Then **change the package names to "-graphext[NewVersion]" again** with the new version (better using the JS script explained in **How to publish the changes** steps 1 and 2) and publish the packages to our private NPM with:
-```
-docker-compose run bpsh -c 'cd packages/core && npm publish && cd ../../ && cd packages/icons && npm publish && cd ../../ && cd packages/datetime && npm publish && cd ../../ && cd packages/table && npm publish && cd ../../ && cd packages/select && npm publish'
-```
+Then **change the package names to "-graphext[NewVersion]" again** directly in each `packages/*/package.json`. Woodpecker CI will publish on push to `deploy`.
 Otherwise, we will be assembling the package by downloading an older version of blueprint and it will not be compatible with our environment.
 
 ## Updating Blueprint styles
@@ -53,24 +50,9 @@ And then create the bundles with
 ```
 docker-compose run bp yarn dist:libs
 ```
-After that you can upgrade the version of the changed packages adding +1 after the `graphext` part of the version. Take into account the dependencies between packages, like the icons --> core dependency. The easiest way of updating dependencies is:
+After that you can upgrade the version of the changed packages adding +1 after the `graphext` part of the version directly in each `packages/*/package.json`. Take into account the dependencies between packages, like the icons --> core dependency.
 
-1. Edit the file called `graphext-versions.json`, updating all dependencies
-2. Run the script than copies the master versions into the `package.json` of all packages
-
-    ```
-    docker-compose run bp node scripts/syncVersions.js
-    ```
-
-And last but not least... be careful when publishing with npm, latest node + npm versions [are a bit problematic](https://github.com/palantir/blueprint/issues/5645#issuecomment-1270349229). It's recommended to do it from the docker-compose bp service (which has the appropriate node version):
-
-```
-docker-compose run bp /bin/bash
-```
-and then publish the desired packages:
-```
-cd packages/core && npm publish && cd ../../ && cd packages/icons && npm publish && cd ../../ && cd packages/datetime  && npm publish && cd ../../ && cd packages/datetime2  && npm publish && cd ../../ && cd packages/table && npm publish && cd ../../ && cd packages/select && npm publish && cd ../../
-```
+Woodpecker CI handles publishing automatically on push to `deploy` branch.
 
 ## How to add new icons
 

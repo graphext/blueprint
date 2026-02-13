@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is **Graphext's fork** of [Palantir Blueprint](https://github.com/palantir/blueprint), a React-based UI toolkit. The main branch is `graphext` (not `develop`). The fork's purpose is to **customize Blueprint component styles** for Graphext's design system — JavaScript changes to Blueprint source are forbidden; only SCSS modifications are allowed.
 
-Published packages use a `-graphextNN` version suffix (e.g., `5.3.0-graphext49`). Versions are managed centrally in `graphext-versions.json`.
+Published packages use a `-graphextNN` version suffix (e.g., `5.19.1-graphext50`). Versions are set directly in each `packages/*/package.json`.
 
 ## Common Commands
 
@@ -57,15 +57,11 @@ yarn format-check          # Check formatting without fixing
 
 ### Version Management & Publishing
 ```bash
-# 1. Edit graphext-versions.json with new version numbers
-# 2. Sync versions into all package.json files:
-docker-compose run bp node scripts/syncVersions.js
-# 3. Compile and create distribution:
+# 1. Edit version in each packages/*/package.json (use -graphextNN suffix)
+# 2. Compile and create distribution:
 docker-compose run bp sh -c 'yarn compile && yarn dist:libs'
-# 4. Publish (from docker to ensure correct Node version):
-docker-compose run bp /bin/bash
-# Then inside container, publish each package:
-cd packages/core && npm publish && cd ../..
+# 3. Publish (yarn npm publish resolves workspace:^ automatically):
+docker-compose run bp sh -c 'corepack enable && yarn workspace @blueprintjs/icons npm publish && yarn workspace @blueprintjs/core npm publish && yarn workspace @blueprintjs/select npm publish && yarn workspace @blueprintjs/datetime npm publish && yarn workspace @blueprintjs/datetime2 npm publish && yarn workspace @blueprintjs/table npm publish'
 ```
 
 CI (Woodpecker) auto-publishes on push to `deploy` branch: build → publish to Graphext npm → deploy docs to GitHub Pages.
@@ -114,7 +110,7 @@ Each library compiles to three module formats (ESM, CJS, ESNext) plus Sass → C
 
 ## Syncing with Upstream
 
-Pull from a specific Palantir release commit into a new branch, squash all upstream commits, then PR into `graphext`. Before compiling after a version bump, temporarily remove `-graphextNN` suffixes, compile, then re-add them via `syncVersions.js`.
+Pull from a specific Palantir release commit into a new branch, squash all upstream commits, then PR into `graphext`. Before compiling after a version bump, temporarily remove `-graphextNN` suffixes, compile, then re-add them directly in each `package.json`.
 
 ## Code Style
 

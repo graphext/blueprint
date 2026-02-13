@@ -40,13 +40,14 @@ steps:
     image: *node_image
     commands:
       - apk add --update-cache git openssh
+      - corepack enable
       - echo -n $NPMRC | base64 -d > /root/.npmrc
-      - npm publish ./packages/core
-      - npm publish ./packages/icons
-      - npm publish ./packages/datetime
-      - npm publish ./packages/table
-      - npm publish ./packages/select
-      - npm publish ./packages/datetime2
+      - yarn workspace @blueprintjs/icons npm publish
+      - yarn workspace @blueprintjs/core npm publish
+      - yarn workspace @blueprintjs/select npm publish
+      - yarn workspace @blueprintjs/datetime npm publish
+      - yarn workspace @blueprintjs/datetime2 npm publish
+      - yarn workspace @blueprintjs/table npm publish
       - rm /root/.npmrc
     environment:
       NPMRC:
