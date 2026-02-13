@@ -42,12 +42,7 @@ steps:
       - apk add --update-cache git openssh
       - corepack enable
       - echo -n $NPMRC | base64 -d > /root/.npmrc
-      - yarn workspace @blueprintjs/icons npm publish
-      - yarn workspace @blueprintjs/core npm publish
-      - yarn workspace @blueprintjs/select npm publish
-      - yarn workspace @blueprintjs/datetime npm publish
-      - yarn workspace @blueprintjs/datetime2 npm publish
-      - yarn workspace @blueprintjs/table npm publish
+      - for pkg in icons core select datetime datetime2 table; do cd packages/$pkg && yarn pack -o /tmp/$pkg.tgz && npm publish /tmp/$pkg.tgz && cd ../..; done
       - rm /root/.npmrc
     environment:
       NPMRC:
