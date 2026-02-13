@@ -1,6 +1,6 @@
 {
     "name": "@blueprintjs/core",
-    "version": "5.19.1-graphext50",
+    "version": "5.19.1-graphext51",
     "description": "Core styles & components",
     "main": "lib/cjs/index.js",
     "module": "lib/esm/index.js",
