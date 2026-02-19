@@ -71,7 +71,14 @@
         "overrides": {
             "@types/react": "18.3.12",
             "cheerio": "0.22.0"
-        }
+        },
+        "onlyBuiltDependencies": [
+            "esbuild",
+            "@swc/core",
+            "nx",
+            "ttf2woff2",
+            "@parcel/watcher"
+        ]
     },
     "engines": {
         "pnpm": "10.19.0",
