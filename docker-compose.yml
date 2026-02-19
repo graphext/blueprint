@@ -1,20 +1,19 @@
 #
 # The setup (just first time):
-# docker-compose run bp sh -c 'yarn && yarn compile'
+# docker-compose run bp sh -c 'corepack enable && pnpm install && pnpm compile'
 #
 # You can use whatever script you want from package.json, just replace the command, for example:
-# - To get blueprint docs: `docker-compose run -p 9999:9001 bp sh -c 'yarn dev:core'`
+# - To get blueprint docs: `docker-compose run -p 9999:9001 bp sh -c 'pnpm dev:core'`
 # It will be running at http://localhost:9999/
 #
 version: '3'
 services:
   bp:
-    image: node:20
-    command: 'yarn dev:docs'
+    image: node:24-alpine
+    command: 'pnpm dev:docs'
     working_dir: /hostdata
     volumes:
       - .:/hostdata:cached
       - ${DEVELOPMENT_DIR}/config/npmrc:/root/.npmrc
-    #   - ${DEVELOPMENT_DIR}/repositories/graphext/node_modules/@blueprintjs:/root/graphext/blueprintjs
     ports:
       - "9999:9001"
