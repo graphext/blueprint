@@ -8,3 +8,16 @@ $tooltip-background-color: $g-light-base0;
 
 $dark-tooltip-text-color: $g-white;
 $tooltip-text-color: $g-black;
+
+$pt-dark-drop-shadow-opacity: 0;
+$pt-dark-border-shadow-opacity: 0;
+
+$tooltip-padding-horizontal: $pt-grid-size;
+
+// We use dark-theme colors for Tooltip intents:
+$pt-intent-colors: (
+  "primary": $g-primary-600,
+  "success": $g-grass-600,
+  "warning": $g-orange-600,
+  "danger" : $g-error-600
+);
