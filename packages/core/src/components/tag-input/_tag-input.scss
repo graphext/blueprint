@@ -6,7 +6,7 @@
 @import "../tag/common";
 @import "customs";
 
-$tag-input-padding: ($pt-input-height - $tag-height) * 0.5 !default;
+$tag-input-padding: $pt-spacing !default;
 
 $tag-input-icon-padding: ($pt-input-height - $pt-icon-size-standard) * 0.5 !default;
 $tag-input-icon-padding-large: ($pt-input-height-large - $pt-icon-size-large) * 0.5 !default;
@@ -18,7 +18,7 @@ $tag-input-icon-padding-large: ($pt-input-height-large - $pt-icon-size-large) * 
   height: auto;
   line-height: inherit;
   min-height: $pt-input-height;
-  padding-left: $tag-input-padding;
+  padding-left: $pt-spacing * 1.5;
   padding-right: 0;
 
   .#{$ns}-tag-input-icon {
@@ -35,8 +35,8 @@ $tag-input-icon-padding-large: ($pt-input-height-large - $pt-icon-size-large) * 
     // fill vertical height
     align-self: stretch;
     flex-wrap: wrap;
-    margin-right: $tag-input-icon-padding;
-    margin-top: $tag-input-padding;
+    margin-right: $pt-spacing;
+    margin-top: $pt-spacing;
     // allow tags to ellipse and not overflow the container
     min-width: 0;
     position: relative;
@@ -55,7 +55,7 @@ $tag-input-icon-padding-large: ($pt-input-height-large - $pt-icon-size-large) * 
     }
 
     > * {
-      margin-bottom: $tag-input-padding;
+      margin-bottom: $pt-spacing;
     }
   }
 
@@ -74,7 +74,7 @@ $tag-input-icon-padding-large: ($pt-input-height-large - $pt-icon-size-large) * 
     flex: 1 1 auto;
     line-height: $tag-height;
     // essentially a min-width, cuz flex allows it to grow or shrink:
-    width: $pt-grid-size * 8;
+    width: $pt-spacing * 20;
 
     &:disabled,
     &.#{$ns}-disabled {
@@ -89,7 +89,7 @@ $tag-input-icon-padding-large: ($pt-input-height-large - $pt-icon-size-large) * 
   }
 
   .#{$ns}-button {
-    @include pt-button-height-small();
+    @include pt-button-height-small;
   }
 
   &.#{$ns}-large {
@@ -107,7 +107,7 @@ $tag-input-icon-padding-large: ($pt-input-height-large - $pt-icon-size-large) * 
     }
 
     .#{$ns}-button {
-      @include pt-button-height-default();
+      @include pt-button-height-default;
       margin: ($pt-input-height-large - $pt-button-height) * 0.5;
       margin-left: 0;
     }
@@ -136,14 +136,15 @@ $tag-input-icon-padding-large: ($pt-input-height-large - $pt-icon-size-large) * 
     }
 
     .#{$ns}-input-ghost {
-      @include pt-dark-input-placeholder();
+      @include pt-dark-input-placeholder;
 
       color: $dark-input-color;
     }
 
     &.#{$ns}-active {
       background-color: $dark-input-background-color;
-      box-shadow: dark-input-transition-shadow($dark-input-shadow-color-focus, true),
+      box-shadow:
+        dark-input-transition-shadow($dark-input-shadow-color-focus, true),
         $pt-dark-input-box-shadow;
 
       @each $intent, $color in $pt-dark-input-intent-box-shadow-colors {
@@ -157,7 +158,7 @@ $tag-input-icon-padding-large: ($pt-input-height-large - $pt-icon-size-large) * 
 
 // TODO: this is probably a useful modifier that we should pull into core, and use in EditableText
 .#{$ns}-input-ghost {
-  @include pt-input-placeholder();
+  @include pt-input-placeholder;
   background: none;
 
   // reset browser input styles (we're using an input solely because you can type in it)

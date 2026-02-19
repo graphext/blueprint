@@ -16,6 +16,7 @@
 const importPlugin = require("eslint-plugin-import");
 const headerPlugin = require("eslint-plugin-header");
 const jsDocPlugin = require("eslint-plugin-jsdoc");
+const jsxA11yPlugin = require("eslint-plugin-jsx-a11y");
 const reactPlugin = require("eslint-plugin-react");
 const reactHooksPlugin = require("eslint-plugin-react-hooks");
 const globals = require("globals");
@@ -68,6 +69,14 @@ module.exports = tseslint.config(
         },
     },
     {
+        ...jsxA11yPlugin.flatConfigs.recommended,
+        // Gradually rolling out jsx-a11y rules package-by-package.
+        // To enable for another package, add it to this glob pattern, e.g.:
+        // files: ["**/packages/{core,select}/**/*.{ts,tsx}"],
+        files: ["**/packages/{core,datetime,datetime2,select,table}/**/*.{ts,tsx}"],
+        ignores: ["**/test/**/*.{ts,tsx}", "**/test/*.{ts,tsx}", "**/*.test.{ts,tsx}"],
+    },
+    {
         files: ["**/*.{ts,tsx}"],
         languageOptions: {
             globals: { ...globals.browser },
@@ -84,7 +93,7 @@ module.exports = tseslint.config(
         },
     },
     {
-        files: ["**/test/**/*.{ts,tsx}", "**/test/*.{ts,tsx}"],
+        files: ["**/test/**/*.{ts,tsx}", "**/test/*.{ts,tsx}", "**/*.test.{ts,tsx}"],
         languageOptions: {
             globals: {
                 ...globals.env,

@@ -1,26 +1,16 @@
 @# useHotkeys
 
-<div class="@ns-callout @ns-intent-primary @ns-icon-info-sign @ns-callout-has-body-content">
-    <h5 class="@ns-heading">
-
-Migrating from [**HotkeysTarget**](#core/legacy/hotkeys-legacy)?
-
-</h5>
-
-`useHotkeys()` is a replacement for **HotkeysTarget**. You are encouraged to use this new API in your function
-components, or the [**HotkeysTarget2** component](#core/components/hotkeys-target2) in your component classes,
-as they will become the standard APIs in a future major version of Blueprint. See the full
-[migration guide](https://github.com/palantir/blueprint/wiki/HotkeysTarget-&-useHotkeys-migration) on the wiki.
-
-</div>
-
 The `useHotkeys()` hook adds hotkey / keyboard shortcut interactions to your application using a custom React hook.
-Compared to the deprecated [Hotkeys API](#core/legacy/hotkeys-legacy), it works with function components and its
-corresponding [context provider](#core/context/hotkeys-provider) allows more customization of the hotkeys dialog.
+This works with function components and a corresponding [context provider](#core/context/hotkeys-provider) to allow
+customization of the hotkeys dialog.
 
 Focus on the piano below to try its hotkeys. The global hotkeys dialog can be shown using the <kbd>?</kbd> key.
 
 @reactExample UseHotkeysExample
+
+Try modifier key combinations too.
+
+@reactExample HotkeyModifierExample
 
 @## Usage
 
@@ -88,16 +78,25 @@ second parameter which can customize some of its default behavior.
 @## Key combos
 
 Each hotkey must be assigned a key combo that will trigger its events. A key combo consists of zero or more modifier
-keys (`alt`, `ctrl`, `shift`, `meta`, `cmd`) and exactly one action key, such as `A`, `return`, or `up`.
+keys (`alt`, `ctrl`, `shift`, `meta`/`cmd`) and exactly one action key, such as `A`, `return`, or `up`.
 
-Some key combos have aliases. For example, `shift + 1` can equivalently be expressed as `!` and `cmd` is equal to
-`meta`. However, normal alphabetic characters do not have this aliasing, so `X` is equivalent to `x` but is not
-equivalent to `shift + x`.
+The configured keyboard layout is respected for letter keys by using `event.key`, so hotkeys work correctly
+if the keyboard is configured to a different layout than is physically on the keys (e.g., a QWERTY keyboard
+configured as AZERTY).
+
+**Key detection behavior:**
+- **Letters (a-z)**: Uses the character produced by the key to respect keyboard layout (QWERTY vs AZERTY)
+- **Digits (0-9)**: Uses the physical key position to avoid shifted symbols (Shift+1 is detected as `shift+1`, not `!`)
+- **Symbols**: Uses the character produced, with special handling for shift combinations (Shift+[ is detected as `shift+[`, not `{`)
+- **Alt combinations**: Uses physical key position to avoid Alt-transformed characters (Alt+c on macOS is detected as `alt+c`, not `alt+ç`)
+
+Some key combos have aliases. For example, `cmd` is equal to `meta`, and `return` is equal to `enter`. Alphabetic
+characters are case-insensitive, so `X` is equivalent to `x`.
 
 Examples of valid key combos:
 
 -   `cmd+plus`
--   `!` or, equivalently `shift+1`
+-   `shift+1` (note: `!` is not supported)
 -   `return` or, equivalently `enter`
 -   `alt + shift + x`
 -   `ctrl + left`

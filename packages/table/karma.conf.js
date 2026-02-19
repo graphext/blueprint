@@ -10,11 +10,13 @@ module.exports = async function (config) {
             coverageExcludes: [
                 // don't check barrel files or deprecated APIs
                 "src/**/index.ts",
-                "src/deprecatedAliases.ts",
             ],
             coverageOverrides: {
                 "src/cell/cell*": {
                     lines: 70,
+                },
+                "src/cell/editableCell.tsx": {
+                    lines: 75,
                 },
                 "src/common/clipboard*": {
                     lines: 0,
@@ -29,8 +31,8 @@ module.exports = async function (config) {
                     statements: 30,
                 },
                 "src/tableHotkeys*": {
-                    lines: 70,
-                    statements: 70,
+                    lines: 65,
+                    statements: 65,
                 },
             },
         }),

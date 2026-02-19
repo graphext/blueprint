@@ -104,7 +104,7 @@ function printVariable(value, allVariables, outputType) {
  * @param {boolean} retainDefault whether to retain `!default` flags on variables
  * @returns {Promise<string>} output Sass contents
  */
-export function generateScssVariables(parsedInput, retainDefault) {
+export async function generateScssVariables(parsedInput, retainDefault) {
     const { parsedVars, varsInBlocks } = parsedInput;
 
     let variablesScss = COPYRIGHT_HEADER + "\n";
@@ -126,7 +126,12 @@ export function generateScssVariables(parsedInput, retainDefault) {
         variablesScss = `${variablesScss}${variablesArray.join("\n")}\n\n`;
     }
 
-    return prettier.format(variablesScss, { parser: "scss" });
+    // Resolve Prettier configuration to ensure consistent formatting across environments
+    // Use a dummy .scss file path to ensure SCSS-specific overrides are applied
+    const prettierConfig = await prettier.resolveConfig("dummy.scss");
+    const options = { ...prettierConfig, parser: "scss" };
+
+    return prettier.format(variablesScss, options);
 }
 
 /**
@@ -135,7 +140,7 @@ export function generateScssVariables(parsedInput, retainDefault) {
  * @param {ParsedVarsResult} parsedInput
  * @returns {Promise<string>} output Less contents
  */
-export function generateLessVariables(parsedInput) {
+export async function generateLessVariables(parsedInput) {
     const { parsedVars, varsInBlocks } = parsedInput;
 
     let variablesLess = COPYRIGHT_HEADER + "\n";
@@ -160,11 +165,16 @@ export function generateLessVariables(parsedInput) {
         variablesLess = `${variablesLess}${lessBlock}\n\n`;
     }
 
-    return prettier.format(variablesLess, { parser: "less" });
+    // Resolve Prettier configuration to ensure consistent formatting across environments
+    // Use a dummy .less file path to ensure any Less-specific overrides are applied
+    const prettierConfig = await prettier.resolveConfig("dummy.less");
+    const options = { ...prettierConfig, parser: "less" };
+
+    return prettier.format(variablesLess, options);
 }
 
 /**
- * To ensure compatibility with Less, we must converat all instances of `rgba(color, opacity)` which use a hex color
+ * To ensure compatibility with Less, we must convert all instances of `rgba(color, opacity)` which use a hex color
  * as the first argument (e.g. `rgba($black, 0.1)`) to use the more widely-compatible `rgba(r, g, b, a)` syntax.
  *
  * @param {string} variableInitializer
@@ -172,14 +182,12 @@ export function generateLessVariables(parsedInput) {
  * @returns {string}
  */
 function evaluateRgbaInitializerColor(variableInitializer, allVariables) {
-    if (variableInitializer.match(/rgba\(([0-9]+), ([0-9]+), ([0-9]+), (.+)\)/)) {
-        // do nothing if the color is specified in full rgba(r, g, b, a) syntax, since this _is_ supported in Less
-        return variableInitializer;
-    }
-
+    // Only match rgba() calls with hex colors (e.g. rgba(#111418, 0.15))
+    // This leaves rgba(r, g, b, a) format unchanged since it's already valid Less
+    // Note: postcss-simple-vars may add whitespace around the comma, so we handle optional spaces
     return variableInitializer.replace(
-        /rgba\((.+)\, (.+)\)/g,
-        (_, colorHexCode, opacity) => `rgba(${colorHexToRgb(colorHexCode)}, ${opacity})`,
+        /rgba\((#[0-9a-fA-F]{3,8})\s*,\s*([^)]+)\)/g,
+        (_, hexColor, opacity) => `rgba(${colorHexToRgb(hexColor)}, ${opacity.trim()})`,
     );
 }
 

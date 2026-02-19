@@ -15,7 +15,7 @@
  */
 
 import classNames from "classnames";
-import * as React from "react";
+import { PureComponent } from "react";
 
 import { DISPLAYNAME_PREFIX, Popover, type Props } from "@blueprintjs/core";
 import { More } from "@blueprintjs/icons";
@@ -155,7 +155,7 @@ export interface TruncatedFormatState {
  *
  * @see https://blueprintjs.com/docs/#table/api.truncatedformat
  */
-export class TruncatedFormat extends React.PureComponent<TruncatedFormatProps, TruncatedFormatState> {
+export class TruncatedFormat extends PureComponent<TruncatedFormatProps, TruncatedFormatState> {
     public static displayName = `${DISPLAYNAME_PREFIX}.TruncatedFormat`;
 
     public static defaultProps: TruncatedFormatProps = {
@@ -246,6 +246,7 @@ export class TruncatedFormat extends React.PureComponent<TruncatedFormatProps, T
         } else {
             // NOTE: This structure matches what `<Popover>` does internally. If `<Popover>` changes, this must be updated.
             return (
+                // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
                 <span className={Classes.TABLE_TRUNCATED_POPOVER_TARGET} onClick={this.handlePopoverOpen}>
                     <More />
                 </span>
