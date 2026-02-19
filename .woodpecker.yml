@@ -7,7 +7,7 @@ when:
   - event: pull_request
 
 variables:
-  - &node_image node:20-alpine
+  - &node_image node:24-alpine
   - &default_backend_options
     backend_options:
       kubernetes:
@@ -28,9 +28,9 @@ steps:
       - apk add --update-cache bash
       - corepack enable
       - echo -n $NPMRC | base64 -d > /root/.npmrc
-      - yarn
-      - yarn compile
-      - yarn dist
+      - pnpm install
+      - pnpm compile
+      - pnpm dist
       - rm /root/.npmrc
     environment:
       NPMRC:
@@ -150,14 +150,14 @@ steps:
     commands:
       - apk add --update-cache git openssh
       - corepack enable
-      - yarn site:clean
-      - yarn copy:docs-app
+      - pnpm site:clean
+      - pnpm copy:docs-app
       - mkdir /root/.ssh && echo "$DEPLOY_KEY" > /root/.ssh/id_rsa && chmod 0600 /root/.ssh/id_rsa
       - ssh-keyscan github.com >> /root/.ssh/known_hosts
       - git config user.email "woodpecker@graphext.com"
       - git config user.name "Woodpecker CI"
       - git remote set-url origin git@github.com:graphext/blueprint.git
-      - yarn deploy
+      - pnpm deploy
     environment:
       DEPLOY_KEY:
         from_secret: DEPLOY_KEY
