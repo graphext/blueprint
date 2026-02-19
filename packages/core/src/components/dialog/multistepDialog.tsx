@@ -15,7 +15,7 @@
  */
 
 import classNames from "classnames";
-import * as React from "react";
+import { Children } from "react";
 
 import { AbstractPureComponent, Classes, type Position, Utils } from "../../common";
 import { DISPLAYNAME_PREFIX } from "../../common/props";
@@ -191,6 +191,7 @@ export class MultistepDialog extends AbstractPureComponent<MultistepDialogProps,
                     tabIndex={handleClickDialogStep ? 0 : -1}
                     // enable enter key to take effect on the div as if it were a button
                     onKeyDown={clickElementOnKeyPress(["Enter", " "])}
+                    role="button"
                 >
                     <div className={Classes.DIALOG_STEP_ICON}>{stepNumber}</div>
                     <div className={Classes.DIALOG_STEP_TITLE}>{step.props.title}</div>
@@ -276,7 +277,7 @@ export class MultistepDialog extends AbstractPureComponent<MultistepDialogProps,
 
     /** Filters children to only `<DialogStep>`s */
     private getDialogStepChildren(props: MultistepDialogProps & { children?: React.ReactNode } = this.props) {
-        return React.Children.toArray(props.children).filter(isDialogStepElement);
+        return Children.toArray(props.children).filter(isDialogStepElement);
     }
 
     private getInitialIndexFromProps(props: MultistepDialogProps) {

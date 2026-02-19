@@ -14,20 +14,21 @@
  * limitations under the License.
  */
 
-import * as React from "react";
+import { render } from "@testing-library/react";
+import { Component } from "react";
 
-import { Cell, Column, ColumnHeaderCell, ColumnLoadingOption, RowHeaderCell, Table2, TableLoadingOption } from "../src";
+import { Cell, Column, ColumnHeaderCell, ColumnLoadingOption, RowHeaderCell, Table, TableLoadingOption } from "../src";
 import * as Classes from "../src/common/classes";
 
 import { CellType, expectCellLoading } from "./cellTestUtils";
-import { ReactHarness } from "./harness";
+import { ElementHarness } from "./harness";
 
 interface TableLoadingOptionsTesterProps {
     columnLoadingOptions: ColumnLoadingOption[];
     tableLoadingOptions: TableLoadingOption[];
 }
 
-class TableLoadingOptionsTester extends React.Component<TableLoadingOptionsTesterProps> {
+class TableLoadingOptionsTester extends Component<TableLoadingOptionsTesterProps> {
     public static isCellLoading = (index: number) => {
         if (index === 0) {
             return true;
@@ -53,7 +54,7 @@ class TableLoadingOptionsTester extends React.Component<TableLoadingOptionsTeste
     public render() {
         const { columnLoadingOptions, tableLoadingOptions } = this.props;
         return (
-            <Table2
+            <Table
                 loadingOptions={tableLoadingOptions}
                 numRows={3}
                 rowHeaderCellRenderer={TableLoadingOptionsTester.rowHeaderCellRenderer}
@@ -71,13 +72,12 @@ class TableLoadingOptionsTester extends React.Component<TableLoadingOptionsTeste
                     loadingOptions={columnLoadingOptions}
                     columnHeaderCellRenderer={TableLoadingOptionsTester.columnHeaderCellRenderer}
                 />
-            </Table2>
+            </Table>
         );
     }
 }
 
 describe("Loading Options", () => {
-    const harness = new ReactHarness();
     const allTableLoadingOptions = generatePowerSet([
         TableLoadingOption.CELLS,
         TableLoadingOption.COLUMN_HEADERS,
@@ -85,24 +85,17 @@ describe("Loading Options", () => {
     ]);
     const allColumnLoadingOptions = generatePowerSet([ColumnLoadingOption.CELLS, ColumnLoadingOption.HEADER]);
 
-    afterEach(() => {
-        harness.unmount();
-    });
-
-    after(() => {
-        harness.destroy();
-    });
-
     // Below is an exhaustive set of tests of all possible combinations of loading options
     allTableLoadingOptions.forEach(tableLoadingOptions => {
         allColumnLoadingOptions.forEach(columnLoadingOptions => {
             it(`table: [${tableLoadingOptions}], column: [${columnLoadingOptions}]`, () => {
-                const tableHarness = harness.mount(
+                const { container } = render(
                     <TableLoadingOptionsTester
                         columnLoadingOptions={columnLoadingOptions}
                         tableLoadingOptions={tableLoadingOptions}
                     />,
                 );
+                const tableHarness = new ElementHarness(container);
 
                 // only testing the first column of body cells because the second and third
                 // columns are meant to test column related loading combinations

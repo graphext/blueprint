@@ -15,7 +15,6 @@
  */
 
 import classNames from "classnames";
-import * as React from "react";
 
 import { AbstractPureComponent, Classes, Intent } from "../../common";
 import { DISPLAYNAME_PREFIX, removeNonHTMLProps } from "../../common/props";
@@ -60,6 +59,7 @@ export class TabTitle extends AbstractPureComponent<TabTitleProps> {
         const { tabPanelId, tabTitleId } = generateTabIds(parentId, id);
 
         return (
+            // eslint-disable-next-line jsx-a11y/interactive-supports-focus, jsx-a11y/click-events-have-key-events
             <div
                 {...removeNonHTMLProps(htmlProps)}
                 aria-controls={tabPanelId}
