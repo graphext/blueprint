@@ -35,3 +35,18 @@
     padding: 0;
   }
 }
+
+// Intent-based popover appearance (migrated from popover2 overrides)
+.#{$ns}-popover:not(.#{$ns}-tooltip), .#{$ns}-popover.#{$ns}-dark:not(.#{$ns}-tooltip) {
+  @each $intent, $colors in $button-intents {
+    &.#{$ns}-intent-#{$intent} {
+      @include popover-appearance(
+        nth($colors, 1),
+        inherit,
+        $pt-popover-box-shadow,
+        $pt-drop-shadow-opacity,
+        $pt-border-shadow-opacity
+      );
+    }
+  }
+}

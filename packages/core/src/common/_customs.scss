@@ -1,7 +1,10 @@
 // Copyright 2018 Graphext
 
-// easily the most important variable, so it comes first
-// (so other variables can use it to define themselves)
+// BP6 primary spacing unit (4px-based system).
+// Must be defined before $pt-grid-size since BP6 derives many values from it.
+$pt-spacing: 4px;
+
+// Legacy grid size, kept for Graphext overrides that still reference it.
 $pt-grid-size: 8px;
 
 // see https://bitsofco.de/the-new-system-font-stack/
