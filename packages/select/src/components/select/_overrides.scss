@@ -12,6 +12,11 @@
   margin-top: 0;
 }
 
+// Preserve BP5 spacing
+.#{$ns}-multi-select {
+  min-width: $pt-grid-size * 15;
+}
+
 // MultiSelect
 .#{$ns}-tag-input.#{$ns}-multi-select .#{$ns}-tag-input-values {
   margin-top: 0;

@@ -1,8 +1,20 @@
 @import "../../common/customs";
 
+// Preserve BP5 spacing
 .#{$ns}-tag-input {
+  padding-left: $tag-input-padding;
+
+  .#{$ns}-tag-input-values {
+    margin-right: $tag-input-icon-padding;
+    margin-top: $tag-input-padding;
+
+    > * {
+      margin-bottom: $tag-input-padding;
+    }
+  }
+
   .#{$ns}-input-ghost {
-    width: 100%;
+    width: $pt-grid-size * 8;
     font-size: 14px;
     line-height: 16px;
   }

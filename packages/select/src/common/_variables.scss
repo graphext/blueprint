@@ -6,6 +6,7 @@
 // we are only guaranteed 'compile'
 @import "@blueprintjs/colors/lib/scss/colors";
 @import "@blueprintjs/core/src/common/variables";
+@import "customs";
 
 $select-popover-max-height: $pt-spacing * 75 !default;
 $select-popover-max-width: $pt-spacing * 100 !default;

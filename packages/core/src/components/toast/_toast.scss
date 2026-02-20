@@ -3,6 +3,7 @@
 
 @import "../../common/variables";
 @import "../../common/react-transition";
+@import "customs";
 
 $toast-height: $pt-button-height-large !default;
 $toast-min-width: $pt-spacing * 75 !default;

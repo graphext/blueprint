@@ -11,3 +11,8 @@ $menu-background-color: $g-light-base3;
 
 $menu-item-padding-vertical: 4px;
 $menu-item-padding: 8px;
+
+// Preserve BP5 spacing
+$menu-item-line-height: 20px;
+$menu-item-padding-large: ($pt-button-height-large - $pt-icon-size-large) * 0.5;
+$menu-item-padding-vertical-large: $menu-item-padding-vertical;

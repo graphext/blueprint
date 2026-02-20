@@ -1,6 +1,10 @@
 $tag-height: $pt-grid-size * 3;
 $tag-padding: $pt-grid-size;
 
+// Preserve BP5 spacing
+$tag-height-large: $pt-grid-size * 3.5;
+$tag-line-height-large: $pt-grid-size * 2;
+
 $tag-default-color: $g-light-base3;
 $dark-tag-default-color: $g-dark-base3;
 

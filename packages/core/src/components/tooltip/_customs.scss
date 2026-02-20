@@ -12,6 +12,8 @@ $tooltip-text-color: $g-black;
 $pt-dark-drop-shadow-opacity: 0;
 $pt-dark-border-shadow-opacity: 0;
 
+// Preserve BP5 spacing
+$tooltip-padding-vertical: $pt-grid-size * 0.5;
 $tooltip-padding-horizontal: $pt-grid-size;
 
 // We use dark-theme colors for Tooltip intents:

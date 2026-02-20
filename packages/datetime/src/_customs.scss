@@ -5,3 +5,5 @@ $pt-dark-input-box-shadow: none;
 $pt-input-box-shadow: none;
 
 $timepicker-input-row-height: 32px;
+// Preserve BP5 spacing (hardcoded — core variables not available here)
+$timepicker-control-width: 26px;

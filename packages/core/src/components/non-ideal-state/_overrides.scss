@@ -1,0 +1,16 @@
+// Preserve BP5 spacing
+.#{$ns}-non-ideal-state {
+  @include pt-flex-container(column, $pt-grid-size * 2);
+
+  > * {
+    max-width: $pt-grid-size * 40;
+  }
+
+  .#{$ns}-heading {
+    line-height: $pt-grid-size * 2;
+  }
+
+  &.#{$ns}-non-ideal-state-horizontal {
+    @include pt-flex-container(row, $pt-grid-size * 2);
+  }
+}
