@@ -634,6 +634,8 @@
 
 // Label
 label.#{$ns}-label {
+  // Preserve BP5 spacing
+  margin-bottom: $pt-grid-size * 1.5;
   color: $g-light-grey2;
   font-size: $pt-font-size-small;
 

@@ -3,6 +3,7 @@
 
 @import "../tooltip/tooltip";
 @import "./common";
+@import "customs";
 
 $handle-size: $pt-icon-size-standard !default;
 $track-size: $handle-size - ($pt-spacing * 2.5) !default;

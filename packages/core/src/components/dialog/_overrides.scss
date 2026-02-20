@@ -1,4 +1,6 @@
+// Preserve BP5 spacing
 .#{$ns}-dialog {
+  width: $pt-grid-size * 50;
   background-color: $g-light-base2;
   padding-top: 24px;
   padding-bottom: 24px;
@@ -19,6 +21,12 @@
   .#{$ns}-dark & {
     background-color: $g-dark-base2;
   }
+}
+
+// Preserve BP5 spacing for dialog header icon
+.#{$ns}-dialog-header .#{$ns}-icon-large,
+.#{$ns}-dialog-header .#{$ns}-icon {
+  margin-left: -3px;
 }
 
 .#{$ns}-dialog-header, .#{$ns}-dark .#{$ns}-dialog-header {

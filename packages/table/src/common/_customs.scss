@@ -25,3 +25,7 @@ $cell-padding-horizontal: $pt-grid-size * 2;
 $cell-height: $pt-grid-size * 3;
 $large-cell-height: $pt-grid-size * 5;
 
+// Preserve BP5 spacing
+$column-header-min-height: $pt-grid-size * 3;
+$interaction-bar-height: $pt-grid-size * 2;
+

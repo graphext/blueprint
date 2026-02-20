@@ -266,3 +266,16 @@ $stroke-line-left: inset $tab-indicator-width 0;
 }
 
 /* Stroke line declaration ends here */
+
+// Preserve BP5 spacing
+.#{$ns}-tab-panel {
+  margin-top: $pt-grid-size * 2;
+}
+
+.#{$ns}-tab-icon {
+  margin-right: 7px;
+}
+
+.#{$ns}-tab-tag {
+  margin-left: 7px;
+}

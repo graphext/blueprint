@@ -1,0 +1,5 @@
+@use "sass:math";
+
+// Preserve BP5 spacing
+$progress-bar-height: math.round($pt-grid-size * 0.8);
+$progress-bar-stripes-size: $pt-grid-size * 3;

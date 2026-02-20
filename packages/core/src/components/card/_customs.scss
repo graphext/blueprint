@@ -1,3 +1,8 @@
+// Preserve BP5 card padding (was $pt-grid-size * 2 = 16px).
+// BP6 changed to $pt-spacing * 5 = 20px which is too much for Graphext.
+$card-padding: $pt-grid-size * 2;
+$card-padding-compact: $pt-grid-size * 1.5;
+
 $card-background-color: $g-light-base3;
 $dark-card-background-color: $g-dark-base3;
 
