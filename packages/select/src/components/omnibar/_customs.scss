@@ -1,0 +1,5 @@
+// Preserve BP5 omnibar dimensions.
+// BP6 changed from $pt-grid-size to $pt-spacing, making the input taller (40px vs 32px)
+// and the omnibar wider (500px vs 400px).
+$omnibar-input-height: $pt-grid-size * 4;
+$omnibar-width: $pt-grid-size * 50;
