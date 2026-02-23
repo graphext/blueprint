@@ -3,7 +3,6 @@ labels:
 
 when:
   - event: push
-    branch: deploy
   - event: pull_request
 
 variables:
