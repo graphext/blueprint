@@ -1,4 +1,4 @@
-# CLAUDE.md
+# AGENTS.md — blueprint
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
@@ -118,3 +118,14 @@ Pull from a specific Palantir release commit into a new branch, squash all upstr
 - **Stylelint**: 2-space indent for SCSS, 100 char line length (comments excluded)
 - **ESLint**: Blueprint custom config + `import/no-cycle` in CI
 - **TypeScript**: v4.9.5
+
+## Agent Checklist
+
+Before reporting work as complete, verify:
+
+- [ ] `yarn compile` succeeds (all packages build)
+- [ ] `yarn test` passes (relevant package)
+- [ ] `yarn lint` passes
+- [ ] Only SCSS modified — never change Blueprint JavaScript source
+- [ ] No `%` in CSS opacity values (use decimal form: `opacity: 0.5`)
+- [ ] Dark theme variants included (`.#{$ns}-dark` selector) if modifying component styles
