@@ -12,7 +12,7 @@ Published packages use a `-graphextNN` version suffix (e.g., `5.19.1-graphext50`
 
 ### First-time setup
 ```bash
-nvm use                    # Node v18.17
+nvm use                    # Node v20.11 (see .nvmrc; package.json engines: >=20.11)
 corepack enable            # Activate Yarn
 yarn                       # Install dependencies
 yarn compile               # Build all library packages
