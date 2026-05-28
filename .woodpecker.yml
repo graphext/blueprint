@@ -42,7 +42,31 @@ steps:
       - apk add --update-cache git openssh
       - echo -n $NPMRC | base64 -d > /root/.npmrc
       - node scripts/resolveWorkspaceRefs.js
-      - for pkg in icons core select datetime datetime2 table; do npm publish ./packages/$pkg; done
+      - |
+        published=0
+        failed=0
+        for pkg in icons core select datetime datetime2 table; do
+          if out=$(npm publish ./packages/$pkg 2>&1); then
+            echo "$out"
+            published=$((published + 1))
+          else
+            echo "$out"
+            if echo "$out" | grep -q "already exists"; then
+              echo ">>> skip $pkg (version already published)"
+            else
+              failed=$((failed + 1))
+            fi
+          fi
+        done
+        if [ "$failed" -gt 0 ]; then
+          echo "ERROR: $failed package(s) failed to publish"
+          exit 1
+        fi
+        if [ "$published" -eq 0 ]; then
+          echo "ERROR: nothing was published"
+          exit 1
+        fi
+        echo "Published $published package(s)"
       - rm /root/.npmrc
     environment:
       NPMRC:
