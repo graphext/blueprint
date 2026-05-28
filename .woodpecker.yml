@@ -90,8 +90,8 @@ steps:
         set -e
         SHA=$(echo "${CI_COMMIT_SHA}" | cut -c1-7)
         PR_TAG="pr-${CI_COMMIT_PULL_REQUEST}"
-        echo "Preview build for PR #${CI_COMMIT_PULL_REQUEST}, SHA=${SHA}"
-        if [ -z "$SHA" ]; then
+        echo "Preview build for PR #${CI_COMMIT_PULL_REQUEST}, SHA=$$SHA"
+        if [ -z "$$SHA" ]; then
           echo "FATAL: CI_COMMIT_SHA not set"
           exit 1
         fi
@@ -99,9 +99,9 @@ steps:
         for pkg in icons core select datetime datetime2 table; do
           node -e "
             const fs = require('fs');
-            const p = './packages/$pkg/package.json';
+            const p = './packages/$$pkg/package.json';
             const j = JSON.parse(fs.readFileSync(p));
-            j.version = j.version + '-preview.${SHA}';
+            j.version = j.version + '-preview.' + '$$SHA';
             fs.writeFileSync(p, JSON.stringify(j, null, 4) + '\n');
           "
         done
@@ -111,29 +111,29 @@ steps:
         published=0
         failed=0
         for pkg in icons core select datetime datetime2 table; do
-          if out=$(npm publish ./packages/$pkg --tag $PR_TAG 2>&1); then
-            echo "$out"
+          if out=$(npm publish ./packages/$$pkg --tag $$PR_TAG 2>&1); then
+            echo "$$out"
             published=$((published + 1))
           else
-            echo "$out"
-            if echo "$out" | grep -q "already exists"; then
-              echo ">>> skip $pkg (version already published)"
+            echo "$$out"
+            if echo "$$out" | grep -q "already exists"; then
+              echo ">>> skip $$pkg (version already published)"
             else
               failed=$((failed + 1))
             fi
           fi
         done
 
-        if [ "$failed" -gt 0 ]; then
-          echo "ERROR: $failed package(s) failed to publish"
+        if [ "$$failed" -gt 0 ]; then
+          echo "ERROR: $$failed package(s) failed to publish"
           exit 1
         fi
-        if [ "$published" -eq 0 ]; then
+        if [ "$$published" -eq 0 ]; then
           echo "ERROR: nothing was published"
           exit 1
         fi
-        echo "Published $published package(s) under dist-tag '$PR_TAG'"
-        echo "To consume: npm install @blueprintjs/<pkg>@$PR_TAG"
+        echo "Published $$published package(s) under dist-tag $$PR_TAG"
+        echo "To consume: npm install @blueprintjs/<pkg>@$$PR_TAG"
       - rm /root/.npmrc
     environment:
       NPMRC:
