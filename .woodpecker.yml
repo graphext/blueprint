@@ -88,15 +88,13 @@ steps:
       - echo -n $NPMRC | base64 -d > /root/.npmrc
       - |
         set -e
-        echo "=== Env vars (CI/WOODPECKER/DRONE) ==="
-        env | grep -iE '^(CI_|WOODPECKER_|DRONE_)' | sort
-        echo "=== ==="
-        SHA=$(echo $CI_COMMIT_SHA | cut -c1-7)
-        [ -z "$SHA" ] && SHA=$(echo $WOODPECKER_COMMIT_SHA | cut -c1-7)
-        [ -z "$SHA" ] && SHA=$(echo $CI_COMMIT_PULL_REQUEST_SHA | cut -c1-7)
+        SHA=$(echo "${CI_COMMIT_SHA}" | cut -c1-7)
         PR_TAG="pr-${CI_COMMIT_PULL_REQUEST}"
         echo "Preview build for PR #${CI_COMMIT_PULL_REQUEST}, SHA=${SHA}"
-        [ -z "$SHA" ] && { echo "FATAL: no SHA variable found"; exit 1; }
+        if [ -z "$SHA" ]; then
+          echo "FATAL: CI_COMMIT_SHA not set"
+          exit 1
+        fi
 
         for pkg in icons core select datetime datetime2 table; do
           node -e "
