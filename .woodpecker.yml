@@ -82,7 +82,7 @@ steps:
       event: pull_request
     image: *node_image
     commands:
-      - apk add --update-cache git openssh
+      - apt-get update -qq && apt-get install -y -qq git openssh-client > /dev/null
       - echo -n $NPMRC | base64 -d > /root/.npmrc
       - |
         set -e
