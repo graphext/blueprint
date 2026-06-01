@@ -686,10 +686,13 @@
   min-width: 0;
   position: relative;
 }
-// Tag-input input-ghost: tried matching BP5 (line-height 24px, width 64px)
-// but it regressed other tag-related fixtures without changing the tag-input
-// height. Leaving the BP6 defaults — the 48px height delta between BP5 and
-// BP6 must come from somewhere outside this rule.
+// Tag-input input-ghost: BP5 lays the input on its own row below the tags
+// (visible as an ~24px empty area in screenshots) regardless of how many
+// tags there are. Force the BP6 input to take the full row so flex-wrap
+// pushes it below — matches the BP5 footprint exactly.
+.#{$ns}-tag-input .#{$ns}-input-ghost {
+  flex-basis: 100%;
+}
 
 // NOTE: slider-handle uses the same color-mix(intent-default, white) pattern
 // as buttons. Attempted to override to palette-light-gray values like button,
