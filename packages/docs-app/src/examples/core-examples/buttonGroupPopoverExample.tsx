@@ -22,7 +22,7 @@ import {
     type ButtonVariant,
     H5,
     type IconName,
-    Popover,
+    PopoverNext,
     type Size,
     Switch,
     TextAlignment,
@@ -38,7 +38,6 @@ import { VariantSelect } from "./common/variantSelect";
 export const ButtonGroupPopoverExample: React.FC<ExampleProps> = props => {
     const [alignText, setAlignText] = useState<TextAlignment>(TextAlignment.CENTER);
     const [fill, setFill] = useState(false);
-    const [large, setLarge] = useState(false);
     const [size, setSize] = useState<Size>("medium");
     const [variant, setVariant] = useState<ButtonVariant>("solid");
     const [vertical, setVertical] = useState(false);
@@ -47,7 +46,6 @@ export const ButtonGroupPopoverExample: React.FC<ExampleProps> = props => {
         <>
             <H5>Props</H5>
             <Switch label="Fill" checked={fill} onChange={handleBooleanChange(setFill)} />
-            <Switch label="Large" checked={large} onChange={handleBooleanChange(setLarge)} />
             <VariantSelect onChange={setVariant} variant={variant} />
             <Switch
                 label="Vertical"
@@ -84,8 +82,8 @@ const PopoverButton: React.FC<{ text: string; iconName: IconName; vertical: bool
 }) => {
     const endIconName: IconName = vertical ? IconNames.CARET_RIGHT : IconNames.CARET_DOWN;
     return (
-        <Popover content={<FileMenu />} placement={vertical ? "right-start" : "bottom-start"}>
+        <PopoverNext content={<FileMenu />} placement={vertical ? "right-start" : "bottom-start"}>
             <Button endIcon={endIconName} icon={iconName} text={text} />
-        </Popover>
+        </PopoverNext>
     );
 };
