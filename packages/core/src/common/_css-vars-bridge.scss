@@ -635,6 +635,21 @@
   padding: 8px 8px 0 5px;
 }
 
+// Datepicker month/year selectors: BP5's Graphext overrides painted the
+// minimal html-select inside the caption as a pill (white bg + 1px gray
+// box-shadow border). BP6 left it as a true minimal (transparent) select.
+// Restore the pill so the caption matches BP5's screenshot.
+.#{$ns}-datepicker .#{$ns}-html-select.#{$ns}-minimal select,
+.#{$ns}-datepicker-caption .#{$ns}-html-select select {
+  background-color: #FCFCFD !important;
+  box-shadow: inset 0 0 0 1px #DEDEDE !important;
+}
+.#{$ns}-dark .#{$ns}-datepicker .#{$ns}-html-select.#{$ns}-minimal select,
+.#{$ns}-dark .#{$ns}-datepicker-caption .#{$ns}-html-select select {
+  background-color: #2F343C !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2) !important;
+}
+
 // Tree node indentation: BP5 used 16px per level (matches $pt-icon-size-standard);
 // BP6 reduced it to 12px (surface-spacing * 3). Restore BP5 levels 1-5.
 .#{$ns}-tree-node-content-1 { padding-left: 16px; }
