@@ -532,9 +532,18 @@
   line-height: 20px;
 }
 .#{$ns}-menu-item .#{$ns}-menu-item-icon,
-.#{$ns}-menu-item .#{$ns}-menu-item-selected-icon,
-.#{$ns}-menu-item .#{$ns}-submenu-icon {
+.#{$ns}-menu-item .#{$ns}-menu-item-selected-icon {
   height: 20px;
+}
+// Submenu caret: BP5 left it as an unsized inline span (height = SVG 16px)
+// with margin-top: (20-16)/2 = 2px so it sits 2px below the row top, giving
+// a 18px effective height that fits inside the 20px line-height. BP6.15
+// computes margin-top from its 22px line-height (= 3px) and the bridge above
+// expands the submenu-icon to height: 20px, both of which combine to push
+// the menu item to 31px instead of BP5's 28px. Restore BP5's behavior.
+.#{$ns}-menu-item .#{$ns}-submenu-icon {
+  height: 16px;
+  margin-top: 2px;
 }
 
 // Inputs: BP6 "large" variant grew to 40px; BP5 large stayed at 32px (same
@@ -636,9 +645,9 @@
 // and the h6 inherits the browser-default top/bottom margin (~21px each side),
 // which makes the header sit far below the divider.
 .#{$ns}-menu-header > h6 {
-  line-height: 17px;
+  line-height: 14px;
   margin: 0;
-  padding: 8px 8px 0 5px;
+  padding: 12px 8px 0 5px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -656,34 +665,56 @@
 }
 .#{$ns}-dark .#{$ns}-datepicker .#{$ns}-html-select.#{$ns}-minimal select,
 .#{$ns}-dark .#{$ns}-datepicker-caption .#{$ns}-html-select select {
-  background-color: #2F343C !important;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2) !important;
+  // BP5 used `$g-dark-base4` (#313641) for the pill bg and `$g-dark-base5`
+  // (#363B47) for the 1px inset border, instead of BP6's #2F343C with the
+  // generic semi-white inset ring.
+  background-color: #313641 !important;
+  box-shadow: inset 0 0 0 1px #363B47 !important;
 }
 
-// Datepicker caption layout: BP5 placed the < > nav arrows on either side of
-// the Month/Year pills (‹ June 2025 ›). BP6 collapsed both arrows to the right
-// of the pills (June 2025 < >). Reorder them via flex-order so the previous
-// button sits before the dropdowns and next button stays after.
-.rdp-caption {
+// Datepicker caption layout: BP5 absolute-positioned the < > nav arrows so
+// they overlay the caption row without contributing to its width — the
+// caption then sized to just the month/year pills. Mirror that here so the
+// rdp caption (and thus the rdp/month/table) collapses to the pill width.
+// BP5 also rendered a full Divider (14px margin top+bottom + 1px line)
+// between the caption and the weekday row; BP6.15 collapsed that to a thin
+// border-bottom. Restore the BP5 24px vertical breathing room.
+.#{$ns}-datepicker .rdp-caption {
+  position: relative;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
+  padding-bottom: 14px !important;
+  margin-bottom: 14px !important;
+  border-bottom: 1px solid $pt-divider-black;
 }
-.rdp-caption_dropdowns {
-  order: 2;
-  flex: 1 1 auto;
+.#{$ns}-dark .#{$ns}-datepicker .rdp-caption {
+  // BP5's <Divider /> in the caption rendered `border-bottom: 1px solid
+  // rgba(255,255,255,0.2)`, which on the dark-gray dp bg appears lighter
+  // than $pt-dark-divider-black (the solid #363B47 BP6 picks up).
+  border-bottom-color: rgba(255, 255, 255, 0.2);
+}
+.#{$ns}-datepicker .rdp-caption_dropdowns {
   display: flex;
   justify-content: center;
   gap: 8px;
 }
-.rdp-nav {
+.#{$ns}-datepicker .rdp-nav {
   display: contents;
 }
-.#{$ns}-datepicker-nav-button-previous {
-  order: 1;
+.#{$ns}-datepicker .#{$ns}-datepicker-nav-button-previous {
+  // BP5's `.bp5-datepicker-navbar` was offset to left/right: -6px from the
+  // datepicker padding area, so the arrows sat 6px outboard of the caption.
+  position: absolute;
+  left: -6px;
+  top: 50%;
+  transform: translateY(-50%);
 }
-.#{$ns}-datepicker-nav-button-next {
-  order: 3;
+.#{$ns}-datepicker .#{$ns}-datepicker-nav-button-next {
+  position: absolute;
+  right: -6px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 // react-day-picker cell size: BP6 defaults to 40px (rdp-cell-size). BP5's
@@ -693,7 +724,122 @@
 .#{$ns}-datepicker .rdp,
 .#{$ns}-datepicker .rdp-months,
 .#{$ns}-datepicker .rdp-month {
-  --rdp-cell-size: 30px !important;
+  // BP5 used display:table with `width: 30px` cells under
+  // `font-size: 12px` and border-collapse; auto-layout shrunk each cell to
+  // 27.921875px. Match that fractional width so per-column positions align
+  // with BP5 instead of drifting fractions of a pixel by the last column.
+  --rdp-cell-size: 27.921875px !important;
+}
+// BP5 used 28x26 day cells (width != height). rdp ties both to
+// --rdp-cell-size, so override row/cell height explicitly to land on BP5's
+// 26px row + 24px weekday row. Must also lower min-height — the
+// `.rdp-day.bp6-button` rule above pins min-height to --rdp-cell-size
+// (28px), which would override a plain `height: 26px`.
+.#{$ns}-datepicker .rdp-cell,
+.#{$ns}-datepicker .rdp-day,
+.#{$ns}-datepicker .rdp-row,
+.#{$ns}-datepicker .rdp-day.#{$ns}-button {
+  height: 26px !important;
+  min-height: 26px !important;
+}
+.#{$ns}-datepicker .rdp-head_cell {
+  height: 24px !important;
+}
+
+// BP5's `.bp5-datepicker .DayPicker { font-size: 12px }` shrank the entire
+// calendar text. BP6.15 lets it inherit the parent font-size (14px), making
+// the picker visibly larger. Mirror the BP5 12px base so cells, weekday
+// labels, day numbers, and footer text match.
+.#{$ns}-datepicker .rdp {
+  font-size: 12px;
+}
+
+// BP5's overwrites zeroed month margins and weakened weekday weight/color so
+// the calendar grid sits flush with the caption and the weekday row looks
+// muted gray, not bold black like BP6.15's default. Also drop rdp's 210px
+// min-width so the picker can collapse around the 7×28px = 196px table.
+.#{$ns}-datepicker .rdp {
+  min-width: auto !important;
+}
+.#{$ns}-datepicker .rdp-month {
+  margin: 0 !important;
+}
+.#{$ns}-datepicker .rdp-head_cell {
+  font-size: 12px !important;
+  font-weight: 400 !important;
+  text-transform: none !important;
+  // BP5 used $g-light-grey2 (#808080) for weekday labels, not the
+  // semi-darker $pt-text-color-muted that BP6 inherits.
+  color: #808080 !important;
+}
+.#{$ns}-dark .#{$ns}-datepicker .rdp-head_cell {
+  color: #A2A4A9 !important;
+}
+// Day numbers themselves: BP5 used normal weight + neutral 12px size. BP6.15
+// inherits the bold-ish default. Force the BP5 weight/size for day buttons
+// (excluding selected, which has its own white-on-blue treatment). Also pin
+// font-family to inherit so day text uses LatoLatin (the body font) instead
+// of the UA-default Arial that <button> resets to.
+.#{$ns}-datepicker .rdp-day {
+  font-size: 12px;
+  font-weight: 400;
+  font-family: inherit;
+}
+// Selected day: BP5 used $g-light-active (#2BA3E8) for the selection circle
+// because its Graphext overrides repointed `bp5-datepicker .DayPicker-Day
+// --selected` at the active blue. BP6.15 picks up Palantir stock $blue3
+// (#2D72D2). Restore Graphext blue.
+.#{$ns}-datepicker .rdp-day.rdp-day_selected {
+  background-color: #2BA3E8 !important;
+}
+.#{$ns}-dark .#{$ns}-datepicker .rdp-day.rdp-day_selected {
+  background-color: #0091E4 !important;
+}
+// Outside-month day numbers (e.g. the trailing "1 2 3 4 5" after the
+// current month): BP5 painted them solid muted color at full opacity; BP6
+// inherits rdp's default `.rdp-day_outside { opacity: 0.5 }` which makes
+// them nearly invisible on dark backgrounds. Reset to BP5's full opacity.
+.#{$ns}-datepicker .rdp-day.rdp-day_outside {
+  opacity: 1 !important;
+}
+
+// DateRangePicker shortcuts list: BP5's $pt-grid-size was 8px (vs BP6.15's
+// 10px), so `$pt-grid-size * 12 = 96px` minimum width for the shortcuts
+// menu. BP6.15 computes 120px, which pushes the calendar 24px to the
+// right when shortcuts are enabled. Match the BP5 width.
+.#{$ns}-menu.#{$ns}-daterangepicker-shortcuts {
+  min-width: 96px !important;
+}
+// Month/Year selects: BP5's Graphext overrides forced the html-select to
+// inherit body font (LatoLatin) at normal weight. BP6.15 left it at the
+// UA default (Arial 600), which makes "June 2025" look bolder than BP5.
+.#{$ns}-datepicker .#{$ns}-html-select select {
+  font-family: inherit;
+  font-weight: 400;
+}
+// BP5 pinned the dropdown chevron to right: 6px inside the select. BP6.15
+// uses a JS-computed right offset (typically 40px in the inline style) so
+// the chevron sits well to the right of "June"/"2025". That extra gap is
+// what makes the pills look stretched in BP6.15. Force the BP5 position.
+.#{$ns}-datepicker .#{$ns}-html-select .#{$ns}-icon-double-caret-vertical {
+  right: 6px !important;
+}
+// Nav button icons: BP5's Graphext overrides painted < > arrows the active
+// blue (#2BA3E8 light, #0091E4 dark). BP6.15 buttons set their own color
+// rules, so use !important to force the chevron color and SVG fill.
+.#{$ns}-datepicker .#{$ns}-datepicker-nav-button-previous .#{$ns}-icon,
+.#{$ns}-datepicker .#{$ns}-datepicker-nav-button-next .#{$ns}-icon,
+.#{$ns}-datepicker .#{$ns}-datepicker-nav-button-previous .#{$ns}-icon svg,
+.#{$ns}-datepicker .#{$ns}-datepicker-nav-button-next .#{$ns}-icon svg {
+  color: #2BA3E8 !important;
+  fill: #2BA3E8 !important;
+}
+.#{$ns}-dark .#{$ns}-datepicker .#{$ns}-datepicker-nav-button-previous .#{$ns}-icon,
+.#{$ns}-dark .#{$ns}-datepicker .#{$ns}-datepicker-nav-button-next .#{$ns}-icon,
+.#{$ns}-dark .#{$ns}-datepicker .#{$ns}-datepicker-nav-button-previous .#{$ns}-icon svg,
+.#{$ns}-dark .#{$ns}-datepicker .#{$ns}-datepicker-nav-button-next .#{$ns}-icon svg {
+  color: #0091E4 !important;
+  fill: #0091E4 !important;
 }
 
 // Tree node indentation: BP5 used 16px per level (matches $pt-icon-size-standard);
