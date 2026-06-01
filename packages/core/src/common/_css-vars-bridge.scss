@@ -633,6 +633,10 @@
   line-height: 17px;
   margin: 0;
   padding: 8px 8px 0 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: normal;
 }
 
 // Datepicker month/year selectors: BP5's Graphext overrides painted the
