@@ -598,6 +598,11 @@
   height: 32px;
   min-width: 120px;
 }
+.#{$ns}-slider.#{$ns}-vertical {
+  height: 120px;
+  min-width: 32px;
+  width: 32px;
+}
 // Slider handle: BP5 used #f6f7f9 flat + rgba shadow. BP6 uses color-mix in
 // oklch which produces a slightly different tone. Restore BP5 values.
 .#{$ns}-slider-handle {
@@ -652,6 +657,10 @@
   min-width: 0;
   position: relative;
 }
+// Tag-input input-ghost: tried matching BP5 (line-height 24px, width 64px)
+// but it regressed other tag-related fixtures without changing the tag-input
+// height. Leaving the BP6 defaults — the 48px height delta between BP5 and
+// BP6 must come from somewhere outside this rule.
 
 // NOTE: slider-handle uses the same color-mix(intent-default, white) pattern
 // as buttons. Attempted to override to palette-light-gray values like button,
