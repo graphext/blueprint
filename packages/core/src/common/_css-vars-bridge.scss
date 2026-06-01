@@ -611,6 +611,15 @@
   box-shadow: 0 0 0 0 rgba(17, 20, 24, 0.5), 0 1px 1px rgba(17, 20, 24, 0.5);
 }
 
+// Menu header h6: BP5 set explicit margin/padding/line-height; BP6 dropped them
+// and the h6 inherits the browser-default top/bottom margin (~21px each side),
+// which makes the header sit far below the divider.
+.#{$ns}-menu-header > h6 {
+  line-height: 17px;
+  margin: 0;
+  padding: 8px 8px 0 5px;
+}
+
 // Tree node indentation: BP5 used 16px per level (matches $pt-icon-size-standard);
 // BP6 reduced it to 12px (surface-spacing * 3). Restore BP5 levels 1-5.
 .#{$ns}-tree-node-content-1 { padding-left: 16px; }
