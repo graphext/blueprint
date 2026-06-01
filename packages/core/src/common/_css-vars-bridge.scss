@@ -556,6 +556,10 @@
 .#{$ns}-timepicker .#{$ns}-timepicker-input {
   width: 26.4px !important;
 }
+// Timepicker divider text (":" between HH:MM:SS): BP5 8.8px, BP6 8px.
+.#{$ns}-timepicker .#{$ns}-timepicker-divider-text {
+  width: 8.8px !important;
+}
 
 // Tooltip line-height: BP6 forced 14px; BP5 inherited body line-height (~18px),
 // which makes the tooltip box visibly taller. Restore BP5.
