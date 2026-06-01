@@ -611,6 +611,22 @@
   box-shadow: 0 0 0 0 rgba(17, 20, 24, 0.5), 0 1px 1px rgba(17, 20, 24, 0.5);
 }
 
+// Tree node indentation: BP5 used 16px per level (matches $pt-icon-size-standard);
+// BP6 reduced it to 12px (surface-spacing * 3). Restore BP5 levels 1-5.
+.#{$ns}-tree-node-content-1 { padding-left: 16px; }
+.#{$ns}-tree-node-content-2 { padding-left: 32px; }
+.#{$ns}-tree-node-content-3 { padding-left: 48px; }
+.#{$ns}-tree-node-content-4 { padding-left: 64px; }
+.#{$ns}-tree-node-content-5 { padding-left: 80px; }
+// Tree icon gap to label: BP5 = 0px; BP6 = 4px
+.#{$ns}-tree-node-icon {
+  margin-right: 0;
+}
+// Tree caret padding: BP5 = 0; BP6 = 4px (which shifts everything right of it).
+.#{$ns}-tree-node-caret {
+  padding: 0;
+}
+
 // Switch (dark, Off state): BP5 indicator bg was `$dark-gray3` (#313641);
 // BP6 set it to `#FCFCFD` (almost white). Restore BP5.
 .#{$ns}-dark .#{$ns}-control.#{$ns}-switch input ~ .#{$ns}-control-indicator {
