@@ -1,0 +1,522 @@
+// Copyright 2026 Graphext.
+
+// BP6.15+ migrated component styling from SASS variables to CSS custom
+// properties (`var(--bp-*)`). Graphext's `_customs.scss` still defines
+// the legacy `$pt-*` SASS variables, which now no longer affect components
+// at all. This file bridges the two systems: it re-publishes Graphext's
+// SASS values as the corresponding BP6 CSS custom properties, plus a few
+// targeted selector overrides for cases (like button height) that BP6.15
+// computes from CSS vars rather than reading SASS variables.
+//
+// Must be imported AFTER design-tokens (which sets BP6 defaults at :root)
+// and AFTER common/customs (which defines our $pt-* values).
+
+:root {
+  // Surface — border radius drives the "pill vs rounded rect" look
+  --bp-surface-border-radius: #{$pt-border-radius};
+  --bp-surface-spacing: #{$pt-spacing};
+
+  // BP5 buttons had no ring border (only elevation shadow).
+  // Setting border-width to 0 collapses BP6's inset ring entirely, since
+  // the color-mix it computes from border-color is opaque enough to show
+  // when the width is non-zero. Width=0 is the only fully transparent option.
+  --bp-surface-border-width: 0;
+
+  // Typography colors — text legibility on light backgrounds
+  --bp-typography-color-default-rest: #{$pt-text-color};
+  --bp-typography-color-muted: #{$pt-text-color-muted};
+  --bp-typography-color-default-disabled: #{$pt-text-color-disabled};
+
+  // Intent colors are left at BP6 defaults (Palantir stock) because BP5/BP6.8
+  // resolved `$pt-intent-primary` to the same stock blue (#2d72d2).
+
+  // Elevation shadows — BP6.15 rebuilt the entire shadow ramp with bigger,
+  // softer drops. Restore BP6.8 values so popovers, tooltips, dialogs,
+  // drawers, menus, alerts and toasts keep their crisp BP6.8 outlines.
+  --bp-surface-shadow-0: 0px 0px 0px 1px rgba(17, 20, 24, 0.15);
+  --bp-surface-shadow-1: 0px 0px 0px 1px rgba(17, 20, 24, 0.1), 0px 1px 1px 0px rgba(17, 20, 24, 0.2);
+  --bp-surface-shadow-2: 0px 0px 0px 1px rgba(17, 20, 24, 0.1), 0px 1px 1px 0px rgba(17, 20, 24, 0.2), 0px 2px 6px 0px rgba(17, 20, 24, 0.2);
+  --bp-surface-shadow-3: 0px 0px 0px 1px rgba(17, 20, 24, 0.1), 0px 2px 4px 0px rgba(17, 20, 24, 0.2), 0px 8px 24px 0px rgba(17, 20, 24, 0.2);
+  --bp-surface-shadow-4: 0px 0px 0px 1px rgba(17, 20, 24, 0.1), 0px 4px 8px 0px rgba(17, 20, 24, 0.2), 0px 18px 46px 6px rgba(17, 20, 24, 0.2);
+}
+
+// BP6.8 (fork override) used palette-orange-5 + dark text for Warning button.
+.#{$ns}-button.#{$ns}-intent-warning {
+  background-color: var(--bp-palette-orange-5);
+  color: #191919;
+}
+
+// BP6.8 removes the inset box-shadow on buttons inside button-groups so the
+// adjacent buttons don't show internal dividers. My default-button shadow
+// override wins via specificity, so re-apply the BP6.8 reset here.
+.#{$ns}-button-group .#{$ns}-button:not([class*="#{$ns}-intent-"]) {
+  box-shadow: none;
+}
+.#{$ns}-dark .#{$ns}-button-group .#{$ns}-button:not([class*="#{$ns}-intent-"]) {
+  box-shadow: none;
+}
+
+// Tag input icon: BP6.15 uses spacing-multiplied margin (3px) and muted color.
+// BP6.8 used 0 margin and explicit dark color.
+.#{$ns}-tag-input .#{$ns}-tag-input-icon {
+  color: #191919;
+  margin-left: 0;
+}
+.#{$ns}-dark .#{$ns}-tag-input .#{$ns}-tag-input-icon {
+  color: #FFF;
+}
+
+// Button icons (non-intent): BP6.15 switched .bp6-button .bp6-icon to
+// var(--bp-typography-color-muted) (gray). BP6.8 used #191919 (Graphext black).
+// Restoring fixes select carets, html-select caret-down, dropdown chevrons,
+// and any plain icon inside a button.
+.#{$ns}-button .#{$ns}-icon:not([class*="#{$ns}-intent-"]) {
+  color: #191919;
+}
+.#{$ns}-dark .#{$ns}-button .#{$ns}-icon:not([class*="#{$ns}-intent-"]) {
+  color: #ffffff;
+}
+// Tag-input children spacing: BP6.8 used 8px (twice the surface-spacing).
+.#{$ns}-tag-input .#{$ns}-tag-input-values::before,
+.#{$ns}-tag-input .#{$ns}-tag-input-values > * {
+  margin-right: 8px;
+}
+// Tag-input input ghost: BP6.15 uses var(--bp-surface-spacing) = 4px for
+// padding-left, but BP6.8 used a literal 8px. The shift is visible in
+// placeholder/value positioning. Line-height (24px BP6.8 vs 20px BP6.15)
+// is intentionally NOT overridden because changing it makes the tag-input
+// container taller — match BP6.15's tighter height instead.
+.#{$ns}-tag-input .#{$ns}-tag-input-values:first-child .#{$ns}-input-ghost {
+  padding-left: 8px;
+}
+
+.#{$ns}-dark {
+  // Dark theme — same neutralization for button border
+  --bp-surface-border-width: 0;
+
+  // Typography colors (dark)
+  --bp-typography-color-default-rest: #{$pt-dark-text-color};
+  --bp-typography-color-muted: #{$pt-dark-text-color-muted};
+  --bp-typography-color-default-disabled: #{$pt-dark-text-color-disabled};
+
+  // Elevation shadows: BP6.8 did NOT redefine these for dark theme — it
+  // shared the :root values. Re-apply the same as :root to undo BP6.15's
+  // dark-theme shadow rewrite (inset white highlights + 30% black drops).
+  --bp-surface-shadow-0: 0px 0px 0px 1px rgba(17, 20, 24, 0.15);
+  --bp-surface-shadow-1: 0px 0px 0px 1px rgba(17, 20, 24, 0.1), 0px 1px 1px 0px rgba(17, 20, 24, 0.2);
+  --bp-surface-shadow-2: 0px 0px 0px 1px rgba(17, 20, 24, 0.1), 0px 1px 1px 0px rgba(17, 20, 24, 0.2), 0px 2px 6px 0px rgba(17, 20, 24, 0.2);
+  --bp-surface-shadow-3: 0px 0px 0px 1px rgba(17, 20, 24, 0.1), 0px 2px 4px 0px rgba(17, 20, 24, 0.2), 0px 8px 24px 0px rgba(17, 20, 24, 0.2);
+  --bp-surface-shadow-4: 0px 0px 0px 1px rgba(17, 20, 24, 0.1), 0px 4px 8px 0px rgba(17, 20, 24, 0.2), 0px 18px 46px 6px rgba(17, 20, 24, 0.2);
+}
+
+// BP6.15 buttons derive their height from --bp-surface-spacing
+// (default = spacing * 7.5 = 30px). Graphext sized buttons at $pt-button-height
+// (32px / 24px / 40px). Re-apply Graphext's sizes directly on the button rule.
+// Border-radius also differs: BP6.8 buttons used $pt-button-border-radius =
+// $pt-button-height-large / 2 = 20px (overridden locally inside button/_customs.scss),
+// not the global $pt-border-radius (16px). Apply 20px directly here.
+.#{$ns}-button {
+  min-height: #{$pt-button-height};
+  min-width: #{$pt-button-height};
+  border-radius: 20px;
+}
+.#{$ns}-button.#{$ns}-small {
+  min-height: #{$pt-button-height-small};
+  min-width: #{$pt-button-height-small};
+  padding: 0px 4px;
+}
+.#{$ns}-button.#{$ns}-large {
+  min-height: #{$pt-button-height-large};
+  min-width: #{$pt-button-height-large};
+  // Order matches BP6.8 cascade: shorthand `padding: 8px 12px` + later
+  // longhand `padding-left/right: 15px` from fork override results in 8px 15px.
+  padding: 8px 15px;
+  font-size: 16px;
+}
+
+// BP6.15 computes button background via color-mix(intent-default 40%, palette-black)
+// which produces a darker, more bluish gray than BP6.8 (which used flat
+// palette colors $dark-gray3 / $light-gray5). Restore BP6.8 background values
+// for the default (non-intent) button on both themes.
+// Default solid button (not minimal, not outlined, not intent). Minimal/outlined
+// rely on transparent / outlined backgrounds and shouldn't get a filled bg.
+// Box-shadow uses BP6.8's exact rgba() values; BP6.15's color-mix(oklch, ...)
+// equivalent produces a subtly different rendered border.
+.#{$ns}-button:not([class*="#{$ns}-intent-"]):not([class*="#{$ns}-kind-g-"]):not(.#{$ns}-minimal):not(.#{$ns}-outlined):not([aria-label="Close"]) {
+  background-color: var(--bp-palette-light-gray-5);
+  box-shadow: inset 0 0 0 0 rgba(17, 20, 24, 0.2), 0 1px 2px rgba(17, 20, 24, 0.1);
+}
+.#{$ns}-button:not([class*="#{$ns}-intent-"]):not([class*="#{$ns}-kind-g-"]):not(.#{$ns}-minimal):not(.#{$ns}-outlined):not([aria-label="Close"]):hover {
+  background-color: var(--bp-palette-light-gray-4);
+  box-shadow: inset 0 0 0 0 rgba(17, 20, 24, 0.2), 0 1px 2px rgba(17, 20, 24, 0.2);
+}
+.#{$ns}-button:not([class*="#{$ns}-intent-"]):not([class*="#{$ns}-kind-g-"]):not(.#{$ns}-minimal):not(.#{$ns}-outlined):not([aria-label="Close"]):active,
+.#{$ns}-button:not([class*="#{$ns}-intent-"]):not([class*="#{$ns}-kind-g-"]):not(.#{$ns}-minimal):not(.#{$ns}-outlined):not([aria-label="Close"]).#{$ns}-active {
+  background-color: var(--bp-palette-light-gray-2);
+  box-shadow: inset 0 0 0 0 rgba(17, 20, 24, 0.2), 0 1px 2px rgba(17, 20, 24, 0.2);
+}
+
+.#{$ns}-dark .#{$ns}-button:not([class*="#{$ns}-intent-"]):not([class*="#{$ns}-kind-g-"]):not(.#{$ns}-minimal):not(.#{$ns}-outlined):not([aria-label="Close"]) {
+  background-color: var(--bp-palette-dark-gray-3);
+  box-shadow: inset 0 0 0 0 rgba(255, 255, 255, 0.1), 0 1px 2px rgba(17, 20, 24, 0.2);
+}
+.#{$ns}-dark .#{$ns}-button:not([class*="#{$ns}-intent-"]):not([class*="#{$ns}-kind-g-"]):not(.#{$ns}-minimal):not(.#{$ns}-outlined):not([aria-label="Close"]):hover {
+  background-color: var(--bp-palette-dark-gray-2);
+  box-shadow: inset 0 0 0 0 rgba(255, 255, 255, 0.1), 0 1px 2px rgba(17, 20, 24, 0.4);
+}
+.#{$ns}-dark .#{$ns}-button:not([class*="#{$ns}-intent-"]):not([class*="#{$ns}-kind-g-"]):not(.#{$ns}-minimal):not(.#{$ns}-outlined):not([aria-label="Close"]):active,
+.#{$ns}-dark .#{$ns}-button:not([class*="#{$ns}-intent-"]):not([class*="#{$ns}-kind-g-"]):not(.#{$ns}-minimal):not(.#{$ns}-outlined):not([aria-label="Close"]).#{$ns}-active {
+  background-color: var(--bp-palette-dark-gray-1);
+  box-shadow: inset 0 0 0 0 rgba(255, 255, 255, 0.1), 0 1px 2px rgba(17, 20, 24, 0.4);
+}
+
+// Default disabled button — BP6.8 used `rgba($light-gray1, 50%)` light /
+// `rgba($dark-gray3, 15%)` dark. BP6.15's color-mix with intent-default-disabled
+// produces too faint a result especially in dark theme.
+// Exclude Graphext custom button kinds (`bp6-kind-g-*`) so their bordered /
+// transparent variants keep their own box-shadow / background rules.
+.#{$ns}-button:not([class*="#{$ns}-intent-"]):not([class*="#{$ns}-kind-g-"]):not(.#{$ns}-minimal):not(.#{$ns}-outlined):not([aria-label="Close"]):disabled,
+.#{$ns}-button:not([class*="#{$ns}-intent-"]):not([class*="#{$ns}-kind-g-"]):not(.#{$ns}-minimal):not(.#{$ns}-outlined):not([aria-label="Close"]).#{$ns}-disabled {
+  background-color: rgba(211, 216, 222, 0.5);
+  box-shadow: none;
+  color: #cccccc;
+}
+.#{$ns}-dark .#{$ns}-button:not([class*="#{$ns}-intent-"]):not([class*="#{$ns}-kind-g-"]):not(.#{$ns}-minimal):not(.#{$ns}-outlined):not([aria-label="Close"]):disabled,
+.#{$ns}-dark .#{$ns}-button:not([class*="#{$ns}-intent-"]):not([class*="#{$ns}-kind-g-"]):not(.#{$ns}-minimal):not(.#{$ns}-outlined):not([aria-label="Close"]).#{$ns}-disabled {
+  background-color: rgba(47, 52, 60, 0.15);
+  box-shadow: none;
+  color: #7B7D84;
+}
+
+// Outlined button: BP6.8 used a real `border: 1px solid rgba(25,25,25,0.2)`
+// with `box-sizing: border-box`, NOT a box-shadow. The default border-color
+// varies per intent/state. Match BP6.8 exactly so outlined widths align.
+.#{$ns}-button.#{$ns}-outlined {
+  border: 1px solid rgba(25, 25, 25, 0.2);
+  box-sizing: border-box;
+}
+.#{$ns}-dark .#{$ns}-button.#{$ns}-outlined {
+  border-color: rgba(255, 255, 255, 0.4);
+}
+.#{$ns}-button.#{$ns}-outlined:disabled,
+.#{$ns}-button.#{$ns}-outlined.#{$ns}-disabled {
+  border-color: rgba(204, 204, 204, 0.1);
+}
+.#{$ns}-dark .#{$ns}-button.#{$ns}-outlined:disabled,
+.#{$ns}-dark .#{$ns}-button.#{$ns}-outlined.#{$ns}-disabled {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+// Intent variant border colors (light theme, 60% alpha) and dark theme.
+.#{$ns}-button.#{$ns}-outlined.#{$ns}-intent-primary,
+.#{$ns}-button.#{$ns}-minimal.#{$ns}-intent-primary {
+  color: #{$g-light-active};
+}
+.#{$ns}-button.#{$ns}-outlined.#{$ns}-intent-primary {
+  border-color: rgba(43, 163, 232, 0.6);
+}
+.#{$ns}-button.#{$ns}-outlined.#{$ns}-intent-success,
+.#{$ns}-button.#{$ns}-minimal.#{$ns}-intent-success {
+  color: #{$g-grass-500};
+}
+.#{$ns}-button.#{$ns}-outlined.#{$ns}-intent-success {
+  border-color: rgba(79, 176, 79, 0.6);
+}
+.#{$ns}-button.#{$ns}-outlined.#{$ns}-intent-warning,
+.#{$ns}-button.#{$ns}-minimal.#{$ns}-intent-warning {
+  color: #{$g-orange-500};
+}
+.#{$ns}-button.#{$ns}-outlined.#{$ns}-intent-warning {
+  border-color: rgba(217, 130, 43, 0.6);
+}
+.#{$ns}-button.#{$ns}-outlined.#{$ns}-intent-danger,
+.#{$ns}-button.#{$ns}-minimal.#{$ns}-intent-danger {
+  color: #{$g-error-500};
+}
+.#{$ns}-button.#{$ns}-outlined.#{$ns}-intent-danger {
+  border-color: rgba(219, 55, 55, 0.6);
+}
+// Dark theme: brighter "$g-*-600" variants for text + same 60% border alpha
+// (Graphext fork chose g-dark-active = #0091E4 for primary dark text).
+.#{$ns}-dark .#{$ns}-button.#{$ns}-outlined.#{$ns}-intent-primary,
+.#{$ns}-dark .#{$ns}-button.#{$ns}-minimal.#{$ns}-intent-primary {
+  color: #{$g-dark-active};
+}
+.#{$ns}-dark .#{$ns}-button.#{$ns}-outlined.#{$ns}-intent-primary {
+  border-color: rgba(0, 145, 228, 0.6);
+}
+.#{$ns}-dark .#{$ns}-button.#{$ns}-outlined.#{$ns}-intent-success,
+.#{$ns}-dark .#{$ns}-button.#{$ns}-minimal.#{$ns}-intent-success {
+  color: #{$g-grass-600};
+}
+.#{$ns}-dark .#{$ns}-button.#{$ns}-outlined.#{$ns}-intent-success {
+  border-color: rgba(115, 199, 115, 0.6);
+}
+.#{$ns}-dark .#{$ns}-button.#{$ns}-outlined.#{$ns}-intent-warning,
+.#{$ns}-dark .#{$ns}-button.#{$ns}-minimal.#{$ns}-intent-warning {
+  color: #{$g-orange-600};
+}
+.#{$ns}-dark .#{$ns}-button.#{$ns}-outlined.#{$ns}-intent-warning {
+  border-color: rgba(229, 165, 92, 0.6);
+}
+.#{$ns}-dark .#{$ns}-button.#{$ns}-outlined.#{$ns}-intent-danger,
+.#{$ns}-dark .#{$ns}-button.#{$ns}-minimal.#{$ns}-intent-danger {
+  color: #{$g-error-600};
+}
+.#{$ns}-dark .#{$ns}-button.#{$ns}-outlined.#{$ns}-intent-danger {
+  border-color: rgba(247, 117, 117, 0.6);
+}
+// Minimal intent buttons inherit no box-shadow (only color) — both themes.
+.#{$ns}-button.#{$ns}-minimal.#{$ns}-intent-primary,
+.#{$ns}-button.#{$ns}-minimal.#{$ns}-intent-success,
+.#{$ns}-button.#{$ns}-minimal.#{$ns}-intent-warning,
+.#{$ns}-button.#{$ns}-minimal.#{$ns}-intent-danger,
+.#{$ns}-dark .#{$ns}-button.#{$ns}-minimal.#{$ns}-intent-primary,
+.#{$ns}-dark .#{$ns}-button.#{$ns}-minimal.#{$ns}-intent-success,
+.#{$ns}-dark .#{$ns}-button.#{$ns}-minimal.#{$ns}-intent-warning,
+.#{$ns}-dark .#{$ns}-button.#{$ns}-minimal.#{$ns}-intent-danger {
+  box-shadow: none;
+}
+
+// Intent buttons (filled, not outlined): BP6.15 uses color-mix(oklch, ...) for
+// shadow; BP6.8 used a flat rgba. Mirror BP6.8 to avoid sub-pixel render diffs.
+// Use !important to defeat both the base BP6.15 rule and the inline border-width
+// variable that would otherwise compute a non-zero inset for some intents.
+.#{$ns}-button[class*="#{$ns}-intent-"]:not(.#{$ns}-outlined):not(.#{$ns}-minimal) {
+  box-shadow: inset 0 0 0 0 rgba(17, 20, 24, 0.2), 0 1px 2px rgba(17, 20, 24, 0.1) !important;
+}
+.#{$ns}-button[class*="#{$ns}-intent-"]:not(.#{$ns}-outlined):not(.#{$ns}-minimal):hover {
+  box-shadow: inset 0 0 0 0 rgba(17, 20, 24, 0.2), 0 1px 2px rgba(17, 20, 24, 0.2) !important;
+}
+.#{$ns}-button[class*="#{$ns}-intent-"]:not(.#{$ns}-outlined):not(.#{$ns}-minimal):active,
+.#{$ns}-button[class*="#{$ns}-intent-"]:not(.#{$ns}-outlined):not(.#{$ns}-minimal).#{$ns}-active {
+  box-shadow: inset 0 0 0 0 rgba(17, 20, 24, 0.2), 0 1px 2px rgba(17, 20, 24, 0.2) !important;
+}
+
+// Numeric input stepper buttons (vertical button-group inside .bp6-numeric-input)
+// — my default-button override above sets bg to palette-light-gray-5 / dark-gray-3,
+// but the BP6.8 fork rule sets them to #FCFCFD (light) / #313641 (dark). My override
+// wins via specificity (4 vs 3), so re-apply the BP6.8 values with higher specificity.
+.#{$ns}-numeric-input .#{$ns}-button-group.#{$ns}-vertical > .#{$ns}-button {
+  background-color: #FCFCFD;
+}
+.#{$ns}-dark .#{$ns}-numeric-input .#{$ns}-button-group.#{$ns}-vertical > .#{$ns}-button {
+  background-color: #313641;
+}
+
+// HTML select / Select: BP6.15 derives bg via color-mix(intent-default, black/white).
+// Same problem as buttons. Mirror the bridge.
+.#{$ns}-html-select select,
+.#{$ns}-select select {
+  background-color: var(--bp-palette-light-gray-5);
+}
+.#{$ns}-html-select select:hover,
+.#{$ns}-select select:hover {
+  background-color: var(--bp-palette-light-gray-4);
+}
+.#{$ns}-html-select select:active,
+.#{$ns}-html-select select.#{$ns}-active,
+.#{$ns}-select select:active,
+.#{$ns}-select select.#{$ns}-active {
+  background-color: var(--bp-palette-light-gray-2);
+}
+.#{$ns}-dark .#{$ns}-html-select select,
+.#{$ns}-dark .#{$ns}-select select {
+  background-color: var(--bp-palette-dark-gray-3);
+}
+.#{$ns}-dark .#{$ns}-html-select select:hover,
+.#{$ns}-dark .#{$ns}-select select:hover {
+  background-color: var(--bp-palette-dark-gray-2);
+}
+.#{$ns}-dark .#{$ns}-html-select select:active,
+.#{$ns}-dark .#{$ns}-html-select select.#{$ns}-active,
+.#{$ns}-dark .#{$ns}-select select:active,
+.#{$ns}-dark .#{$ns}-select select.#{$ns}-active {
+  background-color: var(--bp-palette-dark-gray-1);
+}
+.#{$ns}-html-select select:disabled,
+.#{$ns}-html-select select.#{$ns}-disabled,
+.#{$ns}-select select:disabled,
+.#{$ns}-select select.#{$ns}-disabled {
+  background-color: rgba(211, 216, 222, 0.5);
+  color: #cccccc;
+}
+.#{$ns}-dark .#{$ns}-html-select select:disabled,
+.#{$ns}-dark .#{$ns}-html-select select.#{$ns}-disabled,
+.#{$ns}-dark .#{$ns}-select select:disabled,
+.#{$ns}-dark .#{$ns}-select select.#{$ns}-disabled {
+  background-color: rgba(47, 52, 60, 0.15);
+  color: #7B7D84;
+}
+
+// html-select border-radius: BP6.8 used 20px (button-height-large/2),
+// BP6.15 uses var(--bp-surface-border-radius) (16px). Match BP6.8 pill radius.
+// Box-shadow is intentionally NOT overridden because BP6.15's color-mix shadow
+// renders closer to BP6.8 than my rgba override (verified empirically).
+.#{$ns}-html-select select,
+.#{$ns}-select select {
+  border-radius: 20px;
+}
+
+// Card: BP6.15 added padding=spacing*5=20px, used a new surface-bg color, and
+// added a 1px inset border via --bp-surface-shadow-0. Graphext's $pt-elevation
+// system uses `none` for level 0 and Graphext-specific base colors for the
+// card surface. Re-establish BP6.8 values.
+.#{$ns}-card {
+  background-color: #{$g-light-base3};
+  box-shadow: #{$pt-elevation-shadow-0};
+  padding: $pt-grid-size * 2;
+}
+.#{$ns}-card.#{$ns}-compact {
+  padding: $pt-grid-size + 4px;
+}
+.#{$ns}-card.#{$ns}-dark,
+.#{$ns}-dark .#{$ns}-card {
+  background-color: #{$g-dark-base3};
+  box-shadow: #{$pt-dark-elevation-shadow-0};
+}
+
+// Preserve Graphext's `g-transparent` card variant — my override above is
+// just as specific as the existing `.bp6-card.bp6-g-transparent` rule but
+// loaded later, so it would otherwise win. Repeat the transparent rule here
+// to keep transparency on top of the bridge.
+.#{$ns}-card.#{$ns}-g-transparent,
+.#{$ns}-card.#{$ns}-g-transparent.#{$ns}-dark,
+.#{$ns}-dark .#{$ns}-card.#{$ns}-g-transparent {
+  background-color: transparent;
+}
+
+// Card elevations: Graphext repurposed BP6's $pt-elevation-shadow-* SASS
+// values (used by `bp6-elevation-N`). BP6.15 components read CSS vars instead.
+.#{$ns}-elevation-1 {
+  box-shadow: #{$pt-elevation-shadow-1};
+}
+.#{$ns}-elevation-2 {
+  // BP6 default elevation-2 (Graphext didn't override this level)
+  box-shadow: 0 0 0 1px rgba(17, 20, 24, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1), 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+.#{$ns}-elevation-3 {
+  box-shadow: #{$pt-elevation-shadow-3};
+}
+.#{$ns}-elevation-4 {
+  box-shadow: #{$pt-elevation-shadow-4};
+}
+.#{$ns}-dark .#{$ns}-elevation-1,
+.#{$ns}-elevation-1.#{$ns}-dark {
+  box-shadow: #{$pt-dark-elevation-shadow-1};
+}
+.#{$ns}-dark .#{$ns}-elevation-2,
+.#{$ns}-elevation-2.#{$ns}-dark {
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2), 0 4px 6px -4px rgba(0, 0, 0, 0.5), inset 0 0 0.5px 0 rgba(255, 255, 255, 0.3), inset 0 0.5px 0 0 rgba(255, 255, 255, 0.08), 0 10px 30px -5px rgba(0, 0, 0, 0.5);
+}
+.#{$ns}-dark .#{$ns}-elevation-3,
+.#{$ns}-elevation-3.#{$ns}-dark {
+  box-shadow: #{$pt-dark-elevation-shadow-3};
+}
+.#{$ns}-dark .#{$ns}-elevation-4,
+.#{$ns}-elevation-4.#{$ns}-dark {
+  box-shadow: #{$pt-dark-elevation-shadow-4};
+}
+
+// Tag: BP6.15 uses --bp-intent-default-rest (#5f6b7c) as base bg; Graphext
+// had a flat light-gray bg via $pt-tag-default-color / customs. Restore BP6.8
+// values for background, size, padding, and rounded radius. Intent variants
+// (primary/success/warning/danger) still go through the BP6 CSS vars so they
+// inherit Palantir stock intent colors as before.
+// Exclude g-lozenge (Graphext color palette tags) and g-toggle-tag so their
+// custom color rules keep applying with their own backgrounds.
+.#{$ns}-tag:not([class*="#{$ns}-intent-"]):not(.#{$ns}-minimal):not(.#{$ns}-g-lozenge):not(.#{$ns}-g-toggle-tag) {
+  background-color: #{$g-light-base3};
+  color: $pt-text-color;
+}
+// In dark theme BP6.8 collapsed ALL tags (including intent) to a generic
+// dark-gray bg + white text. Mirror that behavior.
+.#{$ns}-dark .#{$ns}-tag:not(.#{$ns}-minimal):not(.#{$ns}-g-lozenge):not(.#{$ns}-g-toggle-tag) {
+  background-color: #{$g-dark-base3};
+  color: $pt-dark-text-color;
+}
+.#{$ns}-tag {
+  min-height: $pt-grid-size * 3;
+  min-width: $pt-grid-size * 3;
+  padding: $pt-grid-size * 0.5 $pt-grid-size;
+  line-height: $pt-grid-size * 2;
+}
+.#{$ns}-tag.#{$ns}-round {
+  border-radius: $pt-grid-size * 3.5;
+  padding-left: $pt-grid-size + 2px;
+  padding-right: $pt-grid-size + 2px;
+}
+
+// Tag intent warning (light theme only — dark theme uses generic dark rule above).
+// BP6.15 derives both bg and color from oklch(from var(--bp-intent-warning-*)).
+// BP6.8 used flat #fbb360 / #191919. Restore the flat values.
+.#{$ns}-tag.#{$ns}-intent-warning {
+  background: #fbb360;
+  color: #191919;
+}
+
+// Tag minimal (no intent) — BP6.15 uses oklch derivation for bg + var(--bp-typography-color-muted)
+// for icon fill. BP6.8 used flat rgba and #191919 icons. Restore.
+.#{$ns}-tag.#{$ns}-minimal:not([class*="#{$ns}-intent-"]) {
+  background-color: rgba(143, 153, 168, 0.15);
+  color: #191919;
+}
+.#{$ns}-dark .#{$ns}-tag.#{$ns}-minimal:not([class*="#{$ns}-intent-"]) {
+  background-color: rgba(143, 153, 168, 0.15);
+  color: #ffffff;
+}
+.#{$ns}-tag.#{$ns}-minimal > .#{$ns}-icon,
+.#{$ns}-tag.#{$ns}-minimal .#{$ns}-icon-standard,
+.#{$ns}-tag.#{$ns}-minimal .#{$ns}-icon-large {
+  fill: #191919;
+}
+.#{$ns}-dark .#{$ns}-tag.#{$ns}-minimal > .#{$ns}-icon,
+.#{$ns}-dark .#{$ns}-tag.#{$ns}-minimal .#{$ns}-icon-standard,
+.#{$ns}-dark .#{$ns}-tag.#{$ns}-minimal .#{$ns}-icon-large {
+  fill: #ffffff;
+}
+
+// Tag minimal intent — BP6.15 derives bg/color via oklch from intent rest;
+// BP6.8 used flat rgba + flat color per intent. Restore BP6.8 values for
+// both themes. Light bg=10% alpha, dark bg=20% alpha.
+.#{$ns}-tag.#{$ns}-minimal.#{$ns}-intent-primary {
+  background-color: rgba(45, 114, 210, 0.1);
+  color: #215db0;
+}
+.#{$ns}-tag.#{$ns}-minimal.#{$ns}-intent-success {
+  background-color: rgba(35, 133, 81, 0.1);
+  color: #1c6e42;
+}
+.#{$ns}-tag.#{$ns}-minimal.#{$ns}-intent-warning {
+  background-color: rgba(200, 118, 25, 0.1);
+  color: #935610;
+}
+.#{$ns}-tag.#{$ns}-minimal.#{$ns}-intent-danger {
+  background-color: rgba(205, 66, 70, 0.1);
+  color: #ac2f33;
+}
+.#{$ns}-dark .#{$ns}-tag.#{$ns}-minimal.#{$ns}-intent-primary {
+  background-color: rgba(45, 114, 210, 0.2);
+  color: #8abbff;
+}
+.#{$ns}-dark .#{$ns}-tag.#{$ns}-minimal.#{$ns}-intent-success {
+  background-color: rgba(35, 133, 81, 0.2);
+  color: #72ca9b;
+}
+.#{$ns}-dark .#{$ns}-tag.#{$ns}-minimal.#{$ns}-intent-warning {
+  background-color: rgba(200, 118, 25, 0.2);
+  color: #fbb360;
+}
+.#{$ns}-dark .#{$ns}-tag.#{$ns}-minimal.#{$ns}-intent-danger {
+  background-color: rgba(205, 66, 70, 0.2);
+  color: #fa999c;
+}
+
+// (Breadcrumb separator override removed — Graphext's _overrides.scss already
+//  uses g-divider.svg (slash) via svg-icon(). The BP6.15 diff is in how that
+//  SVG is processed by the toolchain, not in the rule itself.)
+
+// NOTE: slider-handle uses the same color-mix(intent-default, white) pattern
+// as buttons. Attempted to override to palette-light-gray values like button,
+// but doing so increased the slider diff count — BP6.15 may apply a default
+// hover/active rule on slider-handle that conflicts. Left at BP6 defaults
+// pending further investigation.
