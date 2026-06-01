@@ -557,6 +557,40 @@
   width: 26.4px !important;
 }
 
+// Tooltip line-height: BP6 forced 14px; BP5 inherited body line-height (~18px),
+// which makes the tooltip box visibly taller. Restore BP5.
+.#{$ns}-tooltip,
+.#{$ns}-tooltip .#{$ns}-popover-content {
+  line-height: inherit;
+}
+// Tooltip content padding: BP5 used 8px 9.6px; BP6 tightened to 4px 8px.
+.#{$ns}-tooltip .#{$ns}-popover-content {
+  padding: 8px 9.6px;
+}
+
+// Tooltip intent backgrounds: BP5 used the "$g-*-500" light variants;
+// BP6.15 swapped to the "$g-*-600" dark variants. Restore BP5 (light) shades.
+.#{$ns}-tooltip.#{$ns}-intent-primary .#{$ns}-popover-content,
+.#{$ns}-tooltip.#{$ns}-intent-primary .#{$ns}-popover-arrow-fill {
+  background: #2BA3E8;
+  fill: #2BA3E8;
+}
+.#{$ns}-tooltip.#{$ns}-intent-success .#{$ns}-popover-content,
+.#{$ns}-tooltip.#{$ns}-intent-success .#{$ns}-popover-arrow-fill {
+  background: #4FB04F;
+  fill: #4FB04F;
+}
+.#{$ns}-tooltip.#{$ns}-intent-warning .#{$ns}-popover-content,
+.#{$ns}-tooltip.#{$ns}-intent-warning .#{$ns}-popover-arrow-fill {
+  background: #FF9436;
+  fill: #FF9436;
+}
+.#{$ns}-tooltip.#{$ns}-intent-danger .#{$ns}-popover-content,
+.#{$ns}-tooltip.#{$ns}-intent-danger .#{$ns}-popover-arrow-fill {
+  background: #C45A5A;
+  fill: #C45A5A;
+}
+
 // Slider: BP5 sized at 32×120, BP6 grew to 40×150. Restore BP5 dimensions
 // (handle / track positions are computed off these, so the whole rendering
 // shifts when they differ).
