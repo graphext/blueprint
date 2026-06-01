@@ -609,12 +609,21 @@
   min-width: 32px;
   width: 32px;
 }
-// Slider handle: BP5 used #f6f7f9 flat + rgba shadow. BP6 uses color-mix in
-// oklch which produces a slightly different tone. Restore BP5 values.
-.#{$ns}-slider-handle {
-  background-color: #f6f7f9;
+// Slider handle: BP5 fork override painted handles Graphext blue ($g-light-active
+// in light theme, $g-dark-active in dark) and stripped the elevation shadow,
+// not the BP6 (or BP6.8) light-gray-with-shadow look. Match BP5.
+.#{$ns}-slider-handle,
+.#{$ns}-slider-handle:hover {
+  background-color: #2BA3E8;
+  background-image: none;
   border-radius: 20px;
-  box-shadow: 0 0 0 0 rgba(17, 20, 24, 0.5), 0 1px 1px rgba(17, 20, 24, 0.5);
+  box-shadow: none;
+}
+.#{$ns}-dark .#{$ns}-slider-handle,
+.#{$ns}-dark .#{$ns}-slider-handle:hover {
+  background-color: #0091E4;
+  background-image: none;
+  box-shadow: none;
 }
 
 // Menu header h6: BP5 set explicit margin/padding/line-height; BP6 dropped them
