@@ -672,6 +672,25 @@
   margin-right: 16px;
 }
 
+// Tag-remove (the X button inside removable tags): BP5 used 4px padding,
+// BP6 reduced to surface-spacing * 0.5 = 2px. The smaller button makes
+// the parent tag 2px narrower, which shifts all subsequent tags left.
+.#{$ns}-tag-remove {
+  padding: 4px;
+  padding-left: 0;
+}
+// Tag children spacing: BP5 used 6px gap between text and X (and between
+// other siblings); BP6 reduced to surface-spacing = 4px. The 2px diff
+// shifts the X icon left and narrows every removable tag.
+.#{$ns}-tag::before,
+.#{$ns}-tag > * {
+  margin-right: 6px;
+}
+.#{$ns}-tag:empty::before,
+.#{$ns}-tag > :last-child {
+  margin-right: 0;
+}
+
 // Tag-input min-height: BP5 = 32px, BP6 = surface-spacing * 7.5 = 30px.
 .#{$ns}-tag-input {
   min-height: 32px;
