@@ -18,3 +18,7 @@ Licensed under the Apache License, Version 2.0.
 @import "accessibility/focus-states";
 @import "dark-theme";
 @import "components/index";
+
+// Imported LAST so its selector-based overrides win against BP6.15's
+// color-mix and oklch rules that live in component SCSS.
+@import "common/css-vars-bridge";
