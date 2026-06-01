@@ -120,6 +120,12 @@
   min-width: #{$pt-button-height};
   border-radius: 20px;
 }
+// Datepicker day cells are bp6-buttons but need to be sized by --rdp-cell-size,
+// not the 32px button minimum — override them back to the cell-size.
+.rdp-day.#{$ns}-button {
+  min-height: var(--rdp-cell-size, 30px);
+  min-width: var(--rdp-cell-size, 30px);
+}
 .#{$ns}-button.#{$ns}-small {
   min-height: #{$pt-button-height-small};
   min-width: #{$pt-button-height-small};
