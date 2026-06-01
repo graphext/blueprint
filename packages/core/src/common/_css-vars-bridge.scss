@@ -391,8 +391,8 @@
   box-shadow: #{$pt-elevation-shadow-1};
 }
 .#{$ns}-elevation-2 {
-  // BP6 default elevation-2 (Graphext didn't override this level)
-  box-shadow: 0 0 0 1px rgba(17, 20, 24, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1), 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  // BP5 elevation-2 value (BP6 default uses a softer/bigger shadow ramp)
+  box-shadow: 0 0 0 1px rgba(17, 20, 24, 0.1), 0 1px 1px rgba(17, 20, 24, 0.2), 0 2px 6px rgba(17, 20, 24, 0.2);
 }
 .#{$ns}-elevation-3 {
   box-shadow: #{$pt-elevation-shadow-3};
@@ -406,7 +406,7 @@
 }
 .#{$ns}-dark .#{$ns}-elevation-2,
 .#{$ns}-elevation-2.#{$ns}-dark {
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2), 0 4px 6px -4px rgba(0, 0, 0, 0.5), inset 0 0 0.5px 0 rgba(255, 255, 255, 0.3), inset 0 0.5px 0 0 rgba(255, 255, 255, 0.08), 0 10px 30px -5px rgba(0, 0, 0, 0.5);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2), 0 1px 1px rgba(17, 20, 24, 0.4), 0 2px 6px rgba(17, 20, 24, 0.4);
 }
 .#{$ns}-dark .#{$ns}-elevation-3,
 .#{$ns}-elevation-3.#{$ns}-dark {
@@ -514,6 +514,110 @@
 // (Breadcrumb separator override removed — Graphext's _overrides.scss already
 //  uses g-divider.svg (slash) via svg-icon(). The BP6.15 diff is in how that
 //  SVG is processed by the toolchain, not in the rule itself.)
+
+// --- BP5.19.1 parity overrides ------------------------------------------------
+// The rules above neutralise BP6.8 → BP6.15 churn. The rules below restore the
+// few values where BP6 itself (any minor) diverges from BP5.19.1's rendering.
+
+// Menu items: BP5 used line-height 20px (round($pt-font-size * 1.4) = 20 with
+// 14px base), BP6 uses 22px. Difference compounds as N items × 2px per row.
+// Also the icon column height (sets the row's effective min-height).
+.#{$ns}-menu-item {
+  line-height: 20px;
+}
+.#{$ns}-menu-item .#{$ns}-menu-item-icon,
+.#{$ns}-menu-item .#{$ns}-menu-item-selected-icon,
+.#{$ns}-menu-item .#{$ns}-submenu-icon {
+  height: 20px;
+}
+
+// Inputs: BP6 "large" variant grew to 40px; BP5 large stayed at 32px (same
+// as default). The Graphext `$pt-input-height-large` is also 32px, so this
+// matches the fork's intended sizing. Apply to input + input-group + file-input.
+.#{$ns}-input.#{$ns}-large {
+  height: 32px;
+  line-height: 32px;
+}
+.#{$ns}-input-group.#{$ns}-large .#{$ns}-input {
+  height: 32px;
+  line-height: 32px;
+}
+.#{$ns}-file-input.#{$ns}-large,
+.#{$ns}-large .#{$ns}-file-input {
+  height: 32px;
+}
+.#{$ns}-input-group.#{$ns}-large .#{$ns}-button {
+  margin: 0;
+}
+
+// Timepicker input: BP5 26.4px, BP6 26px. Tiny but propagates across the row.
+// !important because the rule is defined in @blueprintjs/datetime, whose CSS
+// loads AFTER core's bridge — so a same-specificity selector would lose.
+.#{$ns}-timepicker .#{$ns}-timepicker-input {
+  width: 26.4px !important;
+}
+
+// Slider: BP5 sized at 32×120, BP6 grew to 40×150. Restore BP5 dimensions
+// (handle / track positions are computed off these, so the whole rendering
+// shifts when they differ).
+.#{$ns}-slider {
+  height: 32px;
+  min-width: 120px;
+}
+// Slider handle: BP5 used #f6f7f9 flat + rgba shadow. BP6 uses color-mix in
+// oklch which produces a slightly different tone. Restore BP5 values.
+.#{$ns}-slider-handle {
+  background-color: #f6f7f9;
+  border-radius: 20px;
+  box-shadow: 0 0 0 0 rgba(17, 20, 24, 0.5), 0 1px 1px rgba(17, 20, 24, 0.5);
+}
+
+// Switch (dark, Off state): BP5 indicator bg was `$dark-gray3` (#313641);
+// BP6 set it to `#FCFCFD` (almost white). Restore BP5.
+.#{$ns}-dark .#{$ns}-control.#{$ns}-switch input ~ .#{$ns}-control-indicator {
+  background: #313641;
+}
+// Switch (dark, On / checked state): BP5 used $g-dark-active (#0091E4), BP6
+// used $g-light-active (#2BA3E8). Brighter blue for dark theme legibility.
+.#{$ns}-dark .#{$ns}-control.#{$ns}-switch input:checked ~ .#{$ns}-control-indicator {
+  background: #0091E4;
+}
+// Switch (dark, Disabled off): BP5 used dark-gray (#313641) same as off; BP6
+// kept the near-white tint and only dimmed the indicator dot.
+.#{$ns}-dark .#{$ns}-control.#{$ns}-switch input:disabled ~ .#{$ns}-control-indicator {
+  background: #313641;
+}
+// Switch (dark, Disabled checked): BP5 darker blue, BP6 lighter.
+.#{$ns}-dark .#{$ns}-control.#{$ns}-switch input:checked:disabled ~ .#{$ns}-control-indicator {
+  background: #006DAB;
+}
+
+// Alert: BP5 used max-width 320 + 16px padding (icon margin 16px); BP6 widened
+// to 400 + 20px padding (icon margin 20px). Restore BP5 dimensions.
+.#{$ns}-alert {
+  max-width: 320px;
+  padding: 16px;
+}
+.#{$ns}-alert-body .#{$ns}-icon {
+  margin-right: 16px;
+}
+
+// Tag-input min-height: BP5 = 32px, BP6 = surface-spacing * 7.5 = 30px.
+.#{$ns}-tag-input {
+  min-height: 32px;
+}
+// Tag-input-values container: BP5 used flex-wrap so the input falls below
+// the tags when they fill the row; BP6 collapsed the values to a non-wrapping
+// flex row, which makes the input inline and the whole tag-input shorter.
+// Re-apply BP5 layout — without flex-wrap the visible footprint shrinks ~48px.
+.#{$ns}-tag-input .#{$ns}-tag-input-values {
+  align-items: center;
+  align-self: stretch;
+  flex-wrap: wrap;
+  margin-top: 8px;
+  min-width: 0;
+  position: relative;
+}
 
 // NOTE: slider-handle uses the same color-mix(intent-default, white) pattern
 // as buttons. Attempted to override to palette-light-gray values like button,
