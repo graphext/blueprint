@@ -16,9 +16,8 @@
 
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { spy, stub } from "sinon";
 
-import { describe, expect, it } from "@blueprintjs/test-commons/vitest";
+import { describe, expect, it, vi } from "@blueprintjs/test-commons/vitest";
 
 import { Button } from "..";
 import { Classes } from "../../common";
@@ -55,37 +54,40 @@ describe("<Tooltip>", () => {
             expect(container.querySelector(`address.${Classes.POPOVER_TARGET}`)).to.exist;
         });
 
-        it("applies minimal class when minimal is true", () => {
+        it("applies minimal animation class when minimal is true", () => {
             const { container } = render(
                 <Tooltip content="content" hoverOpenDelay={0} isOpen={true} minimal={true} usePortal={false}>
                     <Button text="target" />
                 </Tooltip>,
             );
 
-            expect(container.querySelector(`.${Classes.TOOLTIP}.${Classes.MINIMAL}`)).to.exist;
+            // PopoverNext uses POPOVER_MINIMAL_ANIMATION instead of the legacy MINIMAL class.
+            expect(container.querySelector(`.${Classes.TOOLTIP}.${Classes.POPOVER_MINIMAL_ANIMATION}`)).to.exist;
         });
 
-        it("does not apply minimal class when minimal is false", () => {
+        it("does not apply minimal animation class when minimal is false", () => {
             const { container } = render(
                 <Tooltip content="content" hoverOpenDelay={0} isOpen={true} usePortal={false}>
                     <Button text="target" />
                 </Tooltip>,
             );
 
-            expect(container.querySelector(`.${Classes.TOOLTIP}.${Classes.MINIMAL}`)).not.toBeInTheDocument();
+            expect(
+                container.querySelector(`.${Classes.TOOLTIP}.${Classes.POPOVER_MINIMAL_ANIMATION}`),
+            ).not.toBeInTheDocument();
         });
     });
 
     describe("basic functionality", () => {
         it("supports overlay lifecycle props", () => {
-            const onOpening = spy();
+            const onOpening = vi.fn();
             render(
                 <Tooltip content="content" hoverOpenDelay={0} isOpen={true} onOpening={onOpening}>
                     <Button text="target" />
                 </Tooltip>,
             );
 
-            expect(onOpening.calledOnce).to.be.true;
+            expect(onOpening).toHaveBeenCalledOnce();
         });
     });
 
@@ -149,7 +151,7 @@ describe("<Tooltip>", () => {
         });
 
         it("empty content disables Popover and warns with empty string", () => {
-            const warnSpy = stub(console, "warn");
+            const warnSpy = vi.spyOn(console, "warn").mockImplementation(vi.fn());
             render(
                 <Tooltip content="" hoverOpenDelay={0} isOpen={true}>
                     <Button text="target" />
@@ -157,13 +159,13 @@ describe("<Tooltip>", () => {
             );
 
             expect(screen.queryByText("content")).not.toBeInTheDocument();
-            expect(warnSpy.called).to.be.true;
+            expect(warnSpy).toHaveBeenCalled();
 
-            warnSpy.restore();
+            warnSpy.mockRestore();
         });
 
         it("empty content disables Popover and warns with whitespace", () => {
-            const warnSpy = stub(console, "warn");
+            const warnSpy = vi.spyOn(console, "warn").mockImplementation(vi.fn());
             render(
                 <Tooltip content="   " hoverOpenDelay={0} isOpen={true}>
                     <Button text="target" />
@@ -171,9 +173,9 @@ describe("<Tooltip>", () => {
             );
 
             expect(screen.queryByText("content")).not.toBeInTheDocument();
-            expect(warnSpy.called).to.be.true;
+            expect(warnSpy).toHaveBeenCalled();
 
-            warnSpy.restore();
+            warnSpy.mockRestore();
         });
 
         it("setting disabled=true prevents opening tooltip", async () => {
@@ -212,7 +214,7 @@ describe("<Tooltip>", () => {
         });
 
         it("empty content disables Popover and warns", () => {
-            const warnSpy = stub(console, "warn");
+            const warnSpy = vi.spyOn(console, "warn").mockImplementation(vi.fn());
             render(
                 <Tooltip content="" hoverOpenDelay={0} isOpen={true}>
                     <Button text="target" />
@@ -220,15 +222,15 @@ describe("<Tooltip>", () => {
             );
 
             expect(screen.queryByText("content")).not.toBeInTheDocument();
-            expect(warnSpy.called).to.be.true;
+            expect(warnSpy).toHaveBeenCalled();
 
-            warnSpy.restore();
+            warnSpy.mockRestore();
         });
 
         describe("onInteraction()", () => {
             it("is invoked with `true` when closed tooltip target is hovered", async () => {
                 const user = userEvent.setup();
-                const onInteraction = spy();
+                const onInteraction = vi.fn();
                 render(
                     <Tooltip content="content" hoverOpenDelay={0} isOpen={false} onInteraction={onInteraction}>
                         <Button text="target" />
@@ -237,26 +239,30 @@ describe("<Tooltip>", () => {
 
                 await user.hover(screen.getByText("target"));
 
-                expect(onInteraction.calledOnce).to.be.true;
-                expect(onInteraction.calledWith(true)).to.be.true;
+                expect(onInteraction).toHaveBeenCalledOnce();
+                expect(onInteraction).toHaveBeenCalledWith(true, expect.anything());
             });
         });
     });
 
     it("Escape key closes tooltip", async () => {
         const user = userEvent.setup();
-        const onClose = spy();
+        const onClose = vi.fn();
         render(
-            <Tooltip content="content" hoverOpenDelay={0} isOpen={true} onClose={onClose}>
+            <Tooltip content="content" defaultIsOpen={true} hoverOpenDelay={0} onClose={onClose}>
                 <Button text="target" />
             </Tooltip>,
         );
 
-        expect(screen.getByText("content")).to.exist;
+        expect(screen.getByText("content")).toBeInTheDocument();
 
         await user.keyboard("{Escape}");
 
-        expect(onClose.calledOnce).to.be.true;
+        await waitFor(() => {
+            expect(screen.queryByText("content")).not.toBeInTheDocument();
+        });
+
+        expect(onClose).toHaveBeenCalledOnce();
     });
 
     it("Escape key closes only the most recently opened tooltip when multiple are open", async () => {

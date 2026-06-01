@@ -14,40 +14,35 @@
  * limitations under the License.
  */
 
-import { render, screen, waitFor } from "@testing-library/react";
-import { mount, shallow } from "enzyme";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { createRef } from "react";
-import { spy } from "sinon";
 
-import { assert, describe, expect, it } from "@blueprintjs/test-commons/vitest";
+import { describe, expect, it, vi } from "@blueprintjs/test-commons/vitest";
 
 import { Classes } from "../../common";
 import { Icon } from "../icon/icon";
-import { Text } from "../text/text";
 
 import { Tag } from "./tag";
 
 describe("<Tag>", () => {
     it("renders its text", () => {
-        assert.strictEqual(
-            shallow(<Tag>Hello</Tag>)
-                .find(Text)
-                .prop("children"),
-            "Hello",
-        );
+        render(<Tag>Hello</Tag>);
+        expect(screen.getByText("Hello")).toBeInTheDocument();
     });
 
     it("text is not rendered if omitted", () => {
-        assert.isFalse(
-            shallow(<Tag icon="tick" />)
-                .find(Text)
-                .exists(),
-        );
+        const { container } = render(<Tag icon="tick" />);
+        expect(container.querySelector(`.${Classes.TEXT_OVERFLOW_ELLIPSIS}`)).not.toBeInTheDocument();
     });
 
     it("renders icons", () => {
-        const wrapper = shallow(<Tag icon="tick" endIcon="airplane" />);
-        assert.lengthOf(wrapper.find(Icon), 2);
+        const { container } = render(<Tag icon="tick" endIcon="airplane" />);
+        const icons = container.querySelectorAll(`.${Classes.ICON}`);
+        expect(icons).toHaveLength(2);
+        expect(icons[0].firstChild).toBeInstanceOf(SVGElement);
+        expect(icons[0].firstChild).toHaveAttribute("data-icon", "tick");
+        expect(icons[1]).toHaveAttribute("data-icon", "airplane");
     });
 
     it("prefers endIcon to rightIcon", () => {
@@ -57,44 +52,52 @@ describe("<Tag>", () => {
             // eslint-disable-next-line @typescript-eslint/no-deprecated
             <Tag endIcon={endIcon} rightIcon={rightIcon} />,
         );
-        expect(screen.getByTestId("endIcon")).to.exist;
+        expect(screen.getByTestId("endIcon")).toBeInTheDocument();
         expect(screen.queryByTestId("rightIcon")).not.toBeInTheDocument();
     });
 
     it("renders close button when onRemove is a function", () => {
-        const wrapper = mount(<Tag onRemove={spy()}>Hello</Tag>);
-        assert.lengthOf(wrapper.find(`.${Classes.TAG_REMOVE}`), 1);
+        render(<Tag onRemove={vi.fn()}>Hello</Tag>);
+        const closeButton = screen.getByRole("button", { name: "Remove tag" });
+        expect(closeButton).toHaveClass(Classes.TAG_REMOVE);
     });
 
-    it("clicking close button triggers onRemove", () => {
-        const handleRemove = spy();
-        mount(<Tag onRemove={handleRemove}>Hello</Tag>)
-            .find(`.${Classes.TAG_REMOVE}`)
-            .simulate("click");
-        assert.isTrue(handleRemove.calledOnce);
+    it("clicking close button triggers onRemove", async () => {
+        const user = userEvent.setup();
+        const handleRemove = vi.fn();
+        render(<Tag onRemove={handleRemove}>Hello</Tag>);
+        const closeButton = screen.getByRole("button", { name: "Remove tag" });
+        await user.click(closeButton);
+        expect(handleRemove).toHaveBeenCalledOnce();
     });
 
     it("should be interactive when onClick is provided", () => {
-        const wrapper = mount(<Tag onClick={spy()}>Hello</Tag>);
-        assert.lengthOf(wrapper.find(`.${Classes.INTERACTIVE}`), 1);
+        render(<Tag onClick={vi.fn()}>Hello</Tag>);
+        const button = screen.getByRole("button", { name: "Hello" });
+        expect(button).toHaveClass(Classes.INTERACTIVE);
     });
 
     it("should not be interactive when interactive={false}", () => {
-        const wrapper = mount(
-            <Tag onClick={spy()} interactive={false}>
+        render(
+            <Tag onClick={vi.fn()} interactive={false}>
                 Hello
             </Tag>,
         );
-        assert.lengthOf(wrapper.find(`.${Classes.INTERACTIVE}`), 0);
+        const tag = screen.getByText("Hello").closest(`.${Classes.TAG}`);
+        expect(tag).not.toHaveClass(Classes.INTERACTIVE);
+        expect(tag).not.toHaveRole("button");
     });
 
     it(`passes other props onto .${Classes.TAG} element`, () => {
-        const element = shallow(<Tag title="baz qux">Hello</Tag>).find("." + Classes.TAG);
-        assert.deepEqual(element.prop("title"), "baz qux");
+        render(<Tag title="baz qux">Hello</Tag>);
+        const title = screen.getByTitle("baz qux");
+        expect(title).toHaveClass(Classes.TAG);
+        expect(title).toHaveTextContent("Hello");
     });
 
-    it("passes all props to the onRemove handler", () => {
-        const handleRemove = spy();
+    it("passes all props to the onRemove handler", async () => {
+        const user = userEvent.setup();
+        const handleRemove = vi.fn();
         const DATA_ATTR_FOO = "data-foo";
         const tagProps = {
             [DATA_ATTR_FOO]: {
@@ -103,21 +106,18 @@ describe("<Tag>", () => {
             },
             onRemove: handleRemove,
         };
-        mount(<Tag {...tagProps}>Hello</Tag>)
-            .find(`.${Classes.TAG_REMOVE}`)
-            .simulate("click");
-        assert.isTrue(handleRemove.args.length > 0 && handleRemove.args[0].length === 2);
-        assert.isTrue(handleRemove.args[0][1][DATA_ATTR_FOO] !== undefined);
-        assert.deepEqual(handleRemove.args[0][1][DATA_ATTR_FOO], tagProps[DATA_ATTR_FOO]);
+        render(<Tag {...tagProps}>Hello</Tag>);
+        await user.click(screen.getByRole("button", { name: "Remove tag" }));
+        expect(handleRemove).toHaveBeenCalledOnce();
+        expect(handleRemove).toHaveBeenCalledWith(
+            expect.anything(),
+            expect.objectContaining({ [DATA_ATTR_FOO]: tagProps[DATA_ATTR_FOO] }),
+        );
     });
 
-    it("supports ref objects", async () => {
+    it("supports ref objects", () => {
         const elementRef = createRef<HTMLSpanElement>();
-        const wrapper = mount(<Tag ref={elementRef}>Hello</Tag>);
-
-        // wait for the whole lifecycle to run
-        await waitFor(() => {
-            assert.equal(elementRef.current, wrapper.find(`.${Classes.TAG}`).getDOMNode<HTMLSpanElement>());
-        });
+        render(<Tag ref={elementRef}>Hello</Tag>);
+        expect(elementRef.current).toHaveClass(Classes.TAG);
     });
 });

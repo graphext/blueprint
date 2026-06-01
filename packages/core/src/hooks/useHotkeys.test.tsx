@@ -17,9 +17,8 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { useMemo } from "react";
-import { type SinonStub, spy, stub } from "sinon";
 
-import { afterAll, afterEach, beforeAll, describe, expect, it } from "@blueprintjs/test-commons/vitest";
+import { afterAll, afterEach, beforeEach, describe, expect, it, vi } from "@blueprintjs/test-commons/vitest";
 
 import { InputGroup } from "../components/forms/inputGroup";
 import { HotkeysProvider } from "../context";
@@ -34,9 +33,16 @@ interface TestComponentProps extends TestComponentContainerProps {
 interface TestComponentContainerProps {
     bindExtraKeys?: boolean;
     isInputReadOnly?: boolean;
+    showDialogKeyCombo?: string | false;
 }
 
-const TestComponent: React.FC<TestComponentProps> = ({ bindExtraKeys, isInputReadOnly, onKeyA, onKeyB }) => {
+const TestComponent: React.FC<TestComponentProps> = ({
+    bindExtraKeys,
+    isInputReadOnly,
+    onKeyA,
+    onKeyB,
+    showDialogKeyCombo,
+}) => {
     const hotkeys = useMemo(() => {
         const keys = [
             {
@@ -69,7 +75,7 @@ const TestComponent: React.FC<TestComponentProps> = ({ bindExtraKeys, isInputRea
         return keys;
     }, [bindExtraKeys, onKeyA, onKeyB]);
 
-    const { handleKeyDown, handleKeyUp } = useHotkeys(hotkeys);
+    const { handleKeyDown, handleKeyUp } = useHotkeys(hotkeys, { showDialogKeyCombo });
 
     return (
         <div onKeyDown={handleKeyDown} onKeyUp={handleKeyUp}>
@@ -80,8 +86,8 @@ const TestComponent: React.FC<TestComponentProps> = ({ bindExtraKeys, isInputRea
 };
 
 describe("useHotkeys", () => {
-    const onKeyASpy = spy();
-    const onKeyBSpy = spy();
+    const onKeyASpy = vi.fn();
+    const onKeyBSpy = vi.fn();
 
     const TestComponentContainer = (props: TestComponentContainerProps) => {
         return (
@@ -93,8 +99,8 @@ describe("useHotkeys", () => {
     };
 
     afterEach(() => {
-        onKeyASpy.resetHistory();
-        onKeyBSpy.resetHistory();
+        onKeyASpy.mockClear();
+        onKeyBSpy.mockClear();
     });
 
     it("binds local hotkey", async () => {
@@ -103,7 +109,7 @@ describe("useHotkeys", () => {
         const target = screen.getByTestId("target-inside-component");
         target.focus();
         await user.keyboard("a");
-        expect(onKeyASpy.callCount).to.equal(1, "hotkey a should be called once");
+        expect(onKeyASpy).toHaveBeenCalledOnce();
     });
 
     it("binds global hotkey", async () => {
@@ -112,7 +118,7 @@ describe("useHotkeys", () => {
         const target = screen.getByTestId("target-outside-component");
         target.focus();
         await user.keyboard("b");
-        expect(onKeyBSpy.callCount).to.equal(1, "hotkey b should be called once");
+        expect(onKeyBSpy).toHaveBeenCalledOnce();
     });
 
     it("binds new local hotkeys when hook arg is updated", async () => {
@@ -123,7 +129,7 @@ describe("useHotkeys", () => {
         target.focus();
         // bindExtraKeys adds "shift+A" combo, so we need Shift held during keypress
         await user.keyboard("{Shift>}a{/Shift}");
-        expect(onKeyASpy.callCount).to.equal(1, "hotkey A should be called once");
+        expect(onKeyASpy).toHaveBeenCalledOnce();
     });
 
     it("binds new global hotkeys when hook arg is updated", async () => {
@@ -134,7 +140,7 @@ describe("useHotkeys", () => {
         target.focus();
         // bindExtraKeys adds "shift+B" combo, so we need Shift held during keypress
         await user.keyboard("{Shift>}b{/Shift}");
-        expect(onKeyBSpy.callCount).to.equal(1, "hotkey B should be called once");
+        expect(onKeyBSpy).toHaveBeenCalledOnce();
     });
 
     it("removes local hotkeys when hook arg is updated", async () => {
@@ -145,7 +151,7 @@ describe("useHotkeys", () => {
         target.focus();
         // "shift+A" combo should no longer be bound after removing extra keys
         await user.keyboard("{Shift>}a{/Shift}");
-        expect(onKeyASpy.callCount).to.equal(0, "hotkey A should not be called");
+        expect(onKeyASpy).not.toHaveBeenCalled();
     });
 
     it("removes global hotkeys when hook arg is updated", async () => {
@@ -156,7 +162,7 @@ describe("useHotkeys", () => {
         target.focus();
         // "shift+B" combo should no longer be bound after removing extra keys
         await user.keyboard("{Shift>}b{/Shift}");
-        expect(onKeyBSpy.callCount).to.equal(0, "hotkey B should not be called");
+        expect(onKeyBSpy).not.toHaveBeenCalled();
     });
 
     it("does not trigger hotkeys inside text inputs", async () => {
@@ -165,7 +171,7 @@ describe("useHotkeys", () => {
         const target = screen.getByTestId("input-target");
         target.focus();
         await user.keyboard("a");
-        expect(onKeyASpy.callCount).to.equal(0, "hotkey A should not be called");
+        expect(onKeyASpy).not.toHaveBeenCalled();
     });
 
     it("does trigger hotkeys inside readonly text inputs", async () => {
@@ -174,19 +180,17 @@ describe("useHotkeys", () => {
         const target = screen.getByTestId("input-target");
         target.focus();
         await user.keyboard("a");
-        expect(onKeyASpy.callCount).to.equal(1, "hotkey A should be called once");
+        expect(onKeyASpy).toHaveBeenCalledOnce();
     });
 
     describe("working with HotkeysProvider", () => {
-        let warnSpy: SinonStub | undefined;
-
-        beforeAll(() => (warnSpy = stub(console, "warn")));
-        afterEach(() => warnSpy?.resetHistory());
-        afterAll(() => warnSpy?.restore());
+        const warnSpy = vi.spyOn(console, "warn").mockImplementation(vi.fn());
+        beforeEach(() => warnSpy.mockClear());
+        afterAll(() => warnSpy.mockRestore());
 
         it("logs a warning when used outside of HotkeysProvider context", () => {
             render(<TestComponentContainer />);
-            expect(warnSpy?.calledOnce).to.be.true;
+            expect(warnSpy).toHaveBeenCalledOnce();
         });
 
         it("does NOT log a warning when used inside a HotkeysProvider context", () => {
@@ -195,7 +199,34 @@ describe("useHotkeys", () => {
                     <TestComponentContainer />
                 </HotkeysProvider>,
             );
-            expect(warnSpy?.notCalled).to.be.true;
+            expect(warnSpy).not.toHaveBeenCalled();
+        });
+    });
+
+    describe("showDialogKeyCombo", () => {
+        it("opens the help dialog when the default combo (?) is pressed", async () => {
+            const user = userEvent.setup();
+            render(
+                <HotkeysProvider>
+                    <TestComponentContainer />
+                </HotkeysProvider>,
+            );
+            expect(screen.queryByRole("dialog")).toBeNull();
+            screen.getByTestId("target-outside-component").focus();
+            await user.keyboard("{Shift>}/{/Shift}");
+            expect(await screen.findByRole("dialog")).toBeInTheDocument();
+        });
+
+        it("does not open the help dialog when showDialogKeyCombo is false", async () => {
+            const user = userEvent.setup();
+            render(
+                <HotkeysProvider>
+                    <TestComponentContainer showDialogKeyCombo={false} />
+                </HotkeysProvider>,
+            );
+            screen.getByTestId("target-outside-component").focus();
+            await user.keyboard("{Shift>}/{/Shift}");
+            expect(screen.queryByRole("dialog")).toBeNull();
         });
     });
 });
