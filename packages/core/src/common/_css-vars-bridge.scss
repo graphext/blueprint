@@ -534,7 +534,9 @@
 // Inputs: BP6 "large" variant grew to 40px; BP5 large stayed at 32px (same
 // as default). The Graphext `$pt-input-height-large` is also 32px, so this
 // matches the fork's intended sizing. Apply to input + input-group + file-input.
-.#{$ns}-input.#{$ns}-large {
+// Tag-input is excluded so its container can grow to fit wrapped tag rows
+// (see the tag-input bridge below).
+.#{$ns}-input.#{$ns}-large:not(.#{$ns}-tag-input) {
   height: 32px;
   line-height: 32px;
 }
@@ -691,6 +693,18 @@
 // tags there are. Force the BP6 input to take the full row so flex-wrap
 // pushes it below — matches the BP5 footprint exactly.
 .#{$ns}-tag-input .#{$ns}-input-ghost {
+  flex-basis: 100%;
+}
+// Tag-input large variant: BP5 used min-height 32px (same as default),
+// BP6 grew to spacing*10 = 40px. The bigger min-height suppresses the
+// flex-wrap trick above because the parent's `height` is overridden by
+// .bp6-tag-input.bp6-large which has higher source-order than my .bp6-input
+// override. Bring it back down to 32px so the content drives the height.
+.#{$ns}-tag-input.#{$ns}-large {
+  min-height: 32px;
+}
+.#{$ns}-tag-input.#{$ns}-large .#{$ns}-input-ghost {
+  line-height: 24px;
   flex-basis: 100%;
 }
 
