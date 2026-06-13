@@ -183,10 +183,10 @@ importers:
   packages/core:
     dependencies:
       '@blueprintjs/colors':
-        specifier: workspace:^
+        specifier: workspace:*
         version: link:../colors
       '@blueprintjs/icons':
-        specifier: workspace:^
+        specifier: workspace:*
         version: link:../icons
       '@floating-ui/react':
         specifier: ^0.27.13
@@ -289,7 +289,7 @@ importers:
         specifier: workspace:^
         version: link:../core
       '@blueprintjs/icons':
-        specifier: workspace:^
+        specifier: workspace:*
         version: link:../icons
       '@blueprintjs/select':
         specifier: workspace:^
@@ -317,7 +317,7 @@ importers:
         version: 2.6.3
     devDependencies:
       '@blueprintjs/colors':
-        specifier: workspace:^
+        specifier: workspace:*
         version: link:../colors
       '@blueprintjs/node-build-scripts':
         specifier: workspace:^
@@ -374,7 +374,7 @@ importers:
   packages/datetime2:
     dependencies:
       '@blueprintjs/colors':
-        specifier: workspace:^
+        specifier: workspace:*
         version: link:../colors
       '@blueprintjs/core':
         specifier: workspace:^
@@ -383,7 +383,7 @@ importers:
         specifier: workspace:^
         version: link:../datetime
       '@blueprintjs/icons':
-        specifier: workspace:^
+        specifier: workspace:*
         version: link:../icons
       '@types/react':
         specifier: 18.3.12
@@ -1018,13 +1018,13 @@ importers:
   packages/select:
     dependencies:
       '@blueprintjs/colors':
-        specifier: workspace:^
+        specifier: workspace:*
         version: link:../colors
       '@blueprintjs/core':
         specifier: workspace:^
         version: link:../core
       '@blueprintjs/icons':
-        specifier: workspace:^
+        specifier: workspace:*
         version: link:../icons
       '@types/react':
         specifier: 18.3.12
@@ -1113,7 +1113,7 @@ importers:
         specifier: workspace:^
         version: link:../core
       '@blueprintjs/icons':
-        specifier: workspace:^
+        specifier: workspace:*
         version: link:../icons
       '@types/react':
         specifier: 18.3.12
@@ -1129,7 +1129,7 @@ importers:
         version: 2.6.3
     devDependencies:
       '@blueprintjs/colors':
-        specifier: workspace:^
+        specifier: workspace:*
         version: link:../colors
       '@blueprintjs/node-build-scripts':
         specifier: workspace:^
