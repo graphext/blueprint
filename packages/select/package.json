@@ -37,9 +37,9 @@
         "verify": "npm-run-all compile -p dist test lint"
     },
     "dependencies": {
-        "@blueprintjs/colors": "workspace:^",
+        "@blueprintjs/colors": "workspace:*",
         "@blueprintjs/core": "workspace:^",
-        "@blueprintjs/icons": "workspace:^",
+        "@blueprintjs/icons": "workspace:*",
         "classnames": "catalog:",
         "tslib": "catalog:"
     },

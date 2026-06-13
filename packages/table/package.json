@@ -38,7 +38,7 @@
     },
     "dependencies": {
         "@blueprintjs/core": "workspace:^",
-        "@blueprintjs/icons": "workspace:^",
+        "@blueprintjs/icons": "workspace:*",
         "classnames": "catalog:",
         "react-innertext": "^1.1.5",
         "tslib": "catalog:"
@@ -54,7 +54,7 @@
         }
     },
     "devDependencies": {
-        "@blueprintjs/colors": "workspace:^",
+        "@blueprintjs/colors": "workspace:*",
         "@blueprintjs/node-build-scripts": "workspace:^",
         "@blueprintjs/stylelint-plugin": "workspace:^",
         "@blueprintjs/test-commons": "workspace:^",
