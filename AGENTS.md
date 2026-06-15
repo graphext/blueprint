@@ -1,5 +1,10 @@
 # Blueprint.js Agentic Development Guide
 
+> **This is the Graphext fork of Palantir's Blueprint.** Before any upstream version bump, fork
+> publish, or `-graphextNN` version change, read [`GRAPHEXT_README.md`](GRAPHEXT_README.md) — it
+> documents the upstream-sync strategy (squash upstream, never squash the PR), the version suffix
+> scheme, the styles-only rule, and how publishing works (push to `deploy`).
+
 ## Build/Test Commands
 
 - **Build**: `pnpm compile` (all packages), `pnpm nx compile @blueprintjs/core` (single package)
