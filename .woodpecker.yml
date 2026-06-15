@@ -47,6 +47,7 @@ steps:
       - |
         published=0
         failed=0
+        skipped=0
         for pkg in icons core select datetime datetime2 table; do
           if out=$(npm publish ./packages/$pkg --tag latest 2>&1); then
             echo "$out"
@@ -55,6 +56,7 @@ steps:
             echo "$out"
             if echo "$out" | grep -q "already exists"; then
               echo ">>> skip $pkg (version already published)"
+              skipped=$((skipped + 1))
             else
               failed=$((failed + 1))
             fi
@@ -64,11 +66,11 @@ steps:
           echo "ERROR: $failed package(s) failed to publish"
           exit 1
         fi
-        if [ "$published" -eq 0 ]; then
+        if [ "$published" -eq 0 ] && [ "$skipped" -eq 0 ]; then
           echo "ERROR: nothing was published"
           exit 1
         fi
-        echo "Published $published package(s)"
+        echo "Published $published package(s), skipped $skipped already-published"
       - rm /root/.npmrc
     environment:
       NPMRC:
@@ -108,6 +110,7 @@ steps:
 
         published=0
         failed=0
+        skipped=0
         for pkg in icons core select datetime datetime2 table; do
           if out=$(npm publish ./packages/$$pkg --tag $$PR_TAG 2>&1); then
             echo "$$out"
@@ -116,6 +119,7 @@ steps:
             echo "$$out"
             if echo "$$out" | grep -q "already exists"; then
               echo ">>> skip $$pkg (version already published)"
+              skipped=$((skipped + 1))
             else
               failed=$((failed + 1))
             fi
@@ -126,11 +130,11 @@ steps:
           echo "ERROR: $$failed package(s) failed to publish"
           exit 1
         fi
-        if [ "$$published" -eq 0 ]; then
+        if [ "$$published" -eq 0 ] && [ "$$skipped" -eq 0 ]; then
           echo "ERROR: nothing was published"
           exit 1
         fi
-        echo "Published $$published package(s) under dist-tag $$PR_TAG"
+        echo "Published $$published package(s), skipped $$skipped already-published under dist-tag $$PR_TAG"
         echo "To consume: npm install @blueprintjs/<pkg>@$$PR_TAG"
       - rm /root/.npmrc
     environment:
