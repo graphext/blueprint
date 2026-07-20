@@ -5,6 +5,13 @@
 > documents the upstream-sync strategy (squash upstream, never squash the PR), the version suffix
 > scheme, the styles-only rule, and how publishing works (push to `deploy`).
 
+**Downstream — to test a change in an environment.** The fork publishes `@blueprintjs/*`
+(tagged `-graphextNN`) to the private registry on push to `deploy`. Publishing is not enough to
+see it in a running app — bump the exact `@blueprintjs/*` pins in `graphext/package.json`
+(and, since it also consumes the fork, `gatekeeper/package.json`), `pnpm install`, and deploy
+that consumer (graphext to `pre` first). There is no local dev shortcut. Full chain:
+`docs/cross-repo-workflows.md` §3 (workspace root).
+
 ## Build/Test Commands
 
 - **Build**: `pnpm compile` (all packages), `pnpm nx compile @blueprintjs/core` (single package)
