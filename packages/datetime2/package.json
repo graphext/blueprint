@@ -1,6 +1,6 @@
 {
     "name": "@blueprintjs/datetime2",
-    "version": "3.1.1-graphext55",
+    "version": "3.1.1-graphext56",
     "description": "Re-exports of @blueprintjs/datetime APIs",
     "main": "lib/cjs/index.js",
     "module": "lib/esm/index.js",
@@ -12,7 +12,8 @@
     ],
     "files": [
         "lib",
-        "src"
+        "src",
+        "NOTICE"
     ],
     "scripts": {
         "clean": "rm -rf coverage lib",

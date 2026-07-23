@@ -1,6 +1,6 @@
 {
     "name": "@blueprintjs/select",
-    "version": "6.2.1-graphext55",
+    "version": "6.2.1-graphext56",
     "description": "Components related to selecting items from a list",
     "main": "lib/cjs/index.js",
     "module": "lib/esm/index.js",
@@ -9,7 +9,8 @@
     "style": "lib/css/blueprint-select.css",
     "files": [
         "lib",
-        "src"
+        "src",
+        "NOTICE"
     ],
     "sideEffects": [
         "**/*.css"

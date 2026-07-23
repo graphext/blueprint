@@ -1,0 +1,17 @@
+Blueprint
+
+Copyright Palantir Technologies, Inc.
+Licensed under the Apache License, Version 2.0 (the "License"); see the
+accompanying LICENSE file or http://www.apache.org/licenses/LICENSE-2.0
+
+--------------------------------------------------------------------------------
+
+MODIFICATIONS
+
+This package is a MODIFIED version of Blueprint, maintained by Graphext as a
+fork of the upstream Palantir Blueprint library
+(https://github.com/palantir/blueprint). Graphext builds are published from
+https://github.com/graphext/blueprint under version tags carrying a
+"-graphextNN" suffix. Modifications are Copyright Graphext and are likewise
+licensed under the Apache License, Version 2.0. See the fork's commit history
+for the specific changes.
