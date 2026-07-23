@@ -1,6 +1,6 @@
 {
     "name": "@blueprintjs/core",
-    "version": "6.15.0-graphext55",
+    "version": "6.15.0-graphext56",
     "description": "Core styles & components",
     "main": "lib/cjs/index.js",
     "module": "lib/esm/index.js",
@@ -10,7 +10,8 @@
     "files": [
         "lib",
         "scripts",
-        "src"
+        "src",
+        "NOTICE"
     ],
     "sideEffects": [
         "**/*.css",
